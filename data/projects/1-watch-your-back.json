@@ -1,0 +1,451 @@
+{
+  "id": "1-watch-your-back",
+  "doc": "기술문서.md",
+  "schemaVersion": 2,
+  "title": "뒤통수를 조심해 (Watch Your Back)",
+  "tagline": "적의 뒤통수를 때려야만 이기고, 맞으면 바로 지는 2D 탑다운 잠입·전투 액션 게임",
+  "cover": "images/플레이사진.png",
+  "team": { "type": "solo", "size": "1인", "role": "" },
+  "meta": [
+    { "label": "장르", "value": "탑다운 액션 잠입 게임 (2D)" },
+    { "label": "기간", "value": "2026-06-10 ~ 2026-07-07 (기획·게임 에셋 마련 06-10 ~ 06-16 · 개발 06-17 ~ 07-07)" },
+    { "label": "인원", "value": "1명 (개인 개발)" },
+    { "label": "환경", "value": "Unity 6000.3.15f1, Visual Studio 2026, C#" }
+  ],
+  "tags": ["Unity 6.3", "C#", "2D 탑다운", "FSM", "인터페이스", "코루틴", "BoxCast"],
+  "links": {
+    "github": "https://github.com/KooHoo-Dev/3rd-2D-Project-pinkshield",
+    "video": "",
+    "extra": []
+  },
+  "intent": {
+    "text": "처음 만드는 게임이라 핵심 메커니즘을 단순하게(뒤통수를 치면 승리, 맞으면 패배) 만들고, 뒤통수를 때리는 컷씬 연출로 몰입감을 끌어올리는 데 집중했습니다.",
+    "verbatim": false
+  },
+  "highlights": [
+    {
+      "title": "인터페이스로 상태를 나눈 적 AI",
+      "what": "보스 4명이 같은 몸(`EnemyStateManager`)을 쓰고, 지금 무엇을 하는지는 `IEnemyState`를 구현한 상태 클래스(옷)가 정합니다.",
+      "how": "`IEnemyState`는 `Enter`·`Execute`·`Exit` 세 메서드만 정하고, `Execute`를 코루틴으로 두어 기다림 같은 시간 흐름을 상태 안에 적습니다. `ChangeState`로 옷을 갈아입어도 몸의 위치와 컴포넌트 참조는 그대로입니다.",
+      "why": "보스의 기본 공격·이동이 모두 같아, 몸은 공유하고 보스 특유의 패턴만 보스마다 패턴 상태로 추가하는 것이 좋다고 판단했습니다.",
+      "section": "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다",
+      "image": null
+    },
+    {
+      "title": "정리와 가드를 함께 하는 상태 전환",
+      "what": "밖에서는 `ChangeState`만 부르면 이전 상태 정리와 새 상태 시작이 순서대로 이루어집니다.",
+      "how": "넉다운 가드로 쓰러진 적의 전환을 막고, `Exit`과 `StopCoroutine`을 먼저 호출한 뒤 새 상태의 `Enter`와 코루틴을 시작합니다.",
+      "why": "감시자·쥐·테스트 키처럼 밖에서 `ChangeState`를 부르는 곳이 여럿이라 입구 한 곳에서 막는 것이 가장 확실했고, 넉다운 여부를 상태 종류로 판단해 값을 바꾸지 않는 실수를 없앴습니다.",
+      "section": "3-1. 상태 전환 (`ChangeState`) — 정리와 가드를 함께",
+      "image": null
+    },
+    {
+      "title": "같은 프레임 동시 피격 방지",
+      "what": "플레이어와 적이 동시에 공격할 때 둘 다 이기거나 둘 다 지는 판정 모순을 막습니다.",
+      "how": "같은 프레임에 먼저 `TryLockCombat()`을 호출한 쪽만 판정을 얻고, `LateUpdate`에서 잠금을 풉니다. 뒤통수 피격 박스와 적 공격 박스 양쪽 입구에서 똑같이 확인합니다.",
+      "why": "뒤통수를 쳤는데도 넉다운 컷씬이 재생되는 동안 보스가 공격해 플레이어도 같이 죽는 판정이 계속 일어났기 때문입니다.",
+      "section": "3-2. 같은 프레임 동시 피격 방지 (`TryLockCombat`)",
+      "image": null
+    },
+    {
+      "title": "이동 방향에 맞춰 도는 판정 박스",
+      "what": "적의 이동 방향에 맞춰 시야 박스·공격 박스·뒤통수 피격 박스가 4방향으로 회전합니다.",
+      "how": "애니메이터의 `MoveX`·`MoveY` 중 절댓값이 큰 축으로 4방향을 정하고, 멈춰 있을 때는 마지막 각도를 유지합니다.",
+      "why": "공격·피격 판정 박스는 정확도와 즉각적인 반응이 중요해 즉시 회전, 시야 박스는 고개를 부드럽게 돌리는 연출을 위해 `Mathf.LerpAngle` 보간 회전으로 나눴습니다.",
+      "section": "2-3. 시야·공격 박스 회전",
+      "image": {
+        "src": "images/빨간색(시야박스)-노란색(허트박스)-초록색(히트박스).png",
+        "w": 341,
+        "h": 322,
+        "caption": "적의 판정 박스 — 빨강: 시야 박스, 노랑: 뒤통수 피격 박스, 초록: 공격 범위·타격 박스"
+      }
+    }
+  ],
+  "troubleshooting": [
+    {
+      "title": "적을 쓰러뜨렸는데 플레이어도 쓰러지는 문제",
+      "problem": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 됨. 계속 반복해서 일어났고, 당시 지식과 무료 AI로는 원인을 정확히 진단하기 어려웠음",
+      "cause": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냄",
+      "solution": "① 7/6 — 공격 타격 박스(`EnemyAttackHitBox`)와 `OnBackHit` 앞에 `IsKnockDown` 확인 추가 ② 7/22 — `ChangeState` 입구에도 같은 가드를 넣어, 감시자·쥐가 쓰러진 보스를 다시 움직이게 하는 길까지 막음",
+      "result": "",
+      "lesson": "",
+      "section": "5-2. 트러블슈팅"
+    },
+    {
+      "title": "두 번째 판부터 추격 음악이 안 나오는 문제",
+      "problem": "첫 게임에서는 추격 BGM이 나오지만, 재시도 이후에는 나오지 않음",
+      "cause": "(Claude 추정) `SoundManager`는 씬이 바뀌어도 남는 싱글톤이라, 추격 중에 플레이어가 죽고 씬을 다시 불러오면 적의 `Exit`가 불리지 않아 `engagedEnemyCount`가 0으로 돌아가지 않음",
+      "solution": "(시도) 씬 시작 시 `GameSceneInitializer`가 `SoundManager.ResetCombatMusicState()`로 카운트를 0으로 되돌림",
+      "result": "과제 제출 당시에는 해결하지 못했습니다. 카운트를 되돌린 뒤에도 남은 문제라 다른 원인이 더 있을 수 있고, 추후 리팩토링 때 다시 확인할 예정입니다.",
+      "lesson": "",
+      "section": "5-2. 트러블슈팅"
+    }
+  ],
+  "screenshots": [
+    { "src": "images/cutscene-slap-back.png", "w": 1580, "h": 884, "caption": "뒤통수 타격 컷씬 — 플레이어가 적의 뒤통수 공격에 성공했을 때" },
+    { "src": "images/빨간색(시야박스)-노란색(허트박스)-초록색(히트박스).png", "w": 341, "h": 322, "caption": "적의 판정 박스 — 빨강: 시야 박스, 노랑: 뒤통수 피격 박스, 초록: 공격 범위·타격 박스" },
+    { "src": "images/cutscene-slap-face.png", "w": 1578, "h": 882, "caption": "뺨 맞는 컷씬 — 플레이어가 적에게 들켰을 때" },
+    { "src": "images/GameMenu.png", "w": 1579, "h": 882, "caption": "GameMenu" },
+    { "src": "images/GameOver.png", "w": 1572, "h": 882, "caption": "GameOver" },
+    { "src": "images/GameClear.png", "w": 1579, "h": 884, "caption": "GameClear" }
+  ],
+  "retro": {
+    "achieved": [
+      "뒤통수 때리기 공격과 회피라는 단순한 메인 루프에, 플레이어와 적의 컷씬 연출로 생동감을 줌",
+      "SFX를 넣은 뒤 타격 액션에 재미가 더해지는 것을 느끼고 사운드의 중요성을 깨달음"
+    ],
+    "regrets": [
+      "`EnemyStateManager`가 이동·애니메이션 호출·전환 조건 판단과 전환까지 너무 많은 역할을 맡음",
+      "적 FSM 구현 중 버그(플레이어 감지, 벽 끼임 등)로 플레이 경험이 부자연스러움",
+      "적이 플레이어를 감지하는 것을 플레이어가 눈으로 확인할 수 없음"
+    ],
+    "plans": [
+      "이동·감지·박스 회전·넉다운 연출로 나누고, 매니저는 상태 전환만",
+      "회피 각도 식부터 고친 뒤 A* 길찾기로 교체",
+      "플레이어 시야각만 밝게, 적 시야에 닿으면 발견 수치가 차오르다 최대일 때 추격"
+    ],
+    "section": "5. 결과 및 배운 점"
+  },
+  "deck": {
+    "chapters": [
+      { "key": "intro", "title": "개요", "sectionPath": ["1. 개요"] },
+      { "key": "arch", "title": "시스템 구조", "sectionPath": ["2. 시스템 구조"] },
+      { "key": "core", "title": "핵심 기능", "sectionPath": ["3. 핵심 기능"] },
+      { "key": "choice", "title": "고민과 선택", "sectionPath": ["4. 고민과 선택"] },
+      { "key": "result", "title": "결과 및 배운 점", "sectionPath": ["5. 결과 및 배운 점"] }
+    ],
+    "slides": [
+      {
+        "key": "what",
+        "chapter": "intro",
+        "layout": "overview",
+        "tab": "개요",
+        "title": { "text": "1-1. 무엇을 만들었나 (What)", "verbatim": true },
+        "lead": { "text": "「뒤통수를 조심해」는 배신당한 플레이어가 자신을 버린 동료들과 마주하여 복수를 하며 진실을 알아가는 2D 탑다운 잠입·전투 액션 게임입니다.", "verbatim": true },
+        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나 (What)"],
+        "points": [
+          { "label": "기능", "text": "플레이어는 오로지 적의 뒤통수를 때려야만 승리하고, 플레이어의 몸이 적에게 타격받는 순간 게임 오버가 되는 불공평한 싸움입니다.", "verbatim": true },
+          { "label": "", "text": "간단한 조작이지만, 뒤통수를 때리는 컷씬 연출로 플레이어의 몰입감을 끌어올리는 것이 게임 개발의 핵심이었습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "image", "src": "images/cutscene-slap-back.png", "w": 1580, "h": 884, "caption": { "text": "뒤통수 타격 컷씬 — 플레이어가 적의 뒤통수 공격에 성공했을 때", "verbatim": true } }
+        ]
+      },
+      {
+        "key": "why",
+        "chapter": "intro",
+        "layout": "overview",
+        "tab": "개요",
+        "title": { "text": "1-2. 왜 만들었나 (Why) — 기획 의도", "verbatim": true },
+        "lead": { "text": "그런 마음을 풀어내는 것은 현실에서는 어렵지만, 게임에서는 가능합니다.", "verbatim": true },
+        "sectionPath": ["1. 개요", "1-2. 왜 만들었나 (Why) — 기획 의도"],
+        "points": [
+          { "label": "단순한 핵심 메커니즘", "text": "적의 뒤통수를 친 플레이어가 승리, 플레이어가 맞으면 패배. 그 외의 다른 승패 조건은 없습니다.", "verbatim": true },
+          { "label": "", "text": "플레이어·적 모두 원 히트 원 킬이라, 단순하지만 긴장감을 줄 수 있도록 했습니다.", "verbatim": true },
+          { "label": "기획에 영감을 받은 게임", "text": "뺨 때리기라는 단순하지만 강력한 행동이 주는 시각적 감성에 영감을 얻어, 뒤통수를 때리는 것으로 게임의 핵심 포인트를 잡게 되었습니다.", "verbatim": true }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "bosses",
+        "chapter": "intro",
+        "layout": "full",
+        "tab": "구조",
+        "title": { "text": "1-4. 레벨과 적 — 캐릭터와 레벨 디자인은 함께 간다", "verbatim": true },
+        "lead": { "text": "맵 레벨과 적의 능력을 묶어서 디자인했습니다.", "verbatim": true },
+        "sectionPath": ["1. 개요", "1-4. 레벨과 적 — 캐릭터와 레벨 디자인은 함께 간다"],
+        "points": [
+          { "label": "구현", "text": "보스 4명은 모두 같은 `EnemyStateManager`를 쓰고, 보스마다 다른 점은 곁에 붙은 작은 스크립트로만 만들었습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "보스|구역|능력" },
+          { "kind": "table", "n": 2, "fp": "보스|추가 스크립트|하는 일" }
+        ]
+      },
+      {
+        "key": "scope",
+        "chapter": "intro",
+        "layout": "overview",
+        "tab": "개요",
+        "title": { "text": "1-5. 이 문서에서 다루는 것", "verbatim": true },
+        "lead": { "text": "적 AI 시스템 — 인터페이스로 상태를 나눈 상태 머신, 이동 방향에 맞춰 도는 시야·공격 박스, 동시 공격 판정.", "verbatim": true },
+        "sectionPath": ["1. 개요", "1-5. 이 문서에서 다루는 것"],
+        "points": [
+          { "label": "", "text": "2장 구조 → 3장 상태 전환·동시 공격 처리·장애물 회피·전투 BGM → 4장 박스 회전 방식과 보스 공통 구조를 정한 이유 → 5장 배운 점·트러블슈팅·아쉬운 점.", "verbatim": true },
+          { "label": "", "text": "프로그래밍을 배우고 만든 첫 게임이라 부족한 점이 많았습니다.", "verbatim": true },
+          { "label": "", "text": "이 문서는 잘한 점만큼 부족했던 점을 인정하고, AI 코드 리뷰로 그 원인을 코드에서 찾아 확인한 과정(5-4)과 개선 계획(5-5)에 무게를 두었습니다.", "verbatim": true }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "state-class",
+        "chapter": "arch",
+        "layout": "visual",
+        "tab": "구조",
+        "title": { "text": "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다", "verbatim": true },
+        "lead": { "text": "적 AI 시스템을 비유하자면, `EnemyStateManager`는 몸이고, 각 `IEnemyState`는 그 몸이 잠깐 입는 옷입니다.", "verbatim": true },
+        "sectionPath": ["2. 시스템 구조", "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
+        "points": [
+          { "label": "구현", "text": "몸(콜라이더, 애니메이터, 이동·회전 함수, Player 참조)은 하나뿐이고, 지금 어떤 행동을 하는지는 지금 입고 있는 옷(상태 클래스)이 결정합니다.", "verbatim": true },
+          { "label": "", "text": "옷을 갈아입어도(`ChangeState`) 몸의 위치와 컴포넌트 참조는 그대로 유지됩니다.", "verbatim": true },
+          { "label": "이유", "text": "보스 4명은 외형만 다르고, 공통적으로 같은 공격·같은 이동을 사용하도록 구현했습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "mermaid", "n": 1, "fp": "classDiagram" }
+        ]
+      },
+      {
+        "key": "state-iface",
+        "chapter": "arch",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다", "verbatim": true },
+        "lead": { "text": "`IEnemyState`는 세 메서드만 정합니다.", "verbatim": true },
+        "sectionPath": ["2. 시스템 구조", "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
+        "points": [
+          { "label": "구현", "text": "상태 클래스는 `MonoBehaviour`가 아닌 일반 C# 클래스라서 `new EnemyChaseState()`처럼 만들어 바로 입힙니다.", "verbatim": true },
+          { "label": "구현", "text": "매 프레임 `Update`를 돌리는 대신 `Execute`를 코루틴으로 두어, \"2초 기다렸다가 복귀\"(`WaitForSeconds`) 같은 시간 흐름을 상태 안에 그대로 적을 수 있게 했습니다.", "verbatim": true },
+          { "label": "이유", "text": "코루틴을 고른 이유는, 당시 수업에서 코루틴을 처음 배웠고 배운 것을 직접 활용해 보고 싶은 마음이 컸기 때문입니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "public interface IEnemyState" }
+        ]
+      },
+      {
+        "key": "state-flow",
+        "chapter": "arch",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": { "text": "2-2. 상태 전환", "verbatim": true },
+        "lead": { "text": "각 상태는 `EnemyStateManager`가 적의 상태 판단 조건이 만족되었을 때 전환합니다.", "verbatim": true },
+        "sectionPath": ["2. 시스템 구조", "2-2. 상태 전환"],
+        "points": [
+          { "label": "", "text": "판단 조건은 시야 박스, 공격 범위 박스, 공격 히트 박스 등으로 판정하며, 이 조건을 `EnemyStateManager`가 지니고 직접 상태 전환을 작동시킵니다.", "verbatim": true },
+          { "label": "", "text": "`AlertMovePatternState`가 1-4의 와치만(감시자가 발견하면 감시자가 지키는 구역으로 이동)과 랫만(쥐가 죽은 곳으로 이동)의 패턴입니다.", "verbatim": true },
+          { "label": "", "text": "외부 스크립트(감시자·쥐)는 보스의 내부를 몰라도 목표 위치 하나만 넘기고 `ChangeState`를 부르면 됩니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "mermaid", "n": 1, "fp": "stateDiagram-v2" }
+        ]
+      },
+      {
+        "key": "box-rotate",
+        "chapter": "arch",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "2-3. 시야·공격 박스 회전", "verbatim": true },
+        "lead": { "text": "회전 각도는 애니메이터의 `MoveX`·`MoveY` 값 중 절댓값이 큰 축으로 4방향을 정합니다.", "verbatim": true },
+        "sectionPath": ["2. 시스템 구조", "2-3. 시야·공격 박스 회전"],
+        "points": [
+          { "label": "", "text": "멈춰 있을 때(두 값이 0.01 미만)는 마지막 각도를 유지합니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "image", "src": "images/빨간색(시야박스)-노란색(허트박스)-초록색(히트박스).png", "w": 341, "h": 322, "caption": { "text": "적의 판정 박스 — 빨강: 시야 박스, 노랑: 뒤통수 피격 박스, 초록: 공격 범위·타격 박스", "verbatim": true } },
+          { "kind": "code", "n": 1, "fp": "if (absX > absY)" }
+        ]
+      },
+      {
+        "key": "box-link",
+        "chapter": "arch",
+        "layout": "full",
+        "tab": "구조",
+        "title": { "text": "2-4. 박스와 매니저의 연결 — 박스는 알리기만, 판단은 매니저가", "verbatim": true },
+        "lead": { "text": "각 박스(자식 오브젝트)에는 아주 작은 스크립트만 붙어 있고, 충돌이 나면 부모의 `EnemyStateManager`에 알리기만 합니다.", "verbatim": true },
+        "sectionPath": ["2. 시스템 구조", "2-4. 박스와 매니저의 연결 — 박스는 알리기만, 판단은 매니저가"],
+        "points": [
+          { "label": "", "text": "`CheckPlayerInSight()`가 적에서 플레이어까지 레이캐스트를 쏴서 벽(`ObstacleLayer`)에 가리지 않았을 때만 \"보인다\"로 판정합니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "박스|스크립트|충돌 시 하는 일" }
+        ]
+      },
+      {
+        "key": "change-state",
+        "chapter": "core",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "3-1. 상태 전환 (`ChangeState`) — 정리와 가드를 함께", "verbatim": true },
+        "lead": { "text": "상태 전환 시 생길 수 있는 부작용을 막기 위해 정리·가드 로직을 넣었습니다.", "verbatim": true },
+        "sectionPath": ["3. 핵심 기능", "3-1. 상태 전환 (`ChangeState`) — 정리와 가드를 함께"],
+        "points": [
+          { "label": "넉다운 가드", "text": "이미 쓰러진 상태에서 다른 상태로 잘못 전환되는 문제를 막습니다.", "verbatim": true },
+          { "label": "순서 보장", "text": "`Exit`과 `StopCoroutine`을 먼저 호출해 이전 상태의 이동·사운드 로직을 확실히 정리한 뒤, 새 상태의 코루틴을 시작합니다.", "verbatim": true },
+          { "label": "이유", "text": "넉다운 여부를 따로 `bool`로 들고 있지 않고 지금 입은 옷(상태)의 종류로 판단하기 때문에, 값을 깜빡하고 안 바꾸는 실수가 생기지 않습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "public void ChangeState(IEnemyState newState)" }
+        ]
+      },
+      {
+        "key": "combat-lock",
+        "chapter": "core",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "3-2. 같은 프레임 동시 피격 방지 (`TryLockCombat`)", "verbatim": true },
+        "lead": { "text": "같은 프레임에 먼저 `TryLockCombat()`을 호출한 쪽만 전투 판정을 얻도록 해, 승패가 한쪽으로 분명히 갈리도록 했습니다.", "verbatim": true },
+        "sectionPath": ["3. 핵심 기능", "3-2. 같은 프레임 동시 피격 방지 (`TryLockCombat`)"],
+        "points": [
+          { "label": "문제", "text": "플레이어와 적이 동시에 공격할 때 생기는 판정 모순(둘 다 이기거나 둘 다 지는 경우)", "verbatim": true },
+          { "label": "이유", "text": "뒤통수를 쳤는데도 넉다운 컷씬이 재생되는 동안 보스가 공격해, 플레이어도 같이 죽는 판정이 계속 일어났습니다.", "verbatim": false }
+        ],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "// EnemyStateManager.cs" }
+        ]
+      },
+      {
+        "key": "combat-seq",
+        "chapter": "core",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": { "text": "3-2. 같은 프레임 동시 피격 방지 (`TryLockCombat`)", "verbatim": true },
+        "lead": { "text": "잠금은 양쪽 입구에서 똑같이 확인합니다.", "verbatim": true },
+        "sectionPath": ["3. 핵심 기능", "3-2. 같은 프레임 동시 피격 방지 (`TryLockCombat`)"],
+        "points": [
+          { "label": "", "text": "`OnBackHit`은 잠금 외에도 ① `PlayerAttack` 태그인지 ② 이미 쓰러진 적인지 ③ 때린 플레이어가 이미 쓰러졌는지(`IKnockDownStatus`)를 차례로 걸러 냅니다.", "verbatim": true },
+          { "label": "", "text": "플레이어와 적이 같은 인터페이스 `IKnockDownStatus`를 구현해서, 서로의 클래스를 몰라도 \"쓰러졌나?\"만 물어볼 수 있습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "mermaid", "n": 1, "fp": "sequenceDiagram" }
+        ]
+      },
+      {
+        "key": "avoidance",
+        "chapter": "core",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "3-3. 장애물 회피 이동 (`MoveWithAvoidance`)", "verbatim": true },
+        "lead": { "text": "순찰·추격·출동 상태는 모두 같은 이동 함수를 씁니다.", "verbatim": true },
+        "sectionPath": ["3. 핵심 기능", "3-3. 장애물 회피 이동 (`MoveWithAvoidance`)"],
+        "points": [
+          { "label": "구현", "text": "가려는 방향으로 바로 가지 않고, 부채꼴로 `BoxCast`를 여러 번 쏴서 처음으로 비어 있는 방향으로 움직입니다.", "verbatim": true },
+          { "label": "이유", "text": "선(Raycast) 대신 상자(BoxCast)를 쓴 것은 적의 몸 크기만큼 지나갈 수 있는지 보려는 것입니다.", "verbatim": true },
+          { "label": "", "text": "이 식에는 주석의 의도와 다른 문제가 있어 5-4에서 다시 다룹니다(AI 리뷰 #1).", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "for (int i = 0; i < RayCount; i++) // RayCount = 5" }
+        ]
+      },
+      {
+        "key": "combat-bgm",
+        "chapter": "core",
+        "layout": "code",
+        "tab": "구현",
+        "title": { "text": "3-4. 전투 BGM — 몇 명이 나를 쫓고 있나 세기", "verbatim": true },
+        "lead": { "text": "추격·공격 상태의 `Enter`에서 `NotifyCombatStarted()`, `Exit`에서 `NotifyCombatEnded()`를 부릅니다.", "verbatim": true },
+        "sectionPath": ["3. 핵심 기능", "3-4. 전투 BGM — 몇 명이 나를 쫓고 있나 세기"],
+        "points": [
+          { "label": "구현", "text": "`SoundManager`는 지금 전투 중인 적의 수(`engagedEnemyCount`)를 세어, 0 → 1이 되는 순간 전투 BGM으로, 1 → 0이 되는 순간 평상시 BGM으로 크로스페이드합니다.", "verbatim": true },
+          { "label": "결과", "text": "그래서 적 여러 명이 동시에 쫓아와도 음악이 한 번만 바뀝니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "code", "n": 1, "fp": "public void NotifyCombatStarted()" }
+        ]
+      },
+      {
+        "key": "box-choice",
+        "chapter": "choice",
+        "layout": "full",
+        "tab": "선택",
+        "title": { "text": "4-1. 박스 회전 — 즉시 회전 vs 보간 회전", "verbatim": true },
+        "lead": { "text": "같은 \"방향에 맞춰 도는 박스\"라도 역할에 따라 의도적으로 다르게 처리했습니다.", "verbatim": true },
+        "sectionPath": ["4. 고민과 선택", "4-1. 박스 회전 — 즉시 회전 vs 보간 회전"],
+        "points": [
+          { "label": "", "text": "시야를 부드럽게 돌리는 연출을 넣었지만 정작 그 시야가 보이지 않았던 것입니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "박스|회전 방식|이유" }
+        ]
+      },
+      {
+        "key": "boss-choice",
+        "chapter": "choice",
+        "layout": "full",
+        "tab": "선택",
+        "title": { "text": "4-2. 보스 4명 — 공통 몸 + 상태(옷) vs 보스마다 따로", "verbatim": true },
+        "lead": { "text": "보스의 기본 공격은 모두 같기 때문에, 보스 특유의 패턴은 보스마다 패턴 상태(state)로 추가하는 것이 좋다고 생각했습니다.", "verbatim": true },
+        "sectionPath": ["4. 고민과 선택", "4-2. 보스 4명 — 공통 몸 + 상태(옷) vs 보스마다 따로"],
+        "points": [
+          { "label": "", "text": "실제로 만들어 보니 그 패턴은 해당 보스만 쓰기 때문에 문제가 없다고 판단했습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "방법|장점|단점" }
+        ]
+      },
+      {
+        "key": "lessons",
+        "chapter": "result",
+        "layout": "visual",
+        "tab": "결과",
+        "title": { "text": "5-1. 배운 점", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 배운 점"],
+        "points": [
+          { "label": "게임 연출의 중요성", "text": "게임 내 메인 루프인 뒤통수 때리기 공격과 회피는 굉장히 단순한 구조이지만, 플레이어와 적의 컷씬 연출을 활용하여 게임 플레이 경험에 생동감을 주었습니다.", "verbatim": true },
+          { "label": "사운드의 중요성", "text": "SFX를 넣은 뒤 플레이어와 적의 타격 액션에 재미가 더해지는 것을 느꼈고, SFX와 배경음 등 게임 내 사운드의 중요성을 다시 한번 깨달았습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "image", "src": "images/cutscene-slap-face.png", "w": 1578, "h": 882, "caption": { "text": "뺨 맞는 컷씬 — 플레이어가 적에게 들켰을 때", "verbatim": true } }
+        ]
+      },
+      {
+        "key": "ts-knockdown",
+        "chapter": "result",
+        "layout": "problem",
+        "tab": "문제 해결",
+        "title": { "text": "A. 적을 쓰러뜨렸는데 플레이어도 쓰러지는 문제", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["5. 결과 및 배운 점", "5-2. 트러블슈팅"],
+        "points": [
+          { "label": "문제", "text": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 됨", "verbatim": true },
+          { "label": "원인", "text": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냄", "verbatim": true },
+          { "label": "해결", "text": "공격 타격 박스와 `OnBackHit` 앞에 `IsKnockDown` 확인을 추가하고(7/6), `ChangeState` 입구에도 같은 가드를 넣음(7/22)", "verbatim": false }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "ts-bgm",
+        "chapter": "result",
+        "layout": "problem",
+        "tab": "문제 해결",
+        "title": { "text": "B. 두 번째 판부터 추격 음악이 안 나오는 문제", "verbatim": true },
+        "lead": null,
+        "sectionPath": ["5. 결과 및 배운 점", "5-2. 트러블슈팅"],
+        "points": [
+          { "label": "문제", "text": "첫 게임에서는 추격 BGM이 나오지만, 재시도 이후에는 나오지 않음", "verbatim": true },
+          { "label": "원인", "text": "추격 중에 플레이어가 죽고 씬을 다시 불러오면, 적의 `Exit`가 불리지 않아 `engagedEnemyCount`가 0으로 돌아가지 않습니다.", "verbatim": true },
+          { "label": "시도", "text": "씬 시작 시 `GameSceneInitializer`가 `SoundManager.ResetCombatMusicState()`로 카운트를 0으로 되돌림", "verbatim": true },
+          { "label": "결과", "text": "과제 제출 당시에는 해결하지 못했습니다. 카운트를 되돌린 뒤에도 남은 문제라 다른 원인이 더 있을 수 있고, 추후 리팩토링 때 다시 확인할 예정입니다.", "verbatim": true }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "ai-review",
+        "chapter": "result",
+        "layout": "full",
+        "tab": "결과",
+        "title": { "text": "5-4. AI 코드 리뷰로 다시 본 내 코드", "verbatim": true },
+        "lead": { "text": "5-3에서 제가 느낀 \"부자연스러움\"·\"벽 끼임\"·\"책임 몰림\"이 코드의 어느 줄에서 나오는지 찾는 것이 목표였습니다.", "verbatim": true },
+        "sectionPath": ["5. 결과 및 배운 점", "5-4. AI 코드 리뷰로 다시 본 내 코드"],
+        "points": [],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "#|AI가 짚은 문제|코드 위치|내가 확인한 결과|이어지는 아쉬움" }
+        ]
+      },
+      {
+        "key": "plan",
+        "chapter": "result",
+        "layout": "full",
+        "tab": "결과",
+        "title": { "text": "5-5. 개선 계획 (아직 하지 않음)", "verbatim": true },
+        "lead": { "text": "리팩토링은 아직 하지 않았고 다음 작업으로 남겨 두었습니다.", "verbatim": true },
+        "sectionPath": ["5. 결과 및 배운 점", "5-5. 개선 계획 (아직 하지 않음)"],
+        "points": [
+          { "label": "다음 프로젝트에서 바꾼 것", "text": "다음 프로젝트였던 We got one에서는, 이 게임의 적 FSM과 비슷한 `FishStateManager`는 상태 전환만 관리하고 `FishMovement`는 움직임만 맡도록 나눠서 설계해 보았습니다.", "verbatim": true }
+        ],
+        "visuals": [
+          { "kind": "table", "n": 1, "fp": "아쉬운 점|As-Is (지금)|To-Be (계획)" }
+        ]
+      }
+    ]
+  }
+}

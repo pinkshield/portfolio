@@ -4,7 +4,7 @@
     "name": "윤 건우",
     "nameEn": "Geonwoo Yoon",
     "headline": "왜 이렇게 만들었는지 설명할 수 있는 유니티 클라이언트 개발자",
-    "intro": "물고기 AI·보급·사운드처럼 맡은 시스템을 책임별로 나누고, 왜 그렇게 나눴는지 문서로 설명하는 유니티 개발자입니다.\n무료 AI로 시작해 Claude Opus까지, AI가 낸 설계를 그대로 쓰지 않고 보완점을 찾아 고른 뒤 직접 플레이 테스트로 검증해 왔습니다.\n팀 프로젝트 발표 날 동기들이 막힌 구간을 보며 배운 레벨 디자인의 중요성을 다음 작업의 출발점으로 삼고 있습니다.",
+    "intro": "물고기 AI는 대기·순찰·도망 같은 상태마다 코드를 따로 나눴고, 사운드는 팀원의 코드를 고치지 않고도 소리를 붙일 수 있게 만들었습니다. 이렇게 무엇을 어떻게 나눴고 왜 그렇게 했는지 문서로 설명할 수 있는 유니티 개발자입니다.\n무료 AI로 시작해 지금은 Claude Opus와 함께 개발합니다. AI가 낸 안을 그대로 쓰지 않고 여러 안을 비교해 고르며, 직접 플레이해 문제를 찾습니다. 보급 10개 중 2~3개가 건물 위·맵 밖에 떨어져 주울 수 없던 문제도 플레이 테스트로 찾아, 걸어서 갈 수 있는 곳에만 떨어지도록 고쳤습니다.\n팀 프로젝트 발표 날, 동기들이 제가 만든 두 번째 스테이지에서 계속 막히는 모습을 보며 레벨 디자인이 플레이 경험을 좌우한다는 것을 배웠습니다. 다음 작업은 이 경험에서 출발합니다.",
     "email": "pinkshield303@gmail.com",
     "github": "https://github.com/pinkshield",
     "links": []
@@ -17,51 +17,100 @@
     {
       "name": "Unity",
       "evidence": [
-        { "text": "Unity 6000.3으로 2D 탑다운 잠입·전투 액션 게임을 1인 개발", "project": "1-watch-your-back" },
-        { "text": "Unity 6(URP 2D)에서 물리 기반 물고기 AI·순찰·장애물 회피 구현", "project": "2-teamproject-hs" },
-        { "text": "NavMesh 경로 검사로 보급 낙하 지점 판정", "project": "4-team-even" }
+        {
+          "text": "적 상태 행동을 코루틴으로 만들고, BoxCast로 몸 크기만큼 지나갈 길을 찾는 2D 잠입 액션을 1인 개발",
+          "project": "1-watch-your-back"
+        },
+        {
+          "text": "Unity 6(URP 2D)에서 Rigidbody 물리로 움직이는 물고기 AI와 BoxCast 장애물 회피 구현",
+          "project": "2-teamproject-hs"
+        },
+        {
+          "text": "NavMesh `CalculatePath`로 걸어서 갈 수 있는 곳에만 보급을 떨어뜨림",
+          "project": "4-team-even"
+        }
       ]
     },
     {
       "name": "C#",
       "evidence": [
-        { "text": "`IEnemyState` 인터페이스와 C# 상태 클래스로 적 AI 구성", "project": "1-watch-your-back" },
-        { "text": "`AddComponent`로 사운드 이미터를 실행 중에 자동 부착", "project": "4-team-even" }
+        {
+          "text": "`IEnemyState` 인터페이스와 일반 C# 상태 클래스로 적 AI 구성",
+          "project": "1-watch-your-back"
+        },
+        {
+          "text": "오브젝트 풀 때문에 사운드 이미터가 `Awake`가 아닌 `OnEnable`에서 이벤트를 구독",
+          "project": "4-team-even"
+        }
       ]
     },
     {
       "name": "디자인 패턴",
       "evidence": [
-        { "text": "`IEnemyState`로 상태를 나눈 적 FSM(대기·순찰·추격·공격·넉다운)", "project": "1-watch-your-back" },
-        { "text": "상태마다 클래스를 두고 `IFishState`로 묶은 물고기 FSM", "project": "2-teamproject-hs" },
-        { "text": "`EventBus`·`ServiceLocator`·인터페이스로 파트 간 직접 참조 금지", "project": "4-team-even" }
+        {
+          "text": "인터페이스로 상태를 나눈 FSM으로 보스 4명이 이동·전투 코드를 같이 씀",
+          "project": "1-watch-your-back"
+        },
+        {
+          "text": "물고기 상태 6종을 클래스 하나씩 두고 `IFishState`로 묶은 FSM — 팀원들이 같은 방식으로 문어·상어 상태를 추가",
+          "project": "2-teamproject-hs"
+        },
+        {
+          "text": "EventBus의 `MonsterSpawnedEvent`를 구독해, 다른 팀원의 코드를 고치지 않고 몬스터에 사운드 이미터를 자동으로 붙임",
+          "project": "4-team-even"
+        }
       ]
     },
     {
       "name": "비동기 (async)",
       "evidence": [
-        { "text": "async·`CancellationToken`으로 진행 중인 상태 전환을 취소", "project": "2-teamproject-hs" }
+        {
+          "text": "상태 진입·퇴장을 async로 만들고, 새 전환이 시작되면 `CancellationToken`으로 이전 전환을 취소",
+          "project": "2-teamproject-hs"
+        }
       ]
     },
     {
       "name": "멀티플레이 동기화",
       "evidence": [
-        { "text": "호스트만 물고기 AI 계산, 게스트는 슬롯 ID 스냅샷으로 위치·회전만 반영", "project": "2-teamproject-hs" }
+        {
+          "text": "호스트만 물고기 AI를 계산하고, 게스트는 30ms마다 받은 스냅샷으로 위치·회전만 덮어씀",
+          "project": "2-teamproject-hs"
+        }
       ]
     },
     {
       "name": "레벨 디자인",
       "evidence": [
-        { "text": "튜토리얼·살짝 깊은 바다·아주 깊은 바다 3스테이지 설계와 난이도 조정", "project": "2-teamproject-hs" },
-        { "text": "창고방에서 두 갈래로 나뉘는 루트와 함정 3종 배치", "project": "3-escape-for-freedom" },
-        { "text": "맵 빌더 도구로 생성하고 손으로 고친 배치를 다시 규칙에 반영", "project": "4-team-even" }
+        {
+          "text": "섬·바다 3스테이지 맵을 디자인하고, 너무 어렵다는 반응에 튜토리얼 맵을 추가",
+          "project": "2-teamproject-hs"
+        },
+        {
+          "text": "진열장→창고방→거실→현관 네 구간 맵, 창고방에서 두 갈래로 나뉘는 길과 성격이 다른 함정 3종 배치",
+          "project": "3-escape-for-freedom"
+        },
+        {
+          "text": "맵 면적을 1/4로 줄이고 고저차가 큰 언덕을 없애고 엄폐물을 더 배치",
+          "project": "4-team-even"
+        }
       ]
     },
     {
       "name": "AI 협업 (Claude Code)",
       "evidence": [
-        { "text": "AI가 낸 코드의 책임을 나누도록 구조를 직접 고침", "project": "2-teamproject-hs" },
-        { "text": "설계 → 보완점 정리 → 내 확인 → 구현 순서로 AI와 역할 분담", "project": "4-team-even" }
+        {
+          "text": "Claude 코드 리뷰로 회피 각도 식 오류 등 9건을 찾아 개선 계획에 반영",
+          "project": "1-watch-your-back"
+        },
+        {
+          "text": "AI가 한 클래스에 몰아넣은 물고기 기능을 세 클래스로 나눠 `FishMovement`를 352줄로 줄임",
+          "project": "2-teamproject-hs"
+        },
+        {
+          "text": "작업마다 \"설계 → 빠진 부분 정리 → 내 확인 → 구현\" 순서를 고정하고 팀 기준 문서를 매번 붙임",
+          "project": "4-team-even"
+        }
       ]
     }
   ],

@@ -3,8 +3,8 @@
   "profile": {
     "name": "윤 건우",
     "nameEn": "Geonwoo Yoon",
-    "headline": "왜 이렇게 만들었는지 설명할 수 있는 유니티 클라이언트 개발자",
-    "intro": "물고기 AI는 대기·순찰·도망 같은 상태마다 코드를 따로 나눴고, 사운드는 팀원의 코드를 고치지 않고도 소리를 붙일 수 있게 만들었습니다. 이렇게 무엇을 어떻게 나눴고 왜 그렇게 했는지 문서로 설명할 수 있는 유니티 개발자입니다.\n무료 AI로 시작해 지금은 Claude Opus와 함께 개발합니다. AI가 낸 안을 그대로 쓰지 않고 여러 안을 비교해 고르며, 직접 플레이해 문제를 찾습니다. 보급 10개 중 2~3개가 건물 위·맵 밖에 떨어져 주울 수 없던 문제도 플레이 테스트로 찾아, 걸어서 갈 수 있는 곳에만 떨어지도록 고쳤습니다.\n팀 프로젝트 발표 날, 동기들이 제가 만든 두 번째 스테이지에서 계속 막히는 모습을 보며 레벨 디자인이 플레이 경험을 좌우한다는 것을 배웠습니다. 다음 작업은 이 경험에서 출발합니다.",
+    "headline": "AI와 역할을 나눠, 기획부터 플레이 테스트까지 게임을 끝까지 만드는 유니티 개발자",
+    "intro": "HIVE PURGE에서 저는 무엇을 만들지 정하고, Claude Code는 설계안과 구현을 맡았습니다. 작업마다 \"설계 → 빠진 부분 정리 → 내 확인 → 구현\" 순서를 고정하고 팀 기준 문서를 매번 붙여, 각자의 AI가 다른 팀원의 작업을 건드리지 않게 했습니다. 마감 일주일 전 맵을 새로 만들 때는 AI가 배치를 생성하고 제가 고치되, 손으로 고친 배치가 다시 생성해도 남고 \"높은 곳에서 쏘는 이점은 주지 않는다\"는 원칙이 생성 규칙에 들어가도록 작업 흐름을 짰습니다.\nAI가 구현했어도 직접 플레이해 확인하기 전에는 끝난 것이 아니라고 생각합니다. 보급 10개 중 2~3개가 건물 위·맵 밖에 떨어져 주울 수 없던 문제도 플레이 테스트로 찾아, 걸어서 갈 수 있는 곳에만 떨어지도록 고쳤습니다.\n비전공자로 시작해 무료 AI에서 Claude Opus·Claude Code로 도구를 넓혀 왔고, 레벨 디자인·밸런스·튜토리얼 같은 기획과 구현을 함께 맡아 왔습니다. 지금은 AI가 만든 코드를 제 말로 설명할 수 있도록, 첫 게임의 코드를 AI 코드 리뷰로 다시 읽으며 지적을 하나씩 직접 확인하고 있습니다.",
     "email": "pinkshield303@gmail.com",
     "github": "https://github.com/pinkshield",
     "links": []
@@ -14,6 +14,52 @@
     "accent": "#2F6FEB"
   },
   "skills": [
+    {
+      "name": "AI 협업 (Claude Code)",
+      "evidence": [
+        {
+          "text": "작업마다 \"설계 → 빠진 부분 정리 → 내 확인 → 구현\" 순서를 고정하고 팀 기준 문서를 매번 붙임",
+          "project": "4-team-even"
+        },
+        {
+          "text": "AI가 생성한 맵을 손으로 고치고, 고친 배치가 재생성에도 남게 한 뒤 빌더 규칙으로 되돌림",
+          "project": "4-team-even"
+        },
+        {
+          "text": "AI가 한 클래스에 몰아넣은 물고기 기능을 세 클래스로 나눠 `FishMovement`를 352줄로 줄임",
+          "project": "2-teamproject-hs"
+        },
+        {
+          "text": "Claude 코드 리뷰로 회피 각도 식 오류 등 9건을 찾아 개선 계획에 반영",
+          "project": "1-watch-your-back"
+        }
+      ]
+    },
+    {
+      "name": "게임 기획",
+      "evidence": [
+        {
+          "text": "강화 상점을 3종에서 8종 · 등급 카드 3장 + 리롤로 개편 (한 스테이지 재화 약 300 기준)",
+          "project": "4-team-even"
+        },
+        {
+          "text": "튜토리얼을 단계마다 지시한 행동만 하게 바꾸고, 오퍼레이터 음성 41줄을 TTS로 제작",
+          "project": "4-team-even"
+        },
+        {
+          "text": "창고방에서 두 갈래로 나뉘는 길과 성격이 다른 함정 3종으로 탈출 맵을 레벨 디자인",
+          "project": "3-escape-for-freedom"
+        },
+        {
+          "text": "섬·바다 3스테이지 맵을 디자인하고, 너무 어렵다는 반응에 튜토리얼 맵을 추가",
+          "project": "2-teamproject-hs"
+        },
+        {
+          "text": "WoW 하드코어 전투를 \"시스템 → 행동 → 상호작용 → 결과\" 틀로 분석",
+          "project": "5-wow-hardcore-analysis"
+        }
+      ]
+    },
     {
       "name": "Unity",
       "evidence": [
@@ -62,6 +108,19 @@
       ]
     },
     {
+      "name": "Git 협업",
+      "evidence": [
+        {
+          "text": "UI 통합을 작은 PR 9개로 나누고 다른 브랜치와 미리 시험 병합해 하루 안에 합침",
+          "project": "4-team-even"
+        },
+        {
+          "text": "서버와 공유하는 `Protocol.cs`는 고치기 전에 항상 팀장에게 먼저 물어봄",
+          "project": "2-teamproject-hs"
+        }
+      ]
+    },
+    {
       "name": "비동기 (async)",
       "evidence": [
         {
@@ -78,47 +137,13 @@
           "project": "2-teamproject-hs"
         }
       ]
-    },
-    {
-      "name": "레벨 디자인",
-      "evidence": [
-        {
-          "text": "섬·바다 3스테이지 맵을 디자인하고, 너무 어렵다는 반응에 튜토리얼 맵을 추가",
-          "project": "2-teamproject-hs"
-        },
-        {
-          "text": "진열장→창고방→거실→현관 네 구간 맵, 창고방에서 두 갈래로 나뉘는 길과 성격이 다른 함정 3종 배치",
-          "project": "3-escape-for-freedom"
-        },
-        {
-          "text": "맵 면적을 1/4로 줄이고 고저차가 큰 언덕을 없애고 엄폐물을 더 배치",
-          "project": "4-team-even"
-        }
-      ]
-    },
-    {
-      "name": "AI 협업 (Claude Code)",
-      "evidence": [
-        {
-          "text": "Claude 코드 리뷰로 회피 각도 식 오류 등 9건을 찾아 개선 계획에 반영",
-          "project": "1-watch-your-back"
-        },
-        {
-          "text": "AI가 한 클래스에 몰아넣은 물고기 기능을 세 클래스로 나눠 `FishMovement`를 352줄로 줄임",
-          "project": "2-teamproject-hs"
-        },
-        {
-          "text": "작업마다 \"설계 → 빠진 부분 정리 → 내 확인 → 구현\" 순서를 고정하고 팀 기준 문서를 매번 붙임",
-          "project": "4-team-even"
-        }
-      ]
     }
   ],
   "projects": [
-    "1-watch-your-back",
-    "2-teamproject-hs",
-    "3-escape-for-freedom",
     "4-team-even",
+    "2-teamproject-hs",
+    "1-watch-your-back",
+    "3-escape-for-freedom",
     "5-wow-hardcore-analysis"
   ]
 }

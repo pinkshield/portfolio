@@ -39,8 +39,12 @@
   ],
   "links": {
     "github": "",
-    "video": "https://youtu.be/ApLFcrms6j4",
+    "video": "https://youtube.com/shorts/T9h6JuvG1K4",
     "extra": [
+      {
+        "label": "전체 시연 영상",
+        "url": "https://youtu.be/ApLFcrms6j4"
+      },
       {
         "label": "튜토리얼 영상",
         "url": "https://youtu.be/8Kuv8hg5q3Y"

@@ -63,12 +63,14 @@
     try { h = decodeURIComponent(h); } catch { /* 그대로 */ }
     if (!h) return '';
     const nth = (n) => info.sections[Math.max(1, Math.min(info.sections.length, n)) - 1] || '';
-    if (/^-?\d+$/.test(h)) return nth(+h);
+    // (직접 고친 기능) 한눈에 보기는 인쇄 전용 → 화면에서는 프로젝트 카드 절로
+    const screenId = (id) => (id === 'glance' && document.getElementById('works') ? 'works' : id);
+    if (/^-?\d+$/.test(h)) return screenId(nth(+h));
     const m = /^s=(.+)$/.exec(h);
     if (m) h = m[1].replace(/^(stack|glance)-\d+$/, '$1');
     const sn = /^s-(\d+)$/.exec(h);
-    if (sn) return nth(+sn[1]);
-    return { skills: 'stack', projects: projects[0] ? `p-${projects[0].id}` : '', summary: 'glance' }[h] ?? h;
+    if (sn) return screenId(nth(+sn[1]));
+    return screenId({ skills: 'stack', projects: projects[0] ? `p-${projects[0].id}` : '', summary: 'glance' }[h] ?? h);
   }
 
   function render(pf, projects) {
@@ -125,13 +127,14 @@
     });
 
     // ⑤ 한눈에 보기(format/01 §1 프로젝트 요약 표) — 좁은 화면에서도 가로 스크롤이 없도록 표 대신 행 목록
+    //   (직접 고친 기능) 화면에서는 위쪽 프로젝트 카드가 같은 요약을 맡으므로 인쇄(PDF)에서만 보임(.print-only)
     if (projects.length) out.push(sec('glance', t('en.glance'), t('page.glance'), '',`<ul class="glance">${projects.map((p) => `<li>
       <div class="g-t">${link({ href: `#p-${p.id}`, label: esc(p.title), kind: 'anchor' })}<p>${esc(PF.teamLabel(p.team))}</p></div>
       <div class="g-b">${p.tagline ? `<p>${inline(p.tagline)}</p>` : ''}${(p.tags || []).length ? `<p class="g-tags">${esc(p.tags.slice(0, 4).join(' · '))}</p>` : ''}
         ${p.team?.role ? `<p class="g-role"><b>${T('name.role-short')}</b> ${inline(p.team.role)}</p>` : ''}</div>
-      <div class="g-l">${projLinks(p)}</div></li>`).join('')}</ul>`, 'tint'));
+      <div class="g-l">${projLinks(p)}</div></li>`).join('')}</ul>`, 'tint print-only'));
 
-    // ⑥ 연락처 + 프로젝트별 링크(그 밖의 링크는 주소까지)
+    // ⑥ 연락처 + (직접 고친 기능) 내가 만든 게임의 스크린샷 모음(화면 전용). 프로젝트별 링크는 각 프로젝트 소개에만 둠(같은 링크가 되풀이되지 않게)
     out.push(`<footer id="contact" class="sec contact"><div class="wrap">
       <p class="eyebrow">${T('en.contact')}</p>
       <div class="ct">
@@ -140,12 +143,11 @@
           ${isUrl(prof.github) ? `<p>${link({ href: prof.github, label: `${PF.brandIcon('github')}<span class="url">${esc(shortUrl(prof.github))}</span>` })}</p>` : ''}
           ${profLinks.map((l) => `<p><span class="k">${esc(l.label)}</span> ${link({ href: l.url, label: `<span class="url">${esc(shortUrl(l.url))}</span>` })}</p>`).join('')}
           <p class="print-only"><span class="url">${esc(PF.visibleUrl(''))}</span></p></div>
-        <div class="ct-lk">${projects.map((p) => `<div><b>${esc(p.title)}</b><span class="row">${projLinks(p)}</span>${(p.links?.extra || []).filter((l) => isUrl(l.url))
-          .map((l) => `<span class="ex">${esc(l.label)} ${link({ href: l.url, label: `<span class="url">${esc(shortUrl(l.url))}</span>` })}</span>`).join('')}</div>`).join('')}</div>
+        ${gallery(projects)}
       </div></div></footer>`);
 
     const nav = [['intro', t('page.nav-intro'), prof.intro], ['stack', t('page.nav-stack'), (pf.skills || []).length], [projects[0] ? 'works' : '', t('page.nav-projects'), projects.length],
-      ['glance', t('page.nav-glance'), projects.length], ['contact', t('page.nav-contact'), true]].filter((x) => x[0] && x[2]);
+      ['contact', t('page.nav-contact'), true]].filter((x) => x[0] && x[2]);   // (직접 고친 기능) 한눈에 보기는 인쇄 전용이라 메뉴에서 뺌
     root.innerHTML = `<header class="top no-print"><div class="wrap top-in">
         <a class="top-name" href="#cover">${esc(nameT)}</a>
         <nav aria-label="절 이동"><ul>${nav.map(([id, label]) => `<li><a href="#${esc(id)}">${esc(label)}</a></li>`).join('')}</ul></nav>
@@ -172,13 +174,11 @@
     const WIDE = 26;
     const meta = (p.meta || []).map((m) => `<div${String(m.value || '').length > WIDE ? ' class="wide"' : ''}><dt>${esc(m.label)}</dt><dd>${inline(m.value)}</dd></div>`);
     if (p.team?.role) meta.push(`<div class="wide"><dt>${T('name.role')}</dt><dd>${inline(p.team.role)}</dd></div>`);
-    const extra = (p.links?.extra || []).filter((l) => isUrl(l.url));
+    const ext = extLinks(p);
     const btns = [btn(PF.projectUrl(p.id), T('name.deck'), 'page', 'btn primary'), btn(PF.docUrl(p.id), T('name.doc'), 'page'),
-      isUrl(p.links?.github) && btn(p.links.github, 'GitHub', 'external'), isUrl(p.links?.video) && btn(p.links.video, T('name.video'), 'external'),
-      ...extra.map((l) => btn(l.url, esc(l.label), 'external'))].filter(Boolean);
+      ...ext.map((x) => link({ href: x.url, label: PF.brandIcon(x.icon) + esc(x.label), kind: 'external', cls: `btn ext-${x.kind}`, attrs: x.orig && x.orig !== x.label ? `title="${esc(x.orig)}"` : '' }))];
     const urls = [[t('name.deck'), PF.visibleUrl(PF.projectUrl(p.id)), PF.projectUrl(p.id), 'page'], [t('name.doc'), PF.visibleUrl(PF.docUrl(p.id)), PF.docUrl(p.id), 'page'],
-      isUrl(p.links?.github) && ['GitHub', shortUrl(p.links.github), p.links.github, 'external'], isUrl(p.links?.video) && [t('name.video'), shortUrl(p.links.video), p.links.video, 'external'],
-      ...extra.map((l) => [l.label, shortUrl(l.url), l.url, 'external'])].filter(Boolean);
+      ...ext.map((x) => [x.label, shortUrl(x.url), x.url, 'external'])];
     const cover = p.cover ? `<figure class="cover"><img src="${esc(PF.srcPath(p.id, p.cover))}" alt="${esc(p.title)} 대표 화면"></figure>` : '';
     const body = `${p.tagline ? `<p class="tagline">${inline(p.tagline)}</p>` : ''}
       <div class="pi${cover ? '' : ' nocover'}">${cover}<div class="pi-r">
@@ -215,11 +215,9 @@
   // (직접 고친 기능) 프로젝트 카드 하나: 썸네일(번호 · 팀/개인 · 아이콘) · 제목 · 한 줄 소개 · 태그 4개 · [자세히 보기 →]
   //   카드 전체가 같은 페이지의 #p-<폴더>로 가는 링크(제목 링크를 카드 크기로 늘림), 아이콘 링크는 그 위에 따로 눌림
   function workCard(p, j) {
-    const ico = [isUrl(p.links?.github) && [p.links.github, 'GitHub'], isUrl(p.links?.video) && [p.links.video, t('name.video')],
-      ...(p.links?.extra || []).filter((l) => isUrl(l.url)).map((l) => [l.url, l.label])]
-      .filter((x) => x && PF.brandOf(x[0]))
-      .filter((x, i, a) => a.findIndex((y) => PF.brandOf(y[0]) === PF.brandOf(x[0])) === i)   // 브랜드마다 하나(시연 영상이 쇼츠보다 먼저)
-      .map(([u, label]) => `<a class="wc-ico ${PF.brandOf(u)}" href="${esc(u)}" target="_blank" rel="noopener" title="${esc(label)}" aria-label="${esc(p.title)} ${esc(label)} (새 탭)">${PF.brandIcon(PF.brandOf(u))}</a>`);
+    const ico = extLinks(p).filter((x) => x.icon)
+      .filter((x, i, a) => a.findIndex((y) => y.kind === x.kind) === i)      // 종류마다 하나(GitHub · 전체 시연 영상 · 쇼츠)
+      .map((x) => `<a class="wc-ico ${x.kind}" href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.label)}" aria-label="${esc(p.title)} ${esc(x.label)} (새 탭)">${PF.brandIcon(x.icon)}</a>`);
     const cover = p.cover ? `<img src="${esc(PF.srcPath(p.id, p.cover))}" alt="">` : '';
     return `<li class="wc"><div class="wc-cover${cover ? '' : ' empty'}">${cover}<span class="wc-no">${pad2(j + 1)}</span><span class="wc-kind">${esc(PF.teamLabel(p.team))}</span>
         ${ico.length ? `<div class="wc-icos">${ico.join('')}</div>` : ''}</div>
@@ -231,8 +229,46 @@
 
   function projLinks(p) {
     return [link({ href: PF.projectUrl(p.id), label: T('name.deck'), kind: 'page' }), link({ href: PF.docUrl(p.id), label: T('name.doc-short'), kind: 'page' }),
-      isUrl(p.links?.github) && link({ href: p.links.github, label: PF.brandIcon('github') + 'GitHub' }),
-      isUrl(p.links?.video) && link({ href: p.links.video, label: PF.brandIcon(PF.brandOf(p.links.video)) + T('name.video') })].filter(Boolean).join('');
+      ...extLinks(p).map((x) => link({ href: x.url, label: PF.brandIcon(x.icon) + esc(x.label) }))].join('');
+  }
+
+  // (직접 고친 기능) 프로젝트의 바깥 링크: GitHub → 전체 시연 영상 → 쇼츠 영상 → 그 밖의 링크 순서.
+  //   YouTube 링크는 주소로 가름 — /shorts/ = 쇼츠 영상(쇼츠 아이콘), 그 밖(youtu.be · watch) = 전체 시연 영상(YouTube 아이콘).
+  //   이름은 문구 표(name.video-full · name.video-shorts)로 통일하고, 같은 종류가 둘 이상이면 뒤에 번호. 데이터의 원래 이름은 마우스를 올리면(title) 보임
+  function extLinks(p) {
+    const raw = [isUrl(p.links?.github) && { url: p.links.github, orig: '' }, isUrl(p.links?.video) && { url: p.links.video, orig: '' },
+      ...(p.links?.extra || []).filter((l) => isUrl(l.url)).map((l) => ({ url: l.url, orig: l.label || '' }))].filter(Boolean);
+    const list = raw.map((x) => {
+      const b = PF.brandOf(x.url);
+      if (b === 'youtube') {
+        const sh = /\/shorts\//.test(x.url);
+        return { ...x, kind: sh ? 'shorts' : 'full', icon: sh ? 'shorts' : 'youtube', label: t(sh ? 'name.video-shorts' : 'name.video-full') };
+      }
+      if (b === 'github') return { ...x, kind: 'github', icon: 'github', label: x.orig || 'GitHub', orig: '' };
+      return { ...x, kind: 'other', icon: '', label: x.orig, orig: '' };
+    }).filter((x, i, a) => a.findIndex((y) => y.url === x.url) === i);
+    const rank = { github: 0, full: 1, shorts: 2, other: 3 };
+    list.sort((a, b) => rank[a.kind] - rank[b.kind]);
+    const n = {}, seen = {};
+    list.forEach((x) => { n[x.kind] = (n[x.kind] || 0) + 1; });
+    list.forEach((x) => { if ((x.kind === 'full' || x.kind === 'shorts') && n[x.kind] > 1) { seen[x.kind] = (seen[x.kind] || 0) + 1; x.label += ` ${seen[x.kind]}`; } });
+    return list;
+  }
+
+  // (직접 고친 기능) 연락처 옆 스크린샷 모음: 게임 프로젝트(프로젝트 정보에 '장르'가 있는 것 — 분석 문서 등은 뺌)의 대표 화면 + 기능 화면.
+  //   같은 그림은 한 번만. 칸을 누르면 그림 원본이 새 탭에서 열림. 화면 전용(인쇄에서는 빠짐)
+  function gallery(projects) {
+    const capText = (c) => (typeof c === 'string' ? c : c?.text || '');
+    const items = [];
+    projects.filter((p) => (p.meta || []).some((m) => m.label === '장르')).forEach((p) => {
+      const add = (src, cap) => { if (!src) return; const u = PF.srcPath(p.id, src); if (!items.some((x) => x.u === u)) items.push({ u, p, cap }); };
+      add(p.cover, '');
+      (p.highlights || []).forEach((h) => add(h.image?.src, capText(h.image?.caption) || h.title || ''));
+    });
+    if (!items.length) return '';
+    return `<div class="ct-gal no-print"><p class="ct-gk">${T('page.gallery')}</p><ul class="gallery">${items.map((x) => `<li>
+      <a class="gl" href="${esc(x.u)}" target="_blank" rel="noopener" aria-label="${esc(x.p.title)}${x.cap ? ' — ' + esc(PF.normTitle(x.cap)) : ''} 그림 원본 (새 탭)">
+        <img src="${esc(x.u)}" alt=""><span class="gl-cap">${esc(x.p.title)}</span></a></li>`).join('')}</ul></div>`;
   }
 
   // 화면과 설명 짝 강조(마우스·키보드 포커스) + [PDF로 저장]

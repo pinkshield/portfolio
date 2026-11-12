@@ -210,12 +210,23 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 .ct-lk .row { display: flex; flex-wrap: wrap; gap: 2px 16px; }
 .ct-lk .ex { display: block; margin-top: 4px; color: var(--muted); }
 .ct-lk .ex a { color: var(--accent-ink); text-decoration: none; }
+/* (직접 고친 기능) 연락처 옆 스크린샷 모음: 16:9 칸, 아래에 프로젝트 이름, 누르면 원본(새 탭) */
+.ct-gk { margin-bottom: 12px; font-size: 14px; font-weight: 700; color: var(--muted); }
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.gl { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: calc(var(--radius) * .6); background: var(--surface); }
+.gl img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.gl .pf-newtab-icon { display: none; }
+.gl-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 10px 7px; font-size: 12px; font-weight: 700; color: #fff;
+          background: linear-gradient(transparent, rgb(0 0 0 / .78)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gl:hover img, .gl:focus-visible img { transform: scale(1.05); }
+.gl:hover, .gl:focus-visible { border-color: var(--accent); }
+@media (min-width: 1000px) { .gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* (직접 고친 기능) 브랜드 아이콘(GitHub · YouTube · Unity) — common.js PF.brandIcon. 글자 앞에 붙는 작은 아이콘 */
 .pf-brand { flex: none; width: 1.05em; height: 1.05em; margin-right: .45em; vertical-align: -.15em; }
 .btn .pf-brand { margin-right: 7px; }
-.pf-brand-youtube { color: #FF0033; }
-.btn:hover .pf-brand-youtube { color: #FF0033; }
+.pf-brand-youtube, .pf-brand-shorts { color: #FF0033; }
+.btn:hover .pf-brand-youtube, .btn:hover .pf-brand-shorts { color: #FF0033; }
 .tags .pf-brand, .wc-tags .pf-brand { width: .95em; height: .95em; margin-right: .35em; }
 /* 첫 화면 연락처 버튼: 작은 영문 라벨 + 값 */
 .btn.lbl .bk { margin-right: 9px; font-family: var(--display); font-size: 10.5px; font-weight: 800; letter-spacing: .12em; opacity: .7; }
@@ -242,8 +253,8 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 .wc-ico .pf-brand { margin: 0; width: 18px; height: 18px; }
 .wc-ico:hover, .wc-ico:focus-visible { transform: translateY(-2px) scale(1.06); }
 .wc-ico.github:hover, .wc-ico.github:focus-visible { background: #111; color: #fff; }
-.wc-ico.youtube:hover, .wc-ico.youtube:focus-visible { background: #FF0033; }
-.wc-ico.youtube:hover .pf-brand, .wc-ico.youtube:focus-visible .pf-brand { color: #fff; }
+.wc-ico.full:hover, .wc-ico.full:focus-visible, .wc-ico.shorts:hover, .wc-ico.shorts:focus-visible { background: #FF0033; }
+.wc-ico.full:hover .pf-brand, .wc-ico.full:focus-visible .pf-brand, .wc-ico.shorts:hover .pf-brand, .wc-ico.shorts:focus-visible .pf-brand { color: #fff; }
 .wc-body { display: flex; flex-direction: column; flex: 1; padding: 16px 18px 18px; }
 .wc-body h3 { font-size: 18px; font-weight: 800; letter-spacing: -.02em; }
 .wc-link { color: var(--ink); text-decoration: none; }
@@ -284,7 +295,8 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .btn, .chip, .shot, .flist li, .pill, .g-t a, .top nav a { transition: none; }
-  .wc, .wc-cover img, .wc-ico, .wc-go span, .top-ico { transition: none; }
+  .wc, .wc-cover img, .wc-ico, .wc-go span, .top-ico, .gl img { transition: none; }
+  .gl:hover img, .gl:focus-visible img { transform: none; }
   .wc:hover, .wc:focus-within { transform: none; }
   .wc:hover .wc-cover img { transform: none; }
 }
@@ -361,7 +373,7 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
   .g-l { flex-direction: column; gap: 1pt; }
   .g-l a, .ct-lk .row a { font-size: 9pt; }
   .contact { margin-top: 22pt; }
-  .ct { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 18pt; margin-top: 8pt; }
+  .ct { grid-template-columns: 1fr; gap: 18pt; margin-top: 8pt; }   /* 스크린샷 모음은 화면 전용 → 인쇄는 연락처만 */
   .ct-name { font-size: 20pt; margin-bottom: 6pt; }
   .ct-me p, .ct-lk > div { font-size: 9.5pt; }
   .ct-me .em { font-size: 11pt; }

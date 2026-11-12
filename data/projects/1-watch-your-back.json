@@ -67,7 +67,7 @@
       "problem": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 됨. 계속 반복해서 일어났고, 당시 지식과 무료 AI로는 원인을 정확히 진단하기 어려웠음",
       "cause": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냄",
       "solution": "① 7/6 — 공격 타격 박스(`EnemyAttackHitBox`)와 `OnBackHit` 앞에 `IsKnockDown` 확인 추가 ② 7/22 — `ChangeState` 입구에도 같은 가드를 넣어, 감시자·쥐가 쓰러진 보스를 다시 움직이게 하는 길까지 막음",
-      "result": "",
+      "result": "수정 뒤 다시 테스트해 보니(2026-11-12), 적을 쓰러뜨리고 가만히 있어도 적이 플레이어를 때리지 않아 더는 일어나지 않는 것으로 보입니다.",
       "lesson": "",
       "section": "5-2. 트러블슈팅"
     },
@@ -155,7 +155,7 @@
         "lead": { "text": "맵 레벨과 적의 능력을 묶어서 디자인했습니다.", "verbatim": true },
         "sectionPath": ["1. 개요", "1-4. 레벨과 적 — 캐릭터와 레벨 디자인은 함께 간다"],
         "points": [
-          { "label": "구현", "text": "보스 4명은 모두 같은 `EnemyStateManager`를 쓰고, 보스마다 다른 점은 곁에 붙은 작은 스크립트로만 만들었습니다.", "verbatim": true }
+          { "label": "구현", "text": "보스 4명은 모두 같은 `EnemyStateManager`를 씁니다. 보스마다 다른 점은 감시자·쥐 같은 따로 놓인 스크립트와 다커만에게만 붙은 스크립트, 그리고 패턴 상태(`AlertMovePatternState` 등)로 만들었습니다.", "verbatim": true }
         ],
         "visuals": [
           { "kind": "table", "n": 1, "fp": "보스|구역|능력" },
@@ -398,7 +398,8 @@
         "points": [
           { "label": "문제", "text": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 됨", "verbatim": true },
           { "label": "원인", "text": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냄", "verbatim": true },
-          { "label": "해결", "text": "공격 타격 박스와 `OnBackHit` 앞에 `IsKnockDown` 확인을 추가하고(7/6), `ChangeState` 입구에도 같은 가드를 넣음(7/22)", "verbatim": false }
+          { "label": "해결", "text": "공격 타격 박스와 `OnBackHit` 앞에 `IsKnockDown` 확인을 추가하고(7/6), `ChangeState` 입구에도 같은 가드를 넣음(7/22)", "verbatim": false },
+          { "label": "결과", "text": "수정 뒤 다시 테스트해 보니(2026-11-12), 적을 쓰러뜨리고 가만히 있어도 적이 플레이어를 때리지 않아 더는 일어나지 않는 것으로 보입니다.", "verbatim": true }
         ],
         "visuals": []
       },

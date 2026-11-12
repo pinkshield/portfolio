@@ -15,8 +15,8 @@
   "tags": ["Unity 6.3", "C#", "2D 탑다운", "FSM", "인터페이스", "코루틴", "BoxCast"],
   "links": {
     "github": "https://github.com/KooHoo-Dev/3rd-2D-Project-pinkshield",
-    "video": "",
-    "extra": []
+    "video": "https://youtube.com/shorts/moNh2DrYCas",
+    "extra": [{ "label": "전체 시연 영상", "url": "https://youtu.be/MgwuP_ErnK4" }]
   },
   "intent": {
     "text": "처음 만든 게임이라 규칙을 단순하게(뒤통수를 치면 승리, 맞으면 패배) 정하고, 뒤통수를 때리는 순간을 컷씬으로 크게 보여 주는 데 가장 공을 들였습니다.",
@@ -97,12 +97,13 @@
     "regrets": [
       "`EnemyStateManager` 한 클래스가 이동·애니메이션 호출·감지·박스 회전·넉다운 연출을 모두 맡음",
       "플레이어 감지, 벽 끼임 같은 적 FSM 버그로 적이 부자연스럽게 움직이는 장면이 생김",
-      "적이 나를 봤는지 플레이어가 눈으로 확인할 수 없음"
+      "적이 나를 봤는지 플레이어가 눈으로 확인할 수 없음",
+      "보스마다 다른 박스 시작 각도를 하나로 맞추지 않고 애니메이션에서 따로 조정해, 각도 값이 보스마다 복잡하게 나뉨"
     ],
     "plans": [
       "이동·감지·박스 회전·넉다운 연출로 나누고, 매니저는 상태 전환만",
       "회피 각도 식부터 고친 뒤 A* 길찾기로 교체",
-      "플레이어 시야각만 밝게, 적 시야에 닿으면 발견 수치가 차오르다 최대일 때 추격"
+      "적 시야에 들어가면 발견 게이지가 차오르다 가득 찰 때 추격 — 적이 나를 보고 있다는 것을 미리 알 수 있게"
     ],
     "section": "5. 결과 및 배운 점"
   },
@@ -253,7 +254,8 @@
         "lead": { "text": "각 박스(자식 오브젝트)에는 아주 작은 스크립트만 붙어 있고, 충돌이 나면 부모의 `EnemyStateManager`에 알리기만 합니다.", "verbatim": true },
         "sectionPath": ["2. 시스템 구조", "2-4. 박스와 매니저의 연결 — 박스는 알리기만, 판단은 매니저가"],
         "points": [
-          { "label": "", "text": "`CheckPlayerInSight()`가 적에서 플레이어까지 레이캐스트를 쏴서 벽(`ObstacleLayer`)에 가리지 않았을 때만 \"보인다\"로 판정합니다.", "verbatim": true }
+          { "label": "", "text": "`CheckPlayerInSight()`가 적에서 플레이어까지 레이캐스트를 쏴서 벽(`ObstacleLayer`)에 가리지 않았을 때만 \"보인다\"로 판정합니다.", "verbatim": true },
+          { "label": "", "text": "그래서 빨간 원(시야 박스) 안에 있어도 벽에 가리면 들키지 않는데, 실제로 플레이어가 이를 눈치채기는 어려웠습니다(→ 5-3·5-5).", "verbatim": true }
         ],
         "visuals": [
           { "kind": "table", "n": 1, "fp": "박스|스크립트|충돌 시 하는 일" }
@@ -441,7 +443,7 @@
         "lead": { "text": "미리 세워 둔 업데이트 기획서에, 5-4 리뷰 결과를 바탕으로 리팩토링 순서를 더했습니다. 리팩토링은 아직 하지 않았습니다.", "verbatim": true },
         "sectionPath": ["5. 결과 및 배운 점", "5-5. 개선 계획 (아직 하지 않음)"],
         "points": [
-          { "label": "다음 프로젝트에서 바꾼 것", "text": "다음 프로젝트였던 We got one에서는, 이 게임의 적 FSM과 비슷한 `FishStateManager`는 상태 전환만 관리하고 `FishMovement`는 움직임만 맡도록 나눠서 설계해 보았습니다.", "verbatim": true }
+          { "label": "다음 프로젝트에서 바꾼 것", "text": "다음 프로젝트였던 WeGotOne에서는, 이 게임의 적 FSM과 비슷한 `FishStateManager`는 상태 전환만 관리하고 `FishMovement`는 움직임만 맡도록 나눠서 설계해 보았습니다.", "verbatim": true }
         ],
         "visuals": [
           { "kind": "table", "n": 1, "fp": "아쉬운 점|As-Is (지금)|To-Be (계획)" }

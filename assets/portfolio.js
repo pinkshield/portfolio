@@ -63,12 +63,14 @@
     try { h = decodeURIComponent(h); } catch { /* 그대로 */ }
     if (!h) return '';
     const nth = (n) => info.sections[Math.max(1, Math.min(info.sections.length, n)) - 1] || '';
-    if (/^-?\d+$/.test(h)) return nth(+h);
+    // (직접 고친 기능) 한눈에 보기는 인쇄 전용 → 화면에서는 프로젝트 카드 절로
+    const screenId = (id) => (id === 'glance' && document.getElementById('works') ? 'works' : id);
+    if (/^-?\d+$/.test(h)) return screenId(nth(+h));
     const m = /^s=(.+)$/.exec(h);
     if (m) h = m[1].replace(/^(stack|glance)-\d+$/, '$1');
     const sn = /^s-(\d+)$/.exec(h);
-    if (sn) return nth(+sn[1]);
-    return { skills: 'stack', projects: projects[0] ? `p-${projects[0].id}` : '', summary: 'glance' }[h] ?? h;
+    if (sn) return screenId(nth(+sn[1]));
+    return screenId({ skills: 'stack', projects: projects[0] ? `p-${projects[0].id}` : '', summary: 'glance' }[h] ?? h);
   }
 
   function render(pf, projects) {
@@ -78,7 +80,9 @@
     document.title = `${prof.name ? prof.name + ' · ' : ''}${t('name.portfolio')}`;
     document.querySelector('.skip-link')?.replaceChildren(t('ui.skip'));
     const total = pad2(projects.length);
-    const btn = (href, label, kind, cls = 'btn') => link({ href, label, kind, cls });
+    // (직접 고친 기능) 바깥 링크 버튼은 주소에 맞는 아이콘(GitHub · YouTube)을 글자 앞에 붙임
+    const btn = (href, label, kind, cls = 'btn') => link({ href, label: (kind === 'external' ? PF.brandIcon(PF.brandOf(href)) : '') + label, kind, cls });
+    const ghUser = (u) => { try { return new URL(u).pathname.split('/').filter(Boolean)[0] || shortUrl(u); } catch { return shortUrl(u); } };
     const profLinks = (prof.links || []).filter((l) => isUrl(l.url));
     // 인쇄(PDF)에서는 버튼 대신 칠 수 있는 주소를 보여 줌. rows: [이름, 보이는 주소, 링크, 종류] — PDF에서는 눌러도 열림(링크 규칙은 PF.link 그대로, ↗는 인쇄에서 숨김)
     const printUrls = (rows) => rows.length ? `<dl class="print-only purls">${rows.map(([k, u, href, kind]) => `<div><dt>${esc(k)}</dt><dd class="url">${href
@@ -92,14 +96,19 @@
       <div class="hero-top"><p class="eyebrow">${T('en.portfolio')}</p>${pf.generatedAt ? `<p class="upd">${T('page.updated', { date: pf.generatedAt })}</p>` : ''}</div>
       <h1>${esc(nameT)}${prof.nameEn ? `<span class="en" lang="en">${esc(prof.nameEn)}</span>` : ''}</h1>
       ${prof.headline ? `<p class="headline">${inline(prof.headline)}</p>` : ''}
-      <div class="btns no-print">${[prof.email && link({ href: `mailto:${prof.email}`, label: esc(prof.email), kind: 'mail', cls: 'btn' }),
-        isUrl(prof.github) && btn(prof.github, 'GitHub', 'external'), ...profLinks.map((l) => btn(l.url, esc(l.label), 'external'))].filter(Boolean).join('')}</div>
+      <div class="btns no-print">${[prof.email && link({ href: `mailto:${prof.email}`, label: `<span class="bk">EMAIL</span>${esc(prof.email)}`, kind: 'mail', cls: 'btn primary lbl' }),
+        isUrl(prof.github) && btn(prof.github, `<span class="bk">GITHUB</span>${esc(ghUser(prof.github))}`, 'external', 'btn lbl'), ...profLinks.map((l) => btn(l.url, esc(l.label), 'external'))].filter(Boolean).join('')}</div>
       ${printUrls([prof.email && [t('page.print-email'), prof.email, `mailto:${prof.email}`, 'mail'], isUrl(prof.github) && ['GitHub', shortUrl(prof.github), prof.github, 'external'],
         ...profLinks.map((l) => [l.label, shortUrl(l.url), l.url, 'external']), [t('page.print-web'), PF.visibleUrl('')]].filter(Boolean))}
     </div></section>`);
 
     // ② 자기소개: profile.intro를 줄바꿈까지 그대로(고쳐 쓰지 않음)
     if (prof.intro) out.push(sec('intro', t('en.about'), t('page.intro'), '',`<div class="about">${prof.intro.split(/\n+/).filter((l) => l.trim()).map((l) => `<p>${inline(l)}</p>`).join('')}</div>`));
+
+    // ②-2 (직접 고친 기능) 프로젝트 카드: 자기소개 바로 아래에서 프로젝트 전체를 16:9 썸네일 카드로. 카드를 누르면 그 프로젝트 소개 절로(같은 페이지),
+    //   썸네일 위 둥근 아이콘은 GitHub · YouTube로 바로(새 탭). 화면에서만(인쇄는 아래 '한눈에 보기'가 요약을 맡음)
+    if (projects.length) out.push(sec('works', t('en.works'), t('page.works'), t('page.works-note'),
+      `<ul class="works">${projects.map((p, j) => workCard(p, j)).join('')}</ul>`, 'works-sec no-print'));
 
     // ③ 기술 스택: 기술마다 "무엇을 만들며 썼는지"(evidence)와 근거 프로젝트(같은 페이지의 그 프로젝트로)
     if ((pf.skills || []).length) out.push(sec('stack', t('en.skills'), t('page.stack'), t('page.stack-note'),`<ul class="skills">${pf.skills.map((s) => `<li class="skill">
@@ -118,42 +127,44 @@
     });
 
     // ⑤ 한눈에 보기(format/01 §1 프로젝트 요약 표) — 좁은 화면에서도 가로 스크롤이 없도록 표 대신 행 목록
+    //   (직접 고친 기능) 화면에서는 위쪽 프로젝트 카드가 같은 요약을 맡으므로 인쇄(PDF)에서만 보임(.print-only)
     if (projects.length) out.push(sec('glance', t('en.glance'), t('page.glance'), '',`<ul class="glance">${projects.map((p) => `<li>
       <div class="g-t">${link({ href: `#p-${p.id}`, label: esc(p.title), kind: 'anchor' })}<p>${esc(PF.teamLabel(p.team))}</p></div>
       <div class="g-b">${p.tagline ? `<p>${inline(p.tagline)}</p>` : ''}${(p.tags || []).length ? `<p class="g-tags">${esc(p.tags.slice(0, 4).join(' · '))}</p>` : ''}
         ${p.team?.role ? `<p class="g-role"><b>${T('name.role-short')}</b> ${inline(p.team.role)}</p>` : ''}</div>
-      <div class="g-l">${projLinks(p)}</div></li>`).join('')}</ul>`, 'tint'));
+      <div class="g-l">${projLinks(p)}</div></li>`).join('')}</ul>`, 'tint print-only'));
 
-    // ⑥ 연락처 + 프로젝트별 링크(그 밖의 링크는 주소까지)
+    // ⑥ 연락처 + (직접 고친 기능) 내가 만든 게임의 스크린샷 모음(화면 전용). 프로젝트별 링크는 각 프로젝트 소개에만 둠(같은 링크가 되풀이되지 않게)
     out.push(`<footer id="contact" class="sec contact"><div class="wrap">
       <p class="eyebrow">${T('en.contact')}</p>
       <div class="ct">
         <div class="ct-me"><p class="ct-name">${esc(nameT)}</p>
           ${prof.email ? `<p class="em">${link({ href: `mailto:${prof.email}`, label: esc(prof.email), kind: 'mail' })}</p>` : ''}
-          ${isUrl(prof.github) ? `<p>${link({ href: prof.github, label: `<span class="url">${esc(shortUrl(prof.github))}</span>` })}</p>` : ''}
+          ${isUrl(prof.github) ? `<p>${link({ href: prof.github, label: `${PF.brandIcon('github')}<span class="url">${esc(shortUrl(prof.github))}</span>` })}</p>` : ''}
           ${profLinks.map((l) => `<p><span class="k">${esc(l.label)}</span> ${link({ href: l.url, label: `<span class="url">${esc(shortUrl(l.url))}</span>` })}</p>`).join('')}
           <p class="print-only"><span class="url">${esc(PF.visibleUrl(''))}</span></p></div>
-        <div class="ct-lk">${projects.map((p) => `<div><b>${esc(p.title)}</b><span class="row">${projLinks(p)}</span>${(p.links?.extra || []).filter((l) => isUrl(l.url))
-          .map((l) => `<span class="ex">${esc(l.label)} ${link({ href: l.url, label: `<span class="url">${esc(shortUrl(l.url))}</span>` })}</span>`).join('')}</div>`).join('')}</div>
+        ${gallery(projects)}
       </div></div></footer>`);
 
-    const nav = [['intro', t('page.nav-intro'), prof.intro], ['stack', t('page.nav-stack'), (pf.skills || []).length], [projects[0] ? `p-${projects[0].id}` : '', t('page.nav-projects'), projects.length],
-      ['glance', t('page.nav-glance'), projects.length], ['contact', t('page.nav-contact'), true]].filter((x) => x[0] && x[2]);
+    const nav = [['intro', t('page.nav-intro'), prof.intro], ['stack', t('page.nav-stack'), (pf.skills || []).length], [projects[0] ? 'works' : '', t('page.nav-projects'), projects.length],
+      ['contact', t('page.nav-contact'), true]].filter((x) => x[0] && x[2]);   // (직접 고친 기능) 한눈에 보기는 인쇄 전용이라 메뉴에서 뺌
     root.innerHTML = `<header class="top no-print"><div class="wrap top-in">
         <a class="top-name" href="#cover">${esc(nameT)}</a>
         <nav aria-label="절 이동"><ul>${nav.map(([id, label]) => `<li><a href="#${esc(id)}">${esc(label)}</a></li>`).join('')}</ul></nav>
+        ${isUrl(prof.github) ? `<a class="top-ico" href="${esc(prof.github)}" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub (새 탭)">${PF.brandIcon('github')}</a>` : ''}
         <button type="button" class="btn primary pdf" data-pdf>${T('ui.pdf')}</button></div></header>
       <main id="main">${out.join('')}</main>`;
     root.querySelectorAll('img').forEach((i) => { if (!i.hasAttribute('loading')) i.loading = 'lazy'; i.decoding = 'async'; });
     // (직접 고친 기능) 그림 칸 16:9 고정(게임 화면 비율): 그림 비율이 16:9와 15% 넘게 다르면 칸에 .fit — 잘라 내지 않고 전체를 보여 줌
     const off = (w, h) => w > 0 && h > 0 && Math.abs(w / h / (16 / 9) - 1) > 0.15;
-    root.querySelectorAll('.cover img, .shot-m img').forEach((i) => {
+    root.querySelectorAll('.cover img, .shot-m img, .wc-cover img').forEach((i) => {
       const w = +i.getAttribute('width'), h = +i.getAttribute('height');
       const mark = () => { if (off(i.naturalWidth, i.naturalHeight)) i.parentElement.classList.add('fit'); };
       if (w && h) { if (off(w, h)) i.parentElement.classList.add('fit'); }
       else if (i.complete) mark(); else i.addEventListener('load', mark, { once: true });
     });
-    info.sections = [...root.querySelectorAll('main > section[id], main > .pg > section[id], main > footer[id]')].map((s) => s.id);
+    info.sections = [...root.querySelectorAll('main > section[id], main > .pg > section[id], main > footer[id]')].map((s) => s.id)
+      .filter((id) => id !== 'works');                                   // 카드 절은 화면 전용 → 예전 덱 번호 주소(#3 등)의 차례에서 뺌
     info.projects = projects.length;
   }
 
@@ -163,19 +174,17 @@
     const WIDE = 26;
     const meta = (p.meta || []).map((m) => `<div${String(m.value || '').length > WIDE ? ' class="wide"' : ''}><dt>${esc(m.label)}</dt><dd>${inline(m.value)}</dd></div>`);
     if (p.team?.role) meta.push(`<div class="wide"><dt>${T('name.role')}</dt><dd>${inline(p.team.role)}</dd></div>`);
-    const extra = (p.links?.extra || []).filter((l) => isUrl(l.url));
+    const ext = extLinks(p);
     const btns = [btn(PF.projectUrl(p.id), T('name.deck'), 'page', 'btn primary'), btn(PF.docUrl(p.id), T('name.doc'), 'page'),
-      isUrl(p.links?.github) && btn(p.links.github, 'GitHub', 'external'), isUrl(p.links?.video) && btn(p.links.video, T('name.video'), 'external'),
-      ...extra.map((l) => btn(l.url, esc(l.label), 'external'))].filter(Boolean);
+      ...ext.map((x) => link({ href: x.url, label: PF.brandIcon(x.icon) + esc(x.label), kind: 'external', cls: `btn ext-${x.kind}`, attrs: x.orig && x.orig !== x.label ? `title="${esc(x.orig)}"` : '' }))];
     const urls = [[t('name.deck'), PF.visibleUrl(PF.projectUrl(p.id)), PF.projectUrl(p.id), 'page'], [t('name.doc'), PF.visibleUrl(PF.docUrl(p.id)), PF.docUrl(p.id), 'page'],
-      isUrl(p.links?.github) && ['GitHub', shortUrl(p.links.github), p.links.github, 'external'], isUrl(p.links?.video) && [t('name.video'), shortUrl(p.links.video), p.links.video, 'external'],
-      ...extra.map((l) => [l.label, shortUrl(l.url), l.url, 'external'])].filter(Boolean);
+      ...ext.map((x) => [x.label, shortUrl(x.url), x.url, 'external'])];
     const cover = p.cover ? `<figure class="cover"><img src="${esc(PF.srcPath(p.id, p.cover))}" alt="${esc(p.title)} 대표 화면"></figure>` : '';
     const body = `${p.tagline ? `<p class="tagline">${inline(p.tagline)}</p>` : ''}
       <div class="pi${cover ? '' : ' nocover'}">${cover}<div class="pi-r">
         ${meta.length ? `<dl class="meta">${meta.join('')}</dl>` : ''}
         ${p.intent?.text ? `<div class="intent"><p class="k">${T('name.intent')}</p><p>${inline(p.intent.text)}</p></div>` : ''}
-        ${(p.tags || []).length ? `<ul class="tags">${p.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+        ${(p.tags || []).length ? `<ul class="tags">${p.tags.map((t) => `<li>${tagHtml(t)}</li>`).join('')}</ul>` : ''}
         <div class="btns no-print">${btns.join('')}</div>${printUrls(urls)}</div></div>`;
     return sec(`p-${p.id}`, no, p.title, PF.teamLabel(p.team), body, 'proj');
   }
@@ -200,9 +209,66 @@
     return sec(`p-${p.id}-core`, `${no} · ${t('page.features')}`, p.title, PF.teamLabel(p.team), body, 'tint core');
   }
 
+  // (직접 고친 기능) 기술 태그: 'Unity'가 들어간 태그는 Unity 아이콘을 앞에
+  const tagHtml = (x) => `${/unity/i.test(x) ? PF.brandIcon('unity') : ''}${esc(x)}`;
+
+  // (직접 고친 기능) 프로젝트 카드 하나: 썸네일(번호 · 팀/개인 · 아이콘) · 제목 · 한 줄 소개 · 태그 4개 · [자세히 보기 →]
+  //   카드 전체가 같은 페이지의 #p-<폴더>로 가는 링크(제목 링크를 카드 크기로 늘림), 아이콘 링크는 그 위에 따로 눌림
+  function workCard(p, j) {
+    const ico = extLinks(p).filter((x) => x.icon)
+      .filter((x, i, a) => a.findIndex((y) => y.kind === x.kind) === i)      // 종류마다 하나(GitHub · 전체 시연 영상 · 쇼츠)
+      .map((x) => `<a class="wc-ico ${x.kind}" href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.label)}" aria-label="${esc(p.title)} ${esc(x.label)} (새 탭)">${PF.brandIcon(x.icon)}</a>`);
+    const cover = p.cover ? `<img src="${esc(PF.srcPath(p.id, p.cover))}" alt="">` : '';
+    return `<li class="wc"><div class="wc-cover${cover ? '' : ' empty'}">${cover}<span class="wc-no">${pad2(j + 1)}</span><span class="wc-kind">${esc(PF.teamLabel(p.team))}</span>
+        ${ico.length ? `<div class="wc-icos">${ico.join('')}</div>` : ''}</div>
+      <div class="wc-body"><h3><a class="wc-link" href="#p-${esc(p.id)}">${esc(p.title)}</a></h3>
+        ${p.tagline ? `<p class="wc-tag">${inline(p.tagline)}</p>` : ''}
+        ${(p.tags || []).length ? `<ul class="wc-tags">${p.tags.slice(0, 4).map((x) => `<li>${tagHtml(x)}</li>`).join('')}</ul>` : ''}
+        <p class="wc-go" aria-hidden="true"><span>${T('page.card-go')}</span><span>→</span></p></div></li>`;
+  }
+
   function projLinks(p) {
     return [link({ href: PF.projectUrl(p.id), label: T('name.deck'), kind: 'page' }), link({ href: PF.docUrl(p.id), label: T('name.doc-short'), kind: 'page' }),
-      isUrl(p.links?.github) && link({ href: p.links.github, label: 'GitHub' }), isUrl(p.links?.video) && link({ href: p.links.video, label: T('name.video') })].filter(Boolean).join('');
+      ...extLinks(p).map((x) => link({ href: x.url, label: PF.brandIcon(x.icon) + esc(x.label) }))].join('');
+  }
+
+  // (직접 고친 기능) 프로젝트의 바깥 링크: GitHub → 전체 시연 영상 → 쇼츠 영상 → 그 밖의 링크 순서.
+  //   YouTube 링크는 주소로 가름 — /shorts/ = 쇼츠 영상(쇼츠 아이콘), 그 밖(youtu.be · watch) = 전체 시연 영상(YouTube 아이콘).
+  //   이름은 문구 표(name.video-full · name.video-shorts)로 통일하고, 같은 종류가 둘 이상이면 뒤에 번호. 데이터의 원래 이름은 마우스를 올리면(title) 보임
+  function extLinks(p) {
+    const raw = [isUrl(p.links?.github) && { url: p.links.github, orig: '' }, isUrl(p.links?.video) && { url: p.links.video, orig: '' },
+      ...(p.links?.extra || []).filter((l) => isUrl(l.url)).map((l) => ({ url: l.url, orig: l.label || '' }))].filter(Boolean);
+    const list = raw.map((x) => {
+      const b = PF.brandOf(x.url);
+      if (b === 'youtube') {
+        const sh = /\/shorts\//.test(x.url);
+        return { ...x, kind: sh ? 'shorts' : 'full', icon: sh ? 'shorts' : 'youtube', label: t(sh ? 'name.video-shorts' : 'name.video-full') };
+      }
+      if (b === 'github') return { ...x, kind: 'github', icon: 'github', label: x.orig || 'GitHub', orig: '' };
+      return { ...x, kind: 'other', icon: '', label: x.orig, orig: '' };
+    }).filter((x, i, a) => a.findIndex((y) => y.url === x.url) === i);
+    const rank = { github: 0, full: 1, shorts: 2, other: 3 };
+    list.sort((a, b) => rank[a.kind] - rank[b.kind]);
+    const n = {}, seen = {};
+    list.forEach((x) => { n[x.kind] = (n[x.kind] || 0) + 1; });
+    list.forEach((x) => { if ((x.kind === 'full' || x.kind === 'shorts') && n[x.kind] > 1) { seen[x.kind] = (seen[x.kind] || 0) + 1; x.label += ` ${seen[x.kind]}`; } });
+    return list;
+  }
+
+  // (직접 고친 기능) 연락처 옆 스크린샷 모음: 게임 프로젝트(프로젝트 정보에 '장르'가 있는 것 — 분석 문서 등은 뺌)의 대표 화면 + 기능 화면.
+  //   같은 그림은 한 번만. 칸을 누르면 그림 원본이 새 탭에서 열림. 화면 전용(인쇄에서는 빠짐)
+  function gallery(projects) {
+    const capText = (c) => (typeof c === 'string' ? c : c?.text || '');
+    const items = [];
+    projects.filter((p) => (p.meta || []).some((m) => m.label === '장르')).forEach((p) => {
+      const add = (src, cap) => { if (!src) return; const u = PF.srcPath(p.id, src); if (!items.some((x) => x.u === u)) items.push({ u, p, cap }); };
+      add(p.cover, '');
+      (p.highlights || []).forEach((h) => add(h.image?.src, capText(h.image?.caption) || h.title || ''));
+    });
+    if (!items.length) return '';
+    return `<div class="ct-gal no-print"><p class="ct-gk">${T('page.gallery')}</p><ul class="gallery">${items.map((x) => `<li>
+      <a class="gl" href="${esc(x.u)}" target="_blank" rel="noopener" aria-label="${esc(x.p.title)}${x.cap ? ' — ' + esc(PF.normTitle(x.cap)) : ''} 그림 원본 (새 탭)">
+        <img src="${esc(x.u)}" alt=""><span class="gl-cap">${esc(x.p.title)}</span></a></li>`).join('')}</ul></div>`;
   }
 
   // 화면과 설명 짝 강조(마우스·키보드 포커스) + [PDF로 저장]

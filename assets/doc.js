@@ -187,7 +187,7 @@
     markPrintWide();
     document.fonts?.addEventListener('loadingdone', markPrintWide);
     if (window.mermaid && figs.length) {
-      mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose', fontFamily: 'Pretendard, sans-serif' });
+      mermaid.initialize({ startOnLoad: false, theme: PF.mermaidTheme(), securityLevel: 'loose', fontFamily: 'Pretendard, sans-serif' });
       try { await mermaid.run({ nodes: doc.querySelectorAll('.mermaid') }); }
       catch (err) { console.warn('[doc] Mermaid 렌더 오류:', err); }
     }

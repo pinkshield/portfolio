@@ -89,6 +89,22 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 .top nav ul { display: flex; gap: 22px; }
 .top nav a { font-size: 13.5px; font-weight: 600; color: var(--muted); text-decoration: none; white-space: nowrap; transition: color .15s; }
 .top nav a:hover { color: var(--accent-ink); }
+
+/* (직접 고친 기능) 프로젝트 막대(화면만): 소개 절의 큰 제목이 머리 막대 밑으로 지나가면 한 줄 막대가 내려와 붙고(.stuck),
+   소개·기능 소개 두 절(.pg)이 끝날 때까지 남음. 기능 소개 절에 들어서면 바탕도 그 절 색 + " · 기능 소개"(.on-core). 클래스는 portfolio.js bindProjectBars */
+.pg-bar { position: sticky; top: var(--top-h); z-index: 15; height: 0; }
+.pg-panel { position: absolute; left: 0; right: 0; top: 0; height: 46px; background: var(--paper); border-bottom: 1px solid var(--line);
+            opacity: 0; visibility: hidden; translate: 0 -8px; transition: opacity .2s, translate .2s, visibility 0s .2s, background-color .25s; }
+.pg.stuck .pg-panel { opacity: 1; visibility: visible; translate: 0 0; transition: opacity .2s, translate .2s, visibility 0s, background-color .25s; }
+.pg.on-core .pg-panel { background: var(--tint); }
+.pg-in { height: 100%; display: flex; align-items: center; gap: 14px; }
+.pg-in > p { margin: 0; white-space: nowrap; }
+.pg-title { min-width: 0; flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; font-size: 15px; font-weight: 800; color: var(--ink); }
+.pg-sub { display: none; color: var(--muted); font-weight: 700; }
+.pg.on-core .pg-sub { display: inline; }
+.pg-team { margin-left: auto !important; font-size: 13px; font-weight: 700; color: var(--muted); }
+.pg > .sec.core { scroll-margin-top: calc(var(--top-h) + 46px); }
+@media (max-width: 600px) { .pg-team { display: none; } }
 .top .pdf { padding: 8px 16px; font-size: 13px; }
 
 /* ① 머리: 뒤에 크게 깔린 영문 이름(장식) · 광채 */
@@ -126,10 +142,13 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 .tagline { margin: -18px 0 32px; max-width: 48rem; font-size: clamp(16px, 1.9vw, 18px); color: var(--muted); }
 .pi { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start;
       padding: clamp(18px, 3vw, 36px); background: var(--surface); border: 1px solid var(--line); border-radius: calc(var(--radius) * 1.4); }
-.cover { display: flex; align-items: center; justify-content: center; height: clamp(240px, 42vw, 400px); padding: 12px;
-         background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-.cover img { max-height: 100%; width: auto; height: auto; border-radius: 8px; }
-.meta { display: grid; grid-template-columns: 1fr; gap: 14px 28px; }
+/* (직접 고친 기능) 그림 칸 16:9 고정(게임 화면 비율)·꽉 채움. 비율이 16:9와 많이 다른 그림(정사각형·세로 그림·로고 등)은 .fit(portfolio.js): 잘라 내지 않고 전체를 보여 줌 */
+.cover { aspect-ratio: 16 / 9; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cover.fit { display: flex; align-items: center; justify-content: center; padding: 12px; }
+.cover.fit img, .shot-m.fit img { width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
+.meta { display: grid; grid-template-columns: 1fr; gap: 14px 28px; grid-auto-flow: row dense; }
+.meta dt { white-space: nowrap; }
 .meta dt, .intent .k, .purls dt { font-size: 12px; font-weight: 700; letter-spacing: .06em; color: var(--muted); }
 .meta dd { margin-top: 2px; font-size: 15px; font-weight: 600; }
 .intent { margin-top: 28px; padding-left: 16px; border-left: 3px solid var(--accent); border-image: linear-gradient(180deg, var(--accent), var(--accent-2)) 1; }
@@ -142,9 +161,12 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 /* ④-2 기능 소개: 화면 왼쪽 · 설명과 [발표 덱에서 보기] 오른쪽 */
 .fe { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; }
 .shots { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
-.shot { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: box-shadow .15s, border-color .15s; }
-.shot-m { display: flex; align-items: center; justify-content: center; padding: 14px; }
-.shot-m img { height: auto; max-height: 340px; object-fit: contain; border-radius: 8px; }   /* width 속성(data w/h)으로 받기 전에도 자리를 잡고, 최대 높이에 걸리면 비율 유지(contain) */
+.shot { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: box-shadow .15s, border-color .15s;
+        display: flex; flex-direction: column; }
+.shot > figcaption { flex: 1 1 auto; }                                  /* 2열일 때 캡션 칸이 카드 아래를 채움 */
+.shot-m { flex: none; aspect-ratio: 16 / 9; overflow: hidden; background: var(--paper); }   /* (직접 고친 기능) 그림 칸 16:9 */
+.shot-m img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.shot-m.fit { display: flex; align-items: center; justify-content: center; padding: 14px; }
 .shot figcaption { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 .n { flex: none; padding: 2px 8px; border-radius: var(--pill); background: var(--glow); color: #fff; font-family: var(--display); font-size: 11.5px; font-weight: 800;
      -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -194,15 +216,13 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
   .skill { grid-template-columns: 200px 1fr; gap: 32px; }
   .pi { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; }
   .pi.nocover { grid-template-columns: 1fr; }
-  .meta { grid-template-columns: 1fr 1fr; }
+  /* (직접 고친 기능) 프로젝트 정보 한 줄에 셋(장르·기간·인원) — 긴 값·내 역할(.wide)은 한 줄 전체, dense로 빈칸을 채움 */
+  .meta { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .meta .wide { grid-column: 1 / -1; }
   .fe { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; }
   .fe.noshot { grid-template-columns: 1fr; }
-  .shots { position: sticky; top: calc(var(--top-h) + 20px); }
+  .shots { position: sticky; top: calc(var(--top-h) + 46px + 20px); }   /* 프로젝트 막대 아래 */
   .fe[style*="--shots:3"] .shots, .fe[style*="--shots:4"] .shots { grid-template-columns: 1fr 1fr; }
-  .fe[style*="--shots:1"] .shot-m img { max-height: 420px; }
-  .fe[style*="--shots:2"] .shot-m img { max-height: 280px; }
-  .fe[style*="--shots:3"] .shot-m img, .fe[style*="--shots:4"] .shot-m img { max-height: 200px; }
   .flist li { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 24px; }
   .glance > li { grid-template-columns: 220px minmax(0, 1fr) 200px; gap: 32px; }
   .g-l { justify-content: flex-end; }
@@ -258,8 +278,9 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
   .tagline { margin: -6pt 0 12pt; font-size: 11pt; }
   .pi { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 16pt; padding: 0; background: none; border: 0; border-radius: 0; }
   .pi.nocover { grid-template-columns: 1fr; }
-  .cover { height: 78mm; background: none; padding: 4pt; }
-  .meta { grid-template-columns: 1fr 1fr; gap: 6pt 14pt; }
+  .cover { background: none; }
+  .cover.fit { padding: 4pt; }
+  .meta { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6pt 14pt; }
   .meta .wide { grid-column: 1 / -1; }
   .meta dt, .intent .k, .purls dt { font-size: 7.5pt; }
   .meta dd { font-size: 10pt; }
@@ -273,10 +294,8 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
   .shots { position: static; }
   .fe[style*="--shots:3"] .shots, .fe[style*="--shots:4"] .shots { grid-template-columns: 1fr 1fr; }
   .shot, .flist li, .glance > li, .ct-lk > div { break-inside: avoid; }
-  .shot-m { padding: 6pt; }
-  .shot-m img { max-height: 76mm; }
-  .fe[style*="--shots:1"] .shot-m img { max-height: 110mm; }
-  .fe[style*="--shots:3"] .shot-m img, .fe[style*="--shots:4"] .shot-m img { max-height: 50mm; }
+  .shot-m { background: none; }
+  .shot-m.fit { padding: 6pt; }
   .shot figcaption { padding: 4pt 8pt; font-size: 8.5pt; }
   .flist li { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10pt; padding: 8pt 10pt; }
   .flist h3 { font-size: 11pt; }

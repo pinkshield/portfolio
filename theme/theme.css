@@ -40,4 +40,7 @@
 
   /* ⑥ 코드 판 — PDF 코드 그림의 바탕색 */
   --t-code-bg: #1D1F21;
+
+  /* ⑦ 다이어그램 테마 — 회색조(neutral)로 검정·회색 화면에 맞춤. default로 바꾸면 보라·노랑 기본색 */
+  --t-mermaid: neutral;
 }

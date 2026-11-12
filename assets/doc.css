@@ -171,6 +171,8 @@ code { font-family: var(--mono); font-size: .88em; background: var(--accent-soft
 .md .mmd { margin: 22px 0; }
 .mmd .mermaid { display: flex; justify-content: center; padding: 16px; border: 1px solid var(--diagram-bg); border-radius: calc(var(--r) * .7); overflow-x: auto; background: var(--diagram-bg); }
 .mmd .mermaid svg { display: block; max-width: 100%; height: auto; }
+/* (직접 고친 기능) 다이어그램 라벨 안의 <p>가 본문 글자색(.md p = 어두운 테마의 밝은 회색)을 물려받아 밝은 판 위에서 안 보이던 문제 → mermaid가 정한 라벨 색을 따름 */
+.mermaid svg foreignObject p, .lb-stage svg foreignObject p { color: inherit; }
 .mmd-bar { contain: inline-size; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 6px 12px; margin-top: 6px; font-size: 13px; }
 .mmd-src summary { color: var(--muted); cursor: pointer; font-weight: 600; }
 .mmd-src pre { margin: 8px 0 0; max-height: 320px; overflow: auto; background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; }

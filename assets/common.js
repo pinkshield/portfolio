@@ -148,6 +148,8 @@ const PF = (() => {
     if (t) Object.entries(t).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
     return t;
   }
+  // (직접 고친 기능) 다이어그램(mermaid) 테마 손잡이 --t-mermaid: default(보라·노랑) · neutral(회색조) · forest · base. 판은 늘 밝으므로 dark는 받지 않음
+  const mermaidTheme = () => { const v = themeVar('--t-mermaid'); return ['default', 'neutral', 'forest', 'base'].includes(v) ? v : 'default'; };
 
   // ── 안내 문구(옛 렌더러와 같은 글) ──
   const FILE_HELP = `<p>이 페이지는 <code>data/</code>와 기술 문서를 불러와 그리기 때문에, 파일을 더블클릭해서는 열리지 않습니다.</p>
@@ -176,6 +178,6 @@ const PF = (() => {
   const { t, tab, label, load: loadStrings, report: stringsReport } = PFStr;
 
   return { esc, inline, isUrl, shortUrl, loadJSON, loadText, encodePath, srcPath, projectUrl, docUrl, siteBase, visibleUrl, metaValue, teamLabel,
-           slugger, normTitle, resolveHeading, keyOk, deckSceneFor, headingsOf, ICON, NEWTAB, link, markNewTab, themeTokens, applyTheme, contrast, hexRgb,
+           slugger, normTitle, resolveHeading, keyOk, deckSceneFor, headingsOf, ICON, NEWTAB, link, markNewTab, themeTokens, applyTheme, mermaidTheme, contrast, hexRgb,
            FILE_HELP, noDataHtml, isFile, notice, guardFileProtocol, noData, t, tab, label, loadStrings, stringsReport };
 })();

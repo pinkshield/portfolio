@@ -322,7 +322,7 @@
           { "label": "", "text": "이 식에는 주석의 의도와 다른 문제가 있어 5-4에서 다시 다룹니다(AI 리뷰 #1).", "verbatim": true }
         ],
         "visuals": [
-          { "kind": "code", "n": 1, "fp": "for (int i = 0; i < RayCount; i++) // RayCount = 5" }
+          { "kind": "code", "n": 1, "fp": "for (int i = 0; i < RayCount; i++) // RayCount = 5 (앨리맨 프리팹은 9)" }
         ]
       },
       {

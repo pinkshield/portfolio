@@ -89,6 +89,23 @@ const PF = (() => {
     const nt = NEW_TAB_KINDS.has(kind);
     return `<a${cls ? ` class="${cls}"` : ''} href="${esc(href)}"${nt ? ' target="_blank" rel="noopener"' : ''}${attrs ? ' ' + attrs : ''}>${label}${nt ? NEWTAB : ''}</a>`;
   }
+  // (직접 고친 기능) 브랜드 아이콘(SVG, currentColor) — GitHub · YouTube · Unity. brandOf(주소) = 링크 주소로 아이콘 종류를 고름(없으면 '')
+  const BRAND_PATHS = {
+    github: ['0 0 16 16', 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z'],
+    youtube: ['0 0 24 24', 'M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z'],
+    unity: ['0 0 24 24', 'm12.93 4.29 3.8 2.2c.14.07.14.29 0 .36l-4.52 2.61a.42.42 0 0 1-.42 0L7.27 6.85c-.14-.07-.14-.29 0-.36l3.8-2.2V0L1.38 5.6v11.19l3.71-2.14v-4.39c0-.16.18-.27.32-.18l4.51 2.6c.14.08.22.22.22.37v5.22c0 .15-.18.27-.32.18l-3.8-2.2-3.72 2.15L12 24l9.7-5.6-3.72-2.15-3.8 2.2c-.13.08-.32-.03-.32-.18V13.05c0-.15.09-.29.22-.37l4.51-2.6c.14-.09.32.02.32.18v4.39l3.71 2.14V5.6L12.93 0z'],
+  };
+  const brandIcon = (name, cls = 'pf-brand') => {
+    const p = BRAND_PATHS[name];
+    return p ? `<svg class="${cls} pf-brand-${name}" aria-hidden="true" focusable="false" viewBox="${p[0]}"><path fill="currentColor" d="${p[1]}"/></svg>` : '';
+  };
+  function brandOf(url) {
+    let h = '';
+    try { h = new URL(url, location.href).hostname.replace(/^www\.|^m\./, ''); } catch { return ''; }
+    if (h === 'github.com') return 'github';
+    if (h === 'youtube.com' || h === 'youtu.be') return 'youtube';
+    return '';
+  }
   function markNewTab(a) {                                           // 이미 있는 <a>(md 안 등)에 같은 규칙 적용
     a.target = '_blank'; a.rel = 'noopener';
     if (!a.querySelector('.pf-newtab-icon')) a.insertAdjacentHTML('beforeend', NEWTAB);
@@ -178,6 +195,6 @@ const PF = (() => {
   const { t, tab, label, load: loadStrings, report: stringsReport } = PFStr;
 
   return { esc, inline, isUrl, shortUrl, loadJSON, loadText, encodePath, srcPath, projectUrl, docUrl, siteBase, visibleUrl, metaValue, teamLabel,
-           slugger, normTitle, resolveHeading, keyOk, deckSceneFor, headingsOf, ICON, NEWTAB, link, markNewTab, themeTokens, applyTheme, mermaidTheme, contrast, hexRgb,
+           slugger, normTitle, resolveHeading, keyOk, deckSceneFor, headingsOf, ICON, NEWTAB, link, markNewTab, brandIcon, brandOf, themeTokens, applyTheme, mermaidTheme, contrast, hexRgb,
            FILE_HELP, noDataHtml, isFile, notice, guardFileProtocol, noData, t, tab, label, loadStrings, stringsReport };
 })();

@@ -78,7 +78,9 @@
     document.title = `${prof.name ? prof.name + ' · ' : ''}${t('name.portfolio')}`;
     document.querySelector('.skip-link')?.replaceChildren(t('ui.skip'));
     const total = pad2(projects.length);
-    const btn = (href, label, kind, cls = 'btn') => link({ href, label, kind, cls });
+    // (직접 고친 기능) 바깥 링크 버튼은 주소에 맞는 아이콘(GitHub · YouTube)을 글자 앞에 붙임
+    const btn = (href, label, kind, cls = 'btn') => link({ href, label: (kind === 'external' ? PF.brandIcon(PF.brandOf(href)) : '') + label, kind, cls });
+    const ghUser = (u) => { try { return new URL(u).pathname.split('/').filter(Boolean)[0] || shortUrl(u); } catch { return shortUrl(u); } };
     const profLinks = (prof.links || []).filter((l) => isUrl(l.url));
     // 인쇄(PDF)에서는 버튼 대신 칠 수 있는 주소를 보여 줌. rows: [이름, 보이는 주소, 링크, 종류] — PDF에서는 눌러도 열림(링크 규칙은 PF.link 그대로, ↗는 인쇄에서 숨김)
     const printUrls = (rows) => rows.length ? `<dl class="print-only purls">${rows.map(([k, u, href, kind]) => `<div><dt>${esc(k)}</dt><dd class="url">${href
@@ -92,14 +94,19 @@
       <div class="hero-top"><p class="eyebrow">${T('en.portfolio')}</p>${pf.generatedAt ? `<p class="upd">${T('page.updated', { date: pf.generatedAt })}</p>` : ''}</div>
       <h1>${esc(nameT)}${prof.nameEn ? `<span class="en" lang="en">${esc(prof.nameEn)}</span>` : ''}</h1>
       ${prof.headline ? `<p class="headline">${inline(prof.headline)}</p>` : ''}
-      <div class="btns no-print">${[prof.email && link({ href: `mailto:${prof.email}`, label: esc(prof.email), kind: 'mail', cls: 'btn' }),
-        isUrl(prof.github) && btn(prof.github, 'GitHub', 'external'), ...profLinks.map((l) => btn(l.url, esc(l.label), 'external'))].filter(Boolean).join('')}</div>
+      <div class="btns no-print">${[prof.email && link({ href: `mailto:${prof.email}`, label: `<span class="bk">EMAIL</span>${esc(prof.email)}`, kind: 'mail', cls: 'btn primary lbl' }),
+        isUrl(prof.github) && btn(prof.github, `<span class="bk">GITHUB</span>${esc(ghUser(prof.github))}`, 'external', 'btn lbl'), ...profLinks.map((l) => btn(l.url, esc(l.label), 'external'))].filter(Boolean).join('')}</div>
       ${printUrls([prof.email && [t('page.print-email'), prof.email, `mailto:${prof.email}`, 'mail'], isUrl(prof.github) && ['GitHub', shortUrl(prof.github), prof.github, 'external'],
         ...profLinks.map((l) => [l.label, shortUrl(l.url), l.url, 'external']), [t('page.print-web'), PF.visibleUrl('')]].filter(Boolean))}
     </div></section>`);
 
     // ② 자기소개: profile.intro를 줄바꿈까지 그대로(고쳐 쓰지 않음)
     if (prof.intro) out.push(sec('intro', t('en.about'), t('page.intro'), '',`<div class="about">${prof.intro.split(/\n+/).filter((l) => l.trim()).map((l) => `<p>${inline(l)}</p>`).join('')}</div>`));
+
+    // ②-2 (직접 고친 기능) 프로젝트 카드: 자기소개 바로 아래에서 프로젝트 전체를 16:9 썸네일 카드로. 카드를 누르면 그 프로젝트 소개 절로(같은 페이지),
+    //   썸네일 위 둥근 아이콘은 GitHub · YouTube로 바로(새 탭). 화면에서만(인쇄는 아래 '한눈에 보기'가 요약을 맡음)
+    if (projects.length) out.push(sec('works', t('en.works'), t('page.works'), t('page.works-note'),
+      `<ul class="works">${projects.map((p, j) => workCard(p, j)).join('')}</ul>`, 'works-sec no-print'));
 
     // ③ 기술 스택: 기술마다 "무엇을 만들며 썼는지"(evidence)와 근거 프로젝트(같은 페이지의 그 프로젝트로)
     if ((pf.skills || []).length) out.push(sec('stack', t('en.skills'), t('page.stack'), t('page.stack-note'),`<ul class="skills">${pf.skills.map((s) => `<li class="skill">
@@ -130,30 +137,32 @@
       <div class="ct">
         <div class="ct-me"><p class="ct-name">${esc(nameT)}</p>
           ${prof.email ? `<p class="em">${link({ href: `mailto:${prof.email}`, label: esc(prof.email), kind: 'mail' })}</p>` : ''}
-          ${isUrl(prof.github) ? `<p>${link({ href: prof.github, label: `<span class="url">${esc(shortUrl(prof.github))}</span>` })}</p>` : ''}
+          ${isUrl(prof.github) ? `<p>${link({ href: prof.github, label: `${PF.brandIcon('github')}<span class="url">${esc(shortUrl(prof.github))}</span>` })}</p>` : ''}
           ${profLinks.map((l) => `<p><span class="k">${esc(l.label)}</span> ${link({ href: l.url, label: `<span class="url">${esc(shortUrl(l.url))}</span>` })}</p>`).join('')}
           <p class="print-only"><span class="url">${esc(PF.visibleUrl(''))}</span></p></div>
         <div class="ct-lk">${projects.map((p) => `<div><b>${esc(p.title)}</b><span class="row">${projLinks(p)}</span>${(p.links?.extra || []).filter((l) => isUrl(l.url))
           .map((l) => `<span class="ex">${esc(l.label)} ${link({ href: l.url, label: `<span class="url">${esc(shortUrl(l.url))}</span>` })}</span>`).join('')}</div>`).join('')}</div>
       </div></div></footer>`);
 
-    const nav = [['intro', t('page.nav-intro'), prof.intro], ['stack', t('page.nav-stack'), (pf.skills || []).length], [projects[0] ? `p-${projects[0].id}` : '', t('page.nav-projects'), projects.length],
+    const nav = [['intro', t('page.nav-intro'), prof.intro], ['stack', t('page.nav-stack'), (pf.skills || []).length], [projects[0] ? 'works' : '', t('page.nav-projects'), projects.length],
       ['glance', t('page.nav-glance'), projects.length], ['contact', t('page.nav-contact'), true]].filter((x) => x[0] && x[2]);
     root.innerHTML = `<header class="top no-print"><div class="wrap top-in">
         <a class="top-name" href="#cover">${esc(nameT)}</a>
         <nav aria-label="절 이동"><ul>${nav.map(([id, label]) => `<li><a href="#${esc(id)}">${esc(label)}</a></li>`).join('')}</ul></nav>
+        ${isUrl(prof.github) ? `<a class="top-ico" href="${esc(prof.github)}" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub (새 탭)">${PF.brandIcon('github')}</a>` : ''}
         <button type="button" class="btn primary pdf" data-pdf>${T('ui.pdf')}</button></div></header>
       <main id="main">${out.join('')}</main>`;
     root.querySelectorAll('img').forEach((i) => { if (!i.hasAttribute('loading')) i.loading = 'lazy'; i.decoding = 'async'; });
     // (직접 고친 기능) 그림 칸 16:9 고정(게임 화면 비율): 그림 비율이 16:9와 15% 넘게 다르면 칸에 .fit — 잘라 내지 않고 전체를 보여 줌
     const off = (w, h) => w > 0 && h > 0 && Math.abs(w / h / (16 / 9) - 1) > 0.15;
-    root.querySelectorAll('.cover img, .shot-m img').forEach((i) => {
+    root.querySelectorAll('.cover img, .shot-m img, .wc-cover img').forEach((i) => {
       const w = +i.getAttribute('width'), h = +i.getAttribute('height');
       const mark = () => { if (off(i.naturalWidth, i.naturalHeight)) i.parentElement.classList.add('fit'); };
       if (w && h) { if (off(w, h)) i.parentElement.classList.add('fit'); }
       else if (i.complete) mark(); else i.addEventListener('load', mark, { once: true });
     });
-    info.sections = [...root.querySelectorAll('main > section[id], main > .pg > section[id], main > footer[id]')].map((s) => s.id);
+    info.sections = [...root.querySelectorAll('main > section[id], main > .pg > section[id], main > footer[id]')].map((s) => s.id)
+      .filter((id) => id !== 'works');                                   // 카드 절은 화면 전용 → 예전 덱 번호 주소(#3 등)의 차례에서 뺌
     info.projects = projects.length;
   }
 
@@ -175,7 +184,7 @@
       <div class="pi${cover ? '' : ' nocover'}">${cover}<div class="pi-r">
         ${meta.length ? `<dl class="meta">${meta.join('')}</dl>` : ''}
         ${p.intent?.text ? `<div class="intent"><p class="k">${T('name.intent')}</p><p>${inline(p.intent.text)}</p></div>` : ''}
-        ${(p.tags || []).length ? `<ul class="tags">${p.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+        ${(p.tags || []).length ? `<ul class="tags">${p.tags.map((t) => `<li>${tagHtml(t)}</li>`).join('')}</ul>` : ''}
         <div class="btns no-print">${btns.join('')}</div>${printUrls(urls)}</div></div>`;
     return sec(`p-${p.id}`, no, p.title, PF.teamLabel(p.team), body, 'proj');
   }
@@ -200,9 +209,30 @@
     return sec(`p-${p.id}-core`, `${no} · ${t('page.features')}`, p.title, PF.teamLabel(p.team), body, 'tint core');
   }
 
+  // (직접 고친 기능) 기술 태그: 'Unity'가 들어간 태그는 Unity 아이콘을 앞에
+  const tagHtml = (x) => `${/unity/i.test(x) ? PF.brandIcon('unity') : ''}${esc(x)}`;
+
+  // (직접 고친 기능) 프로젝트 카드 하나: 썸네일(번호 · 팀/개인 · 아이콘) · 제목 · 한 줄 소개 · 태그 4개 · [자세히 보기 →]
+  //   카드 전체가 같은 페이지의 #p-<폴더>로 가는 링크(제목 링크를 카드 크기로 늘림), 아이콘 링크는 그 위에 따로 눌림
+  function workCard(p, j) {
+    const ico = [isUrl(p.links?.github) && [p.links.github, 'GitHub'], isUrl(p.links?.video) && [p.links.video, t('name.video')],
+      ...(p.links?.extra || []).filter((l) => isUrl(l.url)).map((l) => [l.url, l.label])]
+      .filter((x) => x && PF.brandOf(x[0]))
+      .filter((x, i, a) => a.findIndex((y) => PF.brandOf(y[0]) === PF.brandOf(x[0])) === i)   // 브랜드마다 하나(시연 영상이 쇼츠보다 먼저)
+      .map(([u, label]) => `<a class="wc-ico ${PF.brandOf(u)}" href="${esc(u)}" target="_blank" rel="noopener" title="${esc(label)}" aria-label="${esc(p.title)} ${esc(label)} (새 탭)">${PF.brandIcon(PF.brandOf(u))}</a>`);
+    const cover = p.cover ? `<img src="${esc(PF.srcPath(p.id, p.cover))}" alt="">` : '';
+    return `<li class="wc"><div class="wc-cover${cover ? '' : ' empty'}">${cover}<span class="wc-no">${pad2(j + 1)}</span><span class="wc-kind">${esc(PF.teamLabel(p.team))}</span>
+        ${ico.length ? `<div class="wc-icos">${ico.join('')}</div>` : ''}</div>
+      <div class="wc-body"><h3><a class="wc-link" href="#p-${esc(p.id)}">${esc(p.title)}</a></h3>
+        ${p.tagline ? `<p class="wc-tag">${inline(p.tagline)}</p>` : ''}
+        ${(p.tags || []).length ? `<ul class="wc-tags">${p.tags.slice(0, 4).map((x) => `<li>${tagHtml(x)}</li>`).join('')}</ul>` : ''}
+        <p class="wc-go" aria-hidden="true"><span>${T('page.card-go')}</span><span>→</span></p></div></li>`;
+  }
+
   function projLinks(p) {
     return [link({ href: PF.projectUrl(p.id), label: T('name.deck'), kind: 'page' }), link({ href: PF.docUrl(p.id), label: T('name.doc-short'), kind: 'page' }),
-      isUrl(p.links?.github) && link({ href: p.links.github, label: 'GitHub' }), isUrl(p.links?.video) && link({ href: p.links.video, label: T('name.video') })].filter(Boolean).join('');
+      isUrl(p.links?.github) && link({ href: p.links.github, label: PF.brandIcon('github') + 'GitHub' }),
+      isUrl(p.links?.video) && link({ href: p.links.video, label: PF.brandIcon(PF.brandOf(p.links.video)) + T('name.video') })].filter(Boolean).join('');
   }
 
   // 화면과 설명 짝 강조(마우스·키보드 포커스) + [PDF로 저장]

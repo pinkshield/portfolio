@@ -106,11 +106,15 @@
       <h3>${esc(s.name)}</h3><ul>${(s.evidence || []).map((e) => `<li><span>${inline(e.text)}</span>${byId[e.project] ? link({ href: `#p-${e.project}`, label: esc(byId[e.project].title), kind: 'anchor', cls: 'chip' }) : ''}</li>`).join('')}</ul></li>`).join('')}</ul>`, 'tint'));
 
     // ④ 프로젝트마다 소개 + 기능 소개
+    //   (직접 고친 기능) 소개 + 기능 소개 두 절을 .pg로 묶고, 큰 제목이 머리 막대 아래로 지나가면 한 줄 막대("PROJECT 01 / 05  이름 · 기능 소개   팀")가
+    //   머리 막대 밑에 붙어 두 절이 끝날 때까지 남음(bindProjectBars). 화면에서만 보임(인쇄는 .no-print)
     projects.forEach((p, j) => {
       const no = t('page.project-no', { no: pad2(j + 1), total });
-      out.push(projectIntro(p, no, sec, btn, printUrls));
       const fe = features(p, no, sec, btn);
-      if (fe) out.push(fe);
+      const team = PF.teamLabel(p.team);
+      const bar = `<div class="pg-bar no-print" aria-hidden="true"><div class="pg-panel"><div class="wrap pg-in"><p class="eyebrow">${esc(no)}</p>
+        <p class="pg-title">${esc(p.title)}${fe ? `<span class="pg-sub"> · ${T('page.features')}</span>` : ''}</p>${team ? `<p class="pg-team">${esc(team)}</p>` : ''}</div></div></div>`;
+      out.push(`<div class="pg">${bar}${projectIntro(p, no, sec, btn, printUrls)}${fe}</div>`);
     });
 
     // ⑤ 한눈에 보기(format/01 §1 프로젝트 요약 표) — 좁은 화면에서도 가로 스크롤이 없도록 표 대신 행 목록
@@ -141,13 +145,23 @@
         <button type="button" class="btn primary pdf" data-pdf>${T('ui.pdf')}</button></div></header>
       <main id="main">${out.join('')}</main>`;
     root.querySelectorAll('img').forEach((i) => { if (!i.hasAttribute('loading')) i.loading = 'lazy'; i.decoding = 'async'; });
-    info.sections = [...root.querySelectorAll('main > section[id], main > footer[id]')].map((s) => s.id);
+    // (직접 고친 기능) 그림 칸 16:9 고정(게임 화면 비율): 그림 비율이 16:9와 15% 넘게 다르면 칸에 .fit — 잘라 내지 않고 전체를 보여 줌
+    const off = (w, h) => w > 0 && h > 0 && Math.abs(w / h / (16 / 9) - 1) > 0.15;
+    root.querySelectorAll('.cover img, .shot-m img').forEach((i) => {
+      const w = +i.getAttribute('width'), h = +i.getAttribute('height');
+      const mark = () => { if (off(i.naturalWidth, i.naturalHeight)) i.parentElement.classList.add('fit'); };
+      if (w && h) { if (off(w, h)) i.parentElement.classList.add('fit'); }
+      else if (i.complete) mark(); else i.addEventListener('load', mark, { once: true });
+    });
+    info.sections = [...root.querySelectorAll('main > section[id], main > .pg > section[id], main > footer[id]')].map((s) => s.id);
     info.projects = projects.length;
   }
 
   // 프로젝트 소개: 대표 이미지 · 메타(장르·기간·인원·환경) · 내 역할 · 개발 의도 · 태그 · 링크
   function projectIntro(p, no, sec, btn, printUrls) {
-    const meta = (p.meta || []).map((m) => `<div><dt>${esc(m.label)}</dt><dd>${inline(m.value)}</dd></div>`);
+    // (직접 고친 기능) 프로젝트 정보: 짧은 값(장르·기간·인원 등)은 한 줄에 셋씩, 긴 값(WIDE자 넘음)과 내 역할은 한 줄 전체
+    const WIDE = 26;
+    const meta = (p.meta || []).map((m) => `<div${String(m.value || '').length > WIDE ? ' class="wide"' : ''}><dt>${esc(m.label)}</dt><dd>${inline(m.value)}</dd></div>`);
     if (p.team?.role) meta.push(`<div class="wide"><dt>${T('name.role')}</dt><dd>${inline(p.team.role)}</dd></div>`);
     const extra = (p.links?.extra || []).filter((l) => isUrl(l.url));
     const btns = [btn(PF.projectUrl(p.id), T('name.deck'), 'page', 'btn primary'), btn(PF.docUrl(p.id), T('name.doc'), 'page'),
@@ -211,6 +225,28 @@
       window.print();
     });
     addEventListener('beforeprint', () => eager());                    // Ctrl+P: 아직 받지 않은 그림을 바로 받기 시작(할 수 있는 만큼)
+    bindProjectBars();
+  }
+
+  // (직접 고친 기능) 프로젝트 막대: 소개 절의 큰 제목(h2)이 머리 막대 밑으로 올라가면 .stuck(막대가 나타남),
+  //   기능 소개 절이 막대에 닿으면 .on-core(막대 바탕도 그 절 색 + 제목 뒤 " · 기능 소개")
+  function bindProjectBars() {
+    const groups = [...root.querySelectorAll('.pg')].map((g) => ({ g, bar: g.querySelector('.pg-bar'), h2: g.querySelector('.sec .sec-head h2'), core: g.querySelector('.sec.core') }))
+      .filter((x) => x.bar && x.h2);
+    if (!groups.length) return;
+    const update = () => {                                               // 스크롤마다 바로(묶음 몇 개의 위치만 읽음 — rAF는 가려진 창에서 멈춤)
+      groups.forEach(({ g, bar, h2, core }) => {
+        const top = bar.getBoundingClientRect().top;                     // 막대가 붙는 자리(머리 막대 바로 아래)
+        const panelH = bar.firstElementChild.offsetHeight;
+        g.classList.toggle('stuck', h2.getBoundingClientRect().bottom <= top + 4);
+        g.classList.toggle('on-core', !!core && core.getBoundingClientRect().top <= top + panelH);
+        const push = Math.min(0, g.getBoundingClientRect().bottom - (top + panelH));   // 묶음 끝에서 막대도 같이 밀려 올라감(다음 절을 덮지 않게)
+        bar.firstElementChild.style.transform = push ? `translateY(${push}px)` : '';
+      });
+    };
+    update();
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
   }
 
   const eager = () => document.querySelectorAll('img[loading="lazy"]').forEach((i) => { i.loading = 'eager'; });

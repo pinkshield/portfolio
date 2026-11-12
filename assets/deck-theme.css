@@ -234,6 +234,7 @@ table.kv td.role { color: var(--accent-ink); font-weight: 800; }
 .vmedia { border-radius: calc(var(--radius) * .6); overflow: hidden; background: var(--card); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; }
 .vbox[data-kind="mermaid"] .vmedia { background: var(--diagram-bg); border-color: var(--diagram-bg); }   /* 다이어그램은 밝은 판(학생 문서의 밝은 mermaid 테마가 그대로 읽히게) */
 .vbox[data-kind="image"] .vmedia img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.vbox[data-kind="mermaid"] .vmedia svg foreignObject p { color: inherit; }   /* (직접 고친 기능) 라벨 글자가 장면의 밝은 글자색을 물려받지 않게 — mermaid 라벨 색을 따름 */
 .vbox[data-kind="mermaid"] .vmedia svg { width: 100% !important; height: 100% !important; max-width: none !important; display: block; }
 .vbox[data-kind="code"] .vmedia { display: block; background: var(--code-bg); border: 0; box-shadow: inset 0 0 0 1px var(--line); }
 .vbox[data-kind="table"] .vmedia { display: block; background: transparent; border: 0; border-radius: 0; }

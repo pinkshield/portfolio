@@ -6,6 +6,7 @@
 //   점검: PFPage.whenReady() → PFPage.report() · ?pf-audit=1이면 #pf-audit에 report()의 base64 JSON(headless용, 발표 덱과 같은 형식)
 (() => {
   const root = document.getElementById('app');
+  const LETTER = '자기소개서.md';                                      // (직접 고친 기능) 자기소개서 원문(레포 맨 위, 수강생 파일) — letter.html이 그림
   const html = document.documentElement;
   const { esc, inline, isUrl, shortUrl, link, t } = PF;
   const T = (k, v) => esc(t(k, v));                                    // HTML에 넣는 문구
@@ -36,8 +37,9 @@
     PF.applyTheme(pf.settings?.accent);
     const projects = (await Promise.all((pf.projects || []).map((id) => PF.loadJSON(`data/projects/${encodeURIComponent(id)}.json`)
       .catch((err) => { console.warn('[portfolio] 프로젝트 데이터 없음:', err.message); return null; })))).filter(Boolean);
+    const letter = PF.loadText(LETTER).then((t) => !!t.trim()).catch(() => false);   // (직접 고친 기능) 자기소개서.md가 있으면 메뉴에 자기소개서 페이지
     await strings;
-    render(pf, projects);
+    render(pf, projects, await letter);
     bind();
     arrived = go(projects);                                            // 내용을 그린 뒤라 브라우저가 처음 주소의 절로 스스로 가지 못함
     if (!arrived && performance.getEntriesByType?.('navigation')[0]?.type === 'reload') {
@@ -73,7 +75,7 @@
     return screenId({ skills: 'stack', projects: projects[0] ? `p-${projects[0].id}` : '', summary: 'glance' }[h] ?? h);
   }
 
-  function render(pf, projects) {
+  function render(pf, projects, hasLetter = false) {
     const prof = pf.profile || {};
     const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
     const nameT = prof.name || t('name.portfolio');
@@ -103,7 +105,9 @@
     </div></section>`);
 
     // ② 자기소개: profile.intro를 줄바꿈까지 그대로(고쳐 쓰지 않음)
-    if (prof.intro) out.push(sec('intro', t('en.about'), t('page.intro'), '',`<div class="about">${prof.intro.split(/\n+/).filter((l) => l.trim()).map((l) => `<p>${inline(l)}</p>`).join('')}</div>`));
+    //   (직접 고친 기능) 자기소개서.md가 있으면 아래에 [자기소개서 전문 보기] 버튼(좁은 화면은 맨 위 메뉴가 숨으므로)
+    if (prof.intro || hasLetter) out.push(sec('intro', t('en.about'), t('page.intro'), '',`<div class="about">${(prof.intro || '').split(/\n+/).filter((l) => l.trim()).map((l) => `<p>${inline(l)}</p>`).join('')}</div>` +
+      (hasLetter ? `<p class="letter-go no-print">${link({ href: 'letter.html', label: esc(t('page.letter-go')), kind: 'page', cls: 'btn primary' })}</p>` : '')));
 
     // ②-2 (직접 고친 기능) 프로젝트 카드: 자기소개 바로 아래에서 프로젝트 전체를 16:9 썸네일 카드로. 카드를 누르면 그 프로젝트 소개 절로(같은 페이지),
     //   썸네일 위 둥근 아이콘은 GitHub · YouTube로 바로(새 탭). 화면에서만(인쇄는 아래 '한눈에 보기'가 요약을 맡음)
@@ -147,10 +151,10 @@
       </div></div></footer>`);
 
     const nav = [['intro', t('page.nav-intro'), prof.intro], ['stack', t('page.nav-stack'), (pf.skills || []).length], [projects[0] ? 'works' : '', t('page.nav-projects'), projects.length],
-      ['contact', t('page.nav-contact'), true]].filter((x) => x[0] && x[2]);   // (직접 고친 기능) 한눈에 보기는 인쇄 전용이라 메뉴에서 뺌
+      ['contact', t('page.nav-contact'), true], ['letter.html', t('page.nav-letter'), hasLetter]].filter((x) => x[0] && x[2]);   // (직접 고친 기능) 한눈에 보기는 인쇄 전용이라 메뉴에서 뺌
     root.innerHTML = `<header class="top no-print"><div class="wrap top-in">
         <a class="top-name" href="#cover">${esc(nameT)}</a>
-        <nav aria-label="절 이동"><ul>${nav.map(([id, label]) => `<li><a href="#${esc(id)}">${esc(label)}</a></li>`).join('')}</ul></nav>
+        <nav aria-label="절 이동"><ul>${nav.map(([id, label]) => `<li><a href="${id.endsWith('.html') ? esc(id) : `#${esc(id)}`}">${esc(label)}</a></li>`).join('')}</ul></nav>
         ${isUrl(prof.github) ? `<a class="top-ico" href="${esc(prof.github)}" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub (새 탭)">${PF.brandIcon('github')}</a>` : ''}
         <button type="button" class="btn primary pdf" data-pdf>${T('ui.pdf')}</button></div></header>
       <main id="main">${out.join('')}</main>`;

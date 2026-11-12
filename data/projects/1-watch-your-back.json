@@ -74,7 +74,7 @@
     {
       "title": "추격 음악이 처음 한 번만 나오는 문제",
       "problem": "첫 게임에서는 추격 BGM이 나오지만, 재시도 이후에는 나오지 않음",
-      "cause": "(Claude 추정) `SoundManager`는 씬이 바뀌어도 남는 싱글톤이라, 추격 중에 플레이어가 죽고 씬을 다시 불러오면 적의 `Exit`가 불리지 않아 `engagedEnemyCount`가 0으로 돌아가지 않음",
+      "cause": "(추정) `SoundManager`는 씬이 바뀌어도 남는 싱글톤이라, 추격 중에 플레이어가 죽고 씬을 다시 불러오면 적의 `Exit`가 불리지 않아 `engagedEnemyCount`가 0으로 돌아가지 않음",
       "solution": "(시도) 씬 시작 시 `GameSceneInitializer`가 `SoundManager.ResetCombatMusicState()`로 카운트를 0으로 되돌림",
       "result": "과제 제출 당시에는 해결하지 못했습니다. 카운트를 되돌린 뒤에도 남은 문제라 다른 원인이 더 있을 수 있고, 추후 리팩토링 때 다시 확인할 예정입니다.",
       "lesson": "",

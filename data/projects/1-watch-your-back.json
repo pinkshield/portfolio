@@ -64,18 +64,18 @@
   "troubleshooting": [
     {
       "title": "적을 쓰러뜨렸는데 플레이어도 쓰러지는 문제",
-      "problem": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 됨. 계속 반복해서 일어났고, 당시 지식과 무료 AI로는 원인을 정확히 진단하기 어려웠음",
-      "cause": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냄",
-      "solution": "① 7/6 — 공격 타격 박스(`EnemyAttackHitBox`)와 `OnBackHit` 앞에 `IsKnockDown` 확인 추가 ② 7/22 — `ChangeState` 입구에도 같은 가드를 넣어, 감시자·쥐가 쓰러진 보스를 다시 움직이게 하는 길까지 막음",
+      "problem": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 되었습니다. 계속 반복해서 일어났고, 당시 지식과 무료 AI로는 원인을 정확히 진단하기 어려웠습니다",
+      "cause": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냈습니다",
+      "solution": "① 7/6 — 공격 타격 박스(`EnemyAttackHitBox`)와 `OnBackHit` 앞에 `IsKnockDown` 확인을 추가했습니다 ② 7/22 — `ChangeState` 입구에도 같은 가드를 넣어, 감시자·쥐가 쓰러진 보스를 다시 움직이게 하는 길까지 막았습니다",
       "result": "",
       "lesson": "",
       "section": "5-2. 트러블슈팅"
     },
     {
       "title": "추격 음악이 처음 한 번만 나오는 문제",
-      "problem": "첫 게임에서는 추격 BGM이 나오지만, 재시도 이후에는 나오지 않음",
+      "problem": "첫 게임에서는 추격 BGM이 나오지만, 재시도 이후에는 나오지 않았습니다",
       "cause": "(Claude 추정) `SoundManager`는 씬이 바뀌어도 남는 싱글톤이라, 추격 중에 플레이어가 죽고 씬을 다시 불러오면 적의 `Exit`가 불리지 않아 `engagedEnemyCount`가 0으로 돌아가지 않음",
-      "solution": "(시도) 씬 시작 시 `GameSceneInitializer`가 `SoundManager.ResetCombatMusicState()`로 카운트를 0으로 되돌림",
+      "solution": "(시도) 씬이 시작될 때 `GameSceneInitializer`가 `SoundManager.ResetCombatMusicState()`로 카운트를 0으로 되돌리게 했습니다",
       "result": "과제 제출 당시에는 해결하지 못했습니다. 카운트를 되돌린 뒤에도 남은 문제라 다른 원인이 더 있을 수 있고, 추후 리팩토링 때 다시 확인할 예정입니다.",
       "lesson": "",
       "section": "5-2. 트러블슈팅"
@@ -322,7 +322,7 @@
           { "label": "", "text": "이 식에는 주석의 의도와 다른 문제가 있어 5-4에서 다시 다룹니다(AI 리뷰 #1).", "verbatim": true }
         ],
         "visuals": [
-          { "kind": "code", "n": 1, "fp": "for (int i = 0; i < RayCount; i++) // RayCount = 5 (앨리맨 프리팹은 9)" }
+          { "kind": "code", "n": 1, "fp": "for (int i = 0; i < RayCount; i++) // RayCount = 5 (앨리만 프리팹은 9)" }
         ]
       },
       {
@@ -396,8 +396,8 @@
         "lead": null,
         "sectionPath": ["5. 결과 및 배운 점", "5-2. 트러블슈팅"],
         "points": [
-          { "label": "문제", "text": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 됨", "verbatim": true },
-          { "label": "원인", "text": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냄", "verbatim": true },
+          { "label": "문제", "text": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 되었습니다", "verbatim": true },
+          { "label": "원인", "text": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냈습니다", "verbatim": true },
           { "label": "해결", "text": "공격 타격 박스와 `OnBackHit` 앞에 `IsKnockDown` 확인을 추가하고(7/6), `ChangeState` 입구에도 같은 가드를 넣음(7/22)", "verbatim": false }
         ],
         "visuals": []
@@ -411,9 +411,9 @@
         "lead": null,
         "sectionPath": ["5. 결과 및 배운 점", "5-2. 트러블슈팅"],
         "points": [
-          { "label": "문제", "text": "처음 추격 상태가 되었을 때는 추격 BGM이 나오지만, 재시도한 뒤에는 나오지 않음", "verbatim": true },
+          { "label": "문제", "text": "처음 추격 상태가 되었을 때는 추격 BGM이 나오지만, 재시도한 뒤에는 나오지 않았습니다", "verbatim": true },
           { "label": "원인", "text": "추격 중에 플레이어가 죽고 씬을 다시 불러오면, 적의 `Exit`가 불리지 않아 `engagedEnemyCount`가 0으로 돌아가지 않습니다.", "verbatim": true },
-          { "label": "시도", "text": "씬 시작 시 `GameSceneInitializer`가 `SoundManager.ResetCombatMusicState()`로 카운트를 0으로 되돌림", "verbatim": true },
+          { "label": "시도", "text": "씬이 시작될 때 `GameSceneInitializer`가 `SoundManager.ResetCombatMusicState()`로 카운트를 0으로 되돌리게 했습니다", "verbatim": true },
           { "label": "결과", "text": "과제 제출 당시에는 해결하지 못했습니다. 카운트를 되돌린 뒤에도 남은 문제라 다른 원인이 더 있을 수 있고, 추후 리팩토링 때 다시 확인할 예정입니다.", "verbatim": true }
         ],
         "visuals": []
@@ -440,7 +440,7 @@
         "lead": { "text": "미리 세워 둔 업데이트 기획서에, 5-4 리뷰 결과를 바탕으로 리팩토링 순서를 더했습니다. 리팩토링은 아직 하지 않았습니다.", "verbatim": true },
         "sectionPath": ["5. 결과 및 배운 점", "5-5. 개선 계획 (아직 하지 않음)"],
         "points": [
-          { "label": "다음 프로젝트에서 바꾼 것", "text": "다음 프로젝트였던 We got one에서는, 이 게임의 적 FSM과 비슷한 `FishStateManager`는 상태 전환만 관리하고 `FishMovement`는 움직임만 맡도록 나눠서 설계해 보았습니다.", "verbatim": true }
+          { "label": "다음 프로젝트에서 바꾼 것", "text": "다음 프로젝트였던 WeGotOne에서는, 이 게임의 적 FSM과 비슷한 `FishStateManager`는 상태 전환만 관리하고 `FishMovement`는 움직임만 맡도록 나눠서 설계해 보았습니다.", "verbatim": true }
         ],
         "visuals": [
           { "kind": "table", "n": 1, "fp": "아쉬운 점|As-Is (지금)|To-Be (계획)" }

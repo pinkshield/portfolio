@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>포트폴리오</title>
+<link rel="icon" href="data:," />
+<!-- 직접 생성 모드(/portfolio-custom) — 키보드 ← → 로 넘기는 슬라이드형 포트폴리오.
+     내용은 ../data/*.json에서만 읽습니다. /portfolio-build를 다시 하면 이 페이지도 최신이 됩니다.
+     색·모양·영문 글꼴은 ../theme/theme.css의 손잡이(--t-*)를 따릅니다. UI 문구는 ../theme/strings.tsv(문구 표)를 따릅니다. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.2.8/latin-700.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.2.8/latin-800.css" />
+<link rel="stylesheet" href="../theme/theme.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+<script src="../assets/strings.js"></script>
+<style>
+  :root {
+    --bg: var(--t-bg, #111111);
+    --card: var(--t-surface, #181A26);
+    --ink: var(--t-ink, #FFFFFF);
+    --body: var(--t-body, #EBEBEB);
+    --muted: var(--t-muted, #A6A8B4);
+    --line: var(--t-line, #262B44);
+    --line2: var(--t-line-2, #3E4566);
+    --accent: var(--t-accent, #EC1C23);
+    --r: var(--t-radius, 6px);
+    --pill: var(--t-pill, 4px);
+    --en: var(--t-display, 'Montserrat'), 'Montserrat', 'Pretendard', sans-serif;
+  }
+  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--body); overflow: hidden; }
+  body { font-family: 'Pretendard', system-ui, sans-serif; -webkit-font-smoothing: antialiased; word-break: keep-all; }
+  #root { height: 100%; }
+
+  /* 슬라이드 레일 — 가로로 한 줄, transform으로 이동 (마우스 휠로 넘어가지 않음) */
+  .rail { display: flex; height: 100%; transition: transform .55s cubic-bezier(.7,0,.2,1); will-change: transform; }
+  .slide { flex: 0 0 100vw; width: 100vw; height: 100%; position: relative; overflow: hidden; }
+  .slide-inner { height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 112px 7vw 80px; box-sizing: border-box; }
+  .slide-inner > .wrap { max-width: 1240px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; justify-content: center; }
+  @media (max-width: 759px) { .slide-inner { padding: 72px 16px 92px; } }
+
+  .eyebrow { font-family: var(--en); font-weight: 800; letter-spacing: .18em; font-size: 12px; color: var(--accent); text-transform: uppercase; }
+  .h-big { color: var(--ink); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line2); border-radius: var(--pill); padding: 4px 10px; font-size: 12.5px; color: var(--body); white-space: nowrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; border-radius: var(--pill); padding: 10px 16px; font-size: 14px; font-weight: 700; transition: background .15s, border-color .15s, color .15s; text-decoration: none; }
+  .btn-fill { background: var(--accent); color: #fff; }
+  .btn-fill:hover { filter: brightness(1.1); }
+  .btn-line { border: 1px solid var(--line2); color: var(--ink); }
+  .btn-line:hover { border-color: var(--accent); color: var(--accent); }
+  .btn:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .muted { color: var(--muted); }
+  .accent { color: var(--accent); }
+  .rule { width: 56px; height: 4px; background: var(--accent); }
+
+  /* 표지 + 자기소개 — 왼쪽 타이틀 그림, 오른쪽 어두운 판에 글.
+     그림은 왼쪽 2/3만 보이게 두어 오른쪽 위 게임 메뉴 글자(Game Start…)가 판 뒤로 들어가게 함 */
+  .hero-art { position: absolute; left: 0; top: 0; bottom: 0; width: 66%; overflow: hidden; }
+  .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: 8% 20%; image-rendering: pixelated; display: block; }
+  .hero-shade { position: absolute; inset: 0; pointer-events: none; background:
+      linear-gradient(to right, rgb(17 17 17 / 0) 0%, rgb(17 17 17 / 0) 44%, rgb(17 17 17 / .85) 58%, rgb(17 17 17) 66%),
+      linear-gradient(to top, rgb(17 17 17 / .9) 0%, rgb(17 17 17 / 0) 18%); }
+  .hero-panel { position: absolute; top: 0; right: 0; bottom: 0; width: 44%; overflow-y: auto; overscroll-behavior: contain;
+                display: flex; padding: 104px 6vw 84px 0; box-sizing: border-box; }
+  .hero-copy { margin: auto 0; max-width: 560px; }
+  @media (max-width: 1099px) { .hero-art { width: 58%; } .hero-panel { width: 52%; padding-right: 4vw; }
+    .hero-shade { background: linear-gradient(to right, rgb(17 17 17 / 0) 0%, rgb(17 17 17 / 0) 34%, rgb(17 17 17 / .85) 50%, rgb(17 17 17) 58%), linear-gradient(to top, rgb(17 17 17 / .9) 0%, rgb(17 17 17 / 0) 18%); } }
+  /* 좁은 화면: 그림 위 · 글 아래, 장 안에서 위아래로 스크롤 */
+  @media (max-width: 759px) {
+    .hero { overflow-y: auto; overscroll-behavior: contain; }
+    .hero-art { position: relative; width: 100%; height: 46vh; }
+    .hero-img { object-position: 22% 25%; }
+    .hero-shade { inset: 0 0 auto 0; height: 46vh; background: linear-gradient(to top, rgb(17 17 17) 0%, rgb(17 17 17 / 0) 40%); }
+    .hero-panel { position: static; width: auto; overflow: visible; padding: 0 16px 96px; margin-top: -48px; }
+    .hero-copy { position: relative; }
+  }
+
+  /* 아래 조작 띠 */
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; height: 64px; display: flex; align-items: center; gap: 14px; padding: 0 24px;
+         background: linear-gradient(to top, rgb(17 17 17 / .92), rgb(17 17 17 / 0)); z-index: 20; }
+  .navbtn { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--line2); border-radius: var(--pill); color: var(--ink); background: rgb(17 17 17 / .6); }
+  .navbtn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .navbtn:disabled { opacity: .35; cursor: default; }
+  .dots { display: flex; gap: 6px; flex: 1; justify-content: center; flex-wrap: wrap; }
+  .dot { width: 8px; height: 8px; border-radius: 2px; background: var(--line2); border: 0; padding: 0; cursor: pointer; transition: width .2s, background .2s; }
+  .dot.on { width: 22px; background: var(--accent); }
+  .counter { font-family: var(--en); font-weight: 700; font-size: 13px; color: var(--ink); min-width: 64px; text-align: right; font-variant-numeric: tabular-nums; }
+  /* 위 메뉴 — 주제로 바로 가기(숫자 키 단축키) */
+  .top { position: fixed; top: 0; left: 0; right: 0; z-index: 25; padding: 20px 32px 14px; pointer-events: none;
+         background: linear-gradient(to bottom, rgb(17 17 17 / .9) 0%, rgb(17 17 17 / .6) 60%, rgb(17 17 17 / 0)); }
+  .top > * { pointer-events: auto; }
+  .top-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .logo { font-family: var(--en); font-weight: 700; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+  .menu { display: flex; gap: 22px; align-items: center; }
+  .menu-item { position: relative; display: inline-flex; align-items: center; gap: 7px; padding: 8px 4px; font-size: 14px; font-weight: 600; color: rgb(202 206 221 / .8); transition: color .2s; }
+  .menu-item:hover, .menu-item.on { color: var(--ink); }
+  .menu-item::after { content: ''; position: absolute; left: 4px; right: 4px; bottom: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform .25s; transform-origin: left; }
+  .menu-item.on::after { transform: scaleX(1); }
+  /* 프로젝트 장에서만 보이는 프로젝트 탭(필터 버튼 모양) */
+  .tabs { display: flex; justify-content: center; gap: 6px; margin-top: 8px; flex-wrap: wrap; transition: opacity .25s, transform .25s; }
+  .tabs.hide { opacity: 0; transform: translateY(-6px); pointer-events: none; }
+  .tab { font-size: 13px; font-weight: 700; padding: 7px 12px; border-radius: 3px; color: var(--ink); transition: background .2s; white-space: nowrap; }
+  .tab:hover { background: rgb(255 255 255 / .06); }
+  .tab.on { background: var(--accent); color: #fff; }
+  .tab .no { font-family: var(--en); margin-right: 6px; opacity: .7; }
+  .burger { display: none; width: 40px; height: 40px; border: 1px solid var(--line2); border-radius: var(--pill); color: var(--ink); font-size: 18px; }
+  .drawer { position: fixed; top: 64px; left: 12px; right: 12px; z-index: 26; padding: 8px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: 0 20px 40px rgb(0 0 0 / .6); }
+  .drawer button { display: flex; width: 100%; align-items: center; justify-content: space-between; padding: 12px 12px; font-size: 15px; font-weight: 600; color: var(--body); border-radius: 3px; }
+  .drawer button.on { color: var(--ink); background: rgb(255 255 255 / .05); box-shadow: inset 3px 0 0 var(--accent); }
+  .drawer .sub { padding-left: 28px; font-size: 13.5px; }
+  @media (max-width: 899px) { .menu { gap: 14px; } }
+  @media (max-width: 759px) { .top { padding: 14px 16px 10px; } .menu, .tabs { display: none; } .burger { display: grid; place-items: center; } .logo { font-size: 14px; letter-spacing: 2px; } }
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 30; transition: width .55s cubic-bezier(.7,0,.2,1); }
+  .hint kbd { font-family: var(--en); font-size: 11px; border: 1px solid var(--line2); border-radius: 3px; padding: 1px 6px; color: var(--ink); }
+  @media (max-width: 759px) { .bar { padding: 0 12px; gap: 8px; } .dots { display: none; } .hint { display: none; } .top { padding: 0 16px; } }
+
+  .shot { width: 100%; border-radius: var(--r); border: 1px solid var(--line); background: #000; object-fit: cover; }
+  .feat-no { font-family: var(--en); font-weight: 800; font-size: 13px; color: var(--accent); letter-spacing: .08em; }
+  @media (prefers-reduced-motion: reduce) { .rail, .progress { transition: none; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useCallback, useRef } = React;
+const T = (k, v) => PFStr.t(k, v);
+const img = (id, src) => `../src/${id}/${src}`;
+
+/* ───── 슬라이드 조각 ───── */
+function Wrap({ children }) { return <div className="slide-inner"><div className="wrap">{children}</div></div>; }
+
+// 표지 + 자기소개 한 장: 왼쪽은 타이틀 그림, 오른쪽 어두운 판에 이름·한 줄 소개·자기소개·연락처
+function CoverSlide({ profile, coverImg }) {
+  const paras = String(profile.intro || '').split('\n').filter(Boolean);
+  return (
+    <section className="slide hero" aria-label={T('page.intro')}>
+      {coverImg && <div className="hero-art"><img className="hero-img" src={coverImg} alt="" /></div>}
+      <div className="hero-shade" />
+      <div className="hero-panel">
+        <div className="hero-copy">
+          <div className="eyebrow">{T('en.portfolio')}</div>
+          <h1 className="h-big text-5xl xl:text-6xl mt-4">{profile.name}</h1>
+          {profile.nameEn && <div className="mt-2 text-lg font-bold accent" style={{ fontFamily: 'var(--en)', letterSpacing: '.04em' }}>{profile.nameEn}</div>}
+          {profile.headline && <p className="mt-6 text-xl xl:text-2xl font-bold leading-snug" style={{ color: 'var(--ink)' }}>{profile.headline}</p>}
+          {paras.length > 0 && (
+            <div className="mt-7 pt-6" style={{ borderTop: '1px solid var(--line)' }}>
+              <div className="eyebrow mb-3">{T('en.about')}</div>
+              <div className="space-y-3">
+                {paras.map((p, i) => <p key={i} className="text-[15px] leading-relaxed">{p}</p>)}
+              </div>
+            </div>
+          )}
+          <div className="mt-7 flex flex-wrap gap-3">
+            {profile.email && <a className="btn btn-fill" href={`mailto:${profile.email}`}>✉ {profile.email}</a>}
+            {profile.github && <a className="btn btn-line" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SkillsSlide({ skills, part, parts, titleOf, goProject }) {
+  return (
+    <section className="slide" aria-label={T('page.stack')}>
+      <Wrap>
+        <div className="flex items-end justify-between gap-4 flex-wrap mb-8">
+          <div>
+            <div className="eyebrow">{T('en.skills')}{parts > 1 ? ` · ${part}/${parts}` : ''}</div>
+            <h2 className="h-big text-3xl md:text-4xl mt-3">{T('page.stack')}</h2>
+          </div>
+          <div className="muted text-sm">{T('page.stack-note')}</div>
+        </div>
+        <div className="grid md:grid-cols-2 gap-4">
+          {skills.map((s) => (
+            <div key={s.name} className="card p-5">
+              <div className="text-lg font-bold" style={{ color: 'var(--ink)' }}>{s.name}</div>
+              <ul className="mt-3 space-y-2.5">
+                {(s.evidence || []).map((e, i) => (
+                  <li key={i} className="text-sm leading-relaxed flex gap-2">
+                    <span className="accent shrink-0">▸</span>
+                    <span>
+                      {e.text.replace(/`/g, '')}
+                      {e.project && <button onClick={() => goProject(e.project)} className="ml-2 text-xs muted underline underline-offset-2 hover:text-[color:var(--accent)]">{titleOf(e.project)}</button>}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </Wrap>
+    </section>
+  );
+}
+
+function teamLabel(p) {
+  const t = p.team || {};
+  if (t.type === 'team') return T('name.team') + (t.size ? ` · ${t.size}` : '');
+  if (t.type === 'solo') return T('name.solo');
+  return '';
+}
+function LinkRow({ p }) {
+  const L = p.links || {};
+  return (
+    <div className="flex flex-wrap gap-2.5">
+      <a className="btn btn-fill" href={`../project.html?p=${encodeURIComponent(p.id)}`}>{T('name.deck')} →</a>
+      <a className="btn btn-line" href={`../doc.html?p=${encodeURIComponent(p.id)}`}>{T('name.doc')}</a>
+      {L.video && <a className="btn btn-line" href={L.video} target="_blank" rel="noopener">{T('name.video')} ↗</a>}
+      {L.github && <a className="btn btn-line" href={L.github} target="_blank" rel="noopener">GitHub ↗</a>}
+      {(L.extra || []).filter((x) => x && x.url).map((x) => <a key={x.url} className="btn btn-line" href={x.url} target="_blank" rel="noopener">{x.label} ↗</a>)}
+    </div>
+  );
+}
+
+function ProjectSlide({ p, no, total }) {
+  return (
+    <section className="slide" aria-label={p.title}>
+      <Wrap>
+        <div className="eyebrow">{T('page.project-no', { no: String(no).padStart(2, '0'), total: String(total).padStart(2, '0') })}<span className="muted ml-3" style={{ letterSpacing: 0, fontFamily: 'Pretendard' }}>{teamLabel(p)}</span></div>
+        <h2 className="h-big text-3xl md:text-5xl mt-3">{p.title}</h2>
+        {p.tagline && <p className="mt-3 text-base md:text-lg max-w-3xl">{p.tagline}</p>}
+        <div className={`grid gap-8 mt-8 items-start ${p.cover ? 'md:grid-cols-12' : ''}`}>
+          {p.cover && <div className="md:col-span-7"><img className="shot" style={{ aspectRatio: '16/9' }} src={img(p.id, p.cover)} alt={p.title} /></div>}
+          <div className={p.cover ? 'md:col-span-5' : ''}>
+            <dl className="grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 text-sm">
+              {(p.meta || []).map((m) => <React.Fragment key={m.label}><dt className="muted whitespace-nowrap">{m.label}</dt><dd style={{ color: 'var(--ink)' }}>{m.value}</dd></React.Fragment>)}
+              {p.team && p.team.role && <><dt className="muted whitespace-nowrap">{T('name.role')}</dt><dd style={{ color: 'var(--ink)' }}>{p.team.role}</dd></>}
+            </dl>
+            {p.intent && p.intent.text && (
+              <div className="mt-5 pl-4" style={{ borderLeft: '3px solid var(--accent)' }}>
+                <div className="text-xs font-bold accent mb-1">{T('name.intent')}</div>
+                <p className="text-sm leading-relaxed">{p.intent.text}</p>
+              </div>
+            )}
+            {(p.tags || []).length > 0 && <div className="mt-5 flex flex-wrap gap-1.5">{p.tags.map((t) => <span key={t} className="chip">{t}</span>)}</div>}
+          </div>
+        </div>
+        <div className="mt-8"><LinkRow p={p} /></div>
+      </Wrap>
+    </section>
+  );
+}
+
+function FeaturesSlide({ p, no }) {
+  const hs = p.highlights || [];
+  return (
+    <section className="slide" aria-label={`${p.title} ${T('page.features')}`}>
+      <Wrap>
+        <div className="flex items-end justify-between gap-4 flex-wrap mb-7">
+          <div>
+            <div className="eyebrow">{T('en.project')} {String(no).padStart(2, '0')} · {T('page.features')}</div>
+            <h2 className="h-big text-2xl md:text-4xl mt-3">{p.title}</h2>
+          </div>
+          <a className="btn btn-line" href={`../project.html?p=${encodeURIComponent(p.id)}`}>{T('page.deck-all')} →</a>
+        </div>
+        <div className={`grid gap-4 ${hs.length > 1 ? 'md:grid-cols-2' : ''}`}>
+          {hs.map((h, i) => (
+            <article key={i} className="card p-5 flex gap-5 flex-col sm:flex-row">
+              {h.image && h.image.src && <img className="shot sm:w-[42%] shrink-0 self-start" style={{ aspectRatio: `${h.image.w || 16}/${h.image.h || 9}`, objectFit: 'contain', imageRendering: 'pixelated' }} src={img(p.id, h.image.src)} alt={h.image.caption || h.title} />}
+              <div className="min-w-0">
+                <div className="feat-no">{T('en.feature')} {String(i + 1).padStart(2, '0')}</div>
+                <h3 className="mt-1.5 text-lg font-bold leading-snug" style={{ color: 'var(--ink)' }}>{h.title}</h3>
+                {h.what && <p className="mt-2 text-sm leading-relaxed">{h.what.replace(/`/g, '')}</p>}
+                {h.why && <p className="mt-2 text-sm leading-relaxed muted">{h.why.replace(/`/g, '')}</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </Wrap>
+    </section>
+  );
+}
+
+function GlanceSlide({ projects, goProject }) {
+  return (
+    <section className="slide" aria-label={T('page.glance')}>
+      <Wrap>
+        <div className="eyebrow">{T('en.glance')}</div>
+        <h2 className="h-big text-3xl md:text-4xl mt-3 mb-8">{T('page.glance')}</h2>
+        <div className="space-y-3">
+          {projects.map((p, i) => (
+            <div key={p.id} className="card p-4 md:p-5 grid md:grid-cols-12 gap-3 md:gap-6 items-center">
+              <button onClick={() => goProject(p.id)} className="md:col-span-4 text-left flex gap-4 items-center group">
+                <span className="feat-no text-base">{String(i + 1).padStart(2, '0')}</span>
+                <span>
+                  <span className="block font-bold text-base md:text-lg group-hover:text-[color:var(--accent)]" style={{ color: 'var(--ink)' }}>{p.title}</span>
+                  <span className="block text-xs muted mt-0.5">{teamLabel(p)}</span>
+                </span>
+              </button>
+              <p className="md:col-span-5 text-sm leading-relaxed">{p.tagline}</p>
+              <div className="md:col-span-3 flex md:justify-end gap-2 flex-wrap">
+                <a className="chip hover:border-[color:var(--accent)]" href={`../project.html?p=${encodeURIComponent(p.id)}`}>{T('name.deck')}</a>
+                <a className="chip hover:border-[color:var(--accent)]" href={`../doc.html?p=${encodeURIComponent(p.id)}`}>{T('name.doc-short')}</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Wrap>
+    </section>
+  );
+}
+
+function ContactSlide({ profile }) {
+  return (
+    <section className="slide" aria-label={T('page.nav-contact')}>
+      <Wrap>
+        <div className="max-w-3xl">
+          <div className="eyebrow">{T('en.contact')}</div>
+          <h2 className="h-big text-4xl md:text-6xl mt-4">{profile.name}</h2>
+          {profile.nameEn && <div className="mt-2 text-lg font-bold accent" style={{ fontFamily: 'var(--en)' }}>{profile.nameEn}</div>}
+          {profile.headline && <p className="mt-6 text-lg md:text-xl" style={{ color: 'var(--ink)' }}>{profile.headline}</p>}
+          <div className="mt-8 flex flex-wrap gap-3">
+            {profile.email && <a className="btn btn-fill" href={`mailto:${profile.email}`}>✉ {profile.email}</a>}
+            {profile.github && <a className="btn btn-line" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
+            {(profile.links || []).filter((x) => x && x.url).map((x) => <a key={x.url} className="btn btn-line" href={x.url} target="_blank" rel="noopener">{x.label} ↗</a>)}
+          </div>
+        </div>
+      </Wrap>
+    </section>
+  );
+}
+
+/* ───── 앱 ───── */
+function App() {
+  const [state, setState] = useState(null);
+  const [err, setErr] = useState('');
+  const [idx, setIdx] = useState(0);
+  const touch = useRef(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await PFStr.load('../theme/strings.tsv');
+        const pf = await (await fetch('../data/portfolio.json', { cache: 'no-cache' })).json();
+        const projects = (await Promise.all((pf.projects || []).map(async (id) => {
+          const r = await fetch(`../data/projects/${encodeURIComponent(id)}.json`, { cache: 'no-cache' });
+          return r.ok ? r.json() : null;
+        }))).filter(Boolean);
+        document.title = `${pf.profile.name} · ${T('name.portfolio')}`;
+        setState({ pf, projects });
+      } catch (e) { setErr(String(e && e.message || e)); }
+    })();
+  }, []);
+
+  // 슬라이드 목록 만들기
+  const slides = [];
+  if (state) {
+    const { pf, projects } = state;
+    const wyb = projects.find((p) => p.id === '1-watch-your-back');
+    const titleShot = wyb && (wyb.screenshots || []).find((s) => /GameMenu/i.test(s.src));
+    const coverImg = titleShot ? img(wyb.id, titleShot.src) : (wyb && wyb.cover ? img(wyb.id, wyb.cover) : '');
+    const titleOf = (id) => (projects.find((p) => p.id === id) || {}).title || id;
+    slides.push({ key: 'cover', group: 'intro', label: T('page.intro'), el: () => <CoverSlide profile={pf.profile} coverImg={coverImg} /> });
+    const sk = pf.skills || [];
+    const half = Math.ceil(sk.length / 2), parts = sk.length > 4 ? 2 : 1;
+    for (let i = 0; i < parts; i++) {
+      const chunk = parts === 1 ? sk : sk.slice(i * half, (i + 1) * half);
+      slides.push({ key: `stack-${i + 1}`, group: 'stack', label: T('page.stack'), el: (goProject) => <SkillsSlide skills={chunk} part={i + 1} parts={parts} titleOf={titleOf} goProject={goProject} /> });
+    }
+    projects.forEach((p, i) => {
+      slides.push({ key: `p-${p.id}`, group: 'projects', project: p.id, label: p.title, el: () => <ProjectSlide p={p} no={i + 1} total={projects.length} /> });
+      if ((p.highlights || []).length) slides.push({ key: `p-${p.id}-core`, group: 'projects', of: p.id, label: `${p.title} · ${T('page.features')}`, el: () => <FeaturesSlide p={p} no={i + 1} /> });
+    });
+    slides.push({ key: 'glance', group: 'glance', label: T('page.glance'), el: (goProject) => <GlanceSlide projects={projects} goProject={goProject} /> });
+    slides.push({ key: 'contact', group: 'contact', label: T('page.nav-contact'), el: () => <ContactSlide profile={pf.profile} /> });
+  }
+  const n = slides.length;
+
+  // 위 메뉴의 주제(숫자 키 1~5) — 그 주제의 첫 장으로
+  const TOPICS = [
+    { group: 'intro', label: T('page.nav-intro') },
+    { group: 'stack', label: T('page.nav-stack') },
+    { group: 'projects', label: T('page.nav-projects') },
+    { group: 'glance', label: T('page.nav-glance') },
+    { group: 'contact', label: T('page.nav-contact') },
+  ].filter((t) => slides.some((s) => s.group === t.group));
+  const cur = slides[idx] || {};
+  const curProject = cur.project || cur.of || null;
+  const firstOf = (g) => slides.findIndex((s) => s.group === g);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const go = useCallback((i) => setIdx((cur) => Math.max(0, Math.min(n - 1, typeof i === 'function' ? i(cur) : i))), [n]);
+  const goProject = useCallback((id) => { const i = slides.findIndex((s) => s.project === id); if (i >= 0) go(i); }, [n]);
+
+  // 주소(#key)와 맞추기 — 새로고침·공유해도 같은 장
+  useEffect(() => {
+    if (!n) return;
+    const fromHash = () => { const k = decodeURIComponent(location.hash.slice(1)); const i = slides.findIndex((s) => s.key === k); if (i >= 0) setIdx(i); };
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+    return () => window.removeEventListener('hashchange', fromHash);
+  }, [n]);
+  useEffect(() => { if (n && slides[idx]) history.replaceState(null, '', '#' + slides[idx].key); }, [idx, n]);
+
+  // 키보드: ← → (+ PageUp/PageDown · Home/End · Space)
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+      const k = e.key;
+      if (k === 'ArrowRight' || k === 'PageDown' || (k === ' ' && !e.shiftKey)) { e.preventDefault(); go((c) => c + 1); }
+      else if (k === 'ArrowLeft' || k === 'PageUp' || (k === ' ' && e.shiftKey)) { e.preventDefault(); go((c) => c - 1); }
+      else if (k === 'Home') { e.preventDefault(); go(0); }
+      else if (k === 'End') { e.preventDefault(); go(n - 1); }
+      else if (k === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [go, n]);
+
+  // 새 장으로 오면 그 장의 안쪽 스크롤을 맨 위로, 화면 밖 장은 Tab으로 못 들어가게
+  useEffect(() => {
+    document.querySelectorAll('.slide').forEach((s, i) => {
+      s.inert = i !== idx;
+      if (i === idx) { const inner = s.querySelector('.slide-inner'); if (inner) inner.scrollTop = 0; }
+    });
+  }, [idx, n]);
+
+  // 휴대폰: 좌우로 밀어 넘기기
+  const onTouchStart = (e) => { const t = e.touches[0]; touch.current = { x: t.clientX, y: t.clientY }; };
+  const onTouchEnd = (e) => {
+    if (!touch.current) return;
+    const t = e.changedTouches[0], dx = t.clientX - touch.current.x, dy = t.clientY - touch.current.y;
+    touch.current = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go((c) => c + (dx < 0 ? 1 : -1));
+  };
+
+  if (err) return <div className="p-10" style={{ color: 'var(--ink)' }}>데이터를 읽지 못했습니다: {err}<br /><span className="muted text-sm">로컬 서버(python -m http.server 4600)로 열었는지, /portfolio-build를 했는지 확인해 주세요.</span></div>;
+  if (!state) return <div className="h-full grid place-items-center muted">…</div>;
+
+  return (
+    <>
+      <div className="progress" style={{ width: `${((idx + 1) / n) * 100}%` }} />
+      <header className="top">
+        <div className="top-row">
+          <button className="logo" onClick={() => go(0)} title="처음으로 (0)">{state.pf.profile.nameEn || state.pf.profile.name}</button>
+          <nav className="menu" aria-label="주제 바로 가기">
+            {TOPICS.map((t) => (
+              <button key={t.group} className={`menu-item ${cur.group === t.group ? 'on' : ''}`} onClick={() => go(firstOf(t.group))} aria-current={cur.group === t.group ? 'true' : undefined}>{t.label}</button>
+            ))}
+          </nav>
+          <button className="burger" onClick={() => setMenuOpen((o) => !o)} aria-expanded={menuOpen} aria-label="메뉴">{menuOpen ? '×' : '☰'}</button>
+        </div>
+        <div className={`tabs ${cur.group === 'projects' ? '' : 'hide'}`} aria-label={T('page.nav-projects')}>
+          {state.projects.map((p, i) => (
+            <button key={p.id} className={`tab ${curProject === p.id ? 'on' : ''}`} onClick={() => goProject(p.id)} tabIndex={cur.group === 'projects' ? 0 : -1}>
+              <span className="no">{String(i + 1).padStart(2, '0')}</span>{p.title.replace(/\s*\(.*\)$/, '').replace(/\s+—.*$/, '')}
+            </button>
+          ))}
+        </div>
+      </header>
+      {menuOpen && (
+        <div className="drawer" role="menu">
+          {TOPICS.map((t) => (
+            <React.Fragment key={t.group}>
+              <button className={cur.group === t.group && t.group !== 'projects' ? 'on' : ''} onClick={() => { go(firstOf(t.group)); setMenuOpen(false); }}>{t.label}</button>
+              {t.group === 'projects' && state.projects.map((p) => (
+                <button key={p.id} className={`sub ${curProject === p.id ? 'on' : ''}`} onClick={() => { goProject(p.id); setMenuOpen(false); }}>{p.title}</button>
+              ))}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+      <main className="h-full" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+        <div className="rail" style={{ transform: `translateX(-${idx * 100}vw)` }}>
+          {slides.map((s) => <React.Fragment key={s.key}>{s.el(goProject)}</React.Fragment>)}
+        </div>
+      </main>
+      <nav className="bar" aria-label="슬라이드 이동">
+        <button className="navbtn" onClick={() => go((c) => c - 1)} disabled={idx === 0} aria-label="이전">←</button>
+        <button className="navbtn" onClick={() => go((c) => c + 1)} disabled={idx === n - 1} aria-label="다음">→</button>
+        <span className="hint text-xs muted ml-2"><kbd>←</kbd> <kbd>→</kbd> 키로 넘기기</span>
+        <div className="dots">{slides.map((s, i) => <button key={s.key} className={`dot ${i === idx ? 'on' : ''}`} onClick={() => go(i)} aria-label={s.label} title={s.label} />)}</div>
+        <span className="counter">{String(idx + 1).padStart(2, '0')} / {String(n).padStart(2, '0')}</span>
+      </nav>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

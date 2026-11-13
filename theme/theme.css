@@ -1,46 +1,42 @@
 /* ─────────────────────────────────────────────────────────────
-   테마 (theme/theme.css) — /portfolio-theme가 만듦 · 2026-11-11
-   참고한 화면: 「뒤통수를 조심해」 기술 문서 초안 PDF(8쪽) — 검은 바탕에 흰 글자, 각진 회색 상자, 도트 그래픽 컷씬 그림
-   뽑은 인상: 순수 검정 바탕 · 흰 글자 · 각진 회색 카드 · 컷씬의 주황 강조 + 빨강 포인트 · 좁고 굵은 대문자 영문 · 평평한 바탕(광채 없음)
+   테마 (theme/theme.css) — /portfolio-theme가 만듦 · 2026-11-13
+   참고한 화면: ① 검은 남색 바탕의 게임 개발자 포트폴리오 페이지(모양·글꼴·평평한 바탕)
+              ② 내 첫 게임 「뒤통수를 조심해」 타이틀 화면(색 — 검은 바탕, 붓글씨 빨강, 남색 재킷)
+   뽑은 인상: 검정 바탕 · 남색 기운의 어두운 카드 · 타이틀 붓글씨 빨강 단색 강조 · 살짝 둥근 카드(6px)와 작은 모서리 버튼 · 굵은 기하학 대문자 영문 · 광채 없음
    값을 고쳐도 됩니다(저장 → 새로고침). 손잡이 설명: .claude/skills/portfolio-theme/rules.md
    이 파일은 /portfolio-update가 건드리지 않습니다. 기본 테마로 되돌리기: /portfolio-theme 되돌리기
    ───────────────────────────────────────────────────────────── */
-@import url("https://cdn.jsdelivr.net/npm/@fontsource/barlow-condensed@5.3.0/latin-700.css");
-@import url("https://cdn.jsdelivr.net/npm/@fontsource/barlow-condensed@5.3.0/latin-800.css");
 
 :root {
   /* ① 바탕과 글자 — 바탕 대비: 제목 12 · 본문 7 · 보조 4.5 이상(check-theme.py가 확인) */
   --t-scheme: dark;
-  --t-bg: #000000;              /* PDF 쪽 바탕의 순수 검정 */
-  --t-surface: #33353B;         /* PDF의 회색 상자 칠(#33353B) */
-  --t-ink: #FFFFFF;             /* 제목·본문 모두 흰 글자 */
-  --t-body: #D9DADD;            /* 본문 — 화면은 흰색 한 단뿐이라 제목과 보조의 중간 */
-  --t-muted: #A3A5AB;           /* 보조 글자 — 회색 카드 위에서도 4.5 이상 */
-  --t-line: #33353B;            /* 상자 테두리선도 상자와 같은 회색 */
-  --t-line-2: #5A5C62;          /* 알약 테두리 — 그림 띠의 회색(#474949)보다 한 단 밝게 */
+  --t-bg: #111111;              /* 타이틀 화면 바탕(면적 36%) */
+  --t-surface: #181A26;         /* 레퍼런스 카드(#161926)와 타이틀의 남색 그림자(#161721) 사이 */
+  --t-ink: #FFFFFF;             /* 레퍼런스 제목 흰색 */
+  --t-body: #EBEBEB;            /* 레퍼런스 문단 글자 */
+  --t-muted: #A6A8B4;           /* 보조 글자 — 남색 카드 위에서도 4.5 이상 */
+  --t-line: #262B44;            /* 타이틀 속 재킷 남색(#262B44) */
+  --t-line-2: #3E4566;          /* 구분선보다 한 단 밝은 남색 */
 
   /* ② 강조색 — 이 줄을 지우면 profile.md의 강조색을 씀. 글자용 진하기·흰 글자 칠은 페이지가 자동으로 맞춤 */
-  --t-accent: #FEAE34;          /* 컷씬 바탕의 주황(그림 면적 17%) */
-  --t-accent-2: #FF0044;        /* 컷씬 SLAP! 글자·인물 머리 테두리의 빨강 */
-  --t-accent-3: #FF0044;        /* 셋째 색은 없어 빨강과 같게 */
+  --t-accent: #EC1C23;          /* "WATCH Your Back!" 붓글씨 빨강 */
+  --t-accent-2: #EC1C23;        /* 레퍼런스처럼 강조는 한 색 — 같은 값 */
+  --t-accent-3: #EC1C23;
 
   /* ③ 모양 */
-  --t-radius: 0px;              /* 회색 상자가 모두 각진 사각형 */
-  --t-pill: 0px;                /* 둥근 모양이 없는 화면이라 버튼·태그도 각지게 */
+  --t-radius: 6px;              /* 레퍼런스 카드 모서리 6px */
+  --t-pill: 4px;                /* 레퍼런스 버튼·필터 모서리 3~4px */
   --t-shadow: rgb(0 0 0 / .8);
 
   /* ④ 영문 라벨 글꼴(PORTFOLIO·CHAPTER 같은 눈썹 글자, 머리 뒤 큰 영문 이름) — 한글은 늘 Pretendard */
-  --t-display: 'Barlow Condensed';   /* PDF 제목의 좁고 굵은 대문자 인상(Oswald)에 가장 가까운 목록 글꼴 */
+  --t-display: 'Montserrat';    /* 레퍼런스의 굵은 기하학 대문자 제목에 가장 가까운 목록 글꼴 */
 
   /* ⑤ 효과 */
   --t-grad: linear-gradient(var(--accent-ink), var(--accent-ink));   /* 그러데이션 글자 없음 — 단색 */
-  --t-badge: var(--accent-fill);    /* 그러데이션 칠 없음 — 단색 배지 */
-  --t-glow: 0;                  /* 바탕이 평평한 검정 */
+  --t-badge: var(--accent-fill);    /* 단색 배지 */
+  --t-glow: 0;                  /* 두 화면 모두 평평한 검은 바탕 */
   --t-mark: 0;                  /* 배경에 깔린 큰 장식 글자 없음 */
 
-  /* ⑥ 코드 판 — PDF 코드 그림의 바탕색 */
-  --t-code-bg: #1D1F21;
-
-  /* ⑦ 다이어그램 테마 — 회색조(neutral)로 검정·회색 화면에 맞춤. default로 바꾸면 보라·노랑 기본색 */
+  /* ⑦ 다이어그램 테마 — 회색조(neutral)로 어두운 화면에 맞춤. default로 바꾸면 보라·노랑 기본색 */
   --t-mermaid: neutral;
 }

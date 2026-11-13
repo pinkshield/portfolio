@@ -5,19 +5,45 @@
   "title": "WoW 클래식 하드코어 — 전투 시스템 분석",
   "tagline": "WoW 클래식 하드코어 서버의 전투 시스템이 만드는 플레이어 간 상호작용 분석",
   "cover": "images/hardcore-death.png",
-  "team": { "type": "solo", "size": "1인", "role": "" },
+  "team": {
+    "type": "solo",
+    "size": "1인",
+    "role": ""
+  },
   "meta": [
-    { "label": "형식", "value": "게임 분석 스터디 그룹 — 멀티플레이 게임 조사 발표 자료 (발표 당시 22장 → 개선판 19장)" },
-    { "label": "분석 대상", "value": "World of Warcraft Classic — 하드코어 서버" },
-    { "label": "기간", "value": "2026-08-13 ~ 2026-08-16 (4일) · 발표 2026-08-18" },
-    { "label": "인원", "value": "1명 (개인 분석)" }
+    {
+      "label": "형식",
+      "value": "게임 분석 스터디 그룹 — 멀티플레이 게임 조사 발표 자료 (발표 당시 22장 → 개선판 19장)"
+    },
+    {
+      "label": "분석 대상",
+      "value": "World of Warcraft Classic — 하드코어 서버"
+    },
+    {
+      "label": "기간",
+      "value": "2026-08-13 ~ 2026-08-16 (4일) · 발표 2026-08-18"
+    },
+    {
+      "label": "인원",
+      "value": "1명 (개인 분석)"
+    }
   ],
-  "tags": ["WoW 클래식", "하드코어 서버", "게임 분석", "역할 분리", "어그로", "군중 제어"],
+  "tags": [
+    "WoW 클래식",
+    "하드코어 서버",
+    "게임 분석",
+    "역할 분리",
+    "어그로",
+    "군중 제어"
+  ],
   "links": {
     "github": "",
     "video": "https://www.youtube.com/shorts/m8lV63PoTOI",
     "extra": [
-      { "label": "플레이 영상 2 (YouTube Shorts)", "url": "https://youtube.com/shorts/xF7WRmsApeA" }
+      {
+        "label": "플레이 영상 2 (YouTube Shorts)",
+        "url": "https://youtube.com/shorts/xF7WRmsApeA"
+      }
     ]
   },
   "intent": {
@@ -26,7 +52,7 @@
   },
   "highlights": [
     {
-      "title": "분석 틀 — 시스템에서 결과까지",
+      "title": "기능이 아니라 인과를 따라간 분석 틀",
       "what": "게임 시스템이 요구하는 플레이어 행동이 다른 플레이어와 어떻게 이어져 어떤 결과(재미·장기 플레이)를 만드는지 순서대로 따라갑니다.",
       "how": "게임 시스템 → 플레이어 행동 → 플레이어 간 상호작용 → 결과의 틀을 5단계 질문(코어 루프 · 행동 유도 장치 · 역할 간 상호작용 · 긴장과 보상 · 장기 플레이)으로 나눠 적용했습니다.",
       "why": "전투 기능을 하나씩 설명하는 대신 이 순서를 골랐습니다. 플레이어가 없다면 시스템은 의미가 없고, 게임을 존재하게 하는 것은 유저들이 서로 상호작용해 만드는 결과라고 보았습니다.",
@@ -34,7 +60,7 @@
       "image": null
     },
     {
-      "title": "역할 분리 — 서로 다른 책임",
+      "title": "한 역할이 무너지면 모두 무너진다",
       "what": "던전 파티 5명(탱커 1 · 딜러 3 · 힐러 1)이 각자 다른 책임을 맡고 하나의 파티로 하나의 보스를 상대합니다.",
       "how": "탱커는 적의 공격 대상을 자신에게 유지해 아군을 보호하고, 딜러는 그 안전 속에서 적을 처치하며, 힐러는 파티원의 체력을 유지시켜 전멸을 막습니다.",
       "why": "한 역할이 무너지면 다른 역할도 함께 무너지기 때문에, \"협력하라\"는 지시 없이도 협력이 발생합니다.",
@@ -42,7 +68,7 @@
       "image": null
     },
     {
-      "title": "어그로 — 위협도로 공격 대상 결정",
+      "title": "몬스터는 위협도가 가장 높은 사람을 노린다",
       "what": "몬스터는 위협도(Threat) 수치로 어떤 플레이어를 공격할지 결정합니다.",
       "how": "탱커의 위협도가 가장 높아 몬스터는 탱커를 공격하고, 딜러나 힐러의 위협도가 탱커를 넘어서면 공격 대상이 그쪽으로 바뀌어 파티 전체의 위험이 커집니다.",
       "why": "딜러는 탱커보다 위협도를 높이지 않는 선에서 공격 속도를 조절하고, 탱커는 딜러들의 위협도를 웃돌도록 관리해야 해 두 역할의 판단이 계속 서로에게 영향을 줍니다.",
@@ -50,17 +76,27 @@
       "image": null
     },
     {
-      "title": "하드코어 — 규칙 하나가 바꾸는 것",
+      "title": "죽으면 끝 — 규칙 하나가 바꾼 위험의 무게",
       "what": "일반 클래식과 전투 시스템은 같고, \"죽으면 끝난다\"는 사망 규칙 하나만 다릅니다.",
       "how": "죽음이 영구 삭제가 되면 모든 전투의 체감 위험이 급상승하고, 신중한 판단이 생존의 조건이 되어 다른 플레이어의 도움이 절실해집니다.",
       "why": "두 서버는 사망 규칙만 다르므로, 하드코어를 고른 것은 이 규칙 하나가 만든 경험의 차이를 직접 겪었기 때문입니다.",
       "section": "3-4. 하드코어 — 규칙 하나가 바꾸는 것",
-      "image": { "src": "images/hardcore-death.png", "w": 880, "h": 885, "caption": "만렙 3일 만에 보스전에서 죽은 제 캐릭터 — 하드코어 서버라 다시 부활할 수 없습니다" }
+      "image": {
+        "src": "images/hardcore-death.png",
+        "w": 880,
+        "h": 885,
+        "caption": "만렙 3일 만에 보스전에서 죽은 제 캐릭터 — 하드코어 서버라 다시 부활할 수 없습니다"
+      }
     }
   ],
   "troubleshooting": [],
   "screenshots": [
-    { "src": "images/shorts-death-aggro.png", "w": 468, "h": 823, "caption": "플레이 영상 장면 1 캡처 — 여러 적에게 한꺼번에 공격받아 사망하는 순간" }
+    {
+      "src": "images/shorts-death-aggro.png",
+      "w": 468,
+      "h": 823,
+      "caption": "플레이 영상 장면 1 캡처 — 여러 적에게 한꺼번에 공격받아 사망하는 순간"
+    }
   ],
   "retro": {
     "achieved": [
@@ -82,237 +118,750 @@
   },
   "deck": {
     "chapters": [
-      { "key": "overview", "title": "개요", "sectionPath": ["1. 개요"] },
-      { "key": "frame", "title": "분석 구조", "sectionPath": ["2. 분석 구조"] },
-      { "key": "core", "title": "핵심 분석", "sectionPath": ["3. 핵심 분석"] },
-      { "key": "choice", "title": "고민과 선택 — 분석하며 정한 것", "sectionPath": ["4. 고민과 선택 — 분석하며 정한 것"] },
-      { "key": "result", "title": "결과 및 배운 점", "sectionPath": ["5. 결과 및 배운 점"] }
+      {
+        "key": "overview",
+        "title": "개요",
+        "sectionPath": [
+          "1. 개요"
+        ]
+      },
+      {
+        "key": "frame",
+        "title": "분석 구조",
+        "sectionPath": [
+          "2. 분석 구조"
+        ]
+      },
+      {
+        "key": "core",
+        "title": "핵심 분석",
+        "sectionPath": [
+          "3. 핵심 분석"
+        ]
+      },
+      {
+        "key": "choice",
+        "title": "고민과 선택 — 분석하며 정한 것",
+        "sectionPath": [
+          "4. 고민과 선택 — 분석하며 정한 것"
+        ]
+      },
+      {
+        "key": "result",
+        "title": "결과 및 배운 점",
+        "sectionPath": [
+          "5. 결과 및 배운 점"
+        ]
+      }
     ],
     "slides": [
       {
-        "key": "why", "chapter": "overview", "layout": "overview", "tab": "개요",
-        "title": { "text": "1-2. 왜 분석했나 (Why) — 분석 질문", "verbatim": true },
-        "lead": { "text": "월드 오브 워크래프트 클래식(하드코어 서버)의 전투 시스템은 어떻게 플레이어들이 서로 의존하고 상호작용하도록 만들며, 그 상호작용을 어떻게 게임의 재미와 장기적인 플레이로 연결하는가?", "verbatim": false },
-        "sectionPath": ["1. 개요", "1-2. 왜 분석했나 (Why) — 분석 질문"],
+        "key": "why",
+        "chapter": "overview",
+        "layout": "overview",
+        "tab": "개요",
+        "title": {
+          "text": "1-2. 왜 분석했나 (Why) — 분석 질문",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "월드 오브 워크래프트 클래식(하드코어 서버)의 전투 시스템은 어떻게 플레이어들이 서로 의존하고 상호작용하도록 만들며, 그 상호작용을 어떻게 게임의 재미와 장기적인 플레이로 연결하는가?",
+          "verbatim": false
+        },
+        "sectionPath": [
+          "1. 개요",
+          "1-2. 왜 분석했나 (Why) — 분석 질문"
+        ],
         "points": [
-          { "label": "이유", "text": "다른 것은 죽음을 처리하는 방식 하나입니다.", "verbatim": true },
-          { "label": "이유", "text": "하드코어 서버의 플레이어들은 진영 간 싸움을 내려 두고 생존에 집중했고, 살아남으려고 서로 협력하면서 유대감이 크게 커졌습니다.", "verbatim": true }
+          {
+            "label": "이유",
+            "text": "다른 것은 죽음을 처리하는 방식 하나입니다.",
+            "verbatim": true
+          },
+          {
+            "label": "이유",
+            "text": "하드코어 서버의 플레이어들은 진영 간 싸움을 내려 두고 생존에 집중했고, 살아남으려고 서로 협력하면서 유대감이 크게 커졌습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": []
       },
       {
-        "key": "origin", "chapter": "overview", "layout": "full", "tab": "개요",
-        "title": { "text": "1-4. 분석 대상의 기본 구조", "verbatim": true },
-        "lead": { "text": "하드코어는 블리자드가 처음부터 설계한 콘텐츠가 아니라, 유저들이 스스로 만든 놀이 문화에서 출발했습니다.", "verbatim": true },
-        "sectionPath": ["1. 개요", "1-4. 분석 대상의 기본 구조"],
+        "key": "origin",
+        "chapter": "overview",
+        "layout": "full",
+        "tab": "개요",
+        "title": {
+          "text": "1-4. 분석 대상의 기본 구조",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "하드코어는 블리자드가 처음부터 설계한 콘텐츠가 아니라, 유저들이 스스로 만든 놀이 문화에서 출발했습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "1. 개요",
+          "1-4. 분석 대상의 기본 구조"
+        ],
         "points": [],
-        "visuals": [ { "kind": "table", "n": 2, "fp": "시기|일" } ]
-      },
-      {
-        "key": "framework", "chapter": "frame", "layout": "visual", "tab": "구조",
-        "title": { "text": "2-1. 분석 틀 — 시스템에서 결과까지", "verbatim": true },
-        "lead": { "text": "게임 시스템이 플레이어에게 어떤 행동을 요구하고, 그 행동이 다른 플레이어와 어떻게 이어져, 어떤 결과(재미·장기 플레이)를 만드는지 순서대로 따라갑니다.", "verbatim": true },
-        "sectionPath": ["2. 분석 구조", "2-1. 분석 틀 — 시스템에서 결과까지"],
-        "points": [],
-        "visuals": [ { "kind": "mermaid", "n": 1, "fp": "flowchart LR" } ]
-      },
-      {
-        "key": "five-steps", "chapter": "frame", "layout": "full", "tab": "구조",
-        "title": { "text": "2-1. 분석 틀 — 시스템에서 결과까지", "verbatim": true },
-        "lead": { "text": "이 틀을 5단계 질문으로 나눠 적용했습니다(3-5).", "verbatim": true },
-        "sectionPath": ["2. 분석 구조", "2-1. 분석 틀 — 시스템에서 결과까지"],
-        "points": [],
-        "visuals": [ { "kind": "table", "n": 1, "fp": "단계|질문" } ]
-      },
-      {
-        "key": "structure", "chapter": "frame", "layout": "visual", "tab": "구조",
-        "title": { "text": "2-2. 전투 시스템 전체 구조", "verbatim": true },
-        "lead": { "text": "역할 분리가 상호의존을 만들고, 어그로와 군중 제어가 그 의존을 실시간 상호작용으로 바꿉니다.", "verbatim": true },
-        "sectionPath": ["2. 분석 구조", "2-2. 전투 시스템 전체 구조"],
-        "points": [
-          { "label": "", "text": "하드코어의 영구 사망 규칙은 그 상호작용에서 나오는 실수 한 번의 대가를 캐릭터 삭제로 키웁니다.", "verbatim": true },
-          { "label": "결과", "text": "이렇게 생긴 협력·경쟁·구조는 길드라는 커뮤니티로 이어지고, 길드가 오래 플레이할 이유가 됩니다.", "verbatim": true }
-        ],
-        "visuals": [ { "kind": "mermaid", "n": 1, "fp": "flowchart LR" } ]
-      },
-      {
-        "key": "roles", "chapter": "core", "layout": "visual", "tab": "구조",
-        "title": { "text": "3-1. 역할 분리 — 서로 다른 책임", "verbatim": true },
-        "lead": { "text": "한 역할이 무너지면 다른 역할도 함께 무너집니다", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-1. 역할 분리 — 서로 다른 책임"],
-        "points": [
-          { "label": "탱커", "text": "적의 공격 대상을 자신에게 유지해 아군을 보호합니다.", "verbatim": true },
-          { "label": "딜러", "text": "적에게 최대한 많은 피해를 주어 전투를 끝냅니다.", "verbatim": true },
-          { "label": "힐러", "text": "파티원의 체력을 유지시켜 전멸을 막습니다.", "verbatim": true }
-        ],
-        "visuals": [ { "kind": "mermaid", "n": 1, "fp": "flowchart LR" } ]
-      },
-      {
-        "key": "aggro", "chapter": "core", "layout": "visual", "tab": "흐름",
-        "title": { "text": "3-2. 어그로 — 몬스터는 누구를 공격하는가", "verbatim": true },
-        "lead": { "text": "몬스터에게는 \"어떤 플레이어를 공격할지\"를 결정하는 위협도(Threat) 수치가 있습니다.", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-2. 어그로 — 몬스터는 누구를 공격하는가"],
-        "points": [
-          { "label": "딜러", "text": "딜러는 \"탱커보다 위협도를 높이지 않는 선\"에서 공격 속도를 조절해야 하고,", "verbatim": true },
-          { "label": "탱커", "text": "탱커는 딜러들의 위협도를 계속 웃돌도록 자신의 위협도를 관리해야 합니다.", "verbatim": true },
-          { "label": "", "text": "이 둘의 판단이 계속 서로에게 영향을 줍니다.", "verbatim": true }
-        ],
-        "visuals": [ { "kind": "mermaid", "n": 1, "fp": "flowchart TD" } ]
-      },
-      {
-        "key": "cc", "chapter": "core", "layout": "overview", "tab": "흐름",
-        "title": { "text": "3-3. 군중 제어(CC) — 어떤 적을, 언제, 누가", "verbatim": true },
-        "lead": { "text": "파티는 3마리 몬스터를 동시에 상대하는 대신, 1마리를 묶어두고(제어) 2마리에 집중합니다.", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-3. 군중 제어(CC) — 어떤 적을, 언제, 누가"],
-        "points": [
-          { "label": "", "text": "어떤 적이 가장 위험한가?", "verbatim": true },
-          { "label": "", "text": "누가 그 적을 제어할 것인가?", "verbatim": true },
-          { "label": "", "text": "제어 기술의 효과는 얼마나 지속되는가?", "verbatim": true },
-          { "label": "", "text": "제어가 풀리기 전에 다른 적을 처치할 수 있는가?", "verbatim": true }
-        ],
-        "visuals": []
-      },
-      {
-        "key": "hc-compare", "chapter": "core", "layout": "full", "tab": "선택",
-        "title": { "text": "3-4. 하드코어 — 규칙 하나가 바꾸는 것", "verbatim": true },
-        "lead": { "text": "규칙은 단 하나만 바뀝니다 — \"죽으면 끝난다.\"", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-4. 하드코어 — 규칙 하나가 바꾸는 것"],
-        "points": [],
-        "visuals": [ { "kind": "table", "n": 1, "fp": "|일반 클래식|하드코어" } ]
-      },
-      {
-        "key": "hc-death", "chapter": "core", "layout": "visual", "tab": "결과",
-        "title": { "text": "3-4. 하드코어 — 규칙 하나가 바꾸는 것", "verbatim": true },
-        "lead": { "text": "하드코어에서는 그 한 번의 실수가 영구 사망으로 이어졌습니다.", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-4. 하드코어 — 규칙 하나가 바꾸는 것"],
-        "points": [
-          { "label": "내가 겪은 장면", "text": "힐러가 잠시 자리를 비운 것을 모르고 전투를 시작해 힐을 받지 못했고, 보스의 속박 기술에 걸려 죽었습니다.", "verbatim": false },
-          { "label": "결과", "text": "같은 시스템(역할 분리·어그로·군중 제어)이라도 실수 한 번이 캐릭터 삭제로 이어지므로, 플레이어는 모든 판단을 더 신중하게 내려야 합니다.", "verbatim": true }
-        ],
         "visuals": [
-          { "kind": "image", "src": "images/hardcore-death.png", "w": 880, "h": 885, "caption": { "text": "만렙 3일 만에 보스전에서 죽은 제 캐릭터 — 하드코어 서버라 다시 부활할 수 없습니다", "verbatim": true } },
-          { "kind": "mermaid", "n": 1, "fp": "flowchart LR" }
+          {
+            "kind": "table",
+            "n": 2,
+            "fp": "시기|일"
+          }
         ]
       },
       {
-        "key": "core-loop", "chapter": "core", "layout": "visual", "tab": "흐름",
-        "title": { "text": "3-5. 5단계 시스템 분석", "verbatim": true },
-        "lead": { "text": "① 코어 루프 — 플레이어가 전투에서 무엇을 반복하는가?", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-5. 5단계 시스템 분석"],
-        "points": [
-          { "label": "", "text": "이 반복이 지루하지 않은 이유는 전투마다 파티 구성과 상대 몬스터에 따라 판단할 것이 달라지기 때문입니다.", "verbatim": true }
+        "key": "framework",
+        "chapter": "frame",
+        "layout": "visual",
+        "tab": "구조",
+        "title": {
+          "text": "2-1. 분석 틀 — 시스템에서 결과까지",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "게임 시스템이 플레이어에게 어떤 행동을 요구하고, 그 행동이 다른 플레이어와 어떻게 이어져, 어떤 결과(재미·장기 플레이)를 만드는지 순서대로 따라갑니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "2. 분석 구조",
+          "2-1. 분석 틀 — 시스템에서 결과까지"
         ],
-        "visuals": [ { "kind": "mermaid", "n": 1, "fp": "flowchart LR" } ]
-      },
-      {
-        "key": "behavior", "chapter": "core", "layout": "full", "tab": "구조",
-        "title": { "text": "3-5. 5단계 시스템 분석", "verbatim": true },
-        "lead": { "text": "모든 역할의 선택이 다른 역할의 결과에 실시간으로 영향을 줍니다.", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-5. 5단계 시스템 분석"],
         "points": [],
-        "visuals": [ { "kind": "table", "n": 1, "fp": "시스템|② 요구하는 행동|③ 다른 역할에 미치는 영향" } ]
-      },
-      {
-        "key": "scene-aggro", "chapter": "core", "layout": "visual", "tab": "결과",
-        "title": { "text": "3-5. 5단계 시스템 분석", "verbatim": true },
-        "lead": { "text": "하드코어 사망 규칙이 모든 행동에 \"신중함\"을 요구한다는 것을 보여 주는 장면입니다.", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-5. 5단계 시스템 분석"],
-        "points": [
-          { "label": "내가 겪은 장면 1", "text": "길을 잘 몰라 헤매다가 여러 적의 어그로를 한꺼번에 끌었고, 동시에 공격받아 죽었습니다.", "verbatim": true }
-        ],
         "visuals": [
-          { "kind": "image", "src": "images/shorts-death-aggro.png", "w": 468, "h": 823, "caption": { "text": "플레이 영상 장면 1 캡처 — 여러 적에게 한꺼번에 공격받아 사망하는 순간", "verbatim": true } }
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "flowchart LR"
+          }
         ]
       },
       {
-        "key": "tension", "chapter": "core", "layout": "overview", "tab": "결과",
-        "title": { "text": "3-5. 5단계 시스템 분석", "verbatim": true },
-        "lead": { "text": "위험이 클수록 성공했을 때 느끼는 보상도 커집니다. 하드코어의 리스크-보상은 이렇게 작동합니다.", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-5. 5단계 시스템 분석"],
+        "key": "five-steps",
+        "chapter": "frame",
+        "layout": "full",
+        "tab": "구조",
+        "title": {
+          "text": "2-1. 분석 틀 — 시스템에서 결과까지",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "이 틀을 5단계 질문으로 나눠 적용했습니다(3-5).",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "2. 분석 구조",
+          "2-1. 분석 틀 — 시스템에서 결과까지"
+        ],
+        "points": [],
+        "visuals": [
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "단계|질문"
+          }
+        ]
+      },
+      {
+        "key": "structure",
+        "chapter": "frame",
+        "layout": "visual",
+        "tab": "구조",
+        "title": {
+          "text": "2-2. 전투 시스템 전체 구조",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "역할 분리가 상호의존을 만들고, 어그로와 군중 제어가 그 의존을 실시간 상호작용으로 바꿉니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "2. 분석 구조",
+          "2-2. 전투 시스템 전체 구조"
+        ],
         "points": [
-          { "label": "경쟁", "text": "하드코어 서버는 던전을 하루에 한 번만 갈 수 있습니다.", "verbatim": true },
-          { "label": "대가", "text": "저는 만렙(60레벨) 캐릭터를 3번 잃고 다시 키운 적이 있고, 함께 플레이해 온 길드원 중에는 그보다 더 많이 죽은 분도 있습니다.", "verbatim": true },
-          { "label": "갈등", "text": "다른 파티원의 실수로 죽어 다툼이 생기기도 합니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "하드코어의 영구 사망 규칙은 그 상호작용에서 나오는 실수 한 번의 대가를 캐릭터 삭제로 키웁니다.",
+            "verbatim": true
+          },
+          {
+            "label": "결과",
+            "text": "이렇게 생긴 협력·경쟁·구조는 길드라는 커뮤니티로 이어지고, 길드가 오래 플레이할 이유가 됩니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "flowchart LR"
+          }
+        ]
+      },
+      {
+        "key": "roles",
+        "chapter": "core",
+        "layout": "visual",
+        "tab": "구조",
+        "title": {
+          "text": "3-1. 역할 분리 — 서로 다른 책임",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "한 역할이 무너지면 다른 역할도 함께 무너집니다",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-1. 역할 분리 — 서로 다른 책임"
+        ],
+        "points": [
+          {
+            "label": "탱커",
+            "text": "적의 공격 대상을 자신에게 유지해 아군을 보호합니다.",
+            "verbatim": true
+          },
+          {
+            "label": "딜러",
+            "text": "적에게 최대한 많은 피해를 주어 전투를 끝냅니다.",
+            "verbatim": true
+          },
+          {
+            "label": "힐러",
+            "text": "파티원의 체력을 유지시켜 전멸을 막습니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "flowchart LR"
+          }
+        ]
+      },
+      {
+        "key": "aggro",
+        "chapter": "core",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {
+          "text": "3-2. 어그로 — 몬스터는 누구를 공격하는가",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "몬스터에게는 \"어떤 플레이어를 공격할지\"를 결정하는 위협도(Threat) 수치가 있습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-2. 어그로 — 몬스터는 누구를 공격하는가"
+        ],
+        "points": [
+          {
+            "label": "딜러",
+            "text": "딜러는 \"탱커보다 위협도를 높이지 않는 선\"에서 공격 속도를 조절해야 하고,",
+            "verbatim": true
+          },
+          {
+            "label": "탱커",
+            "text": "탱커는 딜러들의 위협도를 계속 웃돌도록 자신의 위협도를 관리해야 합니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "이 둘의 판단이 계속 서로에게 영향을 줍니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "flowchart TD"
+          }
+        ]
+      },
+      {
+        "key": "cc",
+        "chapter": "core",
+        "layout": "overview",
+        "tab": "흐름",
+        "title": {
+          "text": "3-3. 군중 제어(CC) — 어떤 적을, 언제, 누가",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "파티는 3마리 몬스터를 동시에 상대하는 대신, 1마리를 묶어두고(제어) 2마리에 집중합니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-3. 군중 제어(CC) — 어떤 적을, 언제, 누가"
+        ],
+        "points": [
+          {
+            "label": "",
+            "text": "어떤 적이 가장 위험한가?",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "누가 그 적을 제어할 것인가?",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "제어 기술의 효과는 얼마나 지속되는가?",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "제어가 풀리기 전에 다른 적을 처치할 수 있는가?",
+            "verbatim": true
+          }
         ],
         "visuals": []
       },
       {
-        "key": "longterm", "chapter": "core", "layout": "visual", "tab": "흐름",
-        "title": { "text": "3-5. 5단계 시스템 분석", "verbatim": true },
-        "lead": { "text": "전투 시스템에서 시작된 상호의존이 길드원·친구와의 오래가는 관계로 이어집니다.", "verbatim": true },
-        "sectionPath": ["3. 핵심 분석", "3-5. 5단계 시스템 분석"],
-        "points": [
-          { "label": "", "text": "캐릭터는 사라져도 관계와 목표는 남습니다.", "verbatim": true },
-          { "label": "내가 겪은 장면 2", "text": "캐릭터를 잃고 다시 키우던 중 게임이 튕겼는데, 길드원에게 지원받은 장비 덕분에 겨우 살아남았습니다.", "verbatim": true }
+        "key": "hc-compare",
+        "chapter": "core",
+        "layout": "full",
+        "tab": "선택",
+        "title": {
+          "text": "3-4. 하드코어 — 규칙 하나가 바꾸는 것",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "규칙은 단 하나만 바뀝니다 — \"죽으면 끝난다.\"",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-4. 하드코어 — 규칙 하나가 바꾸는 것"
         ],
-        "visuals": [ { "kind": "mermaid", "n": 2, "fp": "flowchart LR" } ]
+        "points": [],
+        "visuals": [
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "|일반 클래식|하드코어"
+          }
+        ]
       },
       {
-        "key": "target", "chapter": "choice", "layout": "overview", "tab": "선택",
-        "title": { "text": "4-1. 분석 대상 — 일반 클래식 vs 하드코어", "verbatim": true },
-        "lead": { "text": "두 서버는 전투 시스템이 같고 사망 규칙만 다릅니다(3-4 비교 표).", "verbatim": true },
-        "sectionPath": ["4. 고민과 선택 — 분석하며 정한 것", "4-1. 분석 대상 — 일반 클래식 vs 하드코어"],
+        "key": "hc-death",
+        "chapter": "core",
+        "layout": "visual",
+        "tab": "결과",
+        "title": {
+          "text": "3-4. 하드코어 — 규칙 하나가 바꾸는 것",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "하드코어에서는 그 한 번의 실수가 영구 사망으로 이어졌습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-4. 하드코어 — 규칙 하나가 바꾸는 것"
+        ],
         "points": [
-          { "label": "이유", "text": "하드코어를 고른 이유는 이 규칙 하나가 만든 경험의 차이를 직접 겪었기 때문입니다.", "verbatim": true },
-          { "label": "", "text": "단순한 규칙 하나를 더하는 것만으로도 새로운 경험을 줄 수 있다는 것을 이때 깨달았습니다.", "verbatim": true }
+          {
+            "label": "내가 겪은 장면",
+            "text": "힐러가 잠시 자리를 비운 것을 모르고 전투를 시작해 힐을 받지 못했고, 보스의 속박 기술에 걸려 죽었습니다.",
+            "verbatim": false
+          },
+          {
+            "label": "결과",
+            "text": "같은 시스템(역할 분리·어그로·군중 제어)이라도 실수 한 번이 캐릭터 삭제로 이어지므로, 플레이어는 모든 판단을 더 신중하게 내려야 합니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/hardcore-death.png",
+            "w": 880,
+            "h": 885,
+            "caption": {
+              "text": "만렙 3일 만에 보스전에서 죽은 제 캐릭터 — 하드코어 서버라 다시 부활할 수 없습니다",
+              "verbatim": true
+            }
+          },
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "flowchart LR"
+          }
+        ]
+      },
+      {
+        "key": "core-loop",
+        "chapter": "core",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {
+          "text": "3-5. 5단계 시스템 분석",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "① 코어 루프 — 플레이어가 전투에서 무엇을 반복하는가?",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-5. 5단계 시스템 분석"
+        ],
+        "points": [
+          {
+            "label": "",
+            "text": "이 반복이 지루하지 않은 이유는 전투마다 파티 구성과 상대 몬스터에 따라 판단할 것이 달라지기 때문입니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {
+            "kind": "mermaid",
+            "n": 1,
+            "fp": "flowchart LR"
+          }
+        ]
+      },
+      {
+        "key": "behavior",
+        "chapter": "core",
+        "layout": "full",
+        "tab": "구조",
+        "title": {
+          "text": "3-5. 5단계 시스템 분석",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "모든 역할의 선택이 다른 역할의 결과에 실시간으로 영향을 줍니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-5. 5단계 시스템 분석"
+        ],
+        "points": [],
+        "visuals": [
+          {
+            "kind": "table",
+            "n": 1,
+            "fp": "시스템|② 요구하는 행동|③ 다른 역할에 미치는 영향"
+          }
+        ]
+      },
+      {
+        "key": "scene-aggro",
+        "chapter": "core",
+        "layout": "visual",
+        "tab": "결과",
+        "title": {
+          "text": "3-5. 5단계 시스템 분석",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "하드코어 사망 규칙이 모든 행동에 \"신중함\"을 요구한다는 것을 보여 주는 장면입니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-5. 5단계 시스템 분석"
+        ],
+        "points": [
+          {
+            "label": "내가 겪은 장면 1",
+            "text": "길을 잘 몰라 헤매다가 여러 적의 어그로를 한꺼번에 끌었고, 동시에 공격받아 죽었습니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/shorts-death-aggro.png",
+            "w": 468,
+            "h": 823,
+            "caption": {
+              "text": "플레이 영상 장면 1 캡처 — 여러 적에게 한꺼번에 공격받아 사망하는 순간",
+              "verbatim": true
+            }
+          }
+        ]
+      },
+      {
+        "key": "tension",
+        "chapter": "core",
+        "layout": "overview",
+        "tab": "결과",
+        "title": {
+          "text": "3-5. 5단계 시스템 분석",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "위험이 클수록 성공했을 때 느끼는 보상도 커집니다. 하드코어의 리스크-보상은 이렇게 작동합니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-5. 5단계 시스템 분석"
+        ],
+        "points": [
+          {
+            "label": "경쟁",
+            "text": "하드코어 서버는 던전을 하루에 한 번만 갈 수 있습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "대가",
+            "text": "저는 만렙(60레벨) 캐릭터를 3번 잃고 다시 키운 적이 있고, 함께 플레이해 온 길드원 중에는 그보다 더 많이 죽은 분도 있습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "갈등",
+            "text": "다른 파티원의 실수로 죽어 다툼이 생기기도 합니다.",
+            "verbatim": true
+          }
         ],
         "visuals": []
       },
       {
-        "key": "method", "chapter": "choice", "layout": "overview", "tab": "선택",
-        "title": { "text": "4-2. 분석 틀 — 기능 나열 vs 시스템 → 행동 → 상호작용 → 결과", "verbatim": true },
-        "lead": { "text": "전투 기능을 하나씩 설명하는 대신, 2-1의 시스템 → 행동 → 상호작용 → 결과 순서로 분석했습니다.", "verbatim": true },
-        "sectionPath": ["4. 고민과 선택 — 분석하며 정한 것", "4-2. 분석 틀 — 기능 나열 vs 시스템 → 행동 → 상호작용 → 결과"],
+        "key": "longterm",
+        "chapter": "core",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {
+          "text": "3-5. 5단계 시스템 분석",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "전투 시스템에서 시작된 상호의존이 길드원·친구와의 오래가는 관계로 이어집니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "3. 핵심 분석",
+          "3-5. 5단계 시스템 분석"
+        ],
         "points": [
-          { "label": "이유", "text": "하지만 플레이어가 없다면 이 시스템은 아무 의미가 없습니다.", "verbatim": true },
-          { "label": "이유", "text": "게임을 존재하게 하는 것은 유저들이 이 시스템 안에서 서로 상호작용해 만드는 결과이기 때문입니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "캐릭터는 사라져도 관계와 목표는 남습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "내가 겪은 장면 2",
+            "text": "캐릭터를 잃고 다시 키우던 중 게임이 튕겼는데, 길드원에게 지원받은 장비 덕분에 겨우 살아남았습니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {
+            "kind": "mermaid",
+            "n": 2,
+            "fp": "flowchart LR"
+          }
+        ]
+      },
+      {
+        "key": "target",
+        "chapter": "choice",
+        "layout": "overview",
+        "tab": "선택",
+        "title": {
+          "text": "4-1. 분석 대상 — 일반 클래식 vs 하드코어",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "두 서버는 전투 시스템이 같고 사망 규칙만 다릅니다(3-4 비교 표).",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "4. 고민과 선택 — 분석하며 정한 것",
+          "4-1. 분석 대상 — 일반 클래식 vs 하드코어"
+        ],
+        "points": [
+          {
+            "label": "이유",
+            "text": "하드코어를 고른 이유는 이 규칙 하나가 만든 경험의 차이를 직접 겪었기 때문입니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "단순한 규칙 하나를 더하는 것만으로도 새로운 경험을 줄 수 있다는 것을 이때 깨달았습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": []
       },
       {
-        "key": "pseudo", "chapter": "choice", "layout": "overview", "tab": "구현",
-        "title": { "text": "4-3. 분석한 어그로를 직접 만든다면 — 의사코드", "verbatim": true },
-        "lead": { "text": "3-2의 어그로 시스템을 코드 대신 의사코드로 정리했습니다.", "verbatim": true },
-        "sectionPath": ["4. 고민과 선택 — 분석하며 정한 것", "4-3. 분석한 어그로를 직접 만든다면 — 의사코드"],
+        "key": "method",
+        "chapter": "choice",
+        "layout": "overview",
+        "tab": "선택",
+        "title": {
+          "text": "4-2. 분석 틀 — 기능 나열 vs 시스템 → 행동 → 상호작용 → 결과",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "전투 기능을 하나씩 설명하는 대신, 2-1의 시스템 → 행동 → 상호작용 → 결과 순서로 분석했습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "4. 고민과 선택 — 분석하며 정한 것",
+          "4-2. 분석 틀 — 기능 나열 vs 시스템 → 행동 → 상호작용 → 결과"
+        ],
         "points": [
-          { "label": "", "text": "몬스터가 플레이어의 공격으로 피해를 입은 만큼 위협도 수치가 올라갑니다.", "verbatim": true },
-          { "label": "", "text": "공격마다 위협도 수치를 다르게 적용합니다. 탱커와 딜러를 구분하기 위한 장치입니다.", "verbatim": true },
-          { "label": "", "text": "탱커는 위협도를 강제로 가져오는 스킬(도발)로 몬스터의 공격 대상이 될 수 있습니다.", "verbatim": true }
+          {
+            "label": "이유",
+            "text": "하지만 플레이어가 없다면 이 시스템은 아무 의미가 없습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "이유",
+            "text": "게임을 존재하게 하는 것은 유저들이 이 시스템 안에서 서로 상호작용해 만드는 결과이기 때문입니다.",
+            "verbatim": true
+          }
         ],
         "visuals": []
       },
       {
-        "key": "conclusion", "chapter": "result", "layout": "overview", "tab": "결과",
-        "title": { "text": "5-1. 결론", "verbatim": true },
-        "lead": { "text": "전투 시스템은 \"몬스터를 처치하는 기능\"이 아니라, \"플레이어들의 행동을 서로 연결하는 장치\"로도 설계될 수 있습니다.", "verbatim": true },
-        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결론"],
+        "key": "pseudo",
+        "chapter": "choice",
+        "layout": "overview",
+        "tab": "구현",
+        "title": {
+          "text": "4-3. 분석한 어그로를 직접 만든다면 — 의사코드",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "3-2의 어그로 시스템을 코드 대신 의사코드로 정리했습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "4. 고민과 선택 — 분석하며 정한 것",
+          "4-3. 분석한 어그로를 직접 만든다면 — 의사코드"
+        ],
         "points": [
-          { "label": "", "text": "WoW 클래식 하드코어의 전투는 적을 처치하기 위한 시스템에서 끝나지 않습니다.", "verbatim": true },
-          { "label": "", "text": "그 과정에서 협력·경쟁·신뢰·관계라는 멀티플레이 경험을 만들어 냅니다.", "verbatim": true }
+          {
+            "label": "",
+            "text": "몬스터가 플레이어의 공격으로 피해를 입은 만큼 위협도 수치가 올라갑니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "공격마다 위협도 수치를 다르게 적용합니다. 탱커와 딜러를 구분하기 위한 장치입니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "탱커는 위협도를 강제로 가져오는 스킬(도발)로 몬스터의 공격 대상이 될 수 있습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": []
       },
       {
-        "key": "insights", "chapter": "result", "layout": "overview", "tab": "결과",
-        "title": { "text": "5-2. 개발자로서 얻은 인사이트", "verbatim": true },
+        "key": "conclusion",
+        "chapter": "result",
+        "layout": "overview",
+        "tab": "결과",
+        "title": {
+          "text": "5-1. 결론",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "전투 시스템은 \"몬스터를 처치하는 기능\"이 아니라, \"플레이어들의 행동을 서로 연결하는 장치\"로도 설계될 수 있습니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "5. 결과 및 배운 점",
+          "5-1. 결론"
+        ],
+        "points": [
+          {
+            "label": "",
+            "text": "WoW 클래식 하드코어의 전투는 적을 처치하기 위한 시스템에서 끝나지 않습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "그 과정에서 협력·경쟁·신뢰·관계라는 멀티플레이 경험을 만들어 냅니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "insights",
+        "chapter": "result",
+        "layout": "overview",
+        "tab": "결과",
+        "title": {
+          "text": "5-2. 개발자로서 얻은 인사이트",
+          "verbatim": true
+        },
         "lead": null,
-        "sectionPath": ["5. 결과 및 배운 점", "5-2. 개발자로서 얻은 인사이트"],
+        "sectionPath": [
+          "5. 결과 및 배운 점",
+          "5-2. 개발자로서 얻은 인사이트"
+        ],
         "points": [
-          { "label": "배운 점", "text": "협력을 강요하기보다 서로의 능력에 의존하게 만듭니다. 의존이 강하면 복잡한 사회 시스템 없이도 플레이어 사이에 관계가 생깁니다.", "verbatim": true },
-          { "label": "배운 점", "text": "위험이 커질수록 다른 플레이어의 도움이 갖는 가치도 커집니다.", "verbatim": true },
-          { "label": "배운 점", "text": "규칙 하나로 기존 시스템의 긴장도를 다시 정할 수 있습니다. 하드코어는 시스템을 늘리지 않고 \"죽음\"이라는 실패의 무게만 바꿨습니다.", "verbatim": true }
+          {
+            "label": "배운 점",
+            "text": "협력을 강요하기보다 서로의 능력에 의존하게 만듭니다. 의존이 강하면 복잡한 사회 시스템 없이도 플레이어 사이에 관계가 생깁니다.",
+            "verbatim": true
+          },
+          {
+            "label": "배운 점",
+            "text": "위험이 커질수록 다른 플레이어의 도움이 갖는 가치도 커집니다.",
+            "verbatim": true
+          },
+          {
+            "label": "배운 점",
+            "text": "규칙 하나로 기존 시스템의 긴장도를 다시 정할 수 있습니다. 하드코어는 시스템을 늘리지 않고 \"죽음\"이라는 실패의 무게만 바꿨습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": []
       },
       {
-        "key": "revisit", "chapter": "result", "layout": "overview", "tab": "결과",
-        "title": { "text": "5-3. 이 관점으로 제 프로젝트를 다시 보면", "verbatim": true },
-        "lead": { "text": "이 분석은 프로젝트를 설계할 때 반영한 것이 아니라, 분석을 마친 뒤 제 프로젝트를 돌아본 것입니다.", "verbatim": true },
-        "sectionPath": ["5. 결과 및 배운 점", "5-3. 이 관점으로 제 프로젝트를 다시 보면"],
+        "key": "revisit",
+        "chapter": "result",
+        "layout": "overview",
+        "tab": "결과",
+        "title": {
+          "text": "5-3. 이 관점으로 제 프로젝트를 다시 보면",
+          "verbatim": true
+        },
+        "lead": {
+          "text": "이 분석은 프로젝트를 설계할 때 반영한 것이 아니라, 분석을 마친 뒤 제 프로젝트를 돌아본 것입니다.",
+          "verbatim": true
+        },
+        "sectionPath": [
+          "5. 결과 및 배운 점",
+          "5-3. 이 관점으로 제 프로젝트를 다시 보면"
+        ],
         "points": [
-          { "label": "돌아보니", "text": "「뒤통수를 조심해」의 적 AI는 시야 박스로 플레이어를 감지했는가만 판단하고 추격합니다.", "verbatim": true },
-          { "label": "", "text": "WoW의 어그로는 그 반대로, 여러 플레이어 중 누구를 공격할지를 위협도 수치로 정합니다(3-2).", "verbatim": true },
-          { "label": "다음에 해 볼 것", "text": "적이 공격 대상을 고르는 기준을 직접 만들어 보고 싶습니다.", "verbatim": true }
+          {
+            "label": "돌아보니",
+            "text": "「뒤통수를 조심해」의 적 AI는 시야 박스로 플레이어를 감지했는가만 판단하고 추격합니다.",
+            "verbatim": true
+          },
+          {
+            "label": "",
+            "text": "WoW의 어그로는 그 반대로, 여러 플레이어 중 누구를 공격할지를 위협도 수치로 정합니다(3-2).",
+            "verbatim": true
+          },
+          {
+            "label": "다음에 해 볼 것",
+            "text": "적이 공격 대상을 고르는 기준을 직접 만들어 보고 싶습니다.",
+            "verbatim": true
+          }
         ],
         "visuals": []
       }

@@ -1,0 +1,28 @@
+/* PDF 전용 배치 손질 — 인쇄(PDF)에서만 적용. 화면은 그대로입니다. (/portfolio-make-pdf가 씀 · 직접 고쳐도 됨)
+   tools/make-pdf.py가 이 파일을 페이지 인쇄 규칙 뒤에 덧씌워 인쇄합니다(페이지가 이 파일을 불러오지 않아도 됨).
+   맨 위의 /* 키: 값 */ 줄은 도구가 읽는 설정입니다. 비우거나 지우면 기본값.
+
+   배치 폭(layout-px): PDF를 이 폭의 창에서 보이는 배치로 그린 뒤 A4에 맞게 줄입니다. 작을수록 글씨가 큼.
+     1040 = 넓은 화면 배치(66%) · 960 ≈ 72% · 900 ≈ 76% · 820 ≈ 84% · 780 ≈ 88%. 768 미만이면 휴대폰에 가까운 배치라 쓰지 않음.
+   이미 잘 보이는 글(keep-readable): 화면 비율로 줄였을 때 이미 이 크기(pt) 이상인 글은 키우지 않음. off면 모든 글을 똑같이 키움.
+   글씨 사이 비율 한도(ratio-limit): 원본에서 가장 큰 글 대비 각 글의 비율이 이 배수(× · ÷)까지만 달라짐. off면 끔.
+   흐린 배경 대비(backdrop-contrast): 흐린 대표 이미지 배경 위 흰 글씨의 최소 대비. 클수록 배경을 어둡게 덮음(3 = 큰 글 기준, 4.5 = 작은 글 기준).
+
+   점검·처리 대상(이 페이지에 맞춘 선택자 — /portfolio-make-pdf가 처음 쓸 때 페이지를 읽고 채움. 결과 PDF 모양은 바꾸지 않음):
+     page-root 내용을 담은 맨 바깥 요소 · caption 같은 크기로 묶을 캡션 · backdrop 흐린 배경 묶음(비우면 흐림 필터가 걸린 그림을 스스로 찾음)
+     check-single-line 한 줄이어야 할 글(제목·칩 외) · check-table-cell/-box 정보 표 값 칸/표 · check-cover-image/-feature-image 대표·기능 그림 */
+/* layout-px: 1040 */
+/* keep-readable: 10pt */
+/* ratio-limit: 1.25 */
+/* backdrop-contrast: 3 */
+/* page-root: #root */
+/* caption: figcaption */
+/* backdrop:  */
+/* check-single-line:  */
+/* check-table-cell:  */
+/* check-table-box:  */
+/* check-cover-image:  */
+/* check-feature-image:  */
+
+@media print {
+}

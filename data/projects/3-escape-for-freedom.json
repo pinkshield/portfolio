@@ -73,7 +73,12 @@
       "how": "쿠션(점프 함정)은 공을 튀어 오르게 하고, 고양이(이동형 함정)는 NavMesh로 돌아다니다 공을 발견하면 쫓아가 밀쳐내며, 가속 이동 판자는 밟으면 공이 움직이는 방향으로 가속이 붙습니다.",
       "why": "쿠션은 튀는 방향이 매번 달라 복불복이지만, 떨어져도 바로 그 전 위치에서 다시 칠 수 있어 벌이 작고, 여러 방향으로 튀며 새로운 경로를 찾는 경험을 줄 수 있다고 판단해 남겼습니다.",
       "section": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지",
-      "image": null
+      "image": {
+        "src": "images/trap-cushion.gif",
+        "w": 960,
+        "h": 540,
+        "caption": "쿠션 — 공을 쳐서 쿠션에 올리면 높이 튀어 올라 거실 쪽으로 날아갑니다"
+      }
     },
     {
       "title": "배우고, 익히고, 시험받는 네 구간",
@@ -157,41 +162,11 @@
   },
   "deck": {
     "chapters": [
-      {
-        "key": "overview",
-        "title": "개요",
-        "sectionPath": [
-          "1. 개요"
-        ]
-      },
-      {
-        "key": "layout",
-        "title": "레벨 구조 — 전체 동선",
-        "sectionPath": [
-          "2. 레벨 구조 — 전체 동선"
-        ]
-      },
-      {
-        "key": "areas",
-        "title": "구역별 설계 의도",
-        "sectionPath": [
-          "3. 구역별 설계 의도"
-        ]
-      },
-      {
-        "key": "tradeoffs",
-        "title": "고민과 선택",
-        "sectionPath": [
-          "4. 고민과 선택"
-        ]
-      },
-      {
-        "key": "results",
-        "title": "결과 및 배운 점",
-        "sectionPath": [
-          "5. 결과 및 배운 점"
-        ]
-      }
+      {"key": "overview", "title": "개요", "sectionPath": ["1. 개요"]},
+      {"key": "layout", "title": "레벨 구조 — 전체 동선", "sectionPath": ["2. 레벨 구조 — 전체 동선"]},
+      {"key": "areas", "title": "구역별 설계 의도", "sectionPath": ["3. 구역별 설계 의도"]},
+      {"key": "tradeoffs", "title": "고민과 선택", "sectionPath": ["4. 고민과 선택"]},
+      {"key": "results", "title": "결과 및 배운 점", "sectionPath": ["5. 결과 및 배운 점"]}
     ],
     "slides": [
       {
@@ -199,29 +174,12 @@
         "chapter": "overview",
         "layout": "overview",
         "tab": "개요",
-        "title": {
-          "text": "1-1. 무엇을 만들었나 (What)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "집 안 진열장에 보관된 홀인원 골프공을 집 밖으로 탈출시키는 3D 물리 기반 미니 골프 탈출 게임입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "1. 개요",
-          "1-1. 무엇을 만들었나 (What)"
-        ],
+        "title": {"text": "1-1. 무엇을 만들었나 (What)", "verbatim": true},
+        "lead": {"text": "집 안 진열장에 보관된 홀인원 골프공을 집 밖으로 탈출시키는 3D 물리 기반 미니 골프 탈출 게임입니다.", "verbatim": true},
+        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나 (What)"],
         "points": [
-          {
-            "label": "",
-            "text": "수업의 맵(레벨) 디자인 과제로 만들었습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "골프공 옆의 \"0%\" 는 치는 힘 게이지입니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "수업의 맵(레벨) 디자인 과제로 만들었습니다.", "verbatim": true},
+          {"label": "", "text": "골프공 옆의 \"0%\" 는 치는 힘 게이지입니다.", "verbatim": true}
         ],
         "visuals": [
           {
@@ -229,10 +187,7 @@
             "src": "images/start-trophy-case.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "시작 장면 — 진열장 옆의 홀인원 골프공",
-              "verbatim": true
-            }
+            "caption": {"text": "시작 장면 — 진열장 옆의 홀인원 골프공", "verbatim": true}
           }
         ]
       },
@@ -241,18 +196,9 @@
         "chapter": "overview",
         "layout": "visual",
         "tab": "개요",
-        "title": {
-          "text": "시작 안내 화면 — 게임 방법과 키 안내",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "공이 바닥에 떨어지면 마지막으로 치기 전의 위치로 돌아갑니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "1. 개요",
-          "1-1. 무엇을 만들었나 (What)"
-        ],
+        "title": {"text": "시작 안내 화면 — 게임 방법과 키 안내", "verbatim": true},
+        "lead": {"text": "공이 바닥에 떨어지면 마지막으로 치기 전의 위치로 돌아갑니다.", "verbatim": true},
+        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나 (What)"],
         "points": [],
         "visuals": [
           {
@@ -260,16 +206,9 @@
             "src": "images/start-guide.png",
             "w": 827,
             "h": 834,
-            "caption": {
-              "text": "시작 안내 화면 — 게임 방법과 키 안내",
-              "verbatim": true
-            }
+            "caption": {"text": "시작 안내 화면 — 게임 방법과 키 안내", "verbatim": true}
           },
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "조작|키"
-          }
+          {"kind": "table", "n": 1, "fp": "조작|키"}
         ]
       },
       {
@@ -277,34 +216,13 @@
         "chapter": "overview",
         "layout": "overview",
         "tab": "개요",
-        "title": {
-          "text": "1-2. 과제와 목표 (Why)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "홀인원 공은 진열장에 보관되어 갇혀 있는 공입니다. 그 공을 집 밖으로 탈출시켜 자유를 주는 경험을 주고 싶었습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "1. 개요",
-          "1-2. 과제와 목표 (Why)"
-        ],
+        "title": {"text": "1-2. 과제와 목표 (Why)", "verbatim": true},
+        "lead": {"text": "홀인원 공은 진열장에 보관되어 갇혀 있는 공입니다. 그 공을 집 밖으로 탈출시켜 자유를 주는 경험을 주고 싶었습니다.", "verbatim": true},
+        "sectionPath": ["1. 개요", "1-2. 과제와 목표 (Why)"],
         "points": [
-          {
-            "label": "과제 조건",
-            "text": "새 장애물을 최소 3종 만듭니다.",
-            "verbatim": true
-          },
-          {
-            "label": "과제 조건",
-            "text": "그 장애물을 소개 → 응용 → 심화 세 코스에 나눠 배치해, 플레이어가 배우고 익히고 시험받게 합니다.",
-            "verbatim": true
-          },
-          {
-            "label": "떨어진 명예",
-            "text": "홀인원이라는 큰 영광을 가진 공이 바닥에 떨어지면, 수치심을 느껴 치기 전 위치로 되돌아간다는 콘셉트입니다.",
-            "verbatim": true
-          }
+          {"label": "과제 조건", "text": "새 장애물을 최소 3종 만듭니다.", "verbatim": true},
+          {"label": "과제 조건", "text": "그 장애물을 소개 → 응용 → 심화 세 코스에 나눠 배치해, 플레이어가 배우고 익히고 시험받게 합니다.", "verbatim": true},
+          {"label": "떨어진 명예", "text": "홀인원이라는 큰 영광을 가진 공이 바닥에 떨어지면, 수치심을 느껴 치기 전 위치로 되돌아간다는 콘셉트입니다.", "verbatim": true}
         ],
         "visuals": []
       },
@@ -313,37 +231,20 @@
         "chapter": "overview",
         "layout": "full",
         "tab": "개요",
-        "title": {
-          "text": "1-3. 개발 환경 · 링크",
-          "verbatim": true
-        },
+        "title": {"text": "1-3. 개발 환경 · 링크", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "1. 개요",
-          "1-3. 개발 환경 · 링크"
-        ],
+        "sectionPath": ["1. 개요", "1-3. 개발 환경 · 링크"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "항목|내용"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "항목|내용"}]
       },
       {
         "key": "map",
         "chapter": "layout",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "레벨 전경 — 집 안 코스",
-          "verbatim": true
-        },
+        "title": {"text": "레벨 전경 — 집 안 코스", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "2. 레벨 구조 — 전체 동선"
-        ],
+        "sectionPath": ["2. 레벨 구조 — 전체 동선"],
         "points": [],
         "visuals": [
           {
@@ -351,10 +252,7 @@
             "src": "images/level-overview.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "레벨 전경 — 집 안 코스",
-              "verbatim": true
-            }
+            "caption": {"text": "레벨 전경 — 집 안 코스", "verbatim": true}
           }
         ]
       },
@@ -363,72 +261,34 @@
         "chapter": "layout",
         "layout": "visual",
         "tab": "흐름",
-        "title": {
-          "text": "2. 레벨 구조 — 전체 동선",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "맵은 진열장 → 창고방 → 거실 → 현관 네 구간으로 이어집니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "2. 레벨 구조 — 전체 동선"
-        ],
+        "title": {"text": "2. 레벨 구조 — 전체 동선", "verbatim": true},
+        "lead": {"text": "맵은 진열장 → 창고방 → 거실 → 현관 네 구간으로 이어집니다.", "verbatim": true},
+        "sectionPath": ["2. 레벨 구조 — 전체 동선"],
         "points": [
-          {
-            "label": "",
-            "text": "진열장에서 어느 길로 갈지 정해지고, 창고방을 지나 윗길과 아랫길로 나뉩니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "거실의 목표 지점 두 곳에 모두 도착하면 현관에서 집 밖으로 탈출할 수 있습니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "진열장에서 어느 길로 갈지 정해지고, 창고방을 지나 윗길과 아랫길로 나뉩니다.", "verbatim": true},
+          {"label": "", "text": "거실의 목표 지점 두 곳에 모두 도착하면 현관에서 집 밖으로 탈출할 수 있습니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
         "key": "routes",
         "chapter": "layout",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "두 갈래 길",
-          "verbatim": true
-        },
+        "title": {"text": "두 갈래 길", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "2. 레벨 구조 — 전체 동선"
-        ],
+        "sectionPath": ["2. 레벨 구조 — 전체 동선"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "루트|특징"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 2, "fp": "루트|특징"}]
       },
       {
         "key": "play",
         "chapter": "areas",
         "layout": "full",
         "tab": "결과",
-        "title": {
-          "text": "3. 구역별 설계 의도",
-          "verbatim": true
-        },
+        "title": {"text": "3. 구역별 설계 의도", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "3. 구역별 설계 의도"
-        ],
+        "sectionPath": ["3. 구역별 설계 의도"],
         "points": [],
         "visuals": [
           {
@@ -436,10 +296,7 @@
             "src": "images/play-ramp.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "플레이 장면 — 책장 위의 경사로와 깃발",
-              "verbatim": true
-            }
+            "caption": {"text": "플레이 장면 — 책장 위의 경사로와 깃발", "verbatim": true}
           }
         ]
       },
@@ -448,137 +305,463 @@
         "chapter": "areas",
         "layout": "full",
         "tab": "구현",
-        "title": {
-          "text": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "과제 조건(새 장애물 최소 3종)에 맞춰, 성격이 다른 함정 세 가지를 두었습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "3. 구역별 설계 의도",
-          "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지"
-        ],
+        "title": {"text": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지", "verbatim": true},
+        "lead": {"text": "과제 조건(새 장애물 최소 3종)에 맞춰, 성격이 다른 함정 세 가지를 두었습니다.", "verbatim": true},
+        "sectionPath": ["3. 구역별 설계 의도", "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "함정|종류|동작"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "함정|종류|동작"}]
       },
       {
         "key": "trap-detail",
         "chapter": "areas",
-        "layout": "overview",
+        "layout": "screens",
         "tab": "구현",
-        "title": {
-          "text": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지",
-          "verbatim": true
-        },
+        "title": {"text": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "3. 구역별 설계 의도",
-          "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지"
-        ],
+        "sectionPath": ["3. 구역별 설계 의도", "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지"],
         "points": [
-          {
-            "label": "쿠션",
-            "text": "방향이 좋으면 안전하게 수납장으로 가고, 나쁘면 바닥에 떨어져 다시 쳐야 합니다.",
-            "verbatim": true
-          },
-          {
-            "label": "고양이",
-            "text": "NavMesh로 돌아다니다가 골프공을 발견하면 공을 향해 가서 밀쳐냅니다.",
-            "verbatim": true
-          },
-          {
-            "label": "가속 판자",
-            "text": "공이 움직이는 방향에 따라 플레이어를 돕기도 하고, 잘못 들어가면 바닥으로 떨어져 다시 쳐야 합니다.",
-            "verbatim": true
-          }
+          {"label": "쿠션", "text": "방향이 좋으면 안전하게 수납장으로 가고, 나쁘면 바닥에 떨어져 다시 쳐야 합니다.", "verbatim": true},
+          {"label": "고양이", "text": "NavMesh로 돌아다니다가 골프공을 발견하면 공을 향해 가서 밀쳐냅니다.", "verbatim": true},
+          {"label": "가속 판자", "text": "공이 움직이는 방향에 따라 플레이어를 돕기도 하고, 잘못 들어가면 바닥으로 떨어져 다시 쳐야 합니다.", "verbatim": true}
         ],
-        "visuals": []
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/trap-cushion.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "쿠션 — 공을 쳐서 쿠션에 올리면 높이 튀어 올라 거실 쪽으로 날아갑니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/trap-cat.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "고양이 — 주변을 돌아다니다가 공을 발견하면 공 쪽으로 다가옵니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/trap-boost.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "가속 판자 — 공이 가속 판자를 타면 처음 진행하던 방향으로 가속을 받습니다", "verbatim": true}
+          }
+        ]
       },
       {
         "key": "courses",
         "chapter": "areas",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "3-2. 배우고, 익히고, 시험받는 네 구간 — 구간별 의도",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "창고방이 소개, 거실과 현관이 응용·심화 코스입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "3. 구역별 설계 의도",
-          "3-2. 배우고, 익히고, 시험받는 네 구간 — 구간별 의도"
-        ],
+        "title": {"text": "3-2. 배우고, 익히고, 시험받는 네 구간 — 구간별 의도", "verbatim": true},
+        "lead": {"text": "창고방이 소개, 거실과 현관이 응용·심화 코스입니다.", "verbatim": true},
+        "sectionPath": ["3. 구역별 설계 의도", "3-2. 배우고, 익히고, 시험받는 네 구간 — 구간별 의도"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "구간|코스|이 구간에서 일어나는 일"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "구간|코스|이 구간에서 일어나는 일"}]
       },
       {
         "key": "route-choice",
         "chapter": "tradeoffs",
         "layout": "full",
         "tab": "선택",
-        "title": {
-          "text": "4-1. 길을 한 갈래로 할까, 두 갈래로 할까",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "그래서 어려운 윗길로 가장 높은 홀컵에 도착하면 바로 깃발로 이어져 빨리 끝낼 수 있게 했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4. 고민과 선택",
-          "4-1. 길을 한 갈래로 할까, 두 갈래로 할까"
+        "title": {"text": "4-1. 길을 한 갈래로 할까, 두 갈래로 할까", "verbatim": true},
+        "lead": {"text": "그래서 어려운 윗길로 가장 높은 홀컵에 도착하면 바로 깃발로 이어져 빨리 끝낼 수 있게 했습니다.", "verbatim": true},
+        "sectionPath": ["4. 고민과 선택", "4-1. 길을 한 갈래로 할까, 두 갈래로 할까"],
+        "points": [
+          {"label": "선택 이유", "text": "어려운 도전을 해낸 사람에게는, 첫 도전을 마치면 다음 도전이 순조롭게 풀리는 경험을 주고 싶었습니다.", "verbatim": true},
+          {"label": "예상과 실제", "text": "처음 하는 사람은 이어져 있는 쉬운 길로 갈 것이라고 예상했고, 대부분 첫 플레이는 예상대로 흘러갔습니다.", "verbatim": true},
+          {
+            "label": "결과 화면과의 연결",
+            "text": "공을 친 횟수와 떨어진 횟수를 보며 \"내가 이렇게 많이 쳤어? 이렇게 많이 떨어졌어?\"라는 생각이 들게 하고 싶었습니다.",
+            "verbatim": true
+          }
         ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "방법|장점|단점"}],
+        "edited": true
+      },
+      {
+        "key": "asset-choice",
+        "chapter": "tradeoffs",
+        "layout": "full",
+        "tab": "선택",
+        "title": {"text": "4-2. 어떤 에셋으로 맵을 만들까", "verbatim": true},
+        "lead": {"text": "다행히 원래 쓰려던 에셋의 위치를 찾아, 그 에셋으로 맵을 다시 디자인했습니다", "verbatim": true},
+        "sectionPath": ["4. 고민과 선택", "4-2. 어떤 에셋으로 맵을 만들까"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "방법|장점|단점"}]
+      },
+      {
+        "key": "cushion-choice",
+        "chapter": "tradeoffs",
+        "layout": "overview",
+        "tab": "선택",
+        "title": {"text": "4-3. 복불복 쿠션을 남길까", "verbatim": true},
+        "lead": {"text": "과제 작업지시서에는 \"운만으로 결정되는 구간은 난이도가 아니라 벌\"이라는 기준이 있습니다.", "verbatim": true},
+        "sectionPath": ["4. 고민과 선택", "4-3. 복불복 쿠션을 남길까"],
+        "points": [
+          {"label": "이유", "text": "떨어져도 바로 그 전 위치에서 다시 칠 수 있어 벌이 작다고 판단했습니다.", "verbatim": true},
+          {"label": "이유", "text": "계속 도전하면서 여러 방향으로 튀다 보면 새로운 경로를 찾는 경험을 줄 수 있다고 생각했습니다.", "verbatim": true}
+        ],
+        "visuals": []
+      },
+      {
+        "key": "shortcut-wall",
+        "chapter": "tradeoffs",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "4-5. 홀컵 앞 지름길을 막을까 — 홀컵에 들어와야 열리는 벽", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["4. 고민과 선택", "4-5. 홀컵 앞 지름길을 막을까 — 홀컵에 들어와야 열리는 벽"],
+        "points": [
+          {
+            "label": "상황",
+            "text": "그런데 이 검은 길의 틈으로 떨어진 공이 쿠션을 타고 다시 올라와, 정해 둔 길을 거치지 않고 홀컵에 들어갈 수 있었습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "선택",
+            "text": "이 지름길을 벽 콜라이더로 막았습니다. 그리고 공이 홀컵 플랫폼의 Trigger에 닿으면 벽 콜라이더를 꺼서, 그때부터 검은 길을 따라 깃발 쪽으로 갈 수 있게 했습니다.",
+            "verbatim": true
+          },
+          {"label": "플레이어가 겪는 흐름", "text": "윗길로 홀컵에 들어오면 벽이 사라지고, 검은 길을 따라 깃발까지 한 번에 이어집니다.", "verbatim": true}
+        ],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/hole-wall.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "홀컵 벽 — 쿠션을 타고 올라온 공이 홀컵에 들어가면 벽이 사라집니다", "verbatim": true}
+          }
+        ]
+      },
+      {
+        "key": "result-screen",
+        "chapter": "results",
+        "layout": "visual",
+        "tab": "결과",
+        "title": {"text": "5-1. 결과", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
+        "points": [
+          {"label": "", "text": "자유를 향한 시도(타격 횟수)", "verbatim": true},
+          {"label": "", "text": "떨어진 명예(낙하 횟수)", "verbatim": true},
+          {"label": "", "text": "자유를 되찾기까지 걸린 시간", "verbatim": true},
+          {"label": "", "text": "\"명예를 찾기 위한 재도전\" 버튼으로 다시 도전할 수 있습니다.", "verbatim": true}
+        ],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/result-screen.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {"text": "결과 화면 — 내가 어려운 길로 클리어한 기록(40타·9회 낙하·3분 12초)", "verbatim": true}
+          }
+        ]
+      },
+      {
+        "key": "playtest",
+        "chapter": "results",
+        "layout": "full",
+        "tab": "결과",
+        "title": {"text": "5-1. 결과", "verbatim": true},
+        "lead": {"text": "친구에게 빌드를 보내 플레이 테스트를 부탁했고, 받은 피드백으로 맵을 고쳤습니다", "verbatim": true},
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "누가|타격|낙하|걸린 시간|이렇게 나온 이유"}]
+      },
+      {
+        "key": "playtest-shots",
+        "chapter": "results",
+        "layout": "screens",
+        "tab": "결과",
+        "title": {"text": "5-1. 결과", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
         "points": [],
         "visuals": [
           {
-            "kind": "table",
-            "n": 1,
-            "fp": "방법|장점|단점"
+            "kind": "image",
+            "src": "images/result-first-clear.png",
+            "w": 941,
+            "h": 606,
+            "caption": {"text": "처음 도전해서 클리어한 결과 화면 — 197타·97회 낙하·14분 11초", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/result-friend-feedback.webp",
+            "caption": {"text": "피드백을 준 친구의 결과 화면 — 여러 경로를 시도해 352타·171회 낙하·24분 29초", "verbatim": true}
           }
         ]
+      },
+      {
+        "key": "feedback",
+        "chapter": "results",
+        "layout": "full",
+        "tab": "문제 해결",
+        "title": {"text": "친구가 준 피드백과 고친 것", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 2, "fp": "피드백|원인|고친 것"}]
+      },
+      {
+        "key": "fix-shots",
+        "chapter": "results",
+        "layout": "screens",
+        "tab": "문제 해결",
+        "title": {"text": "친구가 준 피드백과 고친 것", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
+        "points": [],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/feedback-curtain-stuck.webp",
+            "caption": {"text": "커튼봉에 낀 골프공", "verbatim": true}
+          },
+          {"kind": "image", "src": "images/feedback-window.webp", "caption": {"text": "창문 옆의 골프공", "verbatim": true}},
+          {
+            "kind": "image",
+            "src": "images/fix-scene-1.png",
+            "w": 1031,
+            "h": 504,
+            "caption": {"text": "씬 뷰 — 커튼·창문 (1)", "verbatim": true}
+          }
+        ]
+      },
+      {
+        "key": "lesson",
+        "chapter": "results",
+        "layout": "overview",
+        "tab": "결과",
+        "title": {"text": "5-3. 배운 점", "verbatim": true},
+        "lead": {"text": "게임을 만들 때는 \"무엇이 재미있을까\"보다 플레이어에게 어떤 경험을 줄 것인지를 더 생각해야 합니다.", "verbatim": true},
+        "sectionPath": ["5. 결과 및 배운 점", "5-3. 배운 점"],
+        "points": [
+          {
+            "label": "",
+            "text": "탈출하는 길을 찾으며 여러 경로를 찾는 것이 이 게임의 재미라고 생각했지만, 그것이 재미가 아닐 수도 있다는 것을 배웠습니다.",
+            "verbatim": true
+          },
+          {"label": "", "text": "가이드 UI나 바람 효과 같은 게임 시스템으로 어디로 가야 하는지 목표를 정해 주는 것도 중요하다는 것을 배웠습니다.", "verbatim": true}
+        ],
+        "visuals": []
+      }
+    ],
+    "base": [
+      {
+        "key": "what",
+        "chapter": "overview",
+        "layout": "overview",
+        "tab": "개요",
+        "title": {"text": "1-1. 무엇을 만들었나 (What)", "verbatim": true},
+        "lead": {"text": "집 안 진열장에 보관된 홀인원 골프공을 집 밖으로 탈출시키는 3D 물리 기반 미니 골프 탈출 게임입니다.", "verbatim": true},
+        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나 (What)"],
+        "points": [
+          {"label": "", "text": "수업의 맵(레벨) 디자인 과제로 만들었습니다.", "verbatim": true},
+          {"label": "", "text": "골프공 옆의 \"0%\" 는 치는 힘 게이지입니다.", "verbatim": true}
+        ],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/start-trophy-case.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {"text": "시작 장면 — 진열장 옆의 홀인원 골프공", "verbatim": true}
+          }
+        ]
+      },
+      {
+        "key": "controls",
+        "chapter": "overview",
+        "layout": "visual",
+        "tab": "개요",
+        "title": {"text": "시작 안내 화면 — 게임 방법과 키 안내", "verbatim": true},
+        "lead": {"text": "공이 바닥에 떨어지면 마지막으로 치기 전의 위치로 돌아갑니다.", "verbatim": true},
+        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나 (What)"],
+        "points": [],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/start-guide.png",
+            "w": 827,
+            "h": 834,
+            "caption": {"text": "시작 안내 화면 — 게임 방법과 키 안내", "verbatim": true}
+          },
+          {"kind": "table", "n": 1, "fp": "조작|키"}
+        ]
+      },
+      {
+        "key": "why",
+        "chapter": "overview",
+        "layout": "overview",
+        "tab": "개요",
+        "title": {"text": "1-2. 과제와 목표 (Why)", "verbatim": true},
+        "lead": {"text": "홀인원 공은 진열장에 보관되어 갇혀 있는 공입니다. 그 공을 집 밖으로 탈출시켜 자유를 주는 경험을 주고 싶었습니다.", "verbatim": true},
+        "sectionPath": ["1. 개요", "1-2. 과제와 목표 (Why)"],
+        "points": [
+          {"label": "과제 조건", "text": "새 장애물을 최소 3종 만듭니다.", "verbatim": true},
+          {"label": "과제 조건", "text": "그 장애물을 소개 → 응용 → 심화 세 코스에 나눠 배치해, 플레이어가 배우고 익히고 시험받게 합니다.", "verbatim": true},
+          {"label": "떨어진 명예", "text": "홀인원이라는 큰 영광을 가진 공이 바닥에 떨어지면, 수치심을 느껴 치기 전 위치로 되돌아간다는 콘셉트입니다.", "verbatim": true}
+        ],
+        "visuals": []
+      },
+      {
+        "key": "env",
+        "chapter": "overview",
+        "layout": "full",
+        "tab": "개요",
+        "title": {"text": "1-3. 개발 환경 · 링크", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["1. 개요", "1-3. 개발 환경 · 링크"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "항목|내용"}]
+      },
+      {
+        "key": "map",
+        "chapter": "layout",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "레벨 전경 — 집 안 코스", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["2. 레벨 구조 — 전체 동선"],
+        "points": [],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/level-overview.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {"text": "레벨 전경 — 집 안 코스", "verbatim": true}
+          }
+        ]
+      },
+      {
+        "key": "flow",
+        "chapter": "layout",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {"text": "2. 레벨 구조 — 전체 동선", "verbatim": true},
+        "lead": {"text": "맵은 진열장 → 창고방 → 거실 → 현관 네 구간으로 이어집니다.", "verbatim": true},
+        "sectionPath": ["2. 레벨 구조 — 전체 동선"],
+        "points": [
+          {"label": "", "text": "진열장에서 어느 길로 갈지 정해지고, 창고방을 지나 윗길과 아랫길로 나뉩니다.", "verbatim": true},
+          {"label": "", "text": "거실의 목표 지점 두 곳에 모두 도착하면 현관에서 집 밖으로 탈출할 수 있습니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+      },
+      {
+        "key": "routes",
+        "chapter": "layout",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "두 갈래 길", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["2. 레벨 구조 — 전체 동선"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 2, "fp": "루트|특징"}]
+      },
+      {
+        "key": "play",
+        "chapter": "areas",
+        "layout": "full",
+        "tab": "결과",
+        "title": {"text": "3. 구역별 설계 의도", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["3. 구역별 설계 의도"],
+        "points": [],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/play-ramp.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {"text": "플레이 장면 — 책장 위의 경사로와 깃발", "verbatim": true}
+          }
+        ]
+      },
+      {
+        "key": "traps",
+        "chapter": "areas",
+        "layout": "full",
+        "tab": "구현",
+        "title": {"text": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지", "verbatim": true},
+        "lead": {"text": "과제 조건(새 장애물 최소 3종)에 맞춰, 성격이 다른 함정 세 가지를 두었습니다.", "verbatim": true},
+        "sectionPath": ["3. 구역별 설계 의도", "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "함정|종류|동작"}]
+      },
+      {
+        "key": "trap-detail",
+        "chapter": "areas",
+        "layout": "screens",
+        "tab": "구현",
+        "title": {"text": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["3. 구역별 설계 의도", "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지"],
+        "points": [
+          {"label": "쿠션", "text": "방향이 좋으면 안전하게 수납장으로 가고, 나쁘면 바닥에 떨어져 다시 쳐야 합니다.", "verbatim": true},
+          {"label": "고양이", "text": "NavMesh로 돌아다니다가 골프공을 발견하면 공을 향해 가서 밀쳐냅니다.", "verbatim": true},
+          {"label": "가속 판자", "text": "공이 움직이는 방향에 따라 플레이어를 돕기도 하고, 잘못 들어가면 바닥으로 떨어져 다시 쳐야 합니다.", "verbatim": true}
+        ],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/trap-cushion.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "쿠션 — 공을 쳐서 쿠션에 올리면 높이 튀어 올라 거실 쪽으로 날아갑니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/trap-cat.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "고양이 — 주변을 돌아다니다가 공을 발견하면 공 쪽으로 다가옵니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/trap-boost.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "가속 판자 — 공이 가속 판자를 타면 처음 진행하던 방향으로 가속을 받습니다", "verbatim": true}
+          }
+        ]
+      },
+      {
+        "key": "courses",
+        "chapter": "areas",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "3-2. 배우고, 익히고, 시험받는 네 구간 — 구간별 의도", "verbatim": true},
+        "lead": {"text": "창고방이 소개, 거실과 현관이 응용·심화 코스입니다.", "verbatim": true},
+        "sectionPath": ["3. 구역별 설계 의도", "3-2. 배우고, 익히고, 시험받는 네 구간 — 구간별 의도"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "구간|코스|이 구간에서 일어나는 일"}]
+      },
+      {
+        "key": "route-choice",
+        "chapter": "tradeoffs",
+        "layout": "full",
+        "tab": "선택",
+        "title": {"text": "4-1. 길을 한 갈래로 할까, 두 갈래로 할까", "verbatim": true},
+        "lead": {"text": "그래서 어려운 윗길로 가장 높은 홀컵에 도착하면 바로 깃발로 이어져 빨리 끝낼 수 있게 했습니다.", "verbatim": true},
+        "sectionPath": ["4. 고민과 선택", "4-1. 길을 한 갈래로 할까, 두 갈래로 할까"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "방법|장점|단점"}]
       },
       {
         "key": "route-why",
         "chapter": "tradeoffs",
         "layout": "overview",
         "tab": "선택",
-        "title": {
-          "text": "4-1. 길을 한 갈래로 할까, 두 갈래로 할까",
-          "verbatim": true
-        },
+        "title": {"text": "4-1. 길을 한 갈래로 할까, 두 갈래로 할까", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "4. 고민과 선택",
-          "4-1. 길을 한 갈래로 할까, 두 갈래로 할까"
-        ],
+        "sectionPath": ["4. 고민과 선택", "4-1. 길을 한 갈래로 할까, 두 갈래로 할까"],
         "points": [
-          {
-            "label": "선택 이유",
-            "text": "어려운 도전을 해낸 사람에게는, 첫 도전을 마치면 다음 도전이 순조롭게 풀리는 경험을 주고 싶었습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "예상과 실제",
-            "text": "처음 하는 사람은 이어져 있는 쉬운 길로 갈 것이라고 예상했고, 대부분 첫 플레이는 예상대로 흘러갔습니다.",
-            "verbatim": true
-          },
+          {"label": "선택 이유", "text": "어려운 도전을 해낸 사람에게는, 첫 도전을 마치면 다음 도전이 순조롭게 풀리는 경험을 주고 싶었습니다.", "verbatim": true},
+          {"label": "예상과 실제", "text": "처음 하는 사람은 이어져 있는 쉬운 길로 갈 것이라고 예상했고, 대부분 첫 플레이는 예상대로 흘러갔습니다.", "verbatim": true},
           {
             "label": "결과 화면과의 연결",
             "text": "공을 친 횟수와 떨어진 횟수를 보며 \"내가 이렇게 많이 쳤어? 이렇게 많이 떨어졌어?\"라는 생각이 들게 하고 싶었습니다.",
@@ -592,93 +775,70 @@
         "chapter": "tradeoffs",
         "layout": "full",
         "tab": "선택",
-        "title": {
-          "text": "4-2. 어떤 에셋으로 맵을 만들까",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "다행히 원래 쓰려던 에셋의 위치를 찾아, 그 에셋으로 맵을 다시 디자인했습니다",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4. 고민과 선택",
-          "4-2. 어떤 에셋으로 맵을 만들까"
-        ],
+        "title": {"text": "4-2. 어떤 에셋으로 맵을 만들까", "verbatim": true},
+        "lead": {"text": "다행히 원래 쓰려던 에셋의 위치를 찾아, 그 에셋으로 맵을 다시 디자인했습니다", "verbatim": true},
+        "sectionPath": ["4. 고민과 선택", "4-2. 어떤 에셋으로 맵을 만들까"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "방법|장점|단점"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "방법|장점|단점"}]
       },
       {
         "key": "cushion-choice",
         "chapter": "tradeoffs",
         "layout": "overview",
         "tab": "선택",
-        "title": {
-          "text": "4-3. 복불복 쿠션을 남길까",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "과제 작업지시서에는 \"운만으로 결정되는 구간은 난이도가 아니라 벌\"이라는 기준이 있습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4. 고민과 선택",
-          "4-3. 복불복 쿠션을 남길까"
+        "title": {"text": "4-3. 복불복 쿠션을 남길까", "verbatim": true},
+        "lead": {"text": "과제 작업지시서에는 \"운만으로 결정되는 구간은 난이도가 아니라 벌\"이라는 기준이 있습니다.", "verbatim": true},
+        "sectionPath": ["4. 고민과 선택", "4-3. 복불복 쿠션을 남길까"],
+        "points": [
+          {"label": "이유", "text": "떨어져도 바로 그 전 위치에서 다시 칠 수 있어 벌이 작다고 판단했습니다.", "verbatim": true},
+          {"label": "이유", "text": "계속 도전하면서 여러 방향으로 튀다 보면 새로운 경로를 찾는 경험을 줄 수 있다고 생각했습니다.", "verbatim": true}
         ],
+        "visuals": []
+      },
+      {
+        "key": "shortcut-wall",
+        "chapter": "tradeoffs",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "4-5. 홀컵 앞 지름길을 막을까 — 홀컵에 들어와야 열리는 벽", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["4. 고민과 선택", "4-5. 홀컵 앞 지름길을 막을까 — 홀컵에 들어와야 열리는 벽"],
         "points": [
           {
-            "label": "이유",
-            "text": "떨어져도 바로 그 전 위치에서 다시 칠 수 있어 벌이 작다고 판단했습니다.",
+            "label": "상황",
+            "text": "그런데 이 검은 길의 틈으로 떨어진 공이 쿠션을 타고 다시 올라와, 정해 둔 길을 거치지 않고 홀컵에 들어갈 수 있었습니다.",
             "verbatim": true
           },
           {
-            "label": "이유",
-            "text": "계속 도전하면서 여러 방향으로 튀다 보면 새로운 경로를 찾는 경험을 줄 수 있다고 생각했습니다.",
+            "label": "선택",
+            "text": "이 지름길을 벽 콜라이더로 막았습니다. 그리고 공이 홀컵 플랫폼의 Trigger에 닿으면 벽 콜라이더를 꺼서, 그때부터 검은 길을 따라 깃발 쪽으로 갈 수 있게 했습니다.",
             "verbatim": true
-          }
+          },
+          {"label": "플레이어가 겪는 흐름", "text": "윗길로 홀컵에 들어오면 벽이 사라지고, 검은 길을 따라 깃발까지 한 번에 이어집니다.", "verbatim": true}
         ],
-        "visuals": []
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/hole-wall.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "홀컵 벽 — 쿠션을 타고 올라온 공이 홀컵에 들어가면 벽이 사라집니다", "verbatim": true}
+          }
+        ]
       },
       {
         "key": "result-screen",
         "chapter": "results",
         "layout": "visual",
         "tab": "결과",
-        "title": {
-          "text": "5-1. 결과",
-          "verbatim": true
-        },
+        "title": {"text": "5-1. 결과", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5. 결과 및 배운 점",
-          "5-1. 결과"
-        ],
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
         "points": [
-          {
-            "label": "",
-            "text": "자유를 향한 시도(타격 횟수)",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "떨어진 명예(낙하 횟수)",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "자유를 되찾기까지 걸린 시간",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "\"명예를 찾기 위한 재도전\" 버튼으로 다시 도전할 수 있습니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "자유를 향한 시도(타격 횟수)", "verbatim": true},
+          {"label": "", "text": "떨어진 명예(낙하 횟수)", "verbatim": true},
+          {"label": "", "text": "자유를 되찾기까지 걸린 시간", "verbatim": true},
+          {"label": "", "text": "\"명예를 찾기 위한 재도전\" 버튼으로 다시 도전할 수 있습니다.", "verbatim": true}
         ],
         "visuals": [
           {
@@ -686,10 +846,7 @@
             "src": "images/result-screen.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "결과 화면 — 내가 어려운 길로 클리어한 기록(40타·9회 낙하·3분 12초)",
-              "verbatim": true
-            }
+            "caption": {"text": "결과 화면 — 내가 어려운 길로 클리어한 기록(40타·9회 낙하·3분 12초)", "verbatim": true}
           }
         ]
       },
@@ -698,41 +855,20 @@
         "chapter": "results",
         "layout": "full",
         "tab": "결과",
-        "title": {
-          "text": "5-1. 결과",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "친구에게 빌드를 보내 플레이 테스트를 부탁했고, 받은 피드백으로 맵을 고쳤습니다",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5. 결과 및 배운 점",
-          "5-1. 결과"
-        ],
+        "title": {"text": "5-1. 결과", "verbatim": true},
+        "lead": {"text": "친구에게 빌드를 보내 플레이 테스트를 부탁했고, 받은 피드백으로 맵을 고쳤습니다", "verbatim": true},
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "누가|타격|낙하|걸린 시간|이렇게 나온 이유"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "누가|타격|낙하|걸린 시간|이렇게 나온 이유"}]
       },
       {
         "key": "playtest-shots",
         "chapter": "results",
         "layout": "screens",
         "tab": "결과",
-        "title": {
-          "text": "5-1. 결과",
-          "verbatim": true
-        },
+        "title": {"text": "5-1. 결과", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5. 결과 및 배운 점",
-          "5-1. 결과"
-        ],
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
         "points": [],
         "visuals": [
           {
@@ -740,18 +876,12 @@
             "src": "images/result-first-clear.png",
             "w": 941,
             "h": 606,
-            "caption": {
-              "text": "처음 도전해서 클리어한 결과 화면 — 197타·97회 낙하·14분 11초",
-              "verbatim": true
-            }
+            "caption": {"text": "처음 도전해서 클리어한 결과 화면 — 197타·97회 낙하·14분 11초", "verbatim": true}
           },
           {
             "kind": "image",
             "src": "images/result-friend-feedback.webp",
-            "caption": {
-              "text": "피드백을 준 친구의 결과 화면 — 여러 경로를 시도해 352타·171회 낙하·24분 29초",
-              "verbatim": true
-            }
+            "caption": {"text": "피드백을 준 친구의 결과 화면 — 여러 경로를 시도해 352타·171회 낙하·24분 29초", "verbatim": true}
           }
         ]
       },
@@ -760,65 +890,34 @@
         "chapter": "results",
         "layout": "full",
         "tab": "문제 해결",
-        "title": {
-          "text": "친구가 준 피드백과 고친 것",
-          "verbatim": true
-        },
+        "title": {"text": "친구가 준 피드백과 고친 것", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5. 결과 및 배운 점",
-          "5-1. 결과"
-        ],
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "피드백|원인|고친 것"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 2, "fp": "피드백|원인|고친 것"}]
       },
       {
         "key": "fix-shots",
         "chapter": "results",
         "layout": "screens",
         "tab": "문제 해결",
-        "title": {
-          "text": "친구가 준 피드백과 고친 것",
-          "verbatim": true
-        },
+        "title": {"text": "친구가 준 피드백과 고친 것", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5. 결과 및 배운 점",
-          "5-1. 결과"
-        ],
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 결과"],
         "points": [],
         "visuals": [
           {
             "kind": "image",
             "src": "images/feedback-curtain-stuck.webp",
-            "caption": {
-              "text": "커튼봉에 낀 골프공",
-              "verbatim": true
-            }
+            "caption": {"text": "커튼봉에 낀 골프공", "verbatim": true}
           },
-          {
-            "kind": "image",
-            "src": "images/feedback-window.webp",
-            "caption": {
-              "text": "창문 옆의 골프공",
-              "verbatim": true
-            }
-          },
+          {"kind": "image", "src": "images/feedback-window.webp", "caption": {"text": "창문 옆의 골프공", "verbatim": true}},
           {
             "kind": "image",
             "src": "images/fix-scene-1.png",
             "w": 1031,
             "h": 504,
-            "caption": {
-              "text": "씬 뷰 — 커튼·창문 (1)",
-              "verbatim": true
-            }
+            "caption": {"text": "씬 뷰 — 커튼·창문 (1)", "verbatim": true}
           }
         ]
       },
@@ -827,32 +926,20 @@
         "chapter": "results",
         "layout": "overview",
         "tab": "결과",
-        "title": {
-          "text": "5-3. 배운 점",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "게임을 만들 때는 \"무엇이 재미있을까\"보다 플레이어에게 어떤 경험을 줄 것인지를 더 생각해야 합니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5. 결과 및 배운 점",
-          "5-3. 배운 점"
-        ],
+        "title": {"text": "5-3. 배운 점", "verbatim": true},
+        "lead": {"text": "게임을 만들 때는 \"무엇이 재미있을까\"보다 플레이어에게 어떤 경험을 줄 것인지를 더 생각해야 합니다.", "verbatim": true},
+        "sectionPath": ["5. 결과 및 배운 점", "5-3. 배운 점"],
         "points": [
           {
             "label": "",
             "text": "탈출하는 길을 찾으며 여러 경로를 찾는 것이 이 게임의 재미라고 생각했지만, 그것이 재미가 아닐 수도 있다는 것을 배웠습니다.",
             "verbatim": true
           },
-          {
-            "label": "",
-            "text": "가이드 UI나 바람 효과 같은 게임 시스템으로 어디로 가야 하는지 목표를 정해 주는 것도 중요하다는 것을 배웠습니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "가이드 UI나 바람 효과 같은 게임 시스템으로 어디로 가야 하는지 목표를 정해 주는 것도 중요하다는 것을 배웠습니다.", "verbatim": true}
         ],
         "visuals": []
       }
-    ]
+    ],
+    "applied": "c1993377afd8bb81"
   }
 }

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "pin": [
+    {
+      "key": "route-choice",
+      "chapter": "tradeoffs",
+      "layout": "full",
+      "tab": "선택",
+      "title": {"text": "4-1. 길을 한 갈래로 할까, 두 갈래로 할까", "verbatim": true},
+      "lead": {"text": "그래서 어려운 윗길로 가장 높은 홀컵에 도착하면 바로 깃발로 이어져 빨리 끝낼 수 있게 했습니다.", "verbatim": true},
+      "sectionPath": ["4. 고민과 선택", "4-1. 길을 한 갈래로 할까, 두 갈래로 할까"],
+      "points": [
+        {"label": "선택 이유", "text": "어려운 도전을 해낸 사람에게는, 첫 도전을 마치면 다음 도전이 순조롭게 풀리는 경험을 주고 싶었습니다.", "verbatim": true},
+        {"label": "예상과 실제", "text": "처음 하는 사람은 이어져 있는 쉬운 길로 갈 것이라고 예상했고, 대부분 첫 플레이는 예상대로 흘러갔습니다.", "verbatim": true},
+        {"label": "결과 화면과의 연결", "text": "공을 친 횟수와 떨어진 횟수를 보며 \"내가 이렇게 많이 쳤어? 이렇게 많이 떨어졌어?\"라는 생각이 들게 하고 싶었습니다.", "verbatim": true}
+      ],
+      "visuals": [{"kind": "table", "n": 1, "fp": "방법|장점|단점"}],
+      "from": {
+        "key": "route-choice",
+        "sectionPath": ["4. 고민과 선택", "4-1. 길을 한 갈래로 할까, 두 갈래로 할까"],
+        "sig": ["4-1. 길을 한 갈래로 할까, 두 갈래로 할까|table|1|방법|장점|단점"]
+      },
+      "group": "merge-route-choice"
+    }
+  ],
+  "hide": [
+    {
+      "key": "route-why",
+      "from": {"key": "route-why", "sectionPath": ["4. 고민과 선택", "4-1. 길을 한 갈래로 할까, 두 갈래로 할까"], "sig": []},
+      "group": "merge-route-choice"
+    }
+  ]
+}

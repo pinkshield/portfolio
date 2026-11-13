@@ -70,7 +70,12 @@
       "how": "Caught 상태에서 저항도를 초당 1씩 줄이고, 지형에 부딪치면 충돌 세기 × 0.2만큼 즉시 깎습니다. 놓았을 때 저항이 30% 미만이면 기절, 나머지는 도망입니다. 저항도는 `DecreaseResistance()`·`ResetResistance()` 메서드로만 바꿉니다.",
       "why": "지형 충돌 이벤트는 Caught에 들어갈 때 구독하고 나갈 때 해제해, 다른 상태에서는 저항도가 깎이지 않게 했습니다. 저항도를 바꾸는 길을 `DecreaseResistance()`·`ResetResistance()` 두 메서드로 정해, 줄이는 곳마다 따로 챙기지 않아도 0 밑으로 내려가지 않게 했습니다.",
       "section": "3-3. 잡히면 버둥거리다 지친다 — 저항도로 행동이 바뀐다",
-      "image": null
+      "image": {
+        "src": "images/fish-struggle.gif",
+        "w": 960,
+        "h": 522,
+        "caption": "버둥거림과 탈진 — 꼬마돌들이 상어를 붙잡아 계단 바위에 부딪치게 하면, 버둥거리던 상어의 머리 위에 노란 별(탈진)이 뜹니다"
+      }
     },
     {
       "title": "모든 플레이어에게 같은 물고기가 보인다",
@@ -557,6 +562,16 @@
             "kind": "code",
             "n": 1,
             "fp": "// 순찰 중일 때만, 목표 방향으로 물고기 크기의 상자를 쏜다"
+          },
+          {
+            "kind": "image",
+            "src": "images/fish-boxcast.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {
+              "text": "BoxCast 순찰 — 에디터 Scene 뷰에서 순찰하는 물고기마다 앞쪽의 빨간 상자가 감지 범위입니다",
+              "verbatim": true
+            }
           }
         ]
       },
@@ -776,6 +791,16 @@
             "h": 671,
             "caption": {
               "text": "첫 맵 디자인 — 왼쪽 섬에서 출발해 바닷속 구간 두 개를 지나 오른쪽 끝 육지로 가는 구조. 오른쪽 구간이 훨씬 깊다",
+              "verbatim": true
+            }
+          },
+          {
+            "kind": "image",
+            "src": "images/tutorial-storm.gif",
+            "w": 960,
+            "h": 522,
+            "caption": {
+              "text": "튜토리얼 시작 — 배 위에서 네 명이 모두 준비하면 폭풍우 연출로 넘어갑니다",
               "verbatim": true
             }
           }

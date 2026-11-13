@@ -73,7 +73,12 @@
       "how": "쿠션(점프 함정)은 공을 튀어 오르게 하고, 고양이(이동형 함정)는 NavMesh로 돌아다니다 공을 발견하면 쫓아가 밀쳐내며, 가속 이동 판자는 밟으면 공이 움직이는 방향으로 가속이 붙습니다.",
       "why": "쿠션은 튀는 방향이 매번 달라 복불복이지만, 떨어져도 바로 그 전 위치에서 다시 칠 수 있어 벌이 작고, 여러 방향으로 튀며 새로운 경로를 찾는 경험을 줄 수 있다고 판단해 남겼습니다.",
       "section": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지",
-      "image": null
+      "image": {
+        "src": "images/trap-cushion.gif",
+        "w": 960,
+        "h": 540,
+        "caption": "쿠션 — 공을 쳐서 쿠션에 올리면 높이 튀어 올라 거실 쪽으로 날아갑니다"
+      }
     },
     {
       "title": "배우고, 익히고, 시험받는 네 구간",
@@ -309,7 +314,7 @@
       {
         "key": "trap-detail",
         "chapter": "areas",
-        "layout": "overview",
+        "layout": "screens",
         "tab": "구현",
         "title": {"text": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지", "verbatim": true},
         "lead": null,
@@ -319,7 +324,29 @@
           {"label": "고양이", "text": "NavMesh로 돌아다니다가 골프공을 발견하면 공을 향해 가서 밀쳐냅니다.", "verbatim": true},
           {"label": "가속 판자", "text": "공이 움직이는 방향에 따라 플레이어를 돕기도 하고, 잘못 들어가면 바닥으로 떨어져 다시 쳐야 합니다.", "verbatim": true}
         ],
-        "visuals": []
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/trap-cushion.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "쿠션 — 공을 쳐서 쿠션에 올리면 높이 튀어 올라 거실 쪽으로 날아갑니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/trap-cat.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "고양이 — 주변을 돌아다니다가 공을 발견하면 공 쪽으로 다가옵니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/trap-boost.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "가속 판자 — 공이 가속 판자를 타면 처음 진행하던 방향으로 가속을 받습니다", "verbatim": true}
+          }
+        ]
       },
       {
         "key": "courses",
@@ -380,7 +407,7 @@
       {
         "key": "shortcut-wall",
         "chapter": "tradeoffs",
-        "layout": "overview",
+        "layout": "visual",
         "tab": "선택",
         "title": {"text": "4-5. 홀컵 앞 지름길을 막을까 — 홀컵에 들어와야 열리는 벽", "verbatim": true},
         "lead": null,
@@ -398,7 +425,15 @@
           },
           {"label": "플레이어가 겪는 흐름", "text": "윗길로 홀컵에 들어오면 벽이 사라지고, 검은 길을 따라 깃발까지 한 번에 이어집니다.", "verbatim": true}
         ],
-        "visuals": []
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/hole-wall.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "홀컵 벽 — 쿠션을 타고 올라온 공이 홀컵에 들어가면 벽이 사라집니다", "verbatim": true}
+          }
+        ]
       },
       {
         "key": "result-screen",
@@ -660,7 +695,7 @@
       {
         "key": "trap-detail",
         "chapter": "areas",
-        "layout": "overview",
+        "layout": "screens",
         "tab": "구현",
         "title": {"text": "3-1. 튕기고, 밀치고, 가속하는 함정 세 가지", "verbatim": true},
         "lead": null,
@@ -670,7 +705,29 @@
           {"label": "고양이", "text": "NavMesh로 돌아다니다가 골프공을 발견하면 공을 향해 가서 밀쳐냅니다.", "verbatim": true},
           {"label": "가속 판자", "text": "공이 움직이는 방향에 따라 플레이어를 돕기도 하고, 잘못 들어가면 바닥으로 떨어져 다시 쳐야 합니다.", "verbatim": true}
         ],
-        "visuals": []
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/trap-cushion.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "쿠션 — 공을 쳐서 쿠션에 올리면 높이 튀어 올라 거실 쪽으로 날아갑니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/trap-cat.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "고양이 — 주변을 돌아다니다가 공을 발견하면 공 쪽으로 다가옵니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/trap-boost.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "가속 판자 — 공이 가속 판자를 타면 처음 진행하던 방향으로 가속을 받습니다", "verbatim": true}
+          }
+        ]
       },
       {
         "key": "courses",
@@ -741,7 +798,7 @@
       {
         "key": "shortcut-wall",
         "chapter": "tradeoffs",
-        "layout": "overview",
+        "layout": "visual",
         "tab": "선택",
         "title": {"text": "4-5. 홀컵 앞 지름길을 막을까 — 홀컵에 들어와야 열리는 벽", "verbatim": true},
         "lead": null,
@@ -759,7 +816,15 @@
           },
           {"label": "플레이어가 겪는 흐름", "text": "윗길로 홀컵에 들어오면 벽이 사라지고, 검은 길을 따라 깃발까지 한 번에 이어집니다.", "verbatim": true}
         ],
-        "visuals": []
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/hole-wall.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "홀컵 벽 — 쿠션을 타고 올라온 공이 홀컵에 들어가면 벽이 사라집니다", "verbatim": true}
+          }
+        ]
       },
       {
         "key": "result-screen",
@@ -875,6 +940,6 @@
         "visuals": []
       }
     ],
-    "applied": "f0cb8b6c2fa6e4e6"
+    "applied": "c1993377afd8bb81"
   }
 }

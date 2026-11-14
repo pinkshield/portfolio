@@ -31,16 +31,17 @@
     --pill: var(--t-pill, 4px);
     --en: var(--t-display, 'Montserrat'), 'Montserrat', 'Pretendard', sans-serif;
   }
-  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--body); overflow: hidden; }
+  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--body); overflow: hidden; overflow: clip; }
+  main { overflow: clip; }   /* 포커스·스크롤 이동이 가로 레일을 밀지 못하게(장 이동은 transform만) */
   body { font-family: 'Pretendard', system-ui, sans-serif; -webkit-font-smoothing: antialiased; word-break: keep-all; }
   #root { height: 100%; }
 
   /* 슬라이드 레일 — 가로로 한 줄, transform으로 이동 (마우스 휠로 넘어가지 않음) */
   .rail { display: flex; height: 100%; transition: transform .55s cubic-bezier(.7,0,.2,1); will-change: transform; }
   .slide { flex: 0 0 100vw; width: 100vw; height: 100%; position: relative; overflow: hidden; }
-  .slide-inner { height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 112px 7vw 80px; box-sizing: border-box; }
+  .slide-inner { height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 108px 7vw 80px; box-sizing: border-box; }
   .slide-inner > .wrap { max-width: 1240px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; justify-content: center; }
-  @media (max-width: 759px) { .slide-inner { padding: 72px 16px 92px; } }
+  @media (max-width: 759px) { .slide-inner { padding: 70px 16px 92px; } }
 
   .eyebrow { font-family: var(--en); font-weight: 800; letter-spacing: .18em; font-size: 12px; color: var(--accent); text-transform: uppercase; }
   .h-big { color: var(--ink); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
@@ -88,34 +89,93 @@
   .dot { width: 8px; height: 8px; border-radius: 2px; background: var(--line2); border: 0; padding: 0; cursor: pointer; transition: width .2s, background .2s; }
   .dot.on { width: 22px; background: var(--accent); }
   .counter { font-family: var(--en); font-weight: 700; font-size: 13px; color: var(--ink); min-width: 64px; text-align: right; font-variant-numeric: tabular-nums; }
-  /* 위 메뉴 — 주제로 바로 가기(숫자 키 단축키) */
-  .top { position: fixed; top: 0; left: 0; right: 0; z-index: 25; padding: 20px 32px 14px; pointer-events: none;
-         background: linear-gradient(to bottom, rgb(17 17 17 / .9) 0%, rgb(17 17 17 / .6) 60%, rgb(17 17 17 / 0)); }
+  /* 위 메뉴 — 미끄러지는 칸 버튼(지금 있는 주제에 손잡이가 붙음) */
+  .top { position: fixed; top: 0; left: 0; right: 0; z-index: 25; padding: 16px 32px 12px; pointer-events: none;
+         background: linear-gradient(to bottom, rgb(17 17 17 / .92) 0%, rgb(17 17 17 / .6) 60%, rgb(17 17 17 / 0)); }
   .top > * { pointer-events: auto; }
-  .top-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .logo { font-family: var(--en); font-weight: 700; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
-  .menu { display: flex; gap: 22px; align-items: center; }
-  .menu-item { position: relative; display: inline-flex; align-items: center; gap: 7px; padding: 8px 4px; font-size: 14px; font-weight: 600; color: rgb(202 206 221 / .8); transition: color .2s; }
-  .menu-item:hover, .menu-item.on { color: var(--ink); }
-  .menu-item::after { content: ''; position: absolute; left: 4px; right: 4px; bottom: 0; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform .25s; transform-origin: left; }
-  .menu-item.on::after { transform: scaleX(1); }
-  /* 프로젝트 장에서만 보이는 프로젝트 탭(필터 버튼 모양) */
+  .top-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+  .logo { justify-self: start; font-family: var(--en); font-weight: 700; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+  .logo i { color: var(--accent); font-style: normal; }
+  .seg { position: relative; display: flex; padding: 5px; gap: 2px; background: var(--card); border: 1px solid var(--line); border-radius: calc(var(--pill) + 5px); }
+  .seg-thumb { position: absolute; top: 5px; bottom: 5px; left: 0; border-radius: var(--pill); background: rgb(255 255 255 / .08); box-shadow: inset 0 -2px 0 var(--accent);
+               transition: transform .35s cubic-bezier(.7,0,.2,1), width .35s cubic-bezier(.7,0,.2,1), opacity .2s; }
+  .seg button { position: relative; z-index: 1; padding: 9px 18px; font-size: 14px; font-weight: 600; color: var(--muted); border-radius: var(--pill); white-space: nowrap; transition: color .2s; }
+  .seg button:hover, .seg button.on { color: var(--ink); }
+  .top-links { justify-self: end; display: flex; gap: 8px; }
+  .top-links a { font-size: 13px; font-weight: 600; color: var(--muted); padding: 7px 12px; border: 1px solid var(--line); border-radius: var(--pill); }
+  .top-links a:hover { color: var(--ink); border-color: var(--line2); }
+  /* 프로젝트 장에서만 보이는 프로젝트 탭 */
   .tabs { display: flex; justify-content: center; gap: 6px; margin-top: 8px; flex-wrap: wrap; transition: opacity .25s, transform .25s; }
   .tabs.hide { opacity: 0; transform: translateY(-6px); pointer-events: none; }
-  .tab { font-size: 13px; font-weight: 700; padding: 7px 12px; border-radius: 3px; color: var(--ink); transition: background .2s; white-space: nowrap; }
+  .tab { font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 3px; color: var(--ink); transition: background .2s; white-space: nowrap; }
   .tab:hover { background: rgb(255 255 255 / .06); }
   .tab.on { background: var(--accent); color: #fff; }
   .tab .no { font-family: var(--en); margin-right: 6px; opacity: .7; }
-  .burger { display: none; width: 40px; height: 40px; border: 1px solid var(--line2); border-radius: var(--pill); color: var(--ink); font-size: 18px; }
-  .drawer { position: fixed; top: 64px; left: 12px; right: 12px; z-index: 26; padding: 8px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: 0 20px 40px rgb(0 0 0 / .6); }
-  .drawer button { display: flex; width: 100%; align-items: center; justify-content: space-between; padding: 12px 12px; font-size: 15px; font-weight: 600; color: var(--body); border-radius: 3px; }
-  .drawer button.on { color: var(--ink); background: rgb(255 255 255 / .05); box-shadow: inset 3px 0 0 var(--accent); }
-  .drawer .sub { padding-left: 28px; font-size: 13.5px; }
-  @media (max-width: 899px) { .menu { gap: 14px; } }
-  @media (max-width: 759px) { .top { padding: 14px 16px 10px; } .menu, .tabs { display: none; } .burger { display: grid; place-items: center; } .logo { font-size: 14px; letter-spacing: 2px; } }
+  @media (max-width: 1099px) { .top-links { display: none; } .top-row { grid-template-columns: auto 1fr; } .seg { justify-self: end; } }
+  @media (max-width: 759px) { .top { padding: 10px 12px 8px; } .logo, .tabs { display: none; } .top-row { grid-template-columns: 1fr; } .seg { justify-self: center; }
+    .seg button { padding: 8px 9px; font-size: 13px; } }
+
+  /* 이력 · 기술 */
+  .block-h { display: flex; align-items: baseline; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--ink); margin-bottom: 4px; }
+  .block-h b { font-family: var(--en); font-weight: 800; font-size: 15px; letter-spacing: .14em; color: var(--ink); }
+  .block-h span { font-size: 12.5px; color: var(--muted); }
+  .tl li { display: grid; grid-template-columns: 128px 1fr; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .tl time { font-family: var(--en); font-size: 12.5px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.6; }
+  .tl em { display: inline-block; margin-top: 4px; font-style: normal; font-family: 'Pretendard'; font-size: 11px; font-weight: 700; color: var(--accent); border: 1px solid var(--accent); border-radius: 3px; padding: 1px 6px; }
+  .tl h3 { font-size: 14.5px; font-weight: 700; color: var(--ink); line-height: 1.45; }
+  .tl h3 button:hover { color: var(--accent); }
+  .tl p { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+  .tl-kind { font-family: var(--en); font-size: 11px; font-weight: 800; letter-spacing: .14em; color: var(--accent); margin: 14px 0 0; }
+  .sk { text-align: left; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); transition: border-color .2s, background .2s; }
+  .sk b { display: block; font-size: 14.5px; color: var(--ink); line-height: 1.35; }
+  .sk span { display: block; margin-top: 4px; font-size: 11.5px; font-weight: 600; color: var(--muted); }
+  .sk:hover { border-color: var(--line2); }
+  .sk.on { border-color: var(--accent); background: rgb(236 28 35 / .08); box-shadow: inset 0 -2px 0 var(--accent); }
+  .evi { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 4px 18px; }
+  .evi li { display: grid; grid-template-columns: 150px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.6; }
+  .evi li:last-child { border-bottom: 0; }
+  .evi li button { text-align: left; font-weight: 700; color: var(--accent); font-size: 13px; line-height: 1.6; }
+  .evi li button:hover { text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 759px) { .tl li, .evi li { grid-template-columns: 1fr; gap: 2px; } }
+
+  /* 자기소개서 */
+  .quote { margin-top: 18px; padding: 16px 18px; background: var(--card); border-left: 3px solid var(--accent); border-radius: 0 var(--r) var(--r) 0; font-weight: 700; color: var(--ink); line-height: 1.55; font-size: 15px; }
+  .quote small { display: block; margin-top: 8px; font-weight: 500; font-size: 12px; color: var(--muted); }
+  .ch { display: grid; grid-template-columns: 30px 1fr; gap: 8px; width: 100%; text-align: left; padding: 9px 12px; border-radius: var(--r); transition: background .2s; }
+  .ch i { font-style: normal; font-family: var(--en); font-weight: 800; font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .ch b { display: block; font-size: 14px; color: var(--body); line-height: 1.45; }
+  .ch small { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; }
+  .ch:hover { background: rgb(255 255 255 / .04); }
+  .ch.on { background: var(--ink); }
+  .ch.on i { color: var(--accent); } .ch.on b { color: #111111; } .ch.on small { color: #55586A; }
+  .page { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+  .page-scroll { overflow-y: auto; overscroll-behavior: contain; padding: 32px 40px 36px; }
+  .page .num { position: absolute; right: 26px; top: 14px; font-family: var(--en); font-weight: 800; font-size: 64px; line-height: 1; color: rgb(255 255 255 / .05); pointer-events: none; }
+  .page p { font-size: 15px; line-height: 1.85; margin-top: 14px; }
+  .page mark { background: linear-gradient(transparent 58%, rgb(236 28 35 / .38) 58%); color: var(--ink); font-weight: 700; padding: 0 1px; }
+  .fade-in { animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .letter-grid { height: calc(100vh - 188px); min-height: 520px; }
+  .page-scroll { flex: 1; min-height: 0; }
+  @media (max-width: 1023px) { .letter-grid { height: auto; min-height: 0; } .page-scroll { overflow: visible; } }
+  @media (max-width: 759px) { .page-scroll { padding: 22px 18px; } }
+
+  /* 프로젝트 카드 */
+  .pcard { display: flex; flex-direction: column; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; transition: border-color .2s, transform .2s; }
+  .pcard:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .pcard .thumb { position: relative; aspect-ratio: 16/10; background: #000; overflow: hidden; flex: none; }
+  .pcard .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .badge { position: absolute; top: 10px; font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 3px; }
+  .badge.no { left: 10px; background: var(--accent); color: #fff; font-family: var(--en); }
+  .badge.team { right: 10px; background: rgb(17 17 17 / .82); color: var(--ink); }
+  .chip.on-chip { border-color: var(--accent); color: var(--ink); background: rgb(236 28 35 / .12); }
+  .gif-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 5px; vertical-align: middle; animation: gifPulse 1.4s ease-in-out infinite; }
+  @keyframes gifPulse { 50% { opacity: .35; } }
+  .clamp3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
   .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 30; transition: width .55s cubic-bezier(.7,0,.2,1); }
   .hint kbd { font-family: var(--en); font-size: 11px; border: 1px solid var(--line2); border-radius: 3px; padding: 1px 6px; color: var(--ink); }
-  @media (max-width: 759px) { .bar { padding: 0 12px; gap: 8px; } .dots { display: none; } .hint { display: none; } .top { padding: 0 16px; } }
+  @media (max-width: 759px) { .bar { padding: 0 12px; gap: 8px; } .dots { display: none; } .hint { display: none; } }
 
   .shot { width: 100%; border-radius: var(--r); border: 1px solid var(--line); background: #000; object-fit: cover; }
   .feat-no { font-family: var(--en); font-weight: 800; font-size: 13px; color: var(--accent); letter-spacing: .08em; }
@@ -128,6 +188,7 @@
 <script type="text/babel" data-presets="react">
 const { useState, useEffect, useCallback, useRef } = React;
 const T = (k, v) => PFStr.t(k, v);
+try { history.scrollRestoration = 'manual'; } catch { /* 그대로 */ }
 const img = (id, src) => `../src/${id}/${src}`;
 
 /* ───── 슬라이드 조각 ───── */
@@ -164,38 +225,193 @@ function CoverSlide({ profile, coverImg }) {
   );
 }
 
-function SkillsSlide({ skills, part, parts, titleOf, goProject }) {
+// 이력 · 기술 한 장: 왼쪽 연표(교육 + 프로젝트 기간), 오른쪽 기술 칸 → 누르면 "프로젝트 | 근거" 줄
+function HistorySkillsSlide({ history, skills, titleOf, goProject }) {
+  const [sel, setSel] = useState(0);
+  const s = skills[sel] || { evidence: [] };
+  const projCount = (x) => new Set((x.evidence || []).map((e) => e.project).filter(Boolean)).size;
   return (
-    <section className="slide" aria-label={T('page.stack')}>
+    <section className="slide" aria-label={`이력 · ${T('page.stack')}`}>
       <Wrap>
-        <div className="flex items-end justify-between gap-4 flex-wrap mb-8">
-          <div>
-            <div className="eyebrow">{T('en.skills')}{parts > 1 ? ` · ${part}/${parts}` : ''}</div>
-            <h2 className="h-big text-3xl md:text-4xl mt-3">{T('page.stack')}</h2>
-          </div>
-          <div className="muted text-sm">{T('page.stack-note')}</div>
-        </div>
-        <div className="grid md:grid-cols-2 gap-4">
-          {skills.map((s) => (
-            <div key={s.name} className="card p-5">
-              <div className="text-lg font-bold" style={{ color: 'var(--ink)' }}>{s.name}</div>
-              <ul className="mt-3 space-y-2.5">
-                {(s.evidence || []).map((e, i) => (
-                  <li key={i} className="text-sm leading-relaxed flex gap-2">
-                    <span className="accent shrink-0">▸</span>
-                    <span>
-                      {e.text.replace(/`/g, '')}
-                      {e.project && <button onClick={() => goProject(e.project)} className="ml-2 text-xs muted underline underline-offset-2 hover:text-[color:var(--accent)]">{titleOf(e.project)}</button>}
-                    </span>
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          <div className="lg:col-span-5">
+            <div className="block-h"><b>HISTORY</b><span>교육 · 프로젝트</span></div>
+            <ul className="tl">
+              {history.map((h, i) => (
+                <React.Fragment key={i}>
+                  {h.kindStart && <li style={{ display: 'block', border: 0, padding: 0 }}><div className="tl-kind">{h.kindStart}</div></li>}
+                  <li>
+                    <time>{h.when}{h.badge && <><br /><em>{h.badge}</em></>}</time>
+                    <div>
+                      <h3>{h.project ? <button className="text-left" onClick={() => goProject(h.project)}>{h.title}</button> : h.title}</h3>
+                      {h.sub && <p>{h.sub}</p>}
+                    </div>
                   </li>
-                ))}
-              </ul>
+                </React.Fragment>
+              ))}
+            </ul>
+          </div>
+          <div className="lg:col-span-7">
+            <div className="block-h"><b>{T('en.skills')}</b><span>{T('page.stack')} · {T('page.stack-note')}</span></div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-4">
+              {skills.map((x, i) => (
+                <button key={x.name} className={`sk ${i === sel ? 'on' : ''}`} onClick={() => setSel(i)} aria-pressed={i === sel}>
+                  <b>{x.name}</b><span>근거 {(x.evidence || []).length}건 · 프로젝트 {projCount(x)}개</span>
+                </button>
+              ))}
             </div>
-          ))}
+            <ul key={sel} className="evi mt-4 fade-in" aria-live="polite">
+              {(s.evidence || []).map((e, i) => (
+                <li key={i}>
+                  {e.project ? <button onClick={() => goProject(e.project)}>{titleOf(e.project)}</button> : <span />}
+                  <span>{e.text.replace(/`/g, '')}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Wrap>
     </section>
   );
+}
+
+// 자기소개서 한 장: ../자기소개서.md를 그대로 읽어 "## 번호. 제목 — 부제"마다 장으로 나눔. **굵은 글씨**는 형광펜
+function inlineMd(t) {
+  return t.split(/(\*\*[^*]+\*\*)/g).map((x, i) => (/^\*\*[^*]+\*\*$/.test(x) ? <mark key={i}>{x.slice(2, -2)}</mark> : x));
+}
+function LetterSlide({ letter, quote, name }) {
+  const [sel, setSel] = useState(0);
+  const scroller = useRef(null);
+  const article = useRef(null);
+  useEffect(() => { if (scroller.current) scroller.current.scrollTop = 0; }, [sel]);
+  const c = letter.chapters[sel] || letter.chapters[0];
+  return (
+    <section className="slide" aria-label={T('name.letter')}>
+      <div className="slide-inner">
+        <div className="wrap" style={{ width: '100%', justifyContent: 'stretch' }}>
+          <div className="letter-grid grid lg:grid-cols-12 gap-8 lg:gap-10">
+            <aside className="lg:col-span-4 flex flex-col">
+              <div className="eyebrow">COVER LETTER</div>
+              <h2 className="h-big text-3xl md:text-4xl mt-3">{T('name.letter')}<span className="accent">.</span></h2>
+              {quote && <blockquote className="quote">“{quote}”<small>— {name}</small></blockquote>}
+              <ul className="mt-5 space-y-1">
+                {letter.chapters.map((x, i) => (
+                  <li key={i}>
+                    <button className={`ch ${i === sel ? 'on' : ''}`} aria-pressed={i === sel}
+                      onClick={() => { setSel(i); if (window.innerWidth < 1024) setTimeout(() => {
+                        // 장 안의 세로 스크롤만 움직임(scrollIntoView는 가로 레일까지 밀어 버림)
+                        const a = article.current, box = a && a.closest('.slide-inner'); if (!box) return;
+                        box.scrollTo({ top: box.scrollTop + a.getBoundingClientRect().top - box.getBoundingClientRect().top - 64, behavior: 'smooth' });
+                      }, 50); }}>
+                      <i>{String(x.no).padStart(2, '0')}</i>
+                      <span><b>{x.title}</b>{x.sub && <small>{x.sub}</small>}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <a className="btn btn-line mt-5 self-start" href="../letter.html">{T('page.letter-go')} →</a>
+            </aside>
+            <article className="page lg:col-span-8" ref={article} style={{ scrollMarginTop: 64 }}>
+              <span className="num">{String(c.no).padStart(2, '0')}</span>
+              <div className="page-scroll" ref={scroller}>
+                <div key={sel} className="fade-in">
+                  <div className="text-[13px] font-bold accent"><span style={{ fontFamily: 'var(--en)', letterSpacing: '.1em' }}>{String(c.no).padStart(2, '0')}</span>{c.sub ? ` · ${c.sub}` : ''}</div>
+                  <h3 className="mt-2 text-2xl font-extrabold leading-snug" style={{ color: 'var(--ink)' }}>{c.title}</h3>
+                  {c.paras.map((p, i) => <p key={i}>{inlineMd(p)}</p>)}
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+// 기술 문서 md에서 절마다 그림 찾기 — 기능 카드는 "그 기능 절(section)의 그림"(GIF 먼저), 남은 GIF는 프로젝트 장의 화면 모음으로
+function docImages(md) {
+  const lines = md.replace(/<!--[\s\S]*?-->/g, '').split('\n');
+  const heads = [], imgs = [];
+  let fence = false;
+  lines.forEach((l, n) => {
+    if (/^\s*```/.test(l)) { fence = !fence; return; }
+    if (fence) return;
+    const h = l.match(/^(#{1,6})\s+(.+?)\s*$/);
+    if (h) { heads.push({ n, level: h[1].length, text: h[2].replace(/`/g, '').trim() }); return; }
+    const re = /!\[([^\]]*)\]\((<[^>]+>|[^)\s]+)\)/g; let m;
+    while ((m = re.exec(l))) {
+      let src = m[2].replace(/^<|>$/g, '');
+      try { src = decodeURI(src); } catch { /* 그대로 */ }
+      if (/^https?:/i.test(src)) continue;
+      imgs.push({ n, src: src.replace(/^\.\//, ''), alt: m[1].trim() });
+    }
+  });
+  return { heads, imgs };
+}
+function sectionImages(d, section) {
+  const want = String(section || '').replace(/`/g, '').trim();
+  if (!want) return [];
+  const i = d.heads.findIndex((h) => h.text === want || h.text.startsWith(want) || want.startsWith(h.text));
+  if (i < 0) return [];
+  const h = d.heads[i];
+  const end = (d.heads.slice(i + 1).find((x) => x.level <= h.level) || { n: Infinity }).n;
+  return d.imgs.filter((x) => x.n > h.n && x.n < end);
+}
+const isGif = (s) => /\.gif$/i.test(s);
+const capText = (c) => (c && typeof c === 'object' ? c.text || '' : c || '');   // caption이 { text, verbatim }일 때도
+const shortCap = (alt) => String(capText(alt)).split(/\s+—\s+/)[0];
+function buildMedia(p, md) {
+  const d = docImages(md);
+  const features = (p.highlights || []).map((h) => {
+    const inSec = sectionImages(d, h.section);
+    const gifs = inSec.filter((x) => isGif(x.src));
+    if (gifs.length) return gifs;                                   // 그 절에 GIF가 있으면 GIF(여러 개면 모두)
+    if (h.image && h.image.src) return [{ src: h.image.src, alt: h.image.caption || h.title, w: h.image.w, h: h.image.h }];
+    return inSec.slice(0, 1);
+  });
+  const used = new Set(features.flat().map((x) => x.src));
+  const extra = d.imgs.filter((x) => isGif(x.src) && !used.has(x.src)).filter((x, i, a) => a.findIndex((y) => y.src === x.src) === i);
+  return { features, extra };
+}
+
+// 그림 여러 장을 한 자리에서 바꿔 보기(아래 칩으로 고름)
+function MediaSwitch({ id, items, className = '', style, pixel }) {
+  const [k, setK] = useState(0);
+  const cur = items[k] || items[0];
+  if (!cur) return null;
+  return (
+    <figure className={className} style={style}>
+      <img key={cur.src} className="shot fade-in" src={img(id, cur.src)} alt={capText(cur.alt)} loading="lazy"
+        style={{ aspectRatio: cur.w && cur.h ? `${cur.w}/${cur.h}` : '16/9', objectFit: 'contain', imageRendering: pixel ? 'pixelated' : 'auto' }} />
+      {items.length > 1 ? (
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {items.map((x, i) => (
+            <button key={x.src} onClick={() => setK(i)} className={`chip ${i === k ? 'on-chip' : ''}`} style={{ fontSize: 11.5, padding: '2px 8px' }}>
+              {isGif(x.src) && <span className="gif-dot" />}{x.label || shortCap(x.alt) || `${i + 1}`}
+            </button>
+          ))}
+        </div>
+      ) : (cur.alt && !cur.label && <figcaption className="mt-1.5 text-xs muted leading-snug">{isGif(cur.src) && <span className="gif-dot" />}{shortCap(cur.alt)}</figcaption>)}
+    </figure>
+  );
+}
+
+function parseLetter(md) {
+  const text = md.replace(/<!--[\s\S]*?-->/g, '');
+  const parts = text.split(/^##\s+/m);
+  const head = parts.shift() || '';
+  const chapters = parts.map((sec) => {
+    const [first, ...rest] = sec.split('\n');
+    const m = first.trim().match(/^(\d+)\.\s*(.+)$/);
+    const full = m ? m[2] : first.trim();
+    const [title, sub] = full.split(/\s+—\s+/);
+    const paras = rest.join('\n').split(/\n\s*\n/).map((p) => p.split('\n').map((l) => l.trim()).filter(Boolean).join(' ')).filter(Boolean);
+    return { no: m ? +m[1] : 0, title: title.trim(), sub: (sub || '').trim(), paras };
+  }).filter((c) => c.paras.length);
+  // 머리줄의 교육 과정: "… · 기관 「과정 이름」 시작 ~ 끝(수료 예정)"
+  let course = null;
+  const cm = head.match(/·\s*([^·「\n]+?)\s*「([^」]+)」\s*(\d{4}-\d{2}-\d{2})\s*~\s*(\d{4}-\d{2}-\d{2})\s*(?:\(([^)]+)\))?/);
+  if (cm) course = { org: cm[1].trim(), name: cm[2].trim(), start: cm[3], end: cm[4], note: (cm[5] || '').trim() };
+  return { chapters, course };
 }
 
 function teamLabel(p) {
@@ -225,7 +441,11 @@ function ProjectSlide({ p, no, total }) {
         <h2 className="h-big text-3xl md:text-5xl mt-3">{p.title}</h2>
         {p.tagline && <p className="mt-3 text-base md:text-lg max-w-3xl">{p.tagline}</p>}
         <div className={`grid gap-8 mt-8 items-start ${p.cover ? 'md:grid-cols-12' : ''}`}>
-          {p.cover && <div className="md:col-span-7"><img className="shot" style={{ aspectRatio: '16/9' }} src={img(p.id, p.cover)} alt={p.title} /></div>}
+          {p.cover && <div className="md:col-span-7">
+            {/* 대표 이미지 + 기능 카드에 쓰이지 않은 GIF(플레이 화면)를 칩으로 바꿔 봄 */}
+            <MediaSwitch id={p.id} pixel={p.id === '1-watch-your-back'}
+              items={[{ src: p.cover, alt: p.title, label: '대표 이미지' }, ...((p._media && p._media.extra) || [])]} />
+          </div>}
           <div className={p.cover ? 'md:col-span-5' : ''}>
             <dl className="grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 text-sm">
               {(p.meta || []).map((m) => <React.Fragment key={m.label}><dt className="muted whitespace-nowrap">{m.label}</dt><dd style={{ color: 'var(--ink)' }}>{m.value}</dd></React.Fragment>)}
@@ -259,46 +479,60 @@ function FeaturesSlide({ p, no }) {
           <a className="btn btn-line" href={`../project.html?p=${encodeURIComponent(p.id)}`}>{T('page.deck-all')} →</a>
         </div>
         <div className={`grid gap-4 ${hs.length > 1 ? 'md:grid-cols-2' : ''}`}>
-          {hs.map((h, i) => (
+          {hs.map((h, i) => {
+            const media = (p._media && p._media.features[i]) || (h.image && h.image.src ? [{ src: h.image.src, alt: h.image.caption || h.title, w: h.image.w, h: h.image.h }] : []);
+            return (
             <article key={i} className="card p-5 flex gap-5 flex-col sm:flex-row">
-              {h.image && h.image.src && <img className="shot sm:w-[42%] shrink-0 self-start" style={{ aspectRatio: `${h.image.w || 16}/${h.image.h || 9}`, objectFit: 'contain', imageRendering: 'pixelated' }} src={img(p.id, h.image.src)} alt={h.image.caption || h.title} />}
+              {media.length > 0 && <MediaSwitch id={p.id} items={media} className="sm:w-[44%] shrink-0 self-start" pixel={p.id === '1-watch-your-back'} />}
               <div className="min-w-0">
                 <div className="feat-no">{T('en.feature')} {String(i + 1).padStart(2, '0')}</div>
                 <h3 className="mt-1.5 text-lg font-bold leading-snug" style={{ color: 'var(--ink)' }}>{h.title}</h3>
                 {h.what && <p className="mt-2 text-sm leading-relaxed">{h.what.replace(/`/g, '')}</p>}
-                {h.why && <p className="mt-2 text-sm leading-relaxed muted">{h.why.replace(/`/g, '')}</p>}
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </Wrap>
     </section>
   );
 }
 
-function GlanceSlide({ projects, goProject }) {
+// 프로젝트 첫 장: 대표 그림 카드 격자. 카드를 누르면 그 프로젝트 장으로
+const periodOf = (p) => { const m = (p.meta || []).find((x) => /기간/.test(x.label)); const d = m && m.value.match(/(\d{4})-(\d{2})-(\d{2})\s*~\s*(\d{4})-(\d{2})-(\d{2})/); return d ? { start: `${d[1]}-${d[2]}-${d[3]}`, text: `${d[1]}.${d[2]}.${d[3]} – ${d[4] === d[1] ? '' : d[4] + '.'}${d[5]}.${d[6]}` } : null; };
+function ProjectsGridSlide({ projects, goProject }) {
   return (
-    <section className="slide" aria-label={T('page.glance')}>
+    <section className="slide" aria-label={T('page.nav-projects')}>
       <Wrap>
-        <div className="eyebrow">{T('en.glance')}</div>
-        <h2 className="h-big text-3xl md:text-4xl mt-3 mb-8">{T('page.glance')}</h2>
-        <div className="space-y-3">
-          {projects.map((p, i) => (
-            <div key={p.id} className="card p-4 md:p-5 grid md:grid-cols-12 gap-3 md:gap-6 items-center">
-              <button onClick={() => goProject(p.id)} className="md:col-span-4 text-left flex gap-4 items-center group">
-                <span className="feat-no text-base">{String(i + 1).padStart(2, '0')}</span>
-                <span>
-                  <span className="block font-bold text-base md:text-lg group-hover:text-[color:var(--accent)]" style={{ color: 'var(--ink)' }}>{p.title}</span>
-                  <span className="block text-xs muted mt-0.5">{teamLabel(p)}</span>
-                </span>
+        <div className="flex items-end justify-between gap-4 flex-wrap mb-7">
+          <div>
+            <div className="eyebrow">{T('en.project')}</div>
+            <h2 className="h-big text-3xl md:text-4xl mt-3">{T('page.nav-projects')}<span className="accent">.</span></h2>
+          </div>
+          <p className="muted text-sm">카드를 누르면 프로젝트 소개 · 기능으로 넘어갑니다</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+          {projects.map((p, i) => {
+            const per = periodOf(p);
+            return (
+              <button key={p.id} className="pcard" onClick={() => goProject(p.id)}>
+                <div className="thumb">
+                  {p.cover && <img src={img(p.id, p.cover)} alt="" loading="lazy" />}
+                  <span className="badge no">{String(i + 1).padStart(2, '0')}</span>
+                  {teamLabel(p) && <span className="badge team">{teamLabel(p)}</span>}
+                </div>
+                <div className="p-4 flex flex-col flex-1">
+                  <h3 className="font-bold text-[15.5px] leading-snug" style={{ color: 'var(--ink)' }}>{p.title}</h3>
+                  <p className="mt-2 mb-3 text-[13px] leading-relaxed clamp3">{p.tagline}</p>
+                  {per && <p className="mt-2 text-xs muted" style={{ fontFamily: 'var(--en)', fontWeight: 600 }}>{per.text}</p>}
+                  <div className="mt-3 flex flex-wrap gap-1">{(p.tags || []).slice(0, 3).map((t) => <span key={t} className="chip" style={{ fontSize: 11.5, padding: '2px 7px' }}>{t}</span>)}</div>
+                  <div className="mt-auto pt-3 text-xs font-bold flex justify-between items-center" style={{ color: 'var(--ink)', borderTop: '1px solid var(--line)' }}>
+                    <span>{T('name.deck')} · {T('name.doc-short')}</span><span className="accent">→</span>
+                  </div>
+                </div>
               </button>
-              <p className="md:col-span-5 text-sm leading-relaxed">{p.tagline}</p>
-              <div className="md:col-span-3 flex md:justify-end gap-2 flex-wrap">
-                <a className="chip hover:border-[color:var(--accent)]" href={`../project.html?p=${encodeURIComponent(p.id)}`}>{T('name.deck')}</a>
-                <a className="chip hover:border-[color:var(--accent)]" href={`../doc.html?p=${encodeURIComponent(p.id)}`}>{T('name.doc-short')}</a>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </Wrap>
     </section>
@@ -341,8 +575,18 @@ function App() {
           const r = await fetch(`../data/projects/${encodeURIComponent(id)}.json`, { cache: 'no-cache' });
           return r.ok ? r.json() : null;
         }))).filter(Boolean);
+        // 기술 문서 md를 읽어 절마다 그림(GIF) 연결 — 못 읽으면 data의 그림만 씀
+        await Promise.all(projects.map(async (p) => {
+          try {
+            const r = await fetch(`../src/${encodeURIComponent(p.id)}/${encodeURIComponent(p.doc || '기술문서.md')}`, { cache: 'no-cache' });
+            if (r.ok) p._media = buildMedia(p, await r.text());
+          } catch { /* data 그림만 */ }
+        }));
+        // 자기소개서.md(수강생 파일)가 있으면 자기소개서 장 — 없거나 못 읽으면 그 장을 빼고 그림
+        let letter = null;
+        try { const r = await fetch('../' + encodeURIComponent('자기소개서.md'), { cache: 'no-cache' }); if (r.ok) { const l = parseLetter(await r.text()); if (l.chapters.length) letter = l; } } catch { /* 빼고 그림 */ }
         document.title = `${pf.profile.name} · ${T('name.portfolio')}`;
-        setState({ pf, projects });
+        setState({ pf, projects, letter });
       } catch (e) { setErr(String(e && e.message || e)); }
     })();
   }, []);
@@ -356,33 +600,51 @@ function App() {
     const coverImg = titleShot ? img(wyb.id, titleShot.src) : (wyb && wyb.cover ? img(wyb.id, wyb.cover) : '');
     const titleOf = (id) => (projects.find((p) => p.id === id) || {}).title || id;
     slides.push({ key: 'cover', group: 'intro', label: T('page.intro'), el: () => <CoverSlide profile={pf.profile} coverImg={coverImg} /> });
-    const sk = pf.skills || [];
-    const half = Math.ceil(sk.length / 2), parts = sk.length > 4 ? 2 : 1;
-    for (let i = 0; i < parts; i++) {
-      const chunk = parts === 1 ? sk : sk.slice(i * half, (i + 1) * half);
-      slides.push({ key: `stack-${i + 1}`, group: 'stack', label: T('page.stack'), el: (goProject) => <SkillsSlide skills={chunk} part={i + 1} parts={parts} titleOf={titleOf} goProject={goProject} /> });
+    // 연표: 교육(자기소개서 머리줄) + 프로젝트 기간(새 것부터)
+    const history = [];
+    const L = state.letter;
+    if (L && L.course) {
+      const c = L.course, fmt = (d) => d.slice(0, 7).replace('-', '.');
+      history.push({ kindStart: '교육', when: `${fmt(c.start)} – ${fmt(c.end)}`, badge: c.note, title: c.name, sub: c.org });
     }
+    projects.map((p) => ({ p, per: periodOf(p) })).filter((x) => x.per).sort((a, b) => b.per.start.localeCompare(a.per.start))
+      .forEach((x, i) => history.push({ kindStart: i === 0 ? '프로젝트' : '', when: x.per.text, title: x.p.title, sub: teamLabel(x.p), project: x.p.id }));
+    slides.push({ key: 'history', group: 'stack', label: `이력 · ${T('page.stack')}`, el: (goProject) => <HistorySkillsSlide history={history} skills={pf.skills || []} titleOf={titleOf} goProject={goProject} /> });
+    if (L) slides.push({ key: 'letter', group: 'letter', label: T('name.letter'), el: () => <LetterSlide letter={L} quote={pf.profile.headline} name={pf.profile.name} /> });
+    slides.push({ key: 'projects', group: 'projects', label: T('page.nav-projects'), el: (goProject) => <ProjectsGridSlide projects={projects} goProject={goProject} /> });
     projects.forEach((p, i) => {
       slides.push({ key: `p-${p.id}`, group: 'projects', project: p.id, label: p.title, el: () => <ProjectSlide p={p} no={i + 1} total={projects.length} /> });
       if ((p.highlights || []).length) slides.push({ key: `p-${p.id}-core`, group: 'projects', of: p.id, label: `${p.title} · ${T('page.features')}`, el: () => <FeaturesSlide p={p} no={i + 1} /> });
     });
-    slides.push({ key: 'glance', group: 'glance', label: T('page.glance'), el: (goProject) => <GlanceSlide projects={projects} goProject={goProject} /> });
     slides.push({ key: 'contact', group: 'contact', label: T('page.nav-contact'), el: () => <ContactSlide profile={pf.profile} /> });
   }
   const n = slides.length;
 
-  // 위 메뉴의 주제(숫자 키 1~5) — 그 주제의 첫 장으로
+  // 위 칸 버튼의 주제 — 누르면 그 주제의 첫 장으로
   const TOPICS = [
     { group: 'intro', label: T('page.nav-intro') },
-    { group: 'stack', label: T('page.nav-stack') },
+    { group: 'stack', label: '이력 · 기술' },
+    { group: 'letter', label: T('page.nav-letter') },
     { group: 'projects', label: T('page.nav-projects') },
-    { group: 'glance', label: T('page.nav-glance') },
-    { group: 'contact', label: T('page.nav-contact') },
   ].filter((t) => slides.some((s) => s.group === t.group));
   const cur = slides[idx] || {};
   const curProject = cur.project || cur.of || null;
   const firstOf = (g) => slides.findIndex((s) => s.group === g);
-  const [menuOpen, setMenuOpen] = useState(false);
+
+  // 칸 버튼의 손잡이를 지금 주제 칸으로 옮김
+  const segRef = useRef(null);
+  const [thumb, setThumb] = useState({ x: 0, w: 0, on: false });
+  useEffect(() => {
+    const place = () => {
+      const seg = segRef.current; if (!seg) return;
+      const b = seg.querySelector('button.on');
+      if (!b) { setThumb((t) => ({ ...t, on: false })); return; }
+      setThumb({ x: b.offsetLeft, w: b.offsetWidth, on: true });
+    };
+    place();
+    window.addEventListener('resize', place);
+    return () => window.removeEventListener('resize', place);
+  }, [idx, n]);
 
   const go = useCallback((i) => setIdx((cur) => Math.max(0, Math.min(n - 1, typeof i === 'function' ? i(cur) : i))), [n]);
   const goProject = useCallback((id) => { const i = slides.findIndex((s) => s.project === id); if (i >= 0) go(i); }, [n]);
@@ -407,7 +669,6 @@ function App() {
       else if (k === 'ArrowLeft' || k === 'PageUp' || (k === ' ' && e.shiftKey)) { e.preventDefault(); go((c) => c - 1); }
       else if (k === 'Home') { e.preventDefault(); go(0); }
       else if (k === 'End') { e.preventDefault(); go(n - 1); }
-      else if (k === 'Escape') setMenuOpen(false);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -415,6 +676,8 @@ function App() {
 
   // 새 장으로 오면 그 장의 안쪽 스크롤을 맨 위로, 화면 밖 장은 Tab으로 못 들어가게
   useEffect(() => {
+    // 페이지 자체는 가로로 밀리지 않게(장 이동은 레일의 transform만으로)
+    document.documentElement.scrollLeft = 0; document.body.scrollLeft = 0;
     document.querySelectorAll('.slide').forEach((s, i) => {
       s.inert = i !== idx;
       if (i === idx) { const inner = s.querySelector('.slide-inner'); if (inner) inner.scrollTop = 0; }
@@ -438,13 +701,17 @@ function App() {
       <div className="progress" style={{ width: `${((idx + 1) / n) * 100}%` }} />
       <header className="top">
         <div className="top-row">
-          <button className="logo" onClick={() => go(0)} title="처음으로 (0)">{state.pf.profile.nameEn || state.pf.profile.name}</button>
-          <nav className="menu" aria-label="주제 바로 가기">
+          <button className="logo" onClick={() => go(0)}>{state.pf.profile.nameEn || state.pf.profile.name}<i>.</i></button>
+          <nav className="seg" ref={segRef} aria-label="주제 바로 가기">
+            <span className="seg-thumb" style={{ width: thumb.w, transform: `translateX(${thumb.x}px)`, opacity: thumb.on ? 1 : 0 }} />
             {TOPICS.map((t) => (
-              <button key={t.group} className={`menu-item ${cur.group === t.group ? 'on' : ''}`} onClick={() => go(firstOf(t.group))} aria-current={cur.group === t.group ? 'true' : undefined}>{t.label}</button>
+              <button key={t.group} className={cur.group === t.group ? 'on' : ''} onClick={() => go(firstOf(t.group))} aria-current={cur.group === t.group ? 'true' : undefined}>{t.label}</button>
             ))}
           </nav>
-          <button className="burger" onClick={() => setMenuOpen((o) => !o)} aria-expanded={menuOpen} aria-label="메뉴">{menuOpen ? '×' : '☰'}</button>
+          <div className="top-links">
+            {state.pf.profile.github && <a href={state.pf.profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
+            {state.pf.profile.email && <a href={`mailto:${state.pf.profile.email}`}>Email</a>}
+          </div>
         </div>
         <div className={`tabs ${cur.group === 'projects' ? '' : 'hide'}`} aria-label={T('page.nav-projects')}>
           {state.projects.map((p, i) => (
@@ -454,18 +721,6 @@ function App() {
           ))}
         </div>
       </header>
-      {menuOpen && (
-        <div className="drawer" role="menu">
-          {TOPICS.map((t) => (
-            <React.Fragment key={t.group}>
-              <button className={cur.group === t.group && t.group !== 'projects' ? 'on' : ''} onClick={() => { go(firstOf(t.group)); setMenuOpen(false); }}>{t.label}</button>
-              {t.group === 'projects' && state.projects.map((p) => (
-                <button key={p.id} className={`sub ${curProject === p.id ? 'on' : ''}`} onClick={() => { goProject(p.id); setMenuOpen(false); }}>{p.title}</button>
-              ))}
-            </React.Fragment>
-          ))}
-        </div>
-      )}
       <main className="h-full" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         <div className="rail" style={{ transform: `translateX(-${idx * 100}vw)` }}>
           {slides.map((s) => <React.Fragment key={s.key}>{s.el(goProject)}</React.Fragment>)}

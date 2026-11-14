@@ -123,7 +123,26 @@
       "section": "5-2. 트러블슈팅"
     }
   ],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "src": "images/fish-struggle.gif",
+      "caption": "버둥거림과 탈진 — 꼬마돌들이 상어를 붙잡아 계단 바위에 부딪치게 하면, 버둥거리던 상어의 머리 위에 노란 별(탈진)이 뜹니다",
+      "w": 960,
+      "h": 522
+    },
+    {
+      "src": "images/fish-boxcast.gif",
+      "caption": "BoxCast 순찰 — 에디터 Scene 뷰에서 순찰하는 물고기마다 앞쪽의 빨간 상자가 감지 범위입니다",
+      "w": 960,
+      "h": 540
+    },
+    {
+      "src": "images/tutorial-storm.gif",
+      "caption": "튜토리얼 시작 — 배 위에서 네 명이 모두 준비하면 폭풍우 연출로 넘어갑니다",
+      "w": 960,
+      "h": 522
+    }
+  ],
   "retro": {
     "achieved": [
       "이 FSM 위에 팀원들이 상어·문어·대왕 오징어·갯가재·전기 가오리·지뢰 물고기·해마 등 물고기 종류를 추가",

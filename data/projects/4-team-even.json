@@ -136,6 +136,12 @@
       "caption": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함"
     },
     {
+      "src": "images/ui-after.png",
+      "w": 1920,
+      "h": 1080,
+      "caption": "UI 통합 후 — 메인 메뉴의 선·띠 스타일과 붉은 포인트로 통일"
+    },
+    {
       "src": "images/supply-pickup.gif",
       "w": 960,
       "h": 540,
@@ -152,12 +158,6 @@
       "w": 1920,
       "h": 1080,
       "caption": "새 인게임 맵을 플레이어 눈높이에서 본 화면"
-    },
-    {
-      "src": "images/ui-after.png",
-      "w": 1920,
-      "h": 1080,
-      "caption": "UI 통합 후 — 메인 메뉴의 선·띠 스타일과 붉은 포인트로 통일"
     },
     {
       "src": "images/upgrade-shop.png",

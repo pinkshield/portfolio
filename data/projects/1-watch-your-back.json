@@ -88,10 +88,10 @@
       "why": "공격·피격 판정은 정확해야 해서 바로 돌리고, 시야는 고개를 돌리는 연출을 위해 부드럽게 돌렸습니다.",
       "section": "2-3. 시야·공격 박스 회전",
       "image": {
-        "src": "images/빨간색(시야박스)-노란색(허트박스)-초록색(히트박스).png",
-        "w": 341,
-        "h": 322,
-        "caption": "적의 판정 박스 — 빨강: 시야 박스, 노랑: 뒤통수 피격 박스, 초록: 공격 범위·타격 박스"
+        "src": "images/box-rotation.gif",
+        "w": 960,
+        "h": 538,
+        "caption": "박스 회전 — 적이 방향을 틀면 시야(빨간 원)와 공격 박스(초록)도 그 방향으로 돌아갑니다"
       }
     }
   ],
@@ -117,16 +117,28 @@
   ],
   "screenshots": [
     {
+      "src": "images/backstab.gif",
+      "caption": "뒤통수 — 뒤로 몰래 다가가 뒤통수를 치면 컷씬(SLAP!)과 함께 적이 쓰러집니다",
+      "w": 960,
+      "h": 538
+    },
+    {
+      "src": "images/box-rotation.gif",
+      "caption": "박스 회전 — 적이 방향을 틀면 시야(빨간 원)와 공격 박스(초록)도 그 방향으로 돌아갑니다",
+      "w": 960,
+      "h": 538
+    },
+    {
+      "src": "images/enemy-chase.gif",
+      "caption": "들켰을 때 — 시야(빨간 원)에 들키면 적이 쫓아오고, 공격에 한 번 맞으면 뺨 컷씬과 함께 끝납니다",
+      "w": 960,
+      "h": 538
+    },
+    {
       "src": "images/cutscene-slap-back.png",
       "w": 1580,
       "h": 884,
       "caption": "뒤통수 타격 컷씬 — 플레이어가 적의 뒤통수 공격에 성공했을 때"
-    },
-    {
-      "src": "images/빨간색(시야박스)-노란색(허트박스)-초록색(히트박스).png",
-      "w": 341,
-      "h": 322,
-      "caption": "적의 판정 박스 — 빨강: 시야 박스, 노랑: 뒤통수 피격 박스, 초록: 공격 범위·타격 박스"
     },
     {
       "src": "images/cutscene-slap-face.png",
@@ -139,18 +151,6 @@
       "w": 1579,
       "h": 882,
       "caption": "GameMenu"
-    },
-    {
-      "src": "images/GameOver.png",
-      "w": 1572,
-      "h": 882,
-      "caption": "GameOver"
-    },
-    {
-      "src": "images/GameClear.png",
-      "w": 1579,
-      "h": 884,
-      "caption": "GameClear"
     }
   ],
   "retro": {

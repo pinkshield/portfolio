@@ -117,32 +117,34 @@
       "caption": "레벨 전경 — 집 안 코스"
     },
     {
+      "src": "images/trap-cushion.gif",
+      "caption": "쿠션 — 공을 쳐서 쿠션에 올리면 높이 튀어 올라 거실 쪽으로 날아갑니다",
+      "w": 960,
+      "h": 540
+    },
+    {
+      "src": "images/trap-cat.gif",
+      "caption": "고양이 — 주변을 돌아다니다가 공을 발견하면 공 쪽으로 다가옵니다",
+      "w": 960,
+      "h": 540
+    },
+    {
+      "src": "images/trap-boost.gif",
+      "caption": "가속 판자 — 공이 가속 판자를 타면 처음 진행하던 방향으로 가속을 받습니다",
+      "w": 960,
+      "h": 540
+    },
+    {
+      "src": "images/hole-wall.gif",
+      "caption": "홀컵 벽 — 쿠션을 타고 올라온 공이 홀컵에 들어가면 벽이 사라집니다",
+      "w": 960,
+      "h": 540
+    },
+    {
       "src": "images/start-guide.png",
       "w": 827,
       "h": 834,
       "caption": "시작 안내 화면 — 게임 방법과 키 안내"
-    },
-    {
-      "src": "images/play-ramp.png",
-      "w": 1920,
-      "h": 1080,
-      "caption": "플레이 장면 — 책장 위의 경사로와 깃발"
-    },
-    {
-      "src": "images/result-screen.png",
-      "w": 1920,
-      "h": 1080,
-      "caption": "결과 화면 — 내가 어려운 길로 클리어한 기록(40타·9회 낙하·3분 12초)"
-    },
-    {
-      "src": "images/feedback-curtain-stuck.webp",
-      "caption": "커튼봉에 낀 골프공"
-    },
-    {
-      "src": "images/fix-scene-1.png",
-      "w": 1031,
-      "h": 504,
-      "caption": "씬 뷰 — 커튼·창문 (1)"
     }
   ],
   "retro": {

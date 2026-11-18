@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "pin": [],
+  "hide": [
+    {"key": "conclusion", "from": {"key": "conclusion", "sectionPath": ["5. 결과 및 배운 점", "5-1. 결론"], "sig": []}},
+    {"key": "insights", "from": {"key": "insights", "sectionPath": ["5. 결과 및 배운 점", "5-2. 개발자로서 얻은 인사이트"], "sig": []}}
+  ]
+}

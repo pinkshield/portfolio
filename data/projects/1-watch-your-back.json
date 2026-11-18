@@ -155,13 +155,13 @@
   ],
   "retro": {
     "achieved": [
-      "단순한 메인 루프(뒤통수 때리기·회피)에, 뒤통수를 때리는 순간과 뺨을 맞는 순간을 컷씬으로 보여 주어 생동감을 더함",
+      "통쾌한 복수는 전해짐 — 뒤통수를 치는 순간을 컷씬(SLAP!)과 타격음으로 보여 주었고, 동기도 연출과 사운드를 장점으로 꼽음",
       "SFX(발걸음·타격음)를 넣자 타격이 훨씬 재미있어져, SFX와 BGM의 중요성을 깨달음"
     ],
     "regrets": [
       "`EnemyStateManager` 한 클래스가 이동·애니메이션 호출·감지·박스 회전·넉다운 연출을 모두 맡음",
       "플레이어 감지, 벽 끼임 같은 적 FSM 버그로 적이 부자연스럽게 움직이는 장면이 생김",
-      "적이 나를 봤는지 플레이어가 눈으로 확인할 수 없음",
+      "긴장감은 절반만 전해짐 — 적이 나를 봤는지 눈으로 확인할 수 없어 불합리함도 느껴졌고, 잠입보다 피지컬 게임에 가까워짐",
       "보스마다 다른 박스 시작 각도를 하나로 맞추지 않고 애니메이션에서 따로 조정해, 각도 값이 보스마다 복잡하게 나뉨"
     ],
     "plans": [
@@ -208,7 +208,7 @@
         "layout": "full",
         "tab": "개요",
         "title": {"text": "1-2. 왜 만들었나 (Why) — 기획 의도", "verbatim": true},
-        "lead": {"text": "그러나 실제로는 리스크가 너무 커서 그 행동을 하기 어렵습니다. 하지만 게임에서는 가능합니다.", "verbatim": true},
+        "lead": {"text": "그러나 실제로는 리스크가 너무 커서 그 행동을 하기 어렵습니다. 하지만 게임에서는 가능합니다.", "verbatim": false},
         "sectionPath": ["1. 개요", "1-2. 왜 만들었나 (Why) — 기획 의도"],
         "points": [{"label": "단순한 핵심 메커니즘", "text": "적의 뒤통수를 치면 승리, 플레이어가 맞으면 패배. 다른 승패 조건은 없습니다.", "verbatim": true}],
         "visuals": [{"kind": "table", "n": 1, "fp": "플레이하며 생길 수 있는 문제|어떻게 풀려고 했나|절"}]
@@ -498,41 +498,6 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "1-2의 문제|결과|남은 것"}]
       },
       {
-        "key": "lessons",
-        "chapter": "result",
-        "layout": "visual",
-        "tab": "결과",
-        "title": {"text": "5-1. 배운 점", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["5. 결과 및 배운 점", "5-1. 배운 점"],
-        "points": [
-          {
-            "label": "게임 연출의 중요성",
-            "text": "메인 루프인 뒤통수 때리기와 회피는 아주 단순합니다. 그래서 뒤통수를 때리는 순간과 뺨을 맞는 순간을 컷씬으로 보여 주어 플레이에 생동감을 더했습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "사운드의 중요성",
-            "text": "SFX를 넣자 플레이어와 적의 타격이 훨씬 재미있어졌고, SFX와 BGM의 중요성을 다시 한번 깨달았습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "같은 소리를 여러 소리처럼",
-            "text": "감시자의 \"Hey\" 소리가 매번 똑같아 밋밋해서, 음높이만 무작위로 바꾸는 방법을 배워 적용했고 HIVE PURGE에서도 다시 썼습니다.",
-            "verbatim": false
-          }
-        ],
-        "visuals": [
-          {
-            "kind": "image",
-            "src": "images/cutscene-slap-face.png",
-            "w": 1578,
-            "h": 882,
-            "caption": {"text": "뺨 맞는 컷씬 — 플레이어가 적에게 들켰을 때", "verbatim": true}
-          }
-        ]
-      },
-      {
         "key": "ts-knockdown",
         "chapter": "result",
         "layout": "problem",
@@ -622,7 +587,7 @@
           {
             "label": "다음 프로젝트에서 바꾼 것",
             "text": "다음 프로젝트였던 WeGotOne에서는, 이 게임의 적 FSM과 비슷한 `FishStateManager`는 상태 전환만 관리하고 `FishMovement`는 움직임만 맡도록 나눠서 설계해 보았습니다.",
-            "verbatim": true
+            "verbatim": false
           }
         ],
         "visuals": [{"kind": "table", "n": 1, "fp": "아쉬운 점|As-Is (지금)|To-Be (계획)"}]
@@ -657,7 +622,7 @@
         "layout": "full",
         "tab": "개요",
         "title": {"text": "1-2. 왜 만들었나 (Why) — 기획 의도", "verbatim": true},
-        "lead": {"text": "그러나 실제로는 리스크가 너무 커서 그 행동을 하기 어렵습니다. 하지만 게임에서는 가능합니다.", "verbatim": true},
+        "lead": {"text": "그러나 실제로는 리스크가 너무 커서 그 행동을 하기 어렵습니다. 하지만 게임에서는 가능합니다.", "verbatim": false},
         "sectionPath": ["1. 개요", "1-2. 왜 만들었나 (Why) — 기획 의도"],
         "points": [{"label": "단순한 핵심 메커니즘", "text": "적의 뒤통수를 치면 승리, 플레이어가 맞으면 패배. 다른 승패 조건은 없습니다.", "verbatim": true}],
         "visuals": [{"kind": "table", "n": 1, "fp": "플레이하며 생길 수 있는 문제|어떻게 풀려고 했나|절"}]
@@ -934,7 +899,7 @@
           {
             "label": "게임 연출의 중요성",
             "text": "메인 루프인 뒤통수 때리기와 회피는 아주 단순합니다. 그래서 뒤통수를 때리는 순간과 뺨을 맞는 순간을 컷씬으로 보여 주어 플레이에 생동감을 더했습니다.",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "사운드의 중요성",
@@ -1027,13 +992,13 @@
           {
             "label": "다음 프로젝트에서 바꾼 것",
             "text": "다음 프로젝트였던 WeGotOne에서는, 이 게임의 적 FSM과 비슷한 `FishStateManager`는 상태 전환만 관리하고 `FishMovement`는 움직임만 맡도록 나눠서 설계해 보았습니다.",
-            "verbatim": true
+            "verbatim": false
           }
         ],
         "visuals": [{"kind": "table", "n": 1, "fp": "아쉬운 점|As-Is (지금)|To-Be (계획)"}]
       }
     ],
-    "applied": "977ca994192a3fbc"
+    "applied": "0797725e9be2fb50"
   },
   "generatedAt": "2026-11-12"
 }

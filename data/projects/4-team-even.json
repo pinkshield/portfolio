@@ -355,7 +355,7 @@
             "src": "images/supply-drop.png",
             "w": 1920,
             "h": 1080,
-            "caption": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함",
+            "caption": {"text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함", "verbatim": true},
             "sectionPath": ["3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
           }
         ]
@@ -429,7 +429,7 @@
         "title": {"text": "3-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기", "verbatim": true},
         "lead": {
           "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
-          "verbatim": true
+          "verbatim": false
         },
         "sectionPath": ["3-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
         "points": [
@@ -635,7 +635,7 @@
         "lead": null,
         "sectionPath": ["5-2. 트러블슈팅"],
         "points": [
-          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 전혀 떨어지지 않는 것을 발견했습니다.", "verbatim": true},
+          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 전혀 떨어지지 않는 것을 발견했습니다.", "verbatim": false},
           {
             "label": "원인",
             "text": "새 맵(SciFiMap)의 지형 원점이 y = -20이라, 실제 전장 지면이 지형 기준 높이 약 18m로 계산되었습니다.",
@@ -663,13 +663,13 @@
         "lead": null,
         "sectionPath": ["5-2. 트러블슈팅"],
         "points": [
-          {"label": "문제", "text": "게임 스타트를 누르면 인트로- 튜토리얼- 인게임 씬으로 전환이 안됨, 게임스타트 누를시 바로 인게임 씬으로 전환됨", "verbatim": true},
+          {"label": "문제", "text": "게임 스타트를 누르면 인트로- 튜토리얼- 인게임 씬으로 전환이 안됨, 게임스타트 누를시 바로 인게임 씬으로 전환됨", "verbatim": false},
           {
             "label": "원인",
             "text": "메인 메뉴 씬에 저장된 \"다음 씬 이름\" 값이 테스트용 전투 씬(Monster Player Integration)으로 덮어써져 있어서, GAME START가 인트로를 건너뛰고 바로 전투 씬으로 갔음",
             "verbatim": true
           },
-          {"label": "해결", "text": "그 값을 인트로 씬 이름(기본값 IntroCrawl)을 쓰는 새 필드로 바꿔, 씬에 남은 잘못된 값을 무시하게 함", "verbatim": true},
+          {"label": "해결", "text": "그 값을 인트로 씬 이름(기본값 IntroCrawl)을 쓰는 새 필드로 바꿔, 씬에 남은 잘못된 값을 무시하게 함", "verbatim": false},
           {
             "label": "결과",
             "text": "최종 빌드 전(11-03 밤)에 고쳐, GAME START → 인트로 → 튜토리얼 → 게임 순서로 다시 이어지게 되었습니다.",
@@ -818,7 +818,7 @@
             "src": "images/supply-drop.png",
             "w": 1920,
             "h": 1080,
-            "caption": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함",
+            "caption": {"text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함", "verbatim": true},
             "sectionPath": ["3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
           }
         ]
@@ -879,7 +879,7 @@
         "title": {"text": "3-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기", "verbatim": true},
         "lead": {
           "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
-          "verbatim": true
+          "verbatim": false
         },
         "sectionPath": ["3-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
         "points": [
@@ -1080,7 +1080,7 @@
         "lead": null,
         "sectionPath": ["5-2. 트러블슈팅"],
         "points": [
-          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 전혀 떨어지지 않는 것을 발견했습니다.", "verbatim": true},
+          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 전혀 떨어지지 않는 것을 발견했습니다.", "verbatim": false},
           {
             "label": "원인",
             "text": "새 맵(SciFiMap)의 지형 원점이 y = -20이라, 실제 전장 지면이 지형 기준 높이 약 18m로 계산되었습니다.",
@@ -1108,13 +1108,13 @@
         "lead": null,
         "sectionPath": ["5-2. 트러블슈팅"],
         "points": [
-          {"label": "문제", "text": "게임 스타트를 누르면 인트로- 튜토리얼- 인게임 씬으로 전환이 안됨, 게임스타트 누를시 바로 인게임 씬으로 전환됨", "verbatim": true},
+          {"label": "문제", "text": "게임 스타트를 누르면 인트로- 튜토리얼- 인게임 씬으로 전환이 안됨, 게임스타트 누를시 바로 인게임 씬으로 전환됨", "verbatim": false},
           {
             "label": "원인",
             "text": "메인 메뉴 씬에 저장된 \"다음 씬 이름\" 값이 테스트용 전투 씬(Monster Player Integration)으로 덮어써져 있어서, GAME START가 인트로를 건너뛰고 바로 전투 씬으로 갔음",
             "verbatim": true
           },
-          {"label": "해결", "text": "그 값을 인트로 씬 이름(기본값 IntroCrawl)을 쓰는 새 필드로 바꿔, 씬에 남은 잘못된 값을 무시하게 함", "verbatim": true},
+          {"label": "해결", "text": "그 값을 인트로 씬 이름(기본값 IntroCrawl)을 쓰는 새 필드로 바꿔, 씬에 남은 잘못된 값을 무시하게 함", "verbatim": false},
           {
             "label": "결과",
             "text": "최종 빌드 전(11-03 밤)에 고쳐, GAME START → 인트로 → 튜토리얼 → 게임 순서로 다시 이어지게 되었습니다.",
@@ -1124,7 +1124,7 @@
         "visuals": []
       }
     ],
-    "applied": "5df8e066443bea43"
+    "applied": "cb3169ec9c83bc0b"
   },
   "generatedAt": null
 }

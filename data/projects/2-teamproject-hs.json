@@ -212,7 +212,7 @@
         },
         "lead": {
           "text": "WeGotOne은 폭풍우로 조난당한 플레이어들이 섬에서 물고기를 낚고 나무를 모아 다리를 지으며 육지(최종 지점)까지 가는 2D 물리 기반 협동 멀티플레이 게임입니다(최대 4인).",
-          "verbatim": true
+          "verbatim": false
         },
         "sectionPath": [
           "1. 개요",
@@ -286,7 +286,7 @@
           {
             "label": "동기화",
             "text": "호스트만 물고기 AI·저항 계산을 하고, 게스트는 결과(위치·회전)만 보여 주는 구조가 필요했습니다(아사나 S11-4).",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "맵(레벨) 디자인",
@@ -345,7 +345,7 @@
           {
             "label": "이유",
             "text": "기능이 붙으면서 `FishMovement`가 428줄까지 커졌고, 그 안에 있던 BoxCast 감지 코드를 `FishObstacleSensor`로 따로 빼 352줄로 줄였습니다",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "이유",
@@ -415,7 +415,7 @@
           {
             "label": "슬롯 번호를 ID로 쓴 이유",
             "text": "슬롯 번호만 같으면 \"같은 물고기\"로 짝지을 수 있어, 물고기마다 새 ID를 만들어 알려 주는 생성 메시지가 따로 필요 없었습니다.",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "",
@@ -486,7 +486,7 @@
           {
             "label": "async로 만든 이유",
             "text": "도망이 끝날 때까지 기다렸다가 다음 상태로 넘어가야 했습니다.",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "CancellationToken이 필요한 이유",
@@ -529,12 +529,12 @@
           {
             "label": "Caught 상태에서만 구독",
             "text": "그 밖의 상태에서는 이 연산이 필요 없으므로, Caught에 들어갈 때 구독하고 나갈 때 해제했습니다",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "저항도는 메서드로만 바꾼다",
             "text": "바꾸는 길을 `DecreaseResistance()`(0 아래로 안 내려감)와 `ResetResistance()` 두 개로 정해, 저항도가 0 밑으로 내려가지 않게 했습니다.",
-            "verbatim": true
+            "verbatim": false
           }
         ],
         "visuals": [
@@ -573,7 +573,7 @@
           {
             "label": "이유",
             "text": "길찾기에서 Raycast(선)의 한계를 겪었기 때문에, 부피가 있는 물고기에는 처음부터 BoxCast를 선택했습니다.",
-            "verbatim": true
+            "verbatim": false
           }
         ],
         "visuals": [
@@ -625,7 +625,7 @@
           {
             "label": "제가 정한 규칙",
             "text": "종류가 틀리는 버그는 스냅샷 형식(`Protocol.cs`)을 바꾸지 않고, 이미 있는 칸에 넣는 값만 바로잡아 고친다",
-            "verbatim": true
+            "verbatim": false
           }
         ],
         "visuals": [
@@ -657,7 +657,7 @@
           {
             "label": "좀비 물고기",
             "text": "`enabled = false`로는 다른 코드가 메서드를 직접 부르는 것을 막지 못해서, 움직임을 거는 모든 진입점에 `isGuestLocked` 검사를 넣었습니다",
-            "verbatim": true
+            "verbatim": false
           }
         ],
         "visuals": [
@@ -691,7 +691,7 @@
           {
             "label": "B를 접은 이유",
             "text": "남은 개발 시간과 플레이어 담당과의 리팩토링 조율을 생각해 손이 `ICatchable`을 직접 호출하는 C로 조정했습니다.",
-            "verbatim": true
+            "verbatim": false
           }
         ],
         "visuals": [
@@ -723,7 +723,7 @@
           {
             "label": "선택 이유",
             "text": "첫 프로젝트 「뒤통수를 조심해」에서 적 FSM을 인터페이스 구조로 설계해 본 경험이 있었고, 여기에 이 프로젝트 직전에 막 배운 비동기를 더해 활용해 보고 싶었습니다.",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "결과",
@@ -760,7 +760,7 @@
           {
             "label": "예상하지 못한 것",
             "text": "저는 이 문제를 미리 예상하지 못했고, 팀 테스트 플레이 중에 알게 되었습니다. 끊김은 홍산 님이 게스트 보간을 넣어 고쳤습니다",
-            "verbatim": true
+            "verbatim": false
           }
         ],
         "visuals": [
@@ -866,7 +866,7 @@
           {
             "label": "문제",
             "text": "1차 빌드 테스트에서 게스트 화면에 나무가 물고기로 보이고, 같은 자리인데 호스트와 게스트에 다른 물고기가 보였습니다",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "원인",
@@ -876,7 +876,7 @@
           {
             "label": "해결",
             "text": "종류 값을 개별 식별값 `Key`로 통일하고, 게스트의 종류가 호스트와 다르면 올바른 프리팹으로 바꾸게 했습니다",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "결과",
@@ -919,7 +919,7 @@
           {
             "label": "해결",
             "text": "물에 들어온 뒤 1초 동안은 물 밖 판정을 무시하는 쿨타임을 두었습니다.",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "결과",
@@ -947,7 +947,7 @@
           {
             "label": "문제",
             "text": "지뢰 스크립트를 처음 붙였을 때 플레이어가 닿아도 넉백이 일어나지 않았습니다",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "원인",
@@ -957,7 +957,7 @@
           {
             "label": "해결",
             "text": "힘을 더하는 `AddForce` 대신 속도(`linearVelocity`)를 직접 지정해, 지뢰에서 멀어지는 방향으로 확실히 튕겨 나가게 했습니다",
-            "verbatim": true
+            "verbatim": false
           },
           {
             "label": "결과",
@@ -988,7 +988,7 @@
           {
             "label": "협업",
             "text": "어느 클래스가 어느 클래스를 참조하는지 먼저 확인하고, 그 참조를 최대한 줄이려고 합니다.",
-            "verbatim": true
+            "verbatim": false
           }
         ],
         "visuals": [

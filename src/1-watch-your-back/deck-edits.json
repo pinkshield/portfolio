@@ -6,73 +6,31 @@
       "chapter": "arch",
       "layout": "visual",
       "tab": "흐름",
-      "title": {
-        "text": "2-2. 상태 전환",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "전환 조건은 시야 박스와 공격 범위 박스로 판정합니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "2. 시스템 구조",
-        "2-2. 상태 전환"
-      ],
+      "title": {"text": "2-2. 상태 전환", "verbatim": true},
+      "lead": {"text": "전환 조건은 시야 박스와 공격 범위 박스로 판정합니다.", "verbatim": true},
+      "sectionPath": ["2. 시스템 구조", "2-2. 상태 전환"],
       "points": [
         {
           "label": "",
           "text": "1-4의 와치만(감시자가 지키는 구역으로 이동)과 랫만(쥐가 죽은 곳으로 이동) 패턴은 `AlertMovePatternState` 하나로 만들었습니다.",
           "verbatim": true
         },
-        {
-          "label": "",
-          "text": "외부 스크립트(감시자·쥐)는 보스의 내부를 몰라도 목표 위치 하나만 넘기고 `ChangeState`를 부르면 됩니다.",
-          "verbatim": true
-        }
+        {"label": "", "text": "외부 스크립트(감시자·쥐)는 보스의 내부를 몰라도 목표 위치 하나만 넘기고 `ChangeState`를 부르면 됩니다.", "verbatim": true}
       ],
-      "visuals": [
-        {
-          "kind": "mermaid",
-          "n": 1,
-          "fp": "stateDiagram-v2"
-        }
-      ],
-      "from": {
-        "key": "state-flow",
-        "sectionPath": [
-          "2. 시스템 구조",
-          "2-2. 상태 전환"
-        ],
-        "sig": [
-          "2-2. 상태 전환|mermaid|1|stateDiagram-v2"
-        ]
-      }
+      "visuals": [{"kind": "mermaid", "n": 1, "fp": "stateDiagram-v2"}],
+      "from": {"key": "state-flow", "sectionPath": ["2. 시스템 구조", "2-2. 상태 전환"], "sig": ["2-2. 상태 전환|mermaid|1|stateDiagram-v2"]}
     },
     {
       "key": "ts-knockdown",
       "chapter": "result",
       "layout": "problem",
       "tab": "문제 해결",
-      "title": {
-        "text": "A. 적을 쓰러뜨렸는데 플레이어도 쓰러지는 문제",
-        "verbatim": true
-      },
+      "title": {"text": "A. 적을 쓰러뜨렸는데 플레이어도 쓰러지는 문제", "verbatim": true},
       "lead": null,
-      "sectionPath": [
-        "5. 결과 및 배운 점",
-        "5-2. 트러블슈팅"
-      ],
+      "sectionPath": ["5. 결과 및 배운 점", "5-2. 트러블슈팅"],
       "points": [
-        {
-          "label": "문제",
-          "text": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 되었습니다",
-          "verbatim": true
-        },
-        {
-          "label": "원인",
-          "text": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냈습니다",
-          "verbatim": true
-        },
+        {"label": "문제", "text": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 되었습니다", "verbatim": true},
+        {"label": "원인", "text": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냈습니다", "verbatim": true},
         {
           "label": "해결",
           "text": "공격 타격 박스와 `OnBackHit` 앞에 `IsKnockDown` 확인을 추가하고(7/6), `ChangeState` 입구에도 같은 가드를 넣음(7/22)",
@@ -85,44 +43,22 @@
           "src": "images/backstab.gif",
           "w": 960,
           "h": 538,
-          "caption": {
-            "text": "뒤통수 — 뒤로 몰래 다가가 뒤통수를 치면 컷씬(SLAP!)과 함께 적이 쓰러집니다",
-            "verbatim": true
-          },
-          "sectionPath": [
-            "3-2. 같은 프레임 동시 피격 방지 (`TryLockCombat`)"
-          ]
+          "caption": {"text": "뒤통수 — 뒤로 몰래 다가가 뒤통수를 치면 컷씬(SLAP!)과 함께 적이 쓰러집니다", "verbatim": true},
+          "sectionPath": ["3-2. 같은 프레임 동시 피격 방지 (`TryLockCombat`)"]
         }
       ],
-      "from": {
-        "key": "ts-knockdown",
-        "sectionPath": [
-          "5. 결과 및 배운 점",
-          "5-2. 트러블슈팅"
-        ],
-        "sig": []
-      }
+      "from": {"key": "ts-knockdown", "sectionPath": ["5. 결과 및 배운 점", "5-2. 트러블슈팅"], "sig": []}
     },
     {
       "key": "ts-bgm",
       "chapter": "result",
       "layout": "problem",
       "tab": "문제 해결",
-      "title": {
-        "text": "B. 추격 음악이 처음 한 번만 나오는 문제",
-        "verbatim": true
-      },
+      "title": {"text": "B. 추격 음악이 처음 한 번만 나오는 문제", "verbatim": true},
       "lead": null,
-      "sectionPath": [
-        "5. 결과 및 배운 점",
-        "5-2. 트러블슈팅"
-      ],
+      "sectionPath": ["5. 결과 및 배운 점", "5-2. 트러블슈팅"],
       "points": [
-        {
-          "label": "문제",
-          "text": "처음 추격 상태가 되었을 때는 추격 BGM이 나오지만, 재시도한 뒤에는 나오지 않았습니다",
-          "verbatim": true
-        },
+        {"label": "문제", "text": "처음 추격 상태가 되었을 때는 추격 BGM이 나오지만, 재시도한 뒤에는 나오지 않았습니다", "verbatim": true},
         {
           "label": "원인",
           "text": "추격 중에 플레이어가 죽고 씬을 다시 불러오면, 적의 `Exit`가 불리지 않아 `engagedEnemyCount`가 0으로 돌아가지 않습니다.",
@@ -145,87 +81,40 @@
           "src": "images/enemy-chase.gif",
           "w": 960,
           "h": 538,
-          "caption": {
-            "text": "들켰을 때 — 시야(빨간 원)에 들키면 적이 쫓아오고, 공격에 한 번 맞으면 뺨 컷씬과 함께 끝납니다",
-            "verbatim": true
-          },
-          "sectionPath": [
-            "2-2. 상태 전환"
-          ]
+          "caption": {"text": "들켰을 때 — 시야(빨간 원)에 들키면 적이 쫓아오고, 공격에 한 번 맞으면 뺨 컷씬과 함께 끝납니다", "verbatim": true},
+          "sectionPath": ["2-2. 상태 전환"]
         }
       ],
-      "from": {
-        "key": "ts-bgm",
-        "sectionPath": [
-          "5. 결과 및 배운 점",
-          "5-2. 트러블슈팅"
-        ],
-        "sig": []
-      }
+      "from": {"key": "ts-bgm", "sectionPath": ["5. 결과 및 배운 점", "5-2. 트러블슈팅"], "sig": []}
     },
     {
       "key": "avoidance",
       "chapter": "core",
       "layout": "full",
       "tab": "구현",
-      "title": {
-        "text": "3-3. 장애물 회피 이동 (`MoveWithAvoidance`)",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "순찰·추격·출동 상태는 모두 같은 이동 함수를 씁니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "3. 핵심 기능",
-        "3-3. 장애물 회피 이동 (`MoveWithAvoidance`)"
-      ],
+      "title": {"text": "3-3. 장애물 회피 이동 (`MoveWithAvoidance`)", "verbatim": true},
+      "lead": {"text": "순찰·추격·출동 상태는 모두 같은 이동 함수를 씁니다.", "verbatim": true},
+      "sectionPath": ["3. 핵심 기능", "3-3. 장애물 회피 이동 (`MoveWithAvoidance`)"],
       "points": [
-        {
-          "label": "구현",
-          "text": "가려는 방향으로 바로 가지 않고, 부채꼴로 몇 갈래를 살펴서 처음으로 비어 있는 방향으로 움직입니다.",
-          "verbatim": true
-        },
-        {
-          "label": "이유",
-          "text": "당시에는 A* 길찾기가 제 수준에서 구현하기 어렵다고 생각해, 제가 만들 수 있는 방식으로 먼저 설계했습니다.",
-          "verbatim": false
-        },
-        {
-          "label": "문제",
-          "text": "그런데 나중에 디버그 로그로 확인해 보니, 실제로는 같은 쪽을 두 번 보고 한쪽 끝은 보지 않았습니다.",
-          "verbatim": true
-        }
+        {"label": "구현", "text": "가려는 방향으로 바로 가지 않고, 부채꼴로 몇 갈래를 살펴서 처음으로 비어 있는 방향으로 움직입니다.", "verbatim": true},
+        {"label": "이유", "text": "당시에는 A* 길찾기가 제 수준에서 구현하기 어렵다고 생각해, 제가 만들 수 있는 방식으로 먼저 설계했습니다.", "verbatim": false},
+        {"label": "문제", "text": "그런데 나중에 디버그 로그로 확인해 보니, 실제로는 같은 쪽을 두 번 보고 한쪽 끝은 보지 않았습니다.", "verbatim": true}
       ],
       "visuals": [
-        {
-          "kind": "table",
-          "n": 1,
-          "fp": "살피는 순서|1|2|3|4|5"
-        },
+        {"kind": "table", "n": 1, "fp": "살피는 순서|1|2|3|4|5"},
         {
           "kind": "image",
           "src": "images/ai-review-debug-log.png",
           "w": 1600,
           "h": 720,
-          "caption": {
-            "text": "디버그 로그로 확인한 #1 회피 각도와 #2 대기 시간 — Unity Editor.log 발췌",
-            "verbatim": true
-          },
-          "sectionPath": [
-            "5-4. AI 코드 리뷰로 다시 본 내 코드"
-          ]
+          "caption": {"text": "디버그 로그로 확인한 #1 회피 각도와 #2 대기 시간 — Unity Editor.log 발췌", "verbatim": true},
+          "sectionPath": ["5-4. AI 코드 리뷰로 다시 본 내 코드"]
         }
       ],
       "from": {
         "key": "avoidance",
-        "sectionPath": [
-          "3. 핵심 기능",
-          "3-3. 장애물 회피 이동 (`MoveWithAvoidance`)"
-        ],
-        "sig": [
-          "3-3. 장애물 회피 이동 (MoveWithAvoidance)|table|1|살피는 순서|1|2|3|4|5"
-        ]
+        "sectionPath": ["3. 핵심 기능", "3-3. 장애물 회피 이동 (`MoveWithAvoidance`)"],
+        "sig": ["3-3. 장애물 회피 이동 (MoveWithAvoidance)|table|1|살피는 순서|1|2|3|4|5"]
       }
     },
     {
@@ -233,35 +122,15 @@
       "chapter": "arch",
       "layout": "full",
       "tab": "구조",
-      "title": {
-        "text": "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "적 AI 시스템을 비유하자면, `EnemyStateManager`는 몸이고, 각 `IEnemyState`는 그 몸이 잠깐 입는 옷입니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "2. 시스템 구조",
-        "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"
-      ],
+      "title": {"text": "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다", "verbatim": true},
+      "lead": {"text": "적 AI 시스템을 비유하자면, `EnemyStateManager`는 몸이고, 각 `IEnemyState`는 그 몸이 잠깐 입는 옷입니다.", "verbatim": true},
+      "sectionPath": ["2. 시스템 구조", "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
       "points": [],
-      "visuals": [
-        {
-          "kind": "mermaid",
-          "n": 1,
-          "fp": "classDiagram"
-        }
-      ],
+      "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}],
       "from": {
         "key": "state-class",
-        "sectionPath": [
-          "2. 시스템 구조",
-          "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"
-        ],
-        "sig": [
-          "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다|mermaid|1|classDiagram"
-        ]
+        "sectionPath": ["2. 시스템 구조", "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
+        "sig": ["2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다|mermaid|1|classDiagram"]
       },
       "group": "split-state-roles"
     },
@@ -270,42 +139,31 @@
       "chapter": "arch",
       "layout": "visual",
       "tab": "구조",
-      "title": {
-        "text": "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다",
-        "verbatim": true
-      },
+      "title": {"text": "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다", "verbatim": true},
       "lead": null,
-      "sectionPath": [
-        "2. 시스템 구조",
-        "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"
-      ],
+      "sectionPath": ["2. 시스템 구조", "2-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
       "points": [
         {
           "label": "구현",
           "text": "몸(콜라이더, 애니메이터, 이동·회전 함수, Player 참조)은 하나뿐이고, 지금 어떤 행동을 하는지는 지금 입고 있는 옷(상태 클래스)이 결정합니다.",
           "verbatim": true
         },
-        {
-          "label": "",
-          "text": "옷을 갈아입어도(`ChangeState`) 몸의 위치와 컴포넌트 참조는 그대로 유지됩니다.",
-          "verbatim": true
-        },
-        {
-          "label": "이유",
-          "text": "보스 4명은 외형만 다르고 공격·이동은 모두 같습니다.",
-          "verbatim": true
-        }
+        {"label": "", "text": "옷을 갈아입어도(`ChangeState`) 몸의 위치와 컴포넌트 참조는 그대로 유지됩니다.", "verbatim": true},
+        {"label": "이유", "text": "보스 4명은 외형만 다르고 공격·이동은 모두 같습니다.", "verbatim": true}
       ],
-      "visuals": [
-        {
-          "kind": "table",
-          "n": 2,
-          "fp": "비유|맡은 스크립트|하는 일"
-        }
-      ],
+      "visuals": [{"kind": "table", "n": 2, "fp": "비유|맡은 스크립트|하는 일"}],
       "after": "state-class",
       "group": "split-state-roles"
     }
   ],
-  "hide": []
+  "hide": [
+    {
+      "key": "lessons",
+      "from": {
+        "key": "lessons",
+        "sectionPath": ["5. 결과 및 배운 점", "5-1. 배운 점"],
+        "sig": ["5-1. 배운 점|image|images/cutscene-slap-face.png|1"]
+      }
+    }
+  ]
 }

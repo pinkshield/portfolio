@@ -149,11 +149,12 @@
   ],
   "retro": {
     "achieved": [
+      "탈출한 순간의 안도감은 전해짐 — 처음 도전한 플레이어가 14분 고생 끝에 우연히 클리어해, \"살짝 허무하면서도 해냈다\"는 안도감을 느낌",
       "길을 아는 내가 어려운 길로 가도 3분 12초가 걸렸고, 처음 도전한 사람은 14분이 걸려 과제 조건(총 플레이 시간 3분 이상)을 넘었습니다.",
       "친구 플레이 테스트 피드백으로 커튼봉에 공이 끼는 문제와 창문으로 빠져나가는 문제를 고쳤습니다."
     ],
     "regrets": [
-      "안내가 없어 어디로 가야 할지, 목표 지점이 어디 있는지 몰랐습니다.",
+      "안내가 없어 어디로 가야 할지 몰라, 스스로 길을 열어 탈출하기보다 길을 찾아 헤매는 경험에 가까웠습니다.",
       "창고방을 튜토리얼(소개 코스)로 두었지만, 거실에 새로 등장하는 함정이 있었습니다."
     ],
     "plans": [
@@ -176,9 +177,9 @@
         "chapter": "overview",
         "layout": "overview",
         "tab": "개요",
-        "title": {"text": "1-1. 무엇을 만들었나 (What)", "verbatim": true},
+        "title": {"text": "1-1. 무엇을 만들었나", "verbatim": true},
         "lead": {"text": "집 안 진열장에 보관된 홀인원 골프공을 집 밖으로 탈출시키는 3D 물리 기반 미니 골프 탈출 게임입니다.", "verbatim": true},
-        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나 (What)"],
+        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나"],
         "points": [
           {"label": "", "text": "수업의 맵(레벨) 디자인 과제로 만들었습니다.", "verbatim": true},
           {"label": "", "text": "골프공 옆의 \"0%\" 는 치는 힘 게이지입니다.", "verbatim": true}
@@ -200,7 +201,7 @@
         "tab": "개요",
         "title": {"text": "시작 안내 화면 — 게임 방법과 키 안내", "verbatim": true},
         "lead": {"text": "공이 바닥에 떨어지면 마지막으로 치기 전의 위치로 돌아갑니다.", "verbatim": true},
-        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나 (What)"],
+        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나"],
         "points": [],
         "visuals": [
           {
@@ -218,9 +219,9 @@
         "chapter": "overview",
         "layout": "overview",
         "tab": "개요",
-        "title": {"text": "1-2. 과제와 목표 (Why)", "verbatim": true},
+        "title": {"text": "1-2. 과제와 목표", "verbatim": true},
         "lead": {"text": "홀인원 공은 진열장에 보관되어 갇혀 있는 공입니다. 그 공을 집 밖으로 탈출시켜 자유를 주는 경험을 주고 싶었습니다.", "verbatim": true},
-        "sectionPath": ["1. 개요", "1-2. 과제와 목표 (Why)"],
+        "sectionPath": ["1. 개요", "1-2. 과제와 목표"],
         "points": [
           {"label": "과제 조건", "text": "새 장애물을 최소 3종 만듭니다.", "verbatim": true},
           {"label": "과제 조건", "text": "그 장애물을 소개 → 응용 → 심화 세 코스에 나눠 배치해, 플레이어가 배우고 익히고 시험받게 합니다.", "verbatim": true},
@@ -557,9 +558,9 @@
         "chapter": "overview",
         "layout": "overview",
         "tab": "개요",
-        "title": {"text": "1-1. 무엇을 만들었나 (What)", "verbatim": true},
+        "title": {"text": "1-1. 무엇을 만들었나", "verbatim": true},
         "lead": {"text": "집 안 진열장에 보관된 홀인원 골프공을 집 밖으로 탈출시키는 3D 물리 기반 미니 골프 탈출 게임입니다.", "verbatim": true},
-        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나 (What)"],
+        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나"],
         "points": [
           {"label": "", "text": "수업의 맵(레벨) 디자인 과제로 만들었습니다.", "verbatim": true},
           {"label": "", "text": "골프공 옆의 \"0%\" 는 치는 힘 게이지입니다.", "verbatim": true}
@@ -581,7 +582,7 @@
         "tab": "개요",
         "title": {"text": "시작 안내 화면 — 게임 방법과 키 안내", "verbatim": true},
         "lead": {"text": "공이 바닥에 떨어지면 마지막으로 치기 전의 위치로 돌아갑니다.", "verbatim": true},
-        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나 (What)"],
+        "sectionPath": ["1. 개요", "1-1. 무엇을 만들었나"],
         "points": [],
         "visuals": [
           {
@@ -599,9 +600,9 @@
         "chapter": "overview",
         "layout": "overview",
         "tab": "개요",
-        "title": {"text": "1-2. 과제와 목표 (Why)", "verbatim": true},
+        "title": {"text": "1-2. 과제와 목표", "verbatim": true},
         "lead": {"text": "홀인원 공은 진열장에 보관되어 갇혀 있는 공입니다. 그 공을 집 밖으로 탈출시켜 자유를 주는 경험을 주고 싶었습니다.", "verbatim": true},
-        "sectionPath": ["1. 개요", "1-2. 과제와 목표 (Why)"],
+        "sectionPath": ["1. 개요", "1-2. 과제와 목표"],
         "points": [
           {"label": "과제 조건", "text": "새 장애물을 최소 3종 만듭니다.", "verbatim": true},
           {"label": "과제 조건", "text": "그 장애물을 소개 → 응용 → 심화 세 코스에 나눠 배치해, 플레이어가 배우고 익히고 시험받게 합니다.", "verbatim": true},
@@ -942,6 +943,6 @@
         "visuals": []
       }
     ],
-    "applied": "9c1447657ffc4d38"
+    "applied": "5b54d0bf5f33545f"
   }
 }

@@ -439,6 +439,24 @@
         ]
       },
       {
+        "key": "ai-traps",
+        "chapter": "tradeoffs",
+        "layout": "full",
+        "tab": "",
+        "title": {"text": "4-6. 함정 스크립트는 AI에게, 수치는 플레이로", "verbatim": true},
+        "lead": {"text": "코드는 AI가 짰지만, 함정이 플레이에서 어떻게 느껴지는지는 직접 쳐 보며 정했습니다.", "verbatim": true},
+        "sectionPath": ["4. 고민과 선택", "4-6. 함정 스크립트는 AI에게, 수치는 플레이로"],
+        "points": [
+          {
+            "label": "잘 된 것",
+            "text": "레벨 디자인은 제가 직접 하고 함정 코드 구현은 AI에게 맡겨, 작업 시간을 줄이고 생산성을 높일 수 있었습니다.",
+            "verbatim": true
+          },
+          {"label": "안 된 것", "text": "함정을 자세하게 설명하지 않고 요청해서, 받은 코드에 문제가 생겨 고치는 데 시간이 들었습니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "함정|받은 코드|플레이하며 직접 고친 것"}]
+      },
+      {
         "key": "result-screen",
         "chapter": "results",
         "layout": "visual",
@@ -830,6 +848,24 @@
         ]
       },
       {
+        "key": "ai-traps",
+        "chapter": "tradeoffs",
+        "layout": "full",
+        "tab": "",
+        "title": {"text": "4-6. 함정 스크립트는 AI에게, 수치는 플레이로", "verbatim": true},
+        "lead": {"text": "코드는 AI가 짰지만, 함정이 플레이에서 어떻게 느껴지는지는 직접 쳐 보며 정했습니다.", "verbatim": true},
+        "sectionPath": ["4. 고민과 선택", "4-6. 함정 스크립트는 AI에게, 수치는 플레이로"],
+        "points": [
+          {
+            "label": "잘 된 것",
+            "text": "레벨 디자인은 제가 직접 하고 함정 코드 구현은 AI에게 맡겨, 작업 시간을 줄이고 생산성을 높일 수 있었습니다.",
+            "verbatim": true
+          },
+          {"label": "안 된 것", "text": "함정을 자세하게 설명하지 않고 요청해서, 받은 코드에 문제가 생겨 고치는 데 시간이 들었습니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "함정|받은 코드|플레이하며 직접 고친 것"}]
+      },
+      {
         "key": "result-screen",
         "chapter": "results",
         "layout": "visual",
@@ -943,6 +979,6 @@
         "visuals": []
       }
     ],
-    "applied": "5b54d0bf5f33545f"
+    "applied": "02d1433e83505abf"
   }
 }

@@ -1,3 +1,4 @@
+@import url("deck-layout.css"); /* 발표 덱 장면 배치 — 이 줄은 /portfolio-theme가 이 파일을 다시 써도 남겨 둡니다(.claude/rules/deck-layout.md) */
 /* ─────────────────────────────────────────────────────────────
    테마 (theme/theme.css) — /portfolio-theme가 만듦 · 2026-11-13
    참고한 화면: ① 검은 남색 바탕의 게임 개발자 포트폴리오 페이지(모양·글꼴·평평한 바탕)

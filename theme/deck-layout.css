@@ -1,0 +1,78 @@
+/* ─────────────────────────────────────────────────────────────
+   발표 덱 장면 배치 (theme/deck-layout.css) — 2026-11-18, HIVE PURGE 피드백
+   theme/theme.css 첫 줄의 @import로 실립니다. /portfolio-update가 건드리지 않는 파일입니다.
+   규칙: .claude/rules/deck-layout.md · 설계: 설계-발표덱-배치-보완.md
+   - 무엇을 보일지(틀·그림·카드 문장·나누기)는 src/<폴더>/deck-edits.json, 어디에 놓을지는 이 파일
+   - #deck:has(a[href*="p=<폴더>"]) = 그 프로젝트 덱일 때만. 장면 id는 다섯 덱이 같은 이름을 쓰므로 꼭 붙입니다
+   - 렌더러 구조(.dk .vis .cards .ch-mid)가 바뀌면 그 장면은 원래 자동 배치로 돌아갑니다(깨지지 않음)
+   ───────────────────────────────────────────────────────────── */
+
+/* ── 장 표지 그림 (공통) ──
+   제목은 왼쪽 위 한 줄, 그 아래 [게임 화면 | 장면 목록]을 같은 높이로 — 그림이 목록보다 아래로 내려가지 않게.
+   그림을 넣을 장 표지는 아래 SEL 목록에 더하고, 그림 줄을 하나 씁니다. (PPTX로 저장에는 들어가지 않음 — CSS 배경) */
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-arch), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-choice, #ch-result)) .ch-mid {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: auto auto;
+  grid-template-areas: "t t" "img list"; align-content: center; align-items: stretch; row-gap: 20px;
+}
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-arch), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-choice, #ch-result)) .ch-mid > div:first-child { grid-area: t; }
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-arch), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-choice, #ch-result)) .ch-list { grid-area: list; display: flex; flex-direction: column; justify-content: center; }
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-arch), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-choice, #ch-result)) .ch-mid::after {
+  content: ""; grid-area: img; min-height: 220px;
+  border-radius: var(--radius, 6px); border: 1px solid var(--line);
+  background: var(--card) left center / cover no-repeat;
+}
+
+/* ── HIVE PURGE (4-team-even) ── */
+
+/* 3쪽 「개요」 · 7쪽 「시스템 구조」 장 표지 그림 */
+#deck:has(a[href*="p=4-team-even"]) #ch-intro .ch-mid::after { background-image: url("../src/4-team-even/images/main-menu.png"); }
+#deck:has(a[href*="p=4-team-even"]) #ch-arch .ch-mid::after { background-image: url("../src/4-team-even/images/gameplay-crowd.png"); }
+
+/* 5쪽 1-2 — 보급 그림 왼쪽, 문제 카드 4개를 오른쪽에 위아래로 */
+#deck:has(a[href*="p=4-team-even"]) #d-why .dk {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) !important; grid-template-rows: minmax(0, 1fr); align-items: center;
+}
+#deck:has(a[href*="p=4-team-even"]) #d-why .dk > .vis { grid-column: 1; grid-row: 1; }
+#deck:has(a[href*="p=4-team-even"]) #d-why .dk > .cards { grid-column: 2; grid-row: 1; grid-template-columns: minmax(0, 1fr) !important; }
+
+/* 9쪽 2-2 — 다이어그램 왼쪽 크게, 표 오른쪽 위, 카드 1·2 오른쪽 아래 위아래로 */
+#deck:has(a[href*="p=4-team-even"]) #d-supply-arch .pf-fill { flex: 1 1 auto; min-height: 0; margin-block: 0; display: flex; }
+#deck:has(a[href*="p=4-team-even"]) #d-supply-arch .dk {
+  flex: 1 1 auto; min-height: 0; gap: 18px 28px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important; grid-template-rows: auto minmax(0, 1fr) !important;
+  grid-template-areas: "d t" "d c";
+}
+#deck:has(a[href*="p=4-team-even"]) #d-supply-arch .vis { display: contents; }
+#deck:has(a[href*="p=4-team-even"]) #d-supply-arch .vbox[data-kind="mermaid"] { grid-area: d; width: auto !important; min-height: 0; }
+#deck:has(a[href*="p=4-team-even"]) #d-supply-arch .vbox[data-kind="mermaid"] .vmedia { flex: 1 1 auto; min-height: 0; width: auto !important; height: auto !important; }
+#deck:has(a[href*="p=4-team-even"]) #d-supply-arch .vbox[data-kind="table"] { grid-area: t; width: auto !important; }
+#deck:has(a[href*="p=4-team-even"]) #d-supply-arch .vbox[data-kind="table"] .fit-in { zoom: 1 !important; width: auto !important; }
+#deck:has(a[href*="p=4-team-even"]) #d-supply-arch .cards { grid-area: c; grid-template-columns: minmax(0, 1fr) !important; align-content: end; }
+
+/* 10쪽 2-3 — 다이어그램 왼쪽 크게, 카드 1·2 오른쪽 아래 위아래로 (표는 다음 장면) */
+#deck:has(a[href*="p=4-team-even"]) #d-sound-arch .dk {
+  grid-template-columns: minmax(0, 2.6fr) minmax(0, 1fr) !important; grid-template-rows: minmax(0, 1fr) !important;
+}
+#deck:has(a[href*="p=4-team-even"]) #d-sound-arch .dk > .vis { grid-column: 1; grid-row: 1; }
+#deck:has(a[href*="p=4-team-even"]) #d-sound-arch .dk > .cards { grid-column: 2; grid-row: 1; grid-template-columns: minmax(0, 1fr) !important; align-self: end; }
+
+/* 13쪽 3-2 — 다이어그램 위쪽 가로 전체, 카드 1·2 가운데 아래 가로로 (표는 다음 장면) */
+#deck:has(a[href*="p=4-team-even"]) #d-drop-point .dk {
+  grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: minmax(0, 1fr) auto !important; gap: 20px;
+}
+#deck:has(a[href*="p=4-team-even"]) #d-drop-point .dk > .vis { grid-column: 1; grid-row: 1; }
+#deck:has(a[href*="p=4-team-even"]) #d-drop-point .dk > .cards {
+  grid-column: 1; grid-row: 2; grid-template-columns: repeat(2, minmax(0, 560px)) !important; justify-content: center;
+}
+
+/* ── 뒤통수를 조심해 (1-watch-your-back) ── */
+
+/* 장 표지 5장 그림 */
+#deck:has(a[href*="p=1-watch-your-back"]) #ch-intro .ch-mid::after { background-image: url("../src/1-watch-your-back/images/GameMenu.png"); }
+#deck:has(a[href*="p=1-watch-your-back"]) #ch-arch .ch-mid::after { background-image: url("../src/1-watch-your-back/images/빨간색(시야박스)-노란색(허트박스)-초록색(히트박스).png"); background-position: center; }
+#deck:has(a[href*="p=1-watch-your-back"]) #ch-core .ch-mid::after { background-image: url("../src/1-watch-your-back/images/플레이사진.png"); background-position: center; }
+#deck:has(a[href*="p=1-watch-your-back"]) #ch-choice .ch-mid::after { background-image: url("../src/1-watch-your-back/images/cutscene-slap-back.png"); background-position: center; }
+#deck:has(a[href*="p=1-watch-your-back"]) #ch-result .ch-mid::after { background-image: url("../src/1-watch-your-back/images/GameClear.png"); background-position: center; }
+
+/* 장 표지에 그림을 넣으면 목록 자리가 줄어서, 장면마다 붙는 도입 문장은 빼고 제목만 보입니다 */
+#deck:has(a[href*="p=1-watch-your-back"]) .t-CH .ch-list .ld { display: none; }

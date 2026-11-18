@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "pin": [
+    {
+      "key": "why",
+      "chapter": "intro",
+      "layout": "visual",
+      "tab": "개요",
+      "title": {
+        "text": "1-2. 왜 만들었나 (Why) — 제 파트가 풀어야 했던 문제",
+        "verbatim": true
+      },
+      "lead": null,
+      "sectionPath": [
+        "1-2. 왜 만들었나 (Why) — 제 파트가 풀어야 했던 문제"
+      ],
+      "points": [
+        {
+          "label": "보급",
+          "text": "보급이 지형 위·높은 건물 위·맵 밖에 떨어져 주울 수 없는 경우가 나왔습니다",
+          "verbatim": true
+        },
+        {
+          "label": "보급",
+          "text": "테스트 중 10개 중 2~3개 정도를 줍지 못했습니다.",
+          "verbatim": true
+        },
+        {
+          "label": "사운드",
+          "text": "다른 사람의 코드를 고치지 않고 소리를 붙일 방법이 필요했습니다.",
+          "verbatim": false
+        },
+        {
+          "label": "맵",
+          "text": "맵이 크다 보니 플레이어가 계속 몬스터를 피해 도망 다니게 되었고, 보급이 너무 멀리 떨어져 보급을 주우러 가는 길이 오히려 스트레스가 되었습니다.",
+          "verbatim": true
+        }
+      ],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/supply-drop.png",
+          "w": 1920,
+          "h": 1080,
+          "caption": {
+            "text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함",
+            "verbatim": true
+          },
+          "sectionPath": [
+            "3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
+          ]
+        }
+      ],
+      "from": {
+        "key": "why",
+        "sectionPath": [
+          "1-2. 왜 만들었나 (Why) — 제 파트가 풀어야 했던 문제"
+        ],
+        "sig": []
+      }
+    },
+    {
+      "key": "map",
+      "chapter": "choice",
+      "layout": "visual",
+      "tab": "선택",
+      "title": {
+        "text": "4-6. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다",
+        "verbatim": true
+      },
+      "lead": {
+        "text": "마감인 발표일(11-04)까지 남은 기간이 일주일 정도뿐이었습니다",
+        "verbatim": true
+      },
+      "sectionPath": [
+        "4-6. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다"
+      ],
+      "points": [
+        {
+          "label": "",
+          "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.",
+          "verbatim": true
+        },
+        {
+          "label": "",
+          "text": "그래서 \"높은 곳에서 쏘는 이점은 주지 않는다\" 원칙을 빌더 규칙으로 넣어, 계단·사다리·발판이 달린 프리팹은 배치하지 않았습니다.",
+          "verbatim": false
+        }
+      ],
+      "visuals": [
+        {
+          "kind": "table",
+          "n": 1,
+          "fp": "방법|장점|단점"
+        },
+        {
+          "kind": "image",
+          "src": "images/map-overview.png",
+          "w": 2492,
+          "h": 1631,
+          "caption": {
+            "text": "신규 인게임 맵 탑뷰 — 지점 13곳, 순환로, 시작·보스 등장·구조선 착륙 지점",
+            "verbatim": true
+          }
+        }
+      ],
+      "from": {
+        "key": "map",
+        "sectionPath": [
+          "4-6. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다"
+        ],
+        "sig": [
+          "4-6. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다|image|images/map-overview.png|1",
+          "4-6. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다|table|1|방법|장점|단점"
+        ]
+      }
+    },
+    {
+      "key": "sound-arch",
+      "chapter": "arch",
+      "layout": "visual",
+      "tab": "구조",
+      "title": {
+        "text": "2-3. 사운드 모듈 구조 — 소리 하나에 경로 하나",
+        "verbatim": true
+      },
+      "lead": null,
+      "sectionPath": [
+        "2-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"
+      ],
+      "points": [
+        {
+          "label": "",
+          "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.",
+          "verbatim": true
+        },
+        {
+          "label": "",
+          "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-01) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(3-5 ③).",
+          "verbatim": true
+        }
+      ],
+      "visuals": [
+        {
+          "kind": "mermaid",
+          "n": 1,
+          "fp": "flowchart LR"
+        }
+      ],
+      "from": {
+        "key": "sound-arch",
+        "sectionPath": [
+          "2-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"
+        ],
+        "sig": [
+          "2-3. 사운드 모듈 구조 — 소리 하나에 경로 하나|mermaid|1|flowchart LR",
+          "2-3. 사운드 모듈 구조 — 소리 하나에 경로 하나|table|1|경로|언제|예"
+        ]
+      },
+      "group": "split-sound-arch-table"
+    },
+    {
+      "key": "sound-arch-table",
+      "chapter": "arch",
+      "layout": "full",
+      "tab": "구조",
+      "title": {
+        "text": "2-3. 사운드 모듈 구조 — 소리 하나에 경로 하나",
+        "verbatim": true
+      },
+      "lead": null,
+      "sectionPath": [
+        "2-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"
+      ],
+      "points": [],
+      "visuals": [
+        {
+          "kind": "table",
+          "n": 1,
+          "fp": "경로|언제|예"
+        }
+      ],
+      "after": "sound-arch",
+      "group": "split-sound-arch-table"
+    },
+    {
+      "key": "drop-point",
+      "chapter": "core",
+      "layout": "visual",
+      "tab": "흐름",
+      "title": {
+        "text": "3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
+        "verbatim": true
+      },
+      "lead": {
+        "text": "하나라도 걸리면 그 후보는 버리고 다시 뽑습니다(최대 30번).",
+        "verbatim": true
+      },
+      "sectionPath": [
+        "3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
+      ],
+      "points": [
+        {
+          "label": "길 찾기를 맨 마지막에 둔 이유",
+          "text": "값싼 검사로 먼저 거르면 비싼 길 찾기는 살아남은 후보 몇 개만 받으므로, 보급이 늦어지지 않습니다.",
+          "verbatim": true
+        },
+        {
+          "label": "실패 사유를 종류별로 세는 이유",
+          "text": "플레이 테스트 중에는 어떤 상자가 왜 실패했는지 눈으로 확인하기 어려워, 사유별 횟수를 경고로 남겼습니다(5-2 ④).",
+          "verbatim": true
+        }
+      ],
+      "visuals": [
+        {
+          "kind": "mermaid",
+          "n": 1,
+          "fp": "flowchart LR"
+        }
+      ],
+      "from": {
+        "key": "drop-point",
+        "sectionPath": [
+          "3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
+        ],
+        "sig": [
+          "3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)|mermaid|1|flowchart LR",
+          "3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)|table|1|검사|막는 문제|어디서 나왔나"
+        ]
+      },
+      "group": "split-drop-point-table"
+    },
+    {
+      "key": "drop-point-table",
+      "chapter": "core",
+      "layout": "full",
+      "tab": "흐름",
+      "title": {
+        "text": "3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
+        "verbatim": true
+      },
+      "lead": null,
+      "sectionPath": [
+        "3-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
+      ],
+      "points": [],
+      "visuals": [
+        {
+          "kind": "table",
+          "n": 1,
+          "fp": "검사|막는 문제|어디서 나왔나"
+        }
+      ],
+      "after": "drop-point",
+      "group": "split-drop-point-table"
+    }
+  ],
+  "hide": []
+}

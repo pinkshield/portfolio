@@ -76,3 +76,10 @@
 
 /* 장 표지에 그림을 넣으면 목록 자리가 줄어서, 장면마다 붙는 도입 문장은 빼고 제목만 보입니다 */
 #deck:has(a[href*="p=1-watch-your-back"]) .t-CH .ch-list .ld { display: none; }
+
+/* ── WoW 하드코어 분석 (5-wow-hardcore-analysis) ── */
+
+/* 10쪽 「핵심 분석」 장 표지 — 장면이 12개라 목록이 넘침. 탭 이름(구조·흐름…)을 제목 옆 한 줄로
+   렌더러는 장면을 #deck 밖 측정 상자(.pf-measure)에서 맞춰 보므로 #deck:has(...) 대신, 이 덱에만 있는 장면 링크(#d-hc-weight)로 가립니다 */
+#ch-core:has(a[href="#d-hc-weight"]) .ch-list .tx { display: flex; align-items: baseline; gap: 10px; }
+#ch-core:has(a[href="#d-hc-weight"]) .ch-list .d { flex: none; }

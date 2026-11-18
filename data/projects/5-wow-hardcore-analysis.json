@@ -314,11 +314,6 @@
             "label": "내가 겪은 장면",
             "text": "힐러가 잠시 자리를 비운 것을 모르고 전투를 시작해 힐을 받지 못했고, 보스의 속박 기술에 걸려 죽었습니다.",
             "verbatim": false
-          },
-          {
-            "label": "결과",
-            "text": "같은 시스템(역할 분리·어그로·군중 제어)이라도 실수 한 번이 캐릭터 삭제로 이어지므로, 플레이어는 모든 판단을 더 신중하게 내려야 합니다.",
-            "verbatim": true
           }
         ],
         "visuals": [
@@ -328,9 +323,25 @@
             "w": 880,
             "h": 885,
             "caption": {"text": "만렙 3일 만에 보스전에서 죽은 제 캐릭터 — 하드코어 서버라 다시 부활할 수 없습니다", "verbatim": true}
-          },
-          {"kind": "mermaid", "n": 1, "fp": "flowchart LR"}
+          }
         ]
+      },
+      {
+        "key": "hc-weight",
+        "chapter": "core",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {"text": "3-4. 하드코어 — 규칙 하나가 바꾸는 것", "verbatim": true},
+        "lead": {"text": "하드코어는 전투 시스템 자체를 바꾸지 않습니다. 대신 \"위험의 무게\"를 바꿉니다.", "verbatim": true},
+        "sectionPath": ["3. 핵심 분석", "3-4. 하드코어 — 규칙 하나가 바꾸는 것"],
+        "points": [
+          {
+            "label": "결과",
+            "text": "같은 시스템(역할 분리·어그로·군중 제어)이라도 실수 한 번이 캐릭터 삭제로 이어지므로, 플레이어는 모든 판단을 더 신중하게 내려야 합니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
         "key": "core-loop",
@@ -654,11 +665,6 @@
             "label": "내가 겪은 장면",
             "text": "힐러가 잠시 자리를 비운 것을 모르고 전투를 시작해 힐을 받지 못했고, 보스의 속박 기술에 걸려 죽었습니다.",
             "verbatim": false
-          },
-          {
-            "label": "결과",
-            "text": "같은 시스템(역할 분리·어그로·군중 제어)이라도 실수 한 번이 캐릭터 삭제로 이어지므로, 플레이어는 모든 판단을 더 신중하게 내려야 합니다.",
-            "verbatim": true
           }
         ],
         "visuals": [
@@ -668,9 +674,25 @@
             "w": 880,
             "h": 885,
             "caption": {"text": "만렙 3일 만에 보스전에서 죽은 제 캐릭터 — 하드코어 서버라 다시 부활할 수 없습니다", "verbatim": true}
-          },
-          {"kind": "mermaid", "n": 1, "fp": "flowchart LR"}
+          }
         ]
+      },
+      {
+        "key": "hc-weight",
+        "chapter": "core",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {"text": "3-4. 하드코어 — 규칙 하나가 바꾸는 것", "verbatim": true},
+        "lead": {"text": "하드코어는 전투 시스템 자체를 바꾸지 않습니다. 대신 \"위험의 무게\"를 바꿉니다.", "verbatim": true},
+        "sectionPath": ["3. 핵심 분석", "3-4. 하드코어 — 규칙 하나가 바꾸는 것"],
+        "points": [
+          {
+            "label": "결과",
+            "text": "같은 시스템(역할 분리·어그로·군중 제어)이라도 실수 한 번이 캐릭터 삭제로 이어지므로, 플레이어는 모든 판단을 더 신중하게 내려야 합니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
         "key": "core-loop",
@@ -850,6 +872,6 @@
         "visuals": []
       }
     ],
-    "applied": "d6420a7611fb5fbe"
+    "applied": "64c02d9209781c5f"
   }
 }

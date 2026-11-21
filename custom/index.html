@@ -423,12 +423,21 @@ function teamLabel(p) {
   if (t.type === 'solo') return T('name.solo');
   return '';
 }
+// 직접 만든 원본 발표 자료가 있으면 「슬라이드」는 그 파일을 엶 (강사님 피드백 11-21: "슬라이드는 니꺼 원본 써")
+const ORIGINAL_DECK = {
+  '5-wow-hardcore-analysis': 'Present File/WoW_클래식_하드코어_전투시스템_분석_개선.pptx.pdf',
+};
+const deckHref = (p) => ORIGINAL_DECK[p.id]
+  ? `../src/${encodeURIComponent(p.id)}/${ORIGINAL_DECK[p.id].split('/').map(encodeURIComponent).join('/')}`
+  : `../project.html?p=${encodeURIComponent(p.id)}`;
+const docLabel = (p, short) => isAnalysis(p) ? '분석 문서' : T(short ? 'name.doc-short' : 'name.doc');
 function LinkRow({ p }) {
   const L = p.links || {};
+  const orig = !!ORIGINAL_DECK[p.id];
   return (
     <div className="flex flex-wrap gap-2.5">
-      <a className="btn btn-fill" href={`../project.html?p=${encodeURIComponent(p.id)}`}>{T('name.deck')} →</a>
-      <a className="btn btn-line" href={`../doc.html?p=${encodeURIComponent(p.id)}`}>{T('name.doc')}</a>
+      <a className="btn btn-fill" href={deckHref(p)} {...(orig ? { target: '_blank', rel: 'noopener' } : {})}>{T('name.deck')} {orig ? '(원본 PDF) ↗' : '→'}</a>
+      <a className="btn btn-line" href={`../doc.html?p=${encodeURIComponent(p.id)}`}>{docLabel(p)}</a>
       {L.video && <a className="btn btn-line" href={L.video} target="_blank" rel="noopener">{T('name.video')} ↗</a>}
       {L.github && <a className="btn btn-line" href={L.github} target="_blank" rel="noopener">GitHub ↗</a>}
       {(L.extra || []).filter((x) => x && x.url).map((x) => <a key={x.url} className="btn btn-line" href={x.url} target="_blank" rel="noopener">{x.label} ↗</a>)}
@@ -480,7 +489,7 @@ function FeaturesSlide({ p, no }) {
             <div className="eyebrow">{isAnalysis(p) ? 'ANALYSIS' : T('en.project')} {String(no).padStart(2, '0')} · {isAnalysis(p) ? '핵심 분석' : T('page.features')}</div>
             <h2 className="h-big text-2xl md:text-4xl mt-3">{p.title}</h2>
           </div>
-          <a className="btn btn-line" href={`../project.html?p=${encodeURIComponent(p.id)}`}>{T('page.deck-all')} →</a>
+          <a className="btn btn-line" href={deckHref(p)} {...(ORIGINAL_DECK[p.id] ? { target: '_blank', rel: 'noopener' } : {})}>{T('page.deck-all')} {ORIGINAL_DECK[p.id] ? '↗' : '→'}</a>
         </div>
         <div className={`grid gap-4 ${hs.length > 1 ? 'md:grid-cols-2' : ''}`}>
           {hs.map((h, i) => {
@@ -531,7 +540,7 @@ function ProjectsGridSlide({ projects, goProject }) {
                   {per && <p className="mt-2 text-xs muted" style={{ fontFamily: 'var(--en)', fontWeight: 600 }}>{per.text}</p>}
                   <div className="mt-3 flex flex-wrap gap-1">{(p.tags || []).slice(0, 3).map((t) => <span key={t} className="chip" style={{ fontSize: 11.5, padding: '2px 7px' }}>{t}</span>)}</div>
                   <div className="mt-auto pt-3 text-xs font-bold flex justify-between items-center" style={{ color: 'var(--ink)', borderTop: '1px solid var(--line)' }}>
-                    <span>{T('name.deck')} · {T('name.doc-short')}</span><span className="accent">→</span>
+                    <span>{T('name.deck')} · {docLabel(p, true)}</span><span className="accent">→</span>
                   </div>
                 </div>
               </button>

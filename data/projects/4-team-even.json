@@ -412,7 +412,7 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}],
         "edited": true
       },
       {
@@ -750,13 +750,26 @@
       {
         "key": "why",
         "chapter": "intro",
-        "layout": "full",
+        "layout": "visual",
         "tab": "개요",
         "title": {"text": "1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제", "verbatim": true},
         "lead": null,
         "sectionPath": ["1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제"],
-        "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "파트|풀어야 했던 문제|다룬 곳"}]
+        "points": [
+          {"label": "보급", "text": "새 맵에서 보급이 떨어지지 않거나, 지형·높은 건물 위·맵 밖에 떨어져 10개 중 2~3개를 줍지 못했습니다", "verbatim": false},
+          {"label": "사운드", "text": "4명이 각자 만드는 몬스터·보스·무기에 다른 사람의 코드를 고치지 않고 소리를 붙여야 했습니다", "verbatim": false},
+          {"label": "맵", "text": "맵이 너무 커서 도망만 다니게 되고, 보급을 주우러 가는 길이 스트레스였습니다", "verbatim": false}
+        ],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/supply-drop.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {"text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함", "verbatim": true},
+            "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
+          }
+        ]
       },
       {
         "key": "game-flow",
@@ -863,7 +876,18 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}, {"kind": "table", "n": 1, "fp": "경로|언제|예"}]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+      },
+      {
+        "key": "sound-arch-table",
+        "chapter": "arch",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "경로|언제|예"}]
       },
       {
         "key": "supply-api",
@@ -906,7 +930,18 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}, {"kind": "table", "n": 1, "fp": "검사|막는 문제|어디서 나왔나"}]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+      },
+      {
+        "key": "drop-point-table",
+        "chapter": "core",
+        "layout": "full",
+        "tab": "흐름",
+        "title": {"text": "5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "검사|막는 문제|어디서 나왔나"}]
       },
       {
         "key": "drop-weight",
@@ -1123,11 +1158,15 @@
         "layout": "visual",
         "tab": "선택",
         "title": {"text": "7-2. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다", "verbatim": true},
-        "lead": {"text": "Claude가 생성·배치한 결과를 확인해 가며 고칠 부분은 고쳤고, 디테일한 배치는 직접 손으로 했습니다.", "verbatim": true},
+        "lead": {"text": "마감인 발표일(11-04)까지 남은 기간이 일주일 정도뿐이었습니다", "verbatim": true},
         "sectionPath": ["7-2. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다"],
         "points": [
           {"label": "", "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.", "verbatim": true},
-          {"label": "", "text": "또한 쓰지 않는 에셋을 정리해 Sci-Fi Base 에셋을 3.25GB → 1.65GB로 줄였습니다(10-31).", "verbatim": true}
+          {
+            "label": "",
+            "text": "그래서 \"높은 곳에서 쏘는 이점은 주지 않는다\" 원칙을 빌더 규칙으로 넣어, 계단·사다리·발판이 달린 프리팹은 배치하지 않았습니다.",
+            "verbatim": false
+          }
         ],
         "visuals": [
           {"kind": "table", "n": 1, "fp": "방법|장점|단점"},
@@ -1193,7 +1232,7 @@
         "visuals": []
       }
     ],
-    "applied": "1db66eff2f3b6a63"
+    "applied": "1327a00539ff4cf9"
   },
   "generatedAt": null
 }

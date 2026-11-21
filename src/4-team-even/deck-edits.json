@@ -210,7 +210,7 @@
         {
           "kind": "mermaid",
           "n": 1,
-          "fp": "flowchart TB"
+          "fp": "flowchart LR"
         }
       ],
       "from": {

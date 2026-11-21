@@ -235,7 +235,7 @@ function HistorySkillsSlide({ history, skills, titleOf, goProject }) {
       <Wrap>
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           <div className="lg:col-span-5">
-            <div className="block-h"><b>HISTORY</b><span>교육 · 프로젝트</span></div>
+            <div className="block-h"><b>HISTORY</b><span>교육 · 프로젝트 · 게임 분석</span></div>
             <ul className="tl">
               {history.map((h, i) => (
                 <React.Fragment key={i}>
@@ -414,7 +414,10 @@ function parseLetter(md) {
   return { chapters, course };
 }
 
+// 게임 분석 문서(만든 게임이 아닌 것) — 프로젝트 문서의 개요 표에 "분석 대상" 칸이 있으면 분석으로 봄. 「게임 분석」 탭에 따로 둠
+const isAnalysis = (p) => (p.meta || []).some((m) => m.label === '분석 대상');
 function teamLabel(p) {
+  if (isAnalysis(p)) return '게임 분석';
   const t = p.team || {};
   if (t.type === 'team') return T('name.team') + (t.size ? ` · ${t.size}` : '');
   if (t.type === 'solo') return T('name.solo');
@@ -434,10 +437,11 @@ function LinkRow({ p }) {
 }
 
 function ProjectSlide({ p, no, total }) {
+  const pad = (v) => String(v).padStart(2, '0');
   return (
     <section className="slide" aria-label={p.title}>
       <Wrap>
-        <div className="eyebrow">{T('page.project-no', { no: String(no).padStart(2, '0'), total: String(total).padStart(2, '0') })}<span className="muted ml-3" style={{ letterSpacing: 0, fontFamily: 'Pretendard' }}>{teamLabel(p)}</span></div>
+        <div className="eyebrow">{isAnalysis(p) ? `ANALYSIS ${pad(no)} / ${pad(total)}` : T('page.project-no', { no: pad(no), total: pad(total) })}<span className="muted ml-3" style={{ letterSpacing: 0, fontFamily: 'Pretendard' }}>{teamLabel(p)}</span></div>
         <h2 className="h-big text-3xl md:text-5xl mt-3">{p.title}</h2>
         {p.tagline && <p className="mt-3 text-base md:text-lg max-w-3xl">{p.tagline}</p>}
         <div className={`grid gap-8 mt-8 items-start ${p.cover ? 'md:grid-cols-12' : ''}`}>
@@ -473,7 +477,7 @@ function FeaturesSlide({ p, no }) {
       <Wrap>
         <div className="flex items-end justify-between gap-4 flex-wrap mb-7">
           <div>
-            <div className="eyebrow">{T('en.project')} {String(no).padStart(2, '0')} · {T('page.features')}</div>
+            <div className="eyebrow">{isAnalysis(p) ? 'ANALYSIS' : T('en.project')} {String(no).padStart(2, '0')} · {isAnalysis(p) ? '핵심 분석' : T('page.features')}</div>
             <h2 className="h-big text-2xl md:text-4xl mt-3">{p.title}</h2>
           </div>
           <a className="btn btn-line" href={`../project.html?p=${encodeURIComponent(p.id)}`}>{T('page.deck-all')} →</a>
@@ -511,7 +515,7 @@ function ProjectsGridSlide({ projects, goProject }) {
           </div>
           <p className="muted text-sm">카드를 누르면 프로젝트 소개 · 기능으로 넘어갑니다</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${projects.length === 4 ? 'xl:grid-cols-4' : 'xl:grid-cols-5'} gap-4`}>
           {projects.map((p, i) => {
             const per = periodOf(p);
             return (
@@ -594,11 +598,13 @@ function App() {
   // 슬라이드 목록 만들기
   const slides = [];
   if (state) {
-    const { pf, projects } = state;
+    const { pf } = state;
+    const projects = state.projects.filter((p) => !isAnalysis(p));    // 만든 게임
+    const analyses = state.projects.filter(isAnalysis);               // 게임 분석 — 따로 탭
     const wyb = projects.find((p) => p.id === '1-watch-your-back');
     const titleShot = wyb && (wyb.screenshots || []).find((s) => /GameMenu/i.test(s.src));
     const coverImg = titleShot ? img(wyb.id, titleShot.src) : (wyb && wyb.cover ? img(wyb.id, wyb.cover) : '');
-    const titleOf = (id) => (projects.find((p) => p.id === id) || {}).title || id;
+    const titleOf = (id) => (state.projects.find((p) => p.id === id) || {}).title || id;
     slides.push({ key: 'cover', group: 'intro', label: T('page.intro'), el: () => <CoverSlide profile={pf.profile} coverImg={coverImg} /> });
     // 연표: 교육(자기소개서 머리줄) + 프로젝트 기간(새 것부터)
     const history = [];
@@ -609,12 +615,18 @@ function App() {
     }
     projects.map((p) => ({ p, per: periodOf(p) })).filter((x) => x.per).sort((a, b) => b.per.start.localeCompare(a.per.start))
       .forEach((x, i) => history.push({ kindStart: i === 0 ? '프로젝트' : '', when: x.per.text, title: x.p.title, sub: teamLabel(x.p), project: x.p.id }));
+    analyses.map((p) => ({ p, per: periodOf(p) })).filter((x) => x.per).sort((a, b) => b.per.start.localeCompare(a.per.start))
+      .forEach((x, i) => history.push({ kindStart: i === 0 ? '게임 분석' : '', when: x.per.text, title: x.p.title, sub: '개인 분석', project: x.p.id }));
     slides.push({ key: 'history', group: 'stack', label: `이력 · ${T('page.stack')}`, el: (goProject) => <HistorySkillsSlide history={history} skills={pf.skills || []} titleOf={titleOf} goProject={goProject} /> });
     if (L) slides.push({ key: 'letter', group: 'letter', label: T('name.letter'), el: () => <LetterSlide letter={L} quote={pf.profile.headline} name={pf.profile.name} /> });
     slides.push({ key: 'projects', group: 'projects', label: T('page.nav-projects'), el: (goProject) => <ProjectsGridSlide projects={projects} goProject={goProject} /> });
     projects.forEach((p, i) => {
       slides.push({ key: `p-${p.id}`, group: 'projects', project: p.id, label: p.title, el: () => <ProjectSlide p={p} no={i + 1} total={projects.length} /> });
       if ((p.highlights || []).length) slides.push({ key: `p-${p.id}-core`, group: 'projects', of: p.id, label: `${p.title} · ${T('page.features')}`, el: () => <FeaturesSlide p={p} no={i + 1} /> });
+    });
+    analyses.forEach((p, i) => {
+      slides.push({ key: `p-${p.id}`, group: 'analysis', project: p.id, label: p.title, el: () => <ProjectSlide p={p} no={i + 1} total={analyses.length} /> });
+      if ((p.highlights || []).length) slides.push({ key: `p-${p.id}-core`, group: 'analysis', of: p.id, label: `${p.title} · 핵심 분석`, el: () => <FeaturesSlide p={p} no={i + 1} /> });
     });
     slides.push({ key: 'contact', group: 'contact', label: T('page.nav-contact'), el: () => <ContactSlide profile={pf.profile} /> });
   }
@@ -626,6 +638,7 @@ function App() {
     { group: 'stack', label: '이력 · 기술' },
     { group: 'letter', label: T('page.nav-letter') },
     { group: 'projects', label: T('page.nav-projects') },
+    { group: 'analysis', label: '게임 분석' },
   ].filter((t) => slides.some((s) => s.group === t.group));
   const cur = slides[idx] || {};
   const curProject = cur.project || cur.of || null;
@@ -714,7 +727,7 @@ function App() {
           </div>
         </div>
         <div className={`tabs ${cur.group === 'projects' ? '' : 'hide'}`} aria-label={T('page.nav-projects')}>
-          {state.projects.map((p, i) => (
+          {state.projects.filter((p) => !isAnalysis(p)).map((p, i) => (
             <button key={p.id} className={`tab ${curProject === p.id ? 'on' : ''}`} onClick={() => goProject(p.id)} tabIndex={cur.group === 'projects' ? 0 : -1}>
               <span className="no">{String(i + 1).padStart(2, '0')}</span>{p.title.replace(/\s*\(.*\)$/, '').replace(/\s+—.*$/, '')}
             </button>

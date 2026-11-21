@@ -211,9 +211,12 @@
     markPrintWide();
     document.fonts?.addEventListener('loadingdone', markPrintWide);
     if (window.mermaid && figs.length) {
-      mermaid.initialize({ startOnLoad: false, theme: PF.mermaidTheme(), securityLevel: 'loose', fontFamily: 'Pretendard, sans-serif' });
-      try { await mermaid.run({ nodes: doc.querySelectorAll('.mermaid') }); }
-      catch (err) { console.warn('[doc] Mermaid 렌더 오류:', err); errors.push(`mermaid: ${String(err?.message || err).split('\n')[0].slice(0, 160)}`); }
+      await PF.mermaidElk(figs.map((fig) => fig.querySelector('.mermaid').textContent));
+      for (const node of doc.querySelectorAll('.mermaid')) {          // 그림마다 initialize: ELK 순환 처리 값(PF.mermaidElkOpt)이 그림마다 다를 수 있음
+        mermaid.initialize({ startOnLoad: false, theme: PF.mermaidTheme(), securityLevel: 'loose', fontFamily: 'Pretendard, sans-serif', elk: PF.mermaidElkOpt(node.textContent) });
+        try { await mermaid.run({ nodes: [node] }); }
+        catch (err) { console.warn('[doc] Mermaid 렌더 오류:', err); errors.push(`mermaid: ${String(err?.message || err).split('\n')[0].slice(0, 160)}`); }
+      }
     } else if (figs.length) errors.push('mermaid: 다이어그램 라이브러리(Mermaid)를 불러오지 못했습니다');
     figs.forEach((fig) => {
       const svg = fig.querySelector('.mermaid svg');

@@ -198,6 +198,18 @@ const PF = (() => {
   }
   // (직접 고친 기능) 다이어그램(mermaid) 테마 손잡이 --t-mermaid: default(보라·노랑) · neutral(회색조) · forest · base. 판은 늘 밝으므로 dark는 받지 않음
   const mermaidTheme = () => { const v = themeVar('--t-mermaid'); return ['default', 'neutral', 'forest', 'base'].includes(v) ? v : 'default'; };
+  // (직접 고친 기능) ELK 배치: 다이어그램 원문에 %%{init: {"layout": "elk"}}%% 줄이 있을 때만 배치 엔진(@mermaid-js/layout-elk 0.1.7, 약 1.6MB)을 한 번 받아 등록.
+  //   받지 못하면 Mermaid가 기본 배치(dagre)로 그리므로 그림은 그대로 나옴
+  //   되돌아가는 화살표(순환)가 있는 그림은 ELK가 시작 상자를 가운데로 밀 수 있음 → 그 그림의 지시 줄에 "elk": {"cycleBreakingStrategy": "MODEL_ORDER"}를 더하면 원문 순서대로 놓음.
+  //   Mermaid 11.4.1은 이 값을 지시 줄에서 읽지 않으므로 mermaidElkOpt가 읽어 그림마다 initialize의 elk로 넘김(없으면 기본값 GREEDY)
+  const mermaidElkOpt = (text) => ({ cycleBreakingStrategy: /cycleBreakingStrategy["']?\s*:\s*["']?(\w+)/.exec(text)?.[1] || 'GREEDY' });
+  let elkLoad = null;
+  const mermaidElk = (texts) => {
+    if (!window.mermaid?.registerLayoutLoaders || !texts.some((s) => /["']?layout["']?\s*:\s*["']?elk/.test(s))) return Promise.resolve(false);
+    return elkLoad ||= import('https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.7/dist/mermaid-layout-elk.esm.min.mjs')
+      .then((m) => { mermaid.registerLayoutLoaders(m.default); return true; })
+      .catch((err) => { console.warn('[mermaid] ELK 배치를 불러오지 못해 기본 배치로 그립니다:', err); return false; });
+  };
 
   // ── 안내 문구(옛 렌더러와 같은 글) ──
   const FILE_HELP = `<p>이 페이지는 <code>data/</code>와 프로젝트 문서를 불러와 그리기 때문에, 파일을 더블클릭해서는 열리지 않습니다.</p>
@@ -226,6 +238,6 @@ const PF = (() => {
   const { t, tab, label, load: loadStrings, report: stringsReport } = PFStr;
 
   return { esc, inline, isUrl, shortUrl, loadJSON, loadText, encodePath, srcPath, projectUrl, docUrl, siteBase, visibleUrl, metaValue, teamLabel,
-           slugger, normTitle, resolveHeading, keyOk, deckSceneFor, mdHtml, headingsOf, ICON, NEWTAB, link, markNewTab, brandIcon, brandOf, themeTokens, applyTheme, mermaidTheme, contrast, hexRgb,
+           slugger, normTitle, resolveHeading, keyOk, deckSceneFor, mdHtml, headingsOf, ICON, NEWTAB, link, markNewTab, brandIcon, brandOf, themeTokens, applyTheme, mermaidTheme, mermaidElk, mermaidElkOpt, contrast, hexRgb,
            FILE_HELP, noDataHtml, isFile, notice, guardFileProtocol, noData, t, tab, label, loadStrings, stringsReport };
 })();

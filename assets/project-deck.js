@@ -111,12 +111,13 @@
   async function renderMermaid(els) {
     if (!els.length) return;
     if (!window.mermaid) { els.forEach((el) => svgCache.set(el, { error: 'Mermaid를 불러오지 못했습니다' })); return; }
-    mermaid.initialize({ startOnLoad: false, theme: PF.mermaidTheme(), securityLevel: 'loose', fontFamily: 'Pretendard, sans-serif', suppressErrorRendering: true });
+    await PF.mermaidElk(els.map((el) => el.querySelector('code')?.textContent || ''));
     if (!mmdHost) { mmdHost = document.createElement('div'); mmdHost.setAttribute('aria-hidden', 'true'); Object.assign(mmdHost.style, { position: 'absolute', left: '-20000px', top: '0', width: '1280px', visibility: 'hidden' }); document.body.appendChild(mmdHost); }
     let n = 0;
     for (const el of els) {
       if (svgCache.has(el)) continue;
       const text = el.querySelector('code')?.textContent || '';
+      mermaid.initialize({ startOnLoad: false, theme: PF.mermaidTheme(), securityLevel: 'loose', fontFamily: 'Pretendard, sans-serif', suppressErrorRendering: true, elk: PF.mermaidElkOpt(text) });   // 그림마다: ELK 순환 처리 값이 다를 수 있음
       try { const { svg } = await mermaid.render(`dk-mmd-${n++}`, text, mmdHost); svgCache.set(el, { svg }); }
       catch (err) { svgCache.set(el, { error: String(err?.message || err).split('\n')[0].slice(0, 120) }); info.errors.push('mermaid: ' + (err?.message || err)); }
     }

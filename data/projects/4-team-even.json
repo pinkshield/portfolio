@@ -61,7 +61,7 @@
       "what": "플레이어 기준 20~60m 둘레에서 후보 지점을 뽑아, 다섯 검사를 모두 통과한 곳에만 보급을 떨어뜨립니다.",
       "how": "위에서 아래로 광선을 쏴 맞은 지면을 Ground 여부 → 플레이어 발 +5m 이하 → 경사 25° 이하 → NavMesh 위 → 걸어서 갈 수 있는지 순으로 검사하고, 하나라도 걸리면 버리고 다시 뽑습니다(최대 30번).",
       "why": "`CalculatePath`는 실제로 길을 계산해 다섯 검사 중 가장 비싸므로 맨 마지막에 두어, 값싼 검사로 거르고 남은 후보 몇 개만 받게 해 보급이 늦어지지 않게 했습니다. ① 검사는 제가 낸 A안(소품을 Obstacle 레이어로 지정)과 비교해, 성능은 같지만 Ground만 허용해 소품 레이어를 빠뜨려도 틀리지 않는 B안을 골랐습니다.",
-      "section": "5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
+      "section": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
       "image": {
         "src": "images/supply-drop.png",
         "w": 1920,
@@ -74,15 +74,15 @@
       "what": "최종 가중치 = 테이블 기본 Weight × 상황 배율로, 지금 필요한 보급이 더 잘 나오게 합니다.",
       "how": "수류탄·회복 팩은 보유량이 0개면 ×2.0, 가득이면 ×0.25이고, 무기 상자는 몬스터 급증·보급 무기 소진 때 각각 ×2.5(상한 ×4)이며 이미 들고 있으면 나오지 않습니다.",
       "why": "무기 상자 기본 확률만 올리면 수류탄이 가득해도 수류탄 상자가 같은 확률로 나옵니다. 판정 조건과 배율 숫자가 늘어나는 대가는 전부 ConfigTable에 두고 투하 로그로 확인하는 방식으로 감수했습니다.",
-      "section": "5-3. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률",
+      "section": "4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률",
       "image": null
     },
     {
       "title": "새 몬스터도 표만 채우면 소리가 난다",
       "what": "다른 파트는 사운드 표의 키만 넘기고, 새 몬스터는 `MonsterTable`의 사운드 키 열만 채우면 소리가 붙습니다.",
       "how": "몬스터가 생기면(`MonsterSpawnedEvent`) `GameSoundRouter`가 이미터를 붙이고, 이미터는 `OnEnable`에서 `IMonsterSoundSource`를 찾아 공격 예고·사망 같은 지역 이벤트를 구독해 그 몬스터 위치에서 소리를 냅니다.",
-      "why": "몬스터·플레이어 프리팹은 다른 팀원 담당이라 프리팹에 사운드 컴포넌트를 미리 붙이지 않았습니다. 플레이어 소리 버그 때도 프리팹에 직접 붙이는 B안 대신 라우터가 실행 중에 붙이는 A안을 골라 담당자의 작업물을 바꾸지 않았습니다.",
-      "section": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기",
+      "why": "몬스터·플레이어 프리팹은 다른 팀원 담당이라 프리팹에 사운드 컴포넌트를 미리 붙이지 않았습니다. 플레이어 소리 버그 때도 프리팹에 직접 붙이는 방식 대신 라우터가 실행 중에 붙이는 방식을 골라 담당자의 작업물을 바꾸지 않았습니다.",
+      "section": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기",
       "image": null
     },
     {
@@ -90,7 +90,7 @@
       "what": "각자 만들어 색·글꼴·모양이 제각각이던 UI를, 메인 메뉴의 \"Moonlit Night\" 틀을 기준으로 게임 전체 UI로 통합했습니다.",
       "how": "색·글꼴·크기는 새 파일(`UiTheme`, `UiThemeKit`)에 모으고 기존 파일은 그리는 코드만 바꿨으며, 작은 PR 9개로 나눠 다른 브랜치와 미리 시험 병합하며 하루 안에 develop에 합쳤습니다(PR #112).",
       "why": "메인 메뉴가 게임의 첫인상이라, 모든 화면을 같은 색·글꼴·모양으로 맞추면 화면이 바뀌어도 플레이어의 몰입이 깨지지 않는다고 생각했습니다. 마감 직전 팀원 모두가 UI 파일을 동시에 고치고 있어, 색·글꼴·크기는 누구와도 충돌하지 않는 새 파일에 모았습니다.",
-      "section": "6-5. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게",
+      "section": "6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게",
       "image": {
         "src": "images/ui-after.png",
         "w": 1920,
@@ -107,16 +107,16 @@
       "solution": "높이 기준을 플레이어 발 높이 + 5m로 바꾸고, 투하에 실패하면 탈락 사유별 횟수를 경고로 남기게 했습니다.",
       "result": "같은 씬에서 보급이 다시 떨어지는 것을 확인했고, 이후 2차 피드백에서는 \"어디에 떨어지는가\"(지붕·절벽 위) 문제로 넘어갔습니다.",
       "lesson": "",
-      "section": "8-2. 트러블슈팅"
+      "section": "4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)"
     },
     {
       "title": "플레이어 소리가 전혀 나지 않음",
       "problem": "플레이 중 플레이어의 발소리·피격음 등이 전혀 나지 않았습니다.",
       "cause": "`PlayerSoundEmitter`가 플레이어 프리팹에 붙어 있지 않았습니다.",
-      "solution": "플레이어 프리팹(다른 팀원 담당)을 직접 고치지 않고, 라우터가 실행 중에 이미터를 자동으로 붙이는 A안을 골랐습니다.",
+      "solution": "플레이어 프리팹(다른 팀원 담당)을 직접 고치지 않고, 라우터가 실행 중에 이미터를 자동으로 붙이는 방식을 골랐습니다.",
       "result": "고친 뒤 직접 플레이해 플레이어 소리가 나는 것을 확인했습니다.",
       "lesson": "AI가 구현했어도 직접 테스트해 확인하기 전에는 구현되었다고 할 수 없기 때문에, AI 구현 뒤 플레이 테스트는 항상 하는 루틴이었습니다.",
-      "section": "8-2. 트러블슈팅"
+      "section": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)"
     },
     {
       "title": "GAME START가 인트로·튜토리얼을 건너뜀",
@@ -125,7 +125,7 @@
       "solution": "그 값을 인트로 씬 이름(기본값 `IntroCrawl`)을 쓰는 새 필드로 바꿔, 씬에 남은 잘못된 값을 무시하게 했습니다.",
       "result": "최종 빌드 전(11-03 밤)에 고쳐, GAME START → 인트로 → 튜토리얼 → 게임 순서로 다시 이어지게 되었습니다.",
       "lesson": "",
-      "section": "8-2. 트러블슈팅"
+      "section": "8-2. 그 밖의 문제 해결"
     }
   ],
   "screenshots": [
@@ -167,7 +167,7 @@
     }
   ],
   "retro": {
-    "section": "8. 결과 및 배운 점",
+    "section": "8. 결과와 개선 계획",
     "achieved": [
       "보급: 2차 개선 뒤 플레이 테스트에서 못 줍는 보급은 더 이상 나오지 않았습니다 (개선 전: 10개 중 2~3개를 줍지 못함)",
       "사운드: 사운드 25종을 에셋에서 직접 골라 연결했고, 튜토리얼 음성 41줄·BGM 9곡도 연결했습니다. 나중에 추가된 몬스터는 사운드 코드 수정 없이 테이블만 채워 소리를 붙였습니다",
@@ -190,11 +190,14 @@
       {"key": "intro", "title": "개요", "sectionPath": ["1. 개요"]},
       {"key": "design", "title": "게임 디자인", "sectionPath": ["2. 게임 디자인"]},
       {"key": "collab", "title": "팀 협업", "sectionPath": ["3. 팀 협업"]},
-      {"key": "arch", "title": "시스템 구조", "sectionPath": ["4. 시스템 구조"]},
-      {"key": "core", "title": "핵심 기능", "sectionPath": ["5. 핵심 기능"]},
-      {"key": "choice", "title": "고민과 선택", "sectionPath": ["6. 고민과 선택"]},
-      {"key": "ai", "title": "AI 협업", "sectionPath": ["7. AI 협업"]},
-      {"key": "result", "title": "결과 및 배운 점", "sectionPath": ["8. 결과 및 배운 점"]}
+      {
+        "key": "supply",
+        "title": "보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다",
+        "sectionPath": ["4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"]
+      },
+      {"key": "sound", "title": "사운드 — 네 명이 만든 것에 소리 붙이기", "sectionPath": ["5. 사운드 — 네 명이 만든 것에 소리 붙이기"]},
+      {"key": "other", "title": "그 밖에 맡은 것 — 맵 · 튜토리얼 · 강화 · UI", "sectionPath": ["6. 그 밖에 맡은 것 — 맵 · 튜토리얼 · 강화 · UI"]},
+      {"key": "ai", "title": "AI 협업", "sectionPath": ["7. AI 협업"]}
     ],
     "slides": [
       {
@@ -246,7 +249,7 @@
             "w": 1920,
             "h": 1080,
             "caption": {"text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함", "verbatim": true},
-            "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
+            "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
           }
         ],
         "edited": true
@@ -262,22 +265,28 @@
         "points": [
           {
             "label": "",
-            "text": "군중전에서는 하늘에서 떨어지는 보급으로 몰려오는 적을 버티고(5-1), 라운드가 끝나면 강화를 골라 다음 라운드를 더 강한 상태로 시작합니다(6-6).",
+            "text": "군중전에서는 하늘에서 떨어지는 보급으로 몰려오는 적을 버티고(4장), 라운드가 끝나면 강화를 골라 다음 라운드를 더 강한 상태로 시작합니다(6-3).",
             "verbatim": true
           }
         ],
         "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
-        "key": "planning",
+        "key": "high-ground",
         "chapter": "design",
-        "layout": "full",
-        "tab": "개요",
-        "title": {"text": "2-2. 누가 무엇을 기획했나", "verbatim": true},
-        "lead": {"text": "맵·보급·NavMesh를 한 원칙(\"높은 곳에서 쏘는 이점은 주지 않는다\")으로 묶은 기획은 6-1에서 다룹니다.", "verbatim": true},
-        "sectionPath": ["2-2. 누가 무엇을 기획했나"],
-        "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "기획|정한 사람"}]
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로", "verbatim": true},
+        "lead": {"text": "이 원칙을 세 곳에 똑같이 적용했습니다.", "verbatim": true},
+        "sectionPath": ["2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로"],
+        "points": [
+          {
+            "label": "",
+            "text": "플레이 테스트를 하다가 건물 위에 올라간 보급을 본 순간 \"저걸 어떻게 먹어?\" 하는 불쾌감이 들었습니다. 그래서 맵의 원칙을 보급에도 적용했습니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "시스템|적용"}]
       },
       {
         "key": "team",
@@ -305,27 +314,44 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "table", "n": 1, "fp": "상황|내 결정"}, {"kind": "table", "n": 2, "fp": "방법|장점|단점"}]
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "상황|내 결정"},
+          {"kind": "table", "n": 2, "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"}
+        ]
       },
       {
         "key": "rules",
-        "chapter": "arch",
+        "chapter": "collab",
         "layout": "visual",
         "tab": "구조",
-        "title": {"text": "4-1. 팀 공통 규칙 — 파트끼리 서로 모른다", "verbatim": true},
+        "title": {"text": "3-5. 팀 공통 규칙 — 파트끼리 서로 모른다", "verbatim": true},
         "lead": {"text": "파트는 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 씁니다.", "verbatim": true},
-        "sectionPath": ["4-1. 팀 공통 규칙 — 파트끼리 서로 모른다"],
+        "sectionPath": ["3-5. 팀 공통 규칙 — 파트끼리 서로 모른다"],
         "points": [{"label": "", "text": "이 규칙 위에서 각자 AI로 구현하니 작업 시간이 크게 줄었습니다.", "verbatim": true}],
         "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}, {"kind": "table", "n": 1, "fp": "상황|방법"}]
       },
       {
+        "key": "supply-flow",
+        "chapter": "supply",
+        "layout": "visual",
+        "tab": "흐름",
+        "sectionPath": ["4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"],
+        "title": {"text": "4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다", "verbatim": true},
+        "lead": {"text": "군중전에서 보급 상자는 플레이어의 생사를 가르는 시스템입니다.", "verbatim": true},
+        "points": [
+          {"label": "", "text": "이 그림에서 볼 것은 어디에 떨어질지(4-3)와 무엇이 떨어질지(4-4)를 보급이 혼자 정한다는 점입니다.", "verbatim": true},
+          {"label": "", "text": "라운드 담당은 \"떨어뜨려라\"만 부르고, HUD·사운드는 \"주웠다\"는 이벤트만 듣습니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+      },
+      {
         "key": "supply-arch",
-        "chapter": "arch",
+        "chapter": "supply",
         "layout": "visual",
         "tab": "구조",
-        "title": {"text": "4-2. 보급 모듈 구조", "verbatim": true},
+        "title": {"text": "4-1. 보급 모듈 구조 — 맡은 클래스", "verbatim": true},
         "lead": {"text": "보급 시스템에서 중요한 것은 언제 떨어지는가, 얼마나 떨어지는가, 무엇이 떨어지는가입니다.", "verbatim": true},
-        "sectionPath": ["4-2. 보급 모듈 구조"],
+        "sectionPath": ["4-1. 보급 모듈 구조 — 맡은 클래스"],
         "points": [
           {
             "label": "",
@@ -338,68 +364,16 @@
             "verbatim": false
           }
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}, {"kind": "table", "n": 1, "fp": "클래스|하는 일"}]
-      },
-      {
-        "key": "sound-arch",
-        "chapter": "arch",
-        "layout": "visual",
-        "tab": "구조",
-        "title": {"text": "4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
-        "points": [
-          {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
-          {
-            "label": "",
-            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-01) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-5 ③).",
-            "verbatim": true
-          }
-        ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}],
-        "edited": true
-      },
-      {
-        "key": "sound-arch-table",
-        "chapter": "arch",
-        "layout": "full",
-        "tab": "구조",
-        "title": {"text": "4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
-        "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "경로|언제|예"}],
-        "edited": true
-      },
-      {
-        "key": "supply-api",
-        "chapter": "core",
-        "layout": "visual",
-        "tab": "구현",
-        "title": {"text": "5-1. 라운드 중 정해진 간격으로 보급이 떨어진다 — 보급 사용법", "verbatim": true},
-        "lead": {"text": "라운드 담당은 StartAutoDropCycle만 부르면 됩니다.", "verbatim": true},
-        "sectionPath": ["5-1. 라운드 중 정해진 간격으로 보급이 떨어진다 — 보급 사용법"],
-        "points": [{"label": "", "text": "언제 떨어뜨릴지는 RoundSequencer가, 어디에·무엇을은 보급이 정하도록 나눴습니다.", "verbatim": true}],
-        "visuals": [
-          {"kind": "table", "n": 1, "fp": "누가|무엇을 하면|결과"},
-          {
-            "kind": "image",
-            "src": "images/supply-drop.png",
-            "w": 1920,
-            "h": 1080,
-            "caption": {"text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함", "verbatim": true},
-            "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}, {"kind": "table", "n": 1, "fp": "역할 (클래스)|하는 일"}]
       },
       {
         "key": "drop-point",
-        "chapter": "core",
+        "chapter": "supply",
         "layout": "visual",
         "tab": "흐름",
-        "title": {"text": "5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
         "lead": {"text": "하나라도 걸리면 그 후보는 버리고 다시 뽑습니다(최대 30번).", "verbatim": true},
-        "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
         "points": [
           {
             "label": "길 찾기를 맨 마지막에 둔 이유",
@@ -408,7 +382,7 @@
           },
           {
             "label": "실패 사유를 종류별로 세는 이유",
-            "text": "플레이 테스트 중에는 어떤 상자가 왜 실패했는지 눈으로 확인하기 어려워, 사유별 횟수를 경고로 남겼습니다(8-2 ④).",
+            "text": "플레이 테스트 중에는 어떤 상자가 왜 실패했는지 눈으로 확인하기 어려워, 사유별 횟수를 경고로 남겼습니다(4-6).",
             "verbatim": true
           }
         ],
@@ -417,31 +391,42 @@
       },
       {
         "key": "drop-point-table",
-        "chapter": "core",
+        "chapter": "supply",
         "layout": "full",
         "tab": "흐름",
-        "title": {"text": "5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
         "lead": null,
-        "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
         "points": [],
         "visuals": [{"kind": "table", "n": 1, "fp": "검사|막는 문제|어디서 나왔나"}],
         "edited": true
       },
       {
+        "key": "ground-choice",
+        "chapter": "supply",
+        "layout": "full",
+        "tab": "선택",
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "lead": {"text": "성능은 두 안이 같습니다.", "verbatim": true},
+        "points": [{"label": "이유", "text": "B안은 Ground만 허용하므로 소품 레이어를 빠뜨려도 틀리지 않습니다. 이 실수를 막을 수 있어 B안을 골랐습니다.", "verbatim": true}],
+        "visuals": [{"kind": "table", "n": 2, "fp": "|[A] 소품이 아닌 곳에 투하|[B] 처음 맞은 것이 Ground일 때만 투하 ✓|[C] Ground만 맞히는 레이캐스트"}]
+      },
+      {
         "key": "drop-weight",
-        "chapter": "core",
+        "chapter": "supply",
         "layout": "visual",
         "tab": "구현",
-        "title": {"text": "5-3. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률", "verbatim": true},
+        "title": {"text": "4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률", "verbatim": true},
         "lead": {"text": "최종 가중치 = 테이블 기본 Weight × 상황 배율", "verbatim": true},
-        "sectionPath": ["5-3. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률"],
+        "sectionPath": ["4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률"],
         "points": [
           {
             "label": "이유",
             "text": "확률을 바꾸기 전에는 정해진 확률대로 무작위로 떨어뜨렸고, 플레이 테스트 중 정작 필요한 순간에 필요한 보급을 받지 못하는 상황을 겪었습니다.",
             "verbatim": true
           },
-          {"label": "개선", "text": "이를 개선하려고 플레이어가 가진 아이템 상황에 따라 확률이 바뀌도록 바꿨습니다.", "verbatim": true},
+          {"label": "제안", "text": "기본 확률을 올리는 대신, 언제 무엇이 필요한지에 따라 확률이 바뀌게 하자고 제안했습니다.", "verbatim": true},
           {
             "label": "",
             "text": "저는 투하 확률 로그([SupplyDropper] 투하 확률: …)로 수류탄이 0개일 때 수류탄 상자가 자주 나오는 것을 확인했습니다.",
@@ -449,84 +434,18 @@
           }
         ],
         "visuals": [
-          {"kind": "table", "n": 1, "fp": "상자|배율"},
-          {"kind": "table", "n": 2, "fp": "상황 (기본 40/40/10/10, 설계 문서의 계산값)|수류탄|회복|로켓|유탄"}
-        ]
-      },
-      {
-        "key": "emitter",
-        "chapter": "core",
-        "layout": "visual",
-        "tab": "흐름",
-        "title": {"text": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기", "verbatim": true},
-        "lead": {
-          "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
-          "verbatim": true
-        },
-        "sectionPath": ["5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
-        "points": [
-          {
-            "label": "이유",
-            "text": "AI가 작업하다가 다른 파트 담당자의 코드까지 바꿔 버리는 문제를 막으려고, 소리를 코드가 아니라 TSV 표로 관리하도록 설계했습니다.",
-            "verbatim": false
-          },
-          {
-            "label": "Awake가 아니라 OnEnable에서 구독",
-            "text": "몬스터는 오브젝트 풀을 쓰기 때문에, 풀에서 다시 꺼낼 때 Awake가 다시 불리지 않습니다.",
-            "verbatim": true
-          },
-          {"label": "명중이 아니라 예고(Windup) 순간에 공격음", "text": "플레이어에게 공격이 온다는 정보를 미리 주기 위한 장치입니다.", "verbatim": true}
-        ],
-        "visuals": [{"kind": "mermaid", "n": 2, "fp": "sequenceDiagram"}]
-      },
-      {
-        "key": "player-emitter",
-        "chapter": "core",
-        "layout": "code",
-        "tab": "구현",
-        "title": {"text": "같은 방식을 플레이어에도 — 직접 고른 A안", "verbatim": true},
-        "lead": {"text": "원인은 PlayerSoundEmitter가 플레이어 프리팹에 없었던 것입니다(SoundFix_Handoff.md §1).", "verbatim": true},
-        "sectionPath": ["5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
-        "points": [
-          {
-            "label": "효과",
-            "text": "나중에 추가된 돌진형 몬스터, 파르다트록스 등은 사운드 코드를 고치지 않고 사운드 파일을 추가해 테이블의 사운드 키에 넣는 것만으로 소리를 붙였습니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": [
-          {"kind": "code", "n": 1, "fp": "private void AttachPlayerEmitters()   // Start 에서 1번"},
-          {"kind": "table", "n": 2, "fp": "방법|내 판단"}
-        ]
-      },
-      {
-        "key": "high-ground",
-        "chapter": "choice",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "6-1. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로", "verbatim": true},
-        "lead": {"text": "이 원칙을 세 곳에 똑같이 적용했습니다.", "verbatim": true},
-        "sectionPath": ["6-1. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로"],
-        "points": [
-          {
-            "label": "이유",
-            "text": "성능은 두 안이 같지만, A안처럼 소품마다 레이어를 직접 지정하면 레이어를 빠뜨리는 실수가 생깁니다. 이 실수를 막을 수 있어 B안을 골랐습니다.",
-            "verbatim": false
-          }
-        ],
-        "visuals": [
-          {"kind": "table", "n": 1, "fp": "시스템|적용"},
-          {"kind": "table", "n": 2, "fp": "|[A] 소품이 아닌 곳에 투하|[B] 처음 맞은 것이 Ground일 때만 투하 ✓|[C] Ground만 맞히는 레이캐스트"}
+          {"kind": "table", "n": 2, "fp": "상자|배율"},
+          {"kind": "table", "n": 3, "fp": "상황 (기본 40/40/10/10, 설계 문서의 계산값)|수류탄|회복|로켓|유탄"}
         ]
       },
       {
         "key": "pickup",
-        "chapter": "choice",
+        "chapter": "supply",
         "layout": "visual",
         "tab": "선택",
-        "title": {"text": "6-2. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기", "verbatim": true},
+        "title": {"text": "4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기", "verbatim": true},
         "lead": {"text": "처음에는 플레이어가 보급 상자에 닿기만 하면 바로 획득했습니다.", "verbatim": true},
-        "sectionPath": ["6-2. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기"],
+        "sectionPath": ["4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기"],
         "points": [
           {
             "label": "F키로 바꾼 이유",
@@ -552,13 +471,112 @@
         ]
       },
       {
+        "key": "ts-supply",
+        "chapter": "supply",
+        "layout": "problem",
+        "tab": "문제 해결",
+        "title": {"text": "4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)"],
+        "points": [
+          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 전혀 떨어지지 않는 것을 발견했습니다.", "verbatim": false},
+          {
+            "label": "원인",
+            "text": "새 맵(SciFiMap)의 지형 원점이 y = -20이라, 실제 전장 지면이 지형 기준 높이 약 18m로 계산되었습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "해결",
+            "text": "높이 기준을 플레이어 발 높이 + 5m로 바꿔, 맵 원점이나 보스 아레나 높이와 상관없이 같은 규칙이 되게 했습니다(4-3 표의 ②).",
+            "verbatim": true
+          },
+          {
+            "label": "결과",
+            "text": "같은 씬에서 보급이 다시 떨어지는 것을 확인했고, 이후 2차 피드백에서는 \"어디에 떨어지는가\"(지붕·절벽 위) 문제로 넘어갔습니다(4-3).",
+            "verbatim": true
+          }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "sound-arch",
+        "chapter": "sound",
+        "layout": "visual",
+        "tab": "구조",
+        "title": {"text": "5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
+        "points": [
+          {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
+          {
+            "label": "",
+            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-01) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-4).",
+            "verbatim": true
+          }
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}],
+        "edited": true
+      },
+      {
+        "key": "sound-arch-table",
+        "chapter": "sound",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "경로|언제|예"}],
+        "edited": true
+      },
+      {
+        "key": "emitter",
+        "chapter": "sound",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {"text": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기", "verbatim": true},
+        "lead": {
+          "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
+          "verbatim": true
+        },
+        "sectionPath": ["5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
+        "points": [
+          {
+            "label": "이유",
+            "text": "AI가 작업하다가 다른 파트 담당자의 코드까지 바꿔 버리는 문제를 막으려고, 소리를 코드가 아니라 TSV 표로 관리하도록 설계했습니다.",
+            "verbatim": false
+          },
+          {
+            "label": "Awake가 아니라 OnEnable에서 구독",
+            "text": "몬스터는 오브젝트 풀을 쓰기 때문에, 풀에서 다시 꺼낼 때 Awake가 다시 불리지 않습니다.",
+            "verbatim": true
+          },
+          {"label": "명중이 아니라 예고(Windup) 순간에 공격음", "text": "플레이어에게 공격이 온다는 정보를 미리 주기 위한 장치입니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "mermaid", "n": 2, "fp": "sequenceDiagram"}]
+      },
+      {
+        "key": "player-emitter",
+        "chapter": "sound",
+        "layout": "code",
+        "tab": "구현",
+        "title": {"text": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)", "verbatim": true},
+        "lead": {"text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).", "verbatim": true},
+        "sectionPath": ["5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)"],
+        "points": [{"label": "이유", "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.", "verbatim": true}],
+        "visuals": [
+          {"kind": "code", "n": 1, "fp": "// GameSoundRouter.AttachPlayerEmitters (발췌)"},
+          {"kind": "table", "n": 1, "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"}
+        ]
+      },
+      {
         "key": "hurt-sound",
-        "chapter": "choice",
+        "chapter": "sound",
         "layout": "full",
         "tab": "선택",
-        "title": {"text": "몬스터 피격(Hurt) 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
+        "title": {"text": "5-5. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
         "lead": {"text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).", "verbatim": true},
-        "sectionPath": ["6-4. 사운드에서 정한 두 가지 — 피격 소리는 빼고, 곡 키는 라운드 표에", "몬스터 피격(Hurt) 소리 — 만들 수 있지만 만들지 않은 소리"],
+        "sectionPath": ["5-5. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"],
         "points": [
           {
             "label": "",
@@ -569,13 +587,61 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
       },
       {
+        "key": "map",
+        "chapter": "other",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "6-1. 맵 — AI가 만들고, 디테일은 제가 고쳤다", "verbatim": true},
+        "lead": {"text": "마감인 발표일(11-04)까지 남은 기간이 일주일 정도뿐이었습니다", "verbatim": true},
+        "sectionPath": ["6-1. 맵 — AI가 만들고, 디테일은 제가 고쳤다"],
+        "points": [
+          {"label": "", "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.", "verbatim": true},
+          {
+            "label": "",
+            "text": "그래서 \"높은 곳에서 쏘는 이점은 주지 않는다\" 원칙을 빌더 규칙으로 넣어, 계단·사다리·발판이 달린 프리팹은 배치하지 않았습니다.",
+            "verbatim": false
+          }
+        ],
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "|[A] 지금까지처럼 전부 손으로 다시 배치|[B] Claude와 함께 생성 + 확인하며 수정 + 디테일은 수작업 ✓"},
+          {
+            "kind": "image",
+            "src": "images/map-overview.png",
+            "w": 2492,
+            "h": 1631,
+            "caption": {"text": "신규 인게임 맵 탑뷰 — 지점 13곳, 순환로, 시작·보스 등장·구조선 착륙 지점", "verbatim": true}
+          }
+        ],
+        "edited": true
+      },
+      {
+        "key": "upgrade",
+        "chapter": "other",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "6-3. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까", "verbatim": true},
+        "lead": {"text": "처음 만든 강화(10-23)는 재장전·탄창·수류탄 파우치 3종이었고, 각 3레벨까지, 라운드마다 한 번만 살 수 있었습니다.", "verbatim": true},
+        "sectionPath": ["6-3. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까"],
+        "points": [{"label": "", "text": "3장 중 에픽이 1장 이상 나올 확률이 약 58%라, 상점을 열 때마다 절반 이상은 에픽을 보게 됩니다.", "verbatim": true}],
+        "visuals": [
+          {"kind": "table", "n": 2, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
+          {
+            "kind": "image",
+            "src": "images/upgrade-shop.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {"text": "구현된 강화 상점 — 무작위 카드 3장(일반·에픽·하급), 산 카드는 SOLD, 리롤 5, 남은 재화", "verbatim": true}
+          }
+        ]
+      },
+      {
         "key": "ui",
-        "chapter": "choice",
+        "chapter": "other",
         "layout": "screens",
         "tab": "결과",
-        "title": {"text": "6-5. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
+        "title": {"text": "6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
         "lead": {"text": "메인 메뉴를 기준으로 삼은 이유는, 메인 메뉴가 게임의 첫인상이기 때문입니다.", "verbatim": true},
-        "sectionPath": ["6-5. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
+        "sectionPath": ["6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
         "points": [],
         "visuals": [
           {
@@ -602,26 +668,6 @@
         ]
       },
       {
-        "key": "upgrade",
-        "chapter": "choice",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "6-6. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까", "verbatim": true},
-        "lead": {"text": "처음 만든 강화(10-23)는 재장전·탄창·수류탄 파우치 3종이었고, 각 3레벨까지, 라운드마다 한 번만 살 수 있었습니다.", "verbatim": true},
-        "sectionPath": ["6-6. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까"],
-        "points": [{"label": "", "text": "3장 중 에픽이 1장 이상 나올 확률이 약 58%라, 상점을 열 때마다 절반 이상은 에픽을 보게 됩니다.", "verbatim": true}],
-        "visuals": [
-          {"kind": "table", "n": 2, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
-          {
-            "kind": "image",
-            "src": "images/upgrade-shop.png",
-            "w": 1920,
-            "h": 1080,
-            "caption": {"text": "구현된 강화 상점 — 무작위 카드 3장(일반·에픽·하급), 산 카드는 SOLD, 리롤 5, 남은 재화", "verbatim": true}
-          }
-        ]
-      },
-      {
         "key": "ai-role",
         "chapter": "ai",
         "layout": "visual",
@@ -638,86 +684,6 @@
           }
         ],
         "visuals": [{"kind": "table", "n": 1, "fp": "누가|무엇을"}, {"kind": "table", "n": 3, "fp": "맡기지 않은 것|예"}]
-      },
-      {
-        "key": "map",
-        "chapter": "ai",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "7-2. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다", "verbatim": true},
-        "lead": {"text": "마감인 발표일(11-04)까지 남은 기간이 일주일 정도뿐이었습니다", "verbatim": true},
-        "sectionPath": ["7-2. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다"],
-        "points": [
-          {"label": "", "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.", "verbatim": true},
-          {
-            "label": "",
-            "text": "그래서 \"높은 곳에서 쏘는 이점은 주지 않는다\" 원칙을 빌더 규칙으로 넣어, 계단·사다리·발판이 달린 프리팹은 배치하지 않았습니다.",
-            "verbatim": false
-          }
-        ],
-        "visuals": [
-          {"kind": "table", "n": 1, "fp": "방법|장점|단점"},
-          {
-            "kind": "image",
-            "src": "images/map-overview.png",
-            "w": 2492,
-            "h": 1631,
-            "caption": {"text": "신규 인게임 맵 탑뷰 — 지점 13곳, 순환로, 시작·보스 등장·구조선 착륙 지점", "verbatim": true}
-          }
-        ],
-        "edited": true
-      },
-      {
-        "key": "ts-supply",
-        "chapter": "result",
-        "layout": "problem",
-        "tab": "문제 해결",
-        "title": {"text": "④ 새 맵에서 보급이 하나도 떨어지지 않음", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["8-2. 트러블슈팅"],
-        "points": [
-          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 전혀 떨어지지 않는 것을 발견했습니다.", "verbatim": false},
-          {
-            "label": "원인",
-            "text": "새 맵(SciFiMap)의 지형 원점이 y = -20이라, 실제 전장 지면이 지형 기준 높이 약 18m로 계산되었습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "해결",
-            "text": "높이 기준을 플레이어 발 높이 + 5m로 바꿔, 맵 원점이나 보스 아레나 높이와 상관없이 같은 규칙이 되게 했습니다(5-2 표의 ②).",
-            "verbatim": true
-          },
-          {
-            "label": "결과",
-            "text": "같은 씬에서 보급이 다시 떨어지는 것을 확인했고, 이후 2차 피드백에서는 \"어디에 떨어지는가\"(지붕·절벽 위) 문제로 넘어갔습니다(6-1).",
-            "verbatim": true
-          }
-        ],
-        "visuals": []
-      },
-      {
-        "key": "ts-start",
-        "chapter": "result",
-        "layout": "problem",
-        "tab": "문제 해결",
-        "title": {"text": "② GAME START가 인트로·튜토리얼을 건너뜀", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["8-2. 트러블슈팅"],
-        "points": [
-          {"label": "문제", "text": "게임 스타트를 누르면 인트로- 튜토리얼- 인게임 씬으로 전환이 안됨, 게임스타트 누를시 바로 인게임 씬으로 전환됨", "verbatim": false},
-          {
-            "label": "원인",
-            "text": "메인 메뉴 씬에 저장된 \"다음 씬 이름\" 값이 테스트용 전투 씬(Monster Player Integration)으로 덮어써져 있어서, GAME START가 인트로를 건너뛰고 바로 전투 씬으로 갔음",
-            "verbatim": true
-          },
-          {"label": "해결", "text": "그 값을 인트로 씬 이름(기본값 IntroCrawl)을 쓰는 새 필드로 바꿔, 씬에 남은 잘못된 값을 무시하게 함", "verbatim": false},
-          {
-            "label": "결과",
-            "text": "최종 빌드 전(11-03 밤)에 고쳐, GAME START → 인트로 → 튜토리얼 → 게임 순서로 다시 이어지게 되었습니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": []
       }
     ],
     "base": [
@@ -770,7 +736,7 @@
             "w": 1920,
             "h": 1080,
             "caption": {"text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함", "verbatim": true},
-            "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
+            "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
           }
         ]
       },
@@ -785,22 +751,28 @@
         "points": [
           {
             "label": "",
-            "text": "군중전에서는 하늘에서 떨어지는 보급으로 몰려오는 적을 버티고(5-1), 라운드가 끝나면 강화를 골라 다음 라운드를 더 강한 상태로 시작합니다(6-6).",
+            "text": "군중전에서는 하늘에서 떨어지는 보급으로 몰려오는 적을 버티고(4장), 라운드가 끝나면 강화를 골라 다음 라운드를 더 강한 상태로 시작합니다(6-3).",
             "verbatim": true
           }
         ],
         "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
-        "key": "planning",
+        "key": "high-ground",
         "chapter": "design",
-        "layout": "full",
-        "tab": "개요",
-        "title": {"text": "2-2. 누가 무엇을 기획했나", "verbatim": true},
-        "lead": {"text": "맵·보급·NavMesh를 한 원칙(\"높은 곳에서 쏘는 이점은 주지 않는다\")으로 묶은 기획은 6-1에서 다룹니다.", "verbatim": true},
-        "sectionPath": ["2-2. 누가 무엇을 기획했나"],
-        "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "기획|정한 사람"}]
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로", "verbatim": true},
+        "lead": {"text": "이 원칙을 세 곳에 똑같이 적용했습니다.", "verbatim": true},
+        "sectionPath": ["2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로"],
+        "points": [
+          {
+            "label": "",
+            "text": "플레이 테스트를 하다가 건물 위에 올라간 보급을 본 순간 \"저걸 어떻게 먹어?\" 하는 불쾌감이 들었습니다. 그래서 맵의 원칙을 보급에도 적용했습니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "시스템|적용"}]
       },
       {
         "key": "team",
@@ -828,27 +800,44 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "table", "n": 1, "fp": "상황|내 결정"}, {"kind": "table", "n": 2, "fp": "방법|장점|단점"}]
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "상황|내 결정"},
+          {"kind": "table", "n": 2, "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"}
+        ]
       },
       {
         "key": "rules",
-        "chapter": "arch",
+        "chapter": "collab",
         "layout": "visual",
         "tab": "구조",
-        "title": {"text": "4-1. 팀 공통 규칙 — 파트끼리 서로 모른다", "verbatim": true},
+        "title": {"text": "3-5. 팀 공통 규칙 — 파트끼리 서로 모른다", "verbatim": true},
         "lead": {"text": "파트는 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 씁니다.", "verbatim": true},
-        "sectionPath": ["4-1. 팀 공통 규칙 — 파트끼리 서로 모른다"],
+        "sectionPath": ["3-5. 팀 공통 규칙 — 파트끼리 서로 모른다"],
         "points": [{"label": "", "text": "이 규칙 위에서 각자 AI로 구현하니 작업 시간이 크게 줄었습니다.", "verbatim": true}],
         "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}, {"kind": "table", "n": 1, "fp": "상황|방법"}]
       },
       {
+        "key": "supply-flow",
+        "chapter": "supply",
+        "layout": "visual",
+        "tab": "흐름",
+        "sectionPath": ["4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"],
+        "title": {"text": "4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다", "verbatim": true},
+        "lead": {"text": "군중전에서 보급 상자는 플레이어의 생사를 가르는 시스템입니다.", "verbatim": true},
+        "points": [
+          {"label": "", "text": "이 그림에서 볼 것은 어디에 떨어질지(4-3)와 무엇이 떨어질지(4-4)를 보급이 혼자 정한다는 점입니다.", "verbatim": true},
+          {"label": "", "text": "라운드 담당은 \"떨어뜨려라\"만 부르고, HUD·사운드는 \"주웠다\"는 이벤트만 듣습니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+      },
+      {
         "key": "supply-arch",
-        "chapter": "arch",
+        "chapter": "supply",
         "layout": "visual",
         "tab": "구조",
-        "title": {"text": "4-2. 보급 모듈 구조", "verbatim": true},
+        "title": {"text": "4-1. 보급 모듈 구조 — 맡은 클래스", "verbatim": true},
         "lead": {"text": "보급 시스템에서 중요한 것은 언제 떨어지는가, 얼마나 떨어지는가, 무엇이 떨어지는가입니다.", "verbatim": true},
-        "sectionPath": ["4-2. 보급 모듈 구조"],
+        "sectionPath": ["4-1. 보급 모듈 구조 — 맡은 클래스"],
         "points": [
           {
             "label": "",
@@ -861,66 +850,16 @@
             "verbatim": false
           }
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}, {"kind": "table", "n": 1, "fp": "클래스|하는 일"}]
-      },
-      {
-        "key": "sound-arch",
-        "chapter": "arch",
-        "layout": "visual",
-        "tab": "구조",
-        "title": {"text": "4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
-        "points": [
-          {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
-          {
-            "label": "",
-            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-01) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-5 ③).",
-            "verbatim": true
-          }
-        ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
-      },
-      {
-        "key": "sound-arch-table",
-        "chapter": "arch",
-        "layout": "full",
-        "tab": "구조",
-        "title": {"text": "4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["4-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
-        "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "경로|언제|예"}]
-      },
-      {
-        "key": "supply-api",
-        "chapter": "core",
-        "layout": "visual",
-        "tab": "구현",
-        "title": {"text": "5-1. 라운드 중 정해진 간격으로 보급이 떨어진다 — 보급 사용법", "verbatim": true},
-        "lead": {"text": "라운드 담당은 StartAutoDropCycle만 부르면 됩니다.", "verbatim": true},
-        "sectionPath": ["5-1. 라운드 중 정해진 간격으로 보급이 떨어진다 — 보급 사용법"],
-        "points": [{"label": "", "text": "언제 떨어뜨릴지는 RoundSequencer가, 어디에·무엇을은 보급이 정하도록 나눴습니다.", "verbatim": true}],
-        "visuals": [
-          {"kind": "table", "n": 1, "fp": "누가|무엇을 하면|결과"},
-          {
-            "kind": "image",
-            "src": "images/supply-drop.png",
-            "w": 1920,
-            "h": 1080,
-            "caption": {"text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함", "verbatim": true},
-            "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}, {"kind": "table", "n": 1, "fp": "역할 (클래스)|하는 일"}]
       },
       {
         "key": "drop-point",
-        "chapter": "core",
+        "chapter": "supply",
         "layout": "visual",
         "tab": "흐름",
-        "title": {"text": "5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
         "lead": {"text": "하나라도 걸리면 그 후보는 버리고 다시 뽑습니다(최대 30번).", "verbatim": true},
-        "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
         "points": [
           {
             "label": "길 찾기를 맨 마지막에 둔 이유",
@@ -929,7 +868,7 @@
           },
           {
             "label": "실패 사유를 종류별로 세는 이유",
-            "text": "플레이 테스트 중에는 어떤 상자가 왜 실패했는지 눈으로 확인하기 어려워, 사유별 횟수를 경고로 남겼습니다(8-2 ④).",
+            "text": "플레이 테스트 중에는 어떤 상자가 왜 실패했는지 눈으로 확인하기 어려워, 사유별 횟수를 경고로 남겼습니다(4-6).",
             "verbatim": true
           }
         ],
@@ -937,30 +876,41 @@
       },
       {
         "key": "drop-point-table",
-        "chapter": "core",
+        "chapter": "supply",
         "layout": "full",
         "tab": "흐름",
-        "title": {"text": "5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
         "lead": null,
-        "sectionPath": ["5-2. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
         "points": [],
         "visuals": [{"kind": "table", "n": 1, "fp": "검사|막는 문제|어디서 나왔나"}]
       },
       {
+        "key": "ground-choice",
+        "chapter": "supply",
+        "layout": "full",
+        "tab": "선택",
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "lead": {"text": "성능은 두 안이 같습니다.", "verbatim": true},
+        "points": [{"label": "이유", "text": "B안은 Ground만 허용하므로 소품 레이어를 빠뜨려도 틀리지 않습니다. 이 실수를 막을 수 있어 B안을 골랐습니다.", "verbatim": true}],
+        "visuals": [{"kind": "table", "n": 2, "fp": "|[A] 소품이 아닌 곳에 투하|[B] 처음 맞은 것이 Ground일 때만 투하 ✓|[C] Ground만 맞히는 레이캐스트"}]
+      },
+      {
         "key": "drop-weight",
-        "chapter": "core",
+        "chapter": "supply",
         "layout": "visual",
         "tab": "구현",
-        "title": {"text": "5-3. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률", "verbatim": true},
+        "title": {"text": "4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률", "verbatim": true},
         "lead": {"text": "최종 가중치 = 테이블 기본 Weight × 상황 배율", "verbatim": true},
-        "sectionPath": ["5-3. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률"],
+        "sectionPath": ["4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률"],
         "points": [
           {
             "label": "이유",
             "text": "확률을 바꾸기 전에는 정해진 확률대로 무작위로 떨어뜨렸고, 플레이 테스트 중 정작 필요한 순간에 필요한 보급을 받지 못하는 상황을 겪었습니다.",
             "verbatim": true
           },
-          {"label": "개선", "text": "이를 개선하려고 플레이어가 가진 아이템 상황에 따라 확률이 바뀌도록 바꿨습니다.", "verbatim": true},
+          {"label": "제안", "text": "기본 확률을 올리는 대신, 언제 무엇이 필요한지에 따라 확률이 바뀌게 하자고 제안했습니다.", "verbatim": true},
           {
             "label": "",
             "text": "저는 투하 확률 로그([SupplyDropper] 투하 확률: …)로 수류탄이 0개일 때 수류탄 상자가 자주 나오는 것을 확인했습니다.",
@@ -968,84 +918,18 @@
           }
         ],
         "visuals": [
-          {"kind": "table", "n": 1, "fp": "상자|배율"},
-          {"kind": "table", "n": 2, "fp": "상황 (기본 40/40/10/10, 설계 문서의 계산값)|수류탄|회복|로켓|유탄"}
-        ]
-      },
-      {
-        "key": "emitter",
-        "chapter": "core",
-        "layout": "visual",
-        "tab": "흐름",
-        "title": {"text": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기", "verbatim": true},
-        "lead": {
-          "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
-          "verbatim": true
-        },
-        "sectionPath": ["5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
-        "points": [
-          {
-            "label": "이유",
-            "text": "AI가 작업하다가 다른 파트 담당자의 코드까지 바꿔 버리는 문제를 막으려고, 소리를 코드가 아니라 TSV 표로 관리하도록 설계했습니다.",
-            "verbatim": false
-          },
-          {
-            "label": "Awake가 아니라 OnEnable에서 구독",
-            "text": "몬스터는 오브젝트 풀을 쓰기 때문에, 풀에서 다시 꺼낼 때 Awake가 다시 불리지 않습니다.",
-            "verbatim": true
-          },
-          {"label": "명중이 아니라 예고(Windup) 순간에 공격음", "text": "플레이어에게 공격이 온다는 정보를 미리 주기 위한 장치입니다.", "verbatim": true}
-        ],
-        "visuals": [{"kind": "mermaid", "n": 2, "fp": "sequenceDiagram"}]
-      },
-      {
-        "key": "player-emitter",
-        "chapter": "core",
-        "layout": "code",
-        "tab": "구현",
-        "title": {"text": "같은 방식을 플레이어에도 — 직접 고른 A안", "verbatim": true},
-        "lead": {"text": "원인은 PlayerSoundEmitter가 플레이어 프리팹에 없었던 것입니다(SoundFix_Handoff.md §1).", "verbatim": true},
-        "sectionPath": ["5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
-        "points": [
-          {
-            "label": "효과",
-            "text": "나중에 추가된 돌진형 몬스터, 파르다트록스 등은 사운드 코드를 고치지 않고 사운드 파일을 추가해 테이블의 사운드 키에 넣는 것만으로 소리를 붙였습니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": [
-          {"kind": "code", "n": 1, "fp": "private void AttachPlayerEmitters()   // Start 에서 1번"},
-          {"kind": "table", "n": 2, "fp": "방법|내 판단"}
-        ]
-      },
-      {
-        "key": "high-ground",
-        "chapter": "choice",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "6-1. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로", "verbatim": true},
-        "lead": {"text": "이 원칙을 세 곳에 똑같이 적용했습니다.", "verbatim": true},
-        "sectionPath": ["6-1. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로"],
-        "points": [
-          {
-            "label": "이유",
-            "text": "성능은 두 안이 같지만, A안처럼 소품마다 레이어를 직접 지정하면 레이어를 빠뜨리는 실수가 생깁니다. 이 실수를 막을 수 있어 B안을 골랐습니다.",
-            "verbatim": false
-          }
-        ],
-        "visuals": [
-          {"kind": "table", "n": 1, "fp": "시스템|적용"},
-          {"kind": "table", "n": 2, "fp": "|[A] 소품이 아닌 곳에 투하|[B] 처음 맞은 것이 Ground일 때만 투하 ✓|[C] Ground만 맞히는 레이캐스트"}
+          {"kind": "table", "n": 2, "fp": "상자|배율"},
+          {"kind": "table", "n": 3, "fp": "상황 (기본 40/40/10/10, 설계 문서의 계산값)|수류탄|회복|로켓|유탄"}
         ]
       },
       {
         "key": "pickup",
-        "chapter": "choice",
+        "chapter": "supply",
         "layout": "visual",
         "tab": "선택",
-        "title": {"text": "6-2. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기", "verbatim": true},
+        "title": {"text": "4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기", "verbatim": true},
         "lead": {"text": "처음에는 플레이어가 보급 상자에 닿기만 하면 바로 획득했습니다.", "verbatim": true},
-        "sectionPath": ["6-2. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기"],
+        "sectionPath": ["4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기"],
         "points": [
           {
             "label": "F키로 바꾼 이유",
@@ -1071,13 +955,110 @@
         ]
       },
       {
+        "key": "ts-supply",
+        "chapter": "supply",
+        "layout": "problem",
+        "tab": "문제 해결",
+        "title": {"text": "4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)"],
+        "points": [
+          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 전혀 떨어지지 않는 것을 발견했습니다.", "verbatim": false},
+          {
+            "label": "원인",
+            "text": "새 맵(SciFiMap)의 지형 원점이 y = -20이라, 실제 전장 지면이 지형 기준 높이 약 18m로 계산되었습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "해결",
+            "text": "높이 기준을 플레이어 발 높이 + 5m로 바꿔, 맵 원점이나 보스 아레나 높이와 상관없이 같은 규칙이 되게 했습니다(4-3 표의 ②).",
+            "verbatim": true
+          },
+          {
+            "label": "결과",
+            "text": "같은 씬에서 보급이 다시 떨어지는 것을 확인했고, 이후 2차 피드백에서는 \"어디에 떨어지는가\"(지붕·절벽 위) 문제로 넘어갔습니다(4-3).",
+            "verbatim": true
+          }
+        ],
+        "visuals": []
+      },
+      {
+        "key": "sound-arch",
+        "chapter": "sound",
+        "layout": "visual",
+        "tab": "구조",
+        "title": {"text": "5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
+        "points": [
+          {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
+          {
+            "label": "",
+            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-01) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-4).",
+            "verbatim": true
+          }
+        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+      },
+      {
+        "key": "sound-arch-table",
+        "chapter": "sound",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "경로|언제|예"}]
+      },
+      {
+        "key": "emitter",
+        "chapter": "sound",
+        "layout": "visual",
+        "tab": "흐름",
+        "title": {"text": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기", "verbatim": true},
+        "lead": {
+          "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
+          "verbatim": true
+        },
+        "sectionPath": ["5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
+        "points": [
+          {
+            "label": "이유",
+            "text": "AI가 작업하다가 다른 파트 담당자의 코드까지 바꿔 버리는 문제를 막으려고, 소리를 코드가 아니라 TSV 표로 관리하도록 설계했습니다.",
+            "verbatim": false
+          },
+          {
+            "label": "Awake가 아니라 OnEnable에서 구독",
+            "text": "몬스터는 오브젝트 풀을 쓰기 때문에, 풀에서 다시 꺼낼 때 Awake가 다시 불리지 않습니다.",
+            "verbatim": true
+          },
+          {"label": "명중이 아니라 예고(Windup) 순간에 공격음", "text": "플레이어에게 공격이 온다는 정보를 미리 주기 위한 장치입니다.", "verbatim": true}
+        ],
+        "visuals": [{"kind": "mermaid", "n": 2, "fp": "sequenceDiagram"}]
+      },
+      {
+        "key": "player-emitter",
+        "chapter": "sound",
+        "layout": "code",
+        "tab": "구현",
+        "title": {"text": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)", "verbatim": true},
+        "lead": {"text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).", "verbatim": true},
+        "sectionPath": ["5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)"],
+        "points": [{"label": "이유", "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.", "verbatim": true}],
+        "visuals": [
+          {"kind": "code", "n": 1, "fp": "// GameSoundRouter.AttachPlayerEmitters (발췌)"},
+          {"kind": "table", "n": 1, "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"}
+        ]
+      },
+      {
         "key": "hurt-sound",
-        "chapter": "choice",
+        "chapter": "sound",
         "layout": "full",
         "tab": "선택",
-        "title": {"text": "몬스터 피격(Hurt) 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
+        "title": {"text": "5-5. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
         "lead": {"text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).", "verbatim": true},
-        "sectionPath": ["6-4. 사운드에서 정한 두 가지 — 피격 소리는 빼고, 곡 키는 라운드 표에", "몬스터 피격(Hurt) 소리 — 만들 수 있지만 만들지 않은 소리"],
+        "sectionPath": ["5-5. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"],
         "points": [
           {
             "label": "",
@@ -1088,13 +1069,60 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
       },
       {
+        "key": "map",
+        "chapter": "other",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "6-1. 맵 — AI가 만들고, 디테일은 제가 고쳤다", "verbatim": true},
+        "lead": {"text": "마감인 발표일(11-04)까지 남은 기간이 일주일 정도뿐이었습니다", "verbatim": true},
+        "sectionPath": ["6-1. 맵 — AI가 만들고, 디테일은 제가 고쳤다"],
+        "points": [
+          {"label": "", "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.", "verbatim": true},
+          {
+            "label": "",
+            "text": "그래서 \"높은 곳에서 쏘는 이점은 주지 않는다\" 원칙을 빌더 규칙으로 넣어, 계단·사다리·발판이 달린 프리팹은 배치하지 않았습니다.",
+            "verbatim": false
+          }
+        ],
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "|[A] 지금까지처럼 전부 손으로 다시 배치|[B] Claude와 함께 생성 + 확인하며 수정 + 디테일은 수작업 ✓"},
+          {
+            "kind": "image",
+            "src": "images/map-overview.png",
+            "w": 2492,
+            "h": 1631,
+            "caption": {"text": "신규 인게임 맵 탑뷰 — 지점 13곳, 순환로, 시작·보스 등장·구조선 착륙 지점", "verbatim": true}
+          }
+        ]
+      },
+      {
+        "key": "upgrade",
+        "chapter": "other",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "6-3. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까", "verbatim": true},
+        "lead": {"text": "처음 만든 강화(10-23)는 재장전·탄창·수류탄 파우치 3종이었고, 각 3레벨까지, 라운드마다 한 번만 살 수 있었습니다.", "verbatim": true},
+        "sectionPath": ["6-3. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까"],
+        "points": [{"label": "", "text": "3장 중 에픽이 1장 이상 나올 확률이 약 58%라, 상점을 열 때마다 절반 이상은 에픽을 보게 됩니다.", "verbatim": true}],
+        "visuals": [
+          {"kind": "table", "n": 2, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
+          {
+            "kind": "image",
+            "src": "images/upgrade-shop.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {"text": "구현된 강화 상점 — 무작위 카드 3장(일반·에픽·하급), 산 카드는 SOLD, 리롤 5, 남은 재화", "verbatim": true}
+          }
+        ]
+      },
+      {
         "key": "ui",
-        "chapter": "choice",
+        "chapter": "other",
         "layout": "screens",
         "tab": "결과",
-        "title": {"text": "6-5. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
+        "title": {"text": "6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
         "lead": {"text": "메인 메뉴를 기준으로 삼은 이유는, 메인 메뉴가 게임의 첫인상이기 때문입니다.", "verbatim": true},
-        "sectionPath": ["6-5. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
+        "sectionPath": ["6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
         "points": [],
         "visuals": [
           {
@@ -1121,26 +1149,6 @@
         ]
       },
       {
-        "key": "upgrade",
-        "chapter": "choice",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "6-6. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까", "verbatim": true},
-        "lead": {"text": "처음 만든 강화(10-23)는 재장전·탄창·수류탄 파우치 3종이었고, 각 3레벨까지, 라운드마다 한 번만 살 수 있었습니다.", "verbatim": true},
-        "sectionPath": ["6-6. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까"],
-        "points": [{"label": "", "text": "3장 중 에픽이 1장 이상 나올 확률이 약 58%라, 상점을 열 때마다 절반 이상은 에픽을 보게 됩니다.", "verbatim": true}],
-        "visuals": [
-          {"kind": "table", "n": 2, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
-          {
-            "kind": "image",
-            "src": "images/upgrade-shop.png",
-            "w": 1920,
-            "h": 1080,
-            "caption": {"text": "구현된 강화 상점 — 무작위 카드 3장(일반·에픽·하급), 산 카드는 SOLD, 리롤 5, 남은 재화", "verbatim": true}
-          }
-        ]
-      },
-      {
         "key": "ai-role",
         "chapter": "ai",
         "layout": "visual",
@@ -1157,88 +1165,9 @@
           }
         ],
         "visuals": [{"kind": "table", "n": 1, "fp": "누가|무엇을"}, {"kind": "table", "n": 3, "fp": "맡기지 않은 것|예"}]
-      },
-      {
-        "key": "map",
-        "chapter": "ai",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "7-2. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다", "verbatim": true},
-        "lead": {"text": "마감인 발표일(11-04)까지 남은 기간이 일주일 정도뿐이었습니다", "verbatim": true},
-        "sectionPath": ["7-2. 맵·튜토리얼 — AI가 만들고, 디테일은 제가 고쳤다"],
-        "points": [
-          {"label": "", "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.", "verbatim": true},
-          {
-            "label": "",
-            "text": "그래서 \"높은 곳에서 쏘는 이점은 주지 않는다\" 원칙을 빌더 규칙으로 넣어, 계단·사다리·발판이 달린 프리팹은 배치하지 않았습니다.",
-            "verbatim": false
-          }
-        ],
-        "visuals": [
-          {"kind": "table", "n": 1, "fp": "방법|장점|단점"},
-          {
-            "kind": "image",
-            "src": "images/map-overview.png",
-            "w": 2492,
-            "h": 1631,
-            "caption": {"text": "신규 인게임 맵 탑뷰 — 지점 13곳, 순환로, 시작·보스 등장·구조선 착륙 지점", "verbatim": true}
-          }
-        ]
-      },
-      {
-        "key": "ts-supply",
-        "chapter": "result",
-        "layout": "problem",
-        "tab": "문제 해결",
-        "title": {"text": "④ 새 맵에서 보급이 하나도 떨어지지 않음", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["8-2. 트러블슈팅"],
-        "points": [
-          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 전혀 떨어지지 않는 것을 발견했습니다.", "verbatim": false},
-          {
-            "label": "원인",
-            "text": "새 맵(SciFiMap)의 지형 원점이 y = -20이라, 실제 전장 지면이 지형 기준 높이 약 18m로 계산되었습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "해결",
-            "text": "높이 기준을 플레이어 발 높이 + 5m로 바꿔, 맵 원점이나 보스 아레나 높이와 상관없이 같은 규칙이 되게 했습니다(5-2 표의 ②).",
-            "verbatim": true
-          },
-          {
-            "label": "결과",
-            "text": "같은 씬에서 보급이 다시 떨어지는 것을 확인했고, 이후 2차 피드백에서는 \"어디에 떨어지는가\"(지붕·절벽 위) 문제로 넘어갔습니다(6-1).",
-            "verbatim": true
-          }
-        ],
-        "visuals": []
-      },
-      {
-        "key": "ts-start",
-        "chapter": "result",
-        "layout": "problem",
-        "tab": "문제 해결",
-        "title": {"text": "② GAME START가 인트로·튜토리얼을 건너뜀", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["8-2. 트러블슈팅"],
-        "points": [
-          {"label": "문제", "text": "게임 스타트를 누르면 인트로- 튜토리얼- 인게임 씬으로 전환이 안됨, 게임스타트 누를시 바로 인게임 씬으로 전환됨", "verbatim": false},
-          {
-            "label": "원인",
-            "text": "메인 메뉴 씬에 저장된 \"다음 씬 이름\" 값이 테스트용 전투 씬(Monster Player Integration)으로 덮어써져 있어서, GAME START가 인트로를 건너뛰고 바로 전투 씬으로 갔음",
-            "verbatim": true
-          },
-          {"label": "해결", "text": "그 값을 인트로 씬 이름(기본값 IntroCrawl)을 쓰는 새 필드로 바꿔, 씬에 남은 잘못된 값을 무시하게 함", "verbatim": false},
-          {
-            "label": "결과",
-            "text": "최종 빌드 전(11-03 밤)에 고쳐, GAME START → 인트로 → 튜토리얼 → 게임 순서로 다시 이어지게 되었습니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": []
       }
     ],
-    "applied": "c9b9674961a037d6"
+    "applied": "a90c42ed3eb75254"
   },
-  "generatedAt": "2026-11-23"
+  "generatedAt": "2026-11-24"
 }

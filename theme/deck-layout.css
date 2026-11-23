@@ -10,13 +10,13 @@
 /* ── 장 표지 그림 (공통) ──
    제목은 왼쪽 위 한 줄, 그 아래 [게임 화면 | 장면 목록]을 같은 높이로 — 그림이 목록보다 아래로 내려가지 않게.
    그림을 넣을 장 표지는 아래 SEL 목록에 더하고, 그림 줄을 하나 씁니다. (PPTX로 저장에는 들어가지 않음 — CSS 배경) */
-:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-arch), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-mid {
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-mid {
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: auto auto;
   grid-template-areas: "t t" "img list"; align-content: center; align-items: stretch; row-gap: 20px;
 }
-:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-arch), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-mid > div:first-child { grid-area: t; }
-:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-arch), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-list { grid-area: list; display: flex; flex-direction: column; justify-content: center; }
-:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-arch), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-mid::after {
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-mid > div:first-child { grid-area: t; }
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-list { grid-area: list; display: flex; flex-direction: column; justify-content: center; }
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-mid::after {
   content: ""; grid-area: img; min-height: 220px;
   border-radius: var(--radius, 6px); border: 1px solid var(--line);
   background: var(--card) left center / cover no-repeat;
@@ -24,9 +24,9 @@
 
 /* ── HIVE PURGE (4-team-even) ── */
 
-/* 3쪽 「개요」 · 7쪽 「시스템 구조」 장 표지 그림 */
+/* 「개요」 · 「게임 디자인」 장 표지 그림 (11-24 장 재구성으로 「시스템 구조」 장이 없어져 군중전 그림을 「게임 디자인」 장으로 옮김) */
 #deck:has(a[href*="p=4-team-even"]) #ch-intro .ch-mid::after { background-image: url("../src/4-team-even/images/main-menu.png"); }
-#deck:has(a[href*="p=4-team-even"]) #ch-arch .ch-mid::after { background-image: url("../src/4-team-even/images/gameplay-crowd.png"); }
+#deck:has(a[href*="p=4-team-even"]) #ch-design .ch-mid::after { background-image: url("../src/4-team-even/images/gameplay-crowd.png"); }
 
 /* 5쪽 1-2 — 보급 그림 왼쪽, 문제 카드 4개를 오른쪽에 위아래로 */
 #deck:has(a[href*="p=4-team-even"]) #d-why .dk {

@@ -15,6 +15,12 @@
       "port": 4600
     },
     {
+      "name": "portfolio-edit-py313",
+      "runtimeExecutable": "C:/Users/VR9th/AppData/Local/Programs/Python/Python313/python.exe",
+      "runtimeArgs": ["edit-server.py", "4600"],
+      "port": 4600
+    },
+    {
       "name": "portfolio-edit-4610",
       "runtimeExecutable": "python",
       "runtimeArgs": ["edit-server.py", "4610"],

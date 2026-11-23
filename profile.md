@@ -41,5 +41,5 @@
   <!-- project = 프로젝트 중심 (프로젝트가 여러 개일 때) / stack = 기술 스택 중심 (특정 기술을 강조할 때) · 지금의 덱에는 아직 반영되지 않습니다(장면 순서 고정) -->
 - 강조색: #2F6FEB
   <!-- 버튼·링크·태그에 쓰이는 색 하나. 예) #2F6FEB 블루, #0F9D76 그린, #D9480F 오렌지, #7048E8 퍼플 -->
-- 프로젝트 순서: 4-team-even, 3-escape-for-freedom, 2-teamproject-hs, 1-watch-your-back, 5-wow-hardcore-analysis
+- 프로젝트 순서: 6-slime-cardshop-vr, 4-team-even, 3-escape-for-freedom, 2-teamproject-hs, 1-watch-your-back, 5-wow-hardcore-analysis
   <!-- 비워 두면 src/ 폴더 이름 순서. 바꾸려면 폴더 이름을 쉼표로: 2-Yggdrasil, 1-action-platformer -->

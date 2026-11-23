@@ -26,7 +26,7 @@
           "project": "4-team-even"
         },
         {
-          "text": "AI가 한 클래스에 몰아넣은 물고기 기능을 세 클래스로 나눠 `FishMovement`를 352줄로 줄임",
+          "text": "AI가 한 클래스에 몰아넣은 물고기 기능을 세 클래스로 나눠 `FishMovement`를 352줄로 줄였습니다",
           "project": "2-teamproject-hs"
         },
         {
@@ -51,7 +51,7 @@
           "project": "3-escape-for-freedom"
         },
         {
-          "text": "섬·바다 3스테이지 맵을 디자인하고, 너무 어렵다는 반응에 튜토리얼 맵을 추가",
+          "text": "섬·바다 3스테이지 맵을 디자인하고, 너무 어렵다는 반응에 튜토리얼 맵을 추가했습니다",
           "project": "2-teamproject-hs"
         },
         {
@@ -68,7 +68,7 @@
           "project": "1-watch-your-back"
         },
         {
-          "text": "Unity 6(URP 2D)에서 Rigidbody 물리로 움직이는 물고기 AI와 BoxCast 장애물 회피 구현",
+          "text": "Unity 6(URP 2D)에서 Rigidbody 물리로 움직이는 물고기 AI와 BoxCast 장애물 회피를 구현했습니다",
           "project": "2-teamproject-hs"
         },
         {
@@ -98,7 +98,7 @@
           "project": "1-watch-your-back"
         },
         {
-          "text": "물고기 상태 6종을 클래스 하나씩 두고 `IFishState`로 묶은 FSM — 팀원들이 같은 방식으로 문어·상어 상태를 추가",
+          "text": "물고기 상태 6종을 클래스 하나씩 두고 `IFishState`로 묶은 FSM — 팀원들이 같은 방식으로 문어·상어 상태를 추가했습니다",
           "project": "2-teamproject-hs"
         },
         {
@@ -115,7 +115,7 @@
           "project": "4-team-even"
         },
         {
-          "text": "서버와 공유하는 `Protocol.cs`는 고치기 전에 항상 팀장에게 먼저 물어봄",
+          "text": "서버와 공유하는 `Protocol.cs`는 고치기 전에 항상 팀장에게 먼저 물어봤습니다",
           "project": "2-teamproject-hs"
         }
       ]
@@ -124,7 +124,7 @@
       "name": "비동기 (async)",
       "evidence": [
         {
-          "text": "상태 진입·퇴장을 async로 만들고, 새 전환이 시작되면 `CancellationToken`으로 이전 전환을 취소",
+          "text": "상태 진입·퇴장을 async로 만들고, 새 전환이 시작되면 `CancellationToken`으로 이전 전환을 취소했습니다",
           "project": "2-teamproject-hs"
         }
       ]
@@ -133,7 +133,7 @@
       "name": "멀티플레이 동기화",
       "evidence": [
         {
-          "text": "팀장과 함께, 호스트만 물고기 AI를 계산하고 게스트는 30ms마다 받은 스냅샷으로 위치·회전만 덮어쓰는 구조를 만듦",
+          "text": "팀장과 함께, 호스트만 물고기 AI를 계산하고 게스트는 30ms마다 받은 스냅샷으로 위치·회전만 덮어쓰는 구조를 만들었습니다",
           "project": "2-teamproject-hs"
         }
       ]

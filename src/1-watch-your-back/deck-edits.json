@@ -8,7 +8,7 @@
       "tab": "흐름",
       "title": {"text": "3-2. 상태 전환", "verbatim": true},
       "lead": {"text": "전환 조건은 시야 박스와 공격 범위 박스로 판정합니다.", "verbatim": true},
-      "sectionPath": ["3. 시스템 구조", "3-2. 상태 전환"],
+      "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-2. 상태 전환"],
       "points": [
         {
           "label": "",
@@ -18,7 +18,7 @@
         {"label": "", "text": "외부 스크립트(감시자·쥐)는 보스의 내부를 몰라도 목표 위치 하나만 넘기고 `ChangeState`를 부르면 됩니다.", "verbatim": true}
       ],
       "visuals": [{"kind": "mermaid", "n": 1, "fp": "stateDiagram-v2"}],
-      "from": {"key": "state-flow", "sectionPath": ["3. 시스템 구조", "3-2. 상태 전환"], "sig": ["3-2. 상태 전환|mermaid|1|stateDiagram-v2"]}
+      "from": {"key": "state-flow", "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-2. 상태 전환"], "sig": ["3-2. 상태 전환|mermaid|1|stateDiagram-v2"]}
     },
     {
       "key": "ts-knockdown",
@@ -44,7 +44,7 @@
           "w": 960,
           "h": 538,
           "caption": {"text": "뒤통수 — 뒤로 몰래 다가가 뒤통수를 치면 컷씬(SLAP!)과 함께 적이 쓰러집니다", "verbatim": true},
-          "sectionPath": ["4-2. 같은 프레임 동시 피격 방지"]
+          "sectionPath": ["4-3. 같은 프레임 동시 피격 방지"]
         }
       ],
       "from": {"key": "ts-knockdown", "sectionPath": ["7. 결과 및 배운 점", "7-2. 트러블슈팅"], "sig": []}
@@ -71,7 +71,7 @@
         },
         {
           "label": "결과",
-          "text": "과제 제출 당시에는 해결하지 못했습니다. 카운트를 되돌린 뒤에도 남은 문제라 다른 원인이 더 있을 수 있고, 추후 리팩토링 때 다시 확인할 예정입니다.",
+          "text": "아직 해결되지 않았습니다. 카운트를 되돌린 뒤에도 남은 문제라 다른 원인이 더 있을 수 있고, 다시 만들 때 확인할 예정입니다(7-4).",
           "verbatim": true
         }
       ],
@@ -89,12 +89,12 @@
     },
     {
       "key": "avoidance",
-      "chapter": "core",
+      "chapter": "arch",
       "layout": "full",
       "tab": "구현",
-      "title": {"text": "4-3. 장애물 회피 이동", "verbatim": true},
+      "title": {"text": "3-4. 장애물 회피 이동", "verbatim": true},
       "lead": {"text": "순찰·추격·출동 상태는 모두 같은 이동 함수를 씁니다.", "verbatim": true},
-      "sectionPath": ["4. 핵심 기능", "4-3. 장애물 회피 이동"],
+      "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-4. 장애물 회피 이동"],
       "points": [
         {"label": "구현", "text": "가려는 방향으로 바로 가지 않고, 부채꼴로 몇 갈래를 살펴서 처음으로 비어 있는 방향으로 움직입니다.", "verbatim": true},
         {"label": "이유", "text": "당시에는 A* 길찾기가 제 수준에서 구현하기 어렵다고 생각해, 제가 만들 수 있는 방식으로 먼저 설계했습니다.", "verbatim": false},
@@ -113,8 +113,8 @@
       ],
       "from": {
         "key": "avoidance",
-        "sectionPath": ["4. 핵심 기능", "4-3. 장애물 회피 이동"],
-        "sig": ["4-3. 장애물 회피 이동 (MoveWithAvoidance)|table|1|살피는 순서|1|2|3|4|5"]
+        "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-4. 장애물 회피 이동"],
+        "sig": ["3-4. 장애물 회피 이동|table|1|살피는 순서|1|2|3|4|5"]
       }
     },
     {
@@ -124,12 +124,12 @@
       "tab": "구조",
       "title": {"text": "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다", "verbatim": true},
       "lead": {"text": "적 AI는 보스 4명이 함께 쓰는 적 본체(`EnemyStateManager`)와 지금 하는 행동(`IEnemyState`)으로 나뉩니다.", "verbatim": false},
-      "sectionPath": ["3. 시스템 구조", "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
+      "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
       "points": [],
       "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}],
       "from": {
         "key": "state-class",
-        "sectionPath": ["3. 시스템 구조", "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
+        "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
         "sig": ["3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다|mermaid|1|classDiagram"]
       },
       "group": "split-state-roles"
@@ -141,7 +141,7 @@
       "tab": "구조",
       "title": {"text": "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다", "verbatim": true},
       "lead": null,
-      "sectionPath": ["3. 시스템 구조", "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
+      "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
       "points": [
         {
           "label": "구현",

@@ -123,7 +123,7 @@
       "layout": "full",
       "tab": "구조",
       "title": {"text": "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다", "verbatim": true},
-      "lead": {"text": "적 AI 시스템을 비유하자면, `EnemyStateManager`는 몸이고, 각 `IEnemyState`는 그 몸이 잠깐 입는 옷입니다.", "verbatim": true},
+      "lead": {"text": "적 AI는 보스 4명이 함께 쓰는 적 본체(`EnemyStateManager`)와 지금 하는 행동(`IEnemyState`)으로 나뉩니다.", "verbatim": false},
       "sectionPath": ["3. 시스템 구조", "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
       "points": [],
       "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}],
@@ -151,7 +151,7 @@
         {"label": "", "text": "옷을 갈아입어도(`ChangeState`) 몸의 위치와 컴포넌트 참조는 그대로 유지됩니다.", "verbatim": true},
         {"label": "이유", "text": "보스 4명은 외형만 다르고 공격·이동은 모두 같습니다.", "verbatim": true}
       ],
-      "visuals": [{"kind": "table", "n": 2, "fp": "비유|맡은 스크립트|하는 일"}],
+      "visuals": [{"kind": "table", "n": 2, "fp": "역할|맡은 스크립트|하는 일|비유"}],
       "after": "state-class",
       "group": "split-state-roles"
     }

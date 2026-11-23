@@ -1,0 +1,49 @@
+# GitHub Pages 배포 — 올라가는 사이트에서만 첫 화면(index.html)을 custom 페이지로 바꿉니다.
+# 레포의 index.html(렌더러)은 그대로라 /portfolio-update·/portfolio-make-pdf·편집 모드·로컬 미리보기는 지금처럼 동작합니다.
+# 사이트에서: /            = custom 페이지 (custom/index.html의 ../ 경로를 ./로 바꾼 것)
+#             /custom/     = 같은 custom 페이지 (그대로)
+#             /print.html  = 원래 포트폴리오 페이지(렌더러, A4 인쇄용)
+# 필요한 설정(한 번): GitHub 레포 Settings → Pages → Source를 "GitHub Actions"로.
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 사이트 만들기 (첫 화면 = custom)
+        run: |
+          set -euo pipefail
+          test -s custom/index.html || { echo "custom/index.html이 없습니다"; exit 1; }
+          mkdir _site
+          rsync -a --exclude .git --exclude .github --exclude _site ./ _site/
+          mv _site/index.html _site/print.html
+          sed 's#\.\./#./#g' custom/index.html > _site/index.html
+          if grep -q '\.\./' _site/index.html; then echo "../ 경로가 남았습니다"; exit 1; fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

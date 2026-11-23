@@ -36,7 +36,7 @@
   const id = Q.get('p');
   const srcPath = (rel) => PF.srcPath(id, rel);
   const deckUrl = (sid = '') => PF.projectUrl(id, sid);
-  const back = `<p>${link({ href: 'index.html', label: '← 포트폴리오로', kind: 'page', cls: 'btn' })}</p>`;
+  const back = `<p>${link({ href: 'custom/', label: '← 포트폴리오로', kind: 'page', cls: 'btn' })}</p>`;
   const headText = new Map();                                        // 제목 요소 → 원문 제목 글자(링크 표시·각주가 붙기 전)
   const htext = (h) => headText.get(h) ?? h.textContent.trim();
   let releaseHold = null;                                            // 도착한 제목 붙잡기(hold) 해제 함수
@@ -70,7 +70,7 @@
   root.innerHTML = `
     <header class="doc-head">
       <div class="doc-head-in">
-        <p class="crumb">${link({ href: 'index.html', label: T('ui.back'), kind: 'page' })}<span aria-hidden="true">›</span><b>${esc(p.title)} — ${T('name.doc')}</b></p>
+        <p class="crumb">${link({ href: 'custom/', label: T('ui.back'), kind: 'page' })}<span aria-hidden="true">›</span><b>${esc(p.title)} — ${T('name.doc')}</b></p>
         <nav class="head-nav" aria-label="프로젝트 링크">
           ${deckBtn}${ext.join('')}
           <span class="newtab-note">${T('ui.newtab')}</span>
@@ -107,7 +107,7 @@
     </div>
     <div class="doc-fab" role="group" aria-label="빠른 이동"><button type="button" class="fab-toc" aria-haspopup="dialog">${T('name.toc')}</button><a class="fab-top" href="#top" aria-label="맨 위로">↑</a></div>
     <dialog class="toc-dialog" aria-label="문서 목차"><div class="toc-dialog-head"><p class="toc-title">${T('name.toc')}</p><button type="button" class="btn dlg-close">${T('ui.close')}</button></div><div class="toc-links"></div></dialog>
-    <footer class="doc-foot"><span>© ${esc(name)}</span>${link({ href: 'index.html', label: T('ui.back'), kind: 'page' })}</footer>`;
+    <footer class="doc-foot"><span>© ${esc(name)}</span>${link({ href: 'custom/', label: T('ui.back'), kind: 'page' })}</footer>`;
 
   // 좁은 화면(< 720px)에서는 "한눈에" 상자를 접어 둠
   document.getElementById('glance').open = !matchMedia('(max-width: 719.98px)').matches;

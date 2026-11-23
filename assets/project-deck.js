@@ -40,7 +40,7 @@
     await PF.loadStrings();                                            // 아래 띠(HUD)도 문구 표로 — 안내 장면으로 끝난 경우에도
     info.strings = PF.stringsReport();
     PF.dropMeasure(); mmdHost?.remove();
-    PFScene.mount({ deck: '#deck', hint: link({ href: id ? PF.docUrl(id) : 'index.html', label: esc(PF.t('deck.mobile-doc')), kind: 'page' }),
+    PFScene.mount({ deck: '#deck', hint: link({ href: id ? PF.docUrl(id) : 'custom/', label: esc(PF.t('deck.mobile-doc')), kind: 'page' }),
       pptx: window.PFPptx && info.meta ? (b) => PFPptx.save(b) : null }); mark('mounted');   // [PPTX로 저장]은 슬라이드를 그렸을 때만(assets/deck-pptx.js)
   }));
 
@@ -48,7 +48,7 @@
     mark('start');
     if (PF.isFile()) { deck.replaceChildren(PF.msgScene({ title: '로컬 서버로 열어 주세요', html: PF.FILE_HELP })); return; }
     const strings = PF.loadStrings();
-    const back = `<p>${link({ href: 'index.html', label: '← 포트폴리오로', kind: 'page' })}</p>`;
+    const back = `<p>${link({ href: 'custom/', label: '← 포트폴리오로', kind: 'page' })}</p>`;
     if (!id) { info.errors.push('no-project: 주소에 ?p=<폴더 이름>이 없습니다'); deck.replaceChildren(PF.msgScene({ title: '프로젝트를 고르세요', html: `<p>주소 끝에 <code>?p=폴더이름</code>을 붙여 주세요.</p>${back}` })); return; }
     const pf = await PF.loadJSON('data/portfolio.json').catch(() => ({}));
     PF.applyTheme(pf.settings?.accent);
@@ -306,7 +306,7 @@
     const cards = [
       ...ext.map((l) => ({ k: PF.extEn(l), label: l.label, href: l.url, kind: 'external', visible: shortUrl(l.url) })),
       { k: PF.t('en.techdoc'), label: PF.t('name.doc'), href: PF.docUrl(p.id), kind: 'page', visible: PF.visibleUrl(PF.docUrl(p.id)) },
-      { k: PF.t('en.portfolio'), label: PF.t('name.portfolio'), href: 'index.html', kind: 'page', visible: PF.visibleUrl('') },
+      { k: PF.t('en.portfolio'), label: PF.t('name.portfolio'), href: 'custom/', kind: 'page', visible: PF.visibleUrl('custom/') },
     ];
     const cover = await PF.projectIntro(p, { id: 'cover', titleTag: 'h1', eyebrow: PF.t('deck.cover-eyebrow'), links: cards, foot, sec: PF.t('deck.cover'), stats: info.overflow });
     if (auto) cover.querySelector('.pf-foot > span').insertAdjacentHTML('beforeend', '<span class="pf-autoband" data-pf-ui="note">예전 데이터로 자동 구성 — /portfolio-build를 다시 실행하면 슬라이드가 됩니다</span>');
@@ -436,7 +436,7 @@
         <div class="en-mid"><div><h2 class="en-t">${esc(p.title)}</h2>${p.tagline ? `<p class="tagline">${inline(p.tagline)}</p>` : ''}${DOT}</div>
         <div class="en-links">${card(PF.t('en.techdoc'), PF.t('deck.end-doc'), PF.docUrl(p.id), 'page', PF.visibleUrl(PF.docUrl(p.id)), true)}
           ${ext.map((l) => card(PF.extEn(l), l.label, l.url, 'external', shortUrl(l.url))).join('')}
-          ${card(PF.t('en.portfolio'), PF.t('ui.back'), 'index.html', 'page', PF.visibleUrl(''))}</div></div>`;
+          ${card(PF.t('en.portfolio'), PF.t('ui.back'), 'custom/', 'page', PF.visibleUrl('custom/'))}</div></div>`;
       return band(s, auto);
     };
     return PF.guard(make(), PFScene.refUrl('end'), info.overflow);

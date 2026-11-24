@@ -47,7 +47,7 @@
           "project": "4-team-even"
         },
         {
-          "text": "튜토리얼을 단계마다 지시한 행동만 하게 바꾸고, 오퍼레이터 음성 41줄을 TTS로 제작",
+          "text": "튜토리얼을 단계마다 지시한 행동만 하게 바꾸고, 오퍼레이터 음성 45줄을 TTS로 제작",
           "project": "4-team-even"
         },
         {
@@ -114,7 +114,7 @@
           "project": "2-teamproject-hs"
         },
         {
-          "text": "EventBus의 `MonsterSpawnedEvent`를 구독해, 다른 팀원의 코드를 고치지 않고 몬스터에 사운드 이미터를 자동으로 붙임",
+          "text": "EventBus의 `MonsterSpawnedEvent`를 구독해, 다른 팀원 코드의 동작을 고치지 않고 몬스터에 사운드 이미터를 자동으로 붙임",
           "project": "4-team-even"
         }
       ]
@@ -123,7 +123,7 @@
       "name": "Git 협업",
       "evidence": [
         {
-          "text": "UI 통합을 작은 PR 9개로 나누고 다른 브랜치와 미리 시험 병합해 하루 안에 합침",
+          "text": "UI 통합을 작은 작업 단위 9개로 나누고 다른 브랜치와 미리 시험 병합해 하루 안에 합침",
           "project": "4-team-even"
         },
         {

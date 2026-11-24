@@ -26,7 +26,13 @@ const PF = (() => {
   const encodePath = (p) => String(p).split('/').map(encodeURIComponent).join('/');
   const srcPath = (id, rel) => `src/${encodeURIComponent(id)}/${encodePath(String(rel).replace(/^\.\//, ''))}`;
   // 페이지 사이 주소(상대경로, 앞에 / 없음 — 프로젝트 Pages는 /<레포>/ 아래에 있음)
-  const projectUrl = (id, sid = '') => `project.html?p=${encodeURIComponent(id)}${sid ? `#s=${sid}` : ''}`;
+  // [수강생 규칙 .claude/rules/original-deck.md] 아래 프로젝트는 만든 슬라이드 대신 본인 발표 PDF로 가고, 문서 이름도 따로 씁니다(강사님 피드백 11-21).
+  //   /portfolio-update가 이 파일을 덮어쓰면 이 두 표와 projectUrl · docName을 다시 넣습니다.
+  const ORIGINAL_DECK = { '5-wow-hardcore-analysis': 'Present File/WoW_클래식_하드코어_전투시스템_분석_개선_v2.pdf' };
+  const DOC_NAME = { '5-wow-hardcore-analysis': '분석 문서' };
+  const originalDeck = (id) => (ORIGINAL_DECK[id] ? srcPath(id, ORIGINAL_DECK[id]) : '');
+  const docName = (id, short = false) => DOC_NAME[id] || PFStr.t(short ? 'name.doc-short' : 'name.doc');
+  const projectUrl = (id, sid = '') => originalDeck(id) || `project.html?p=${encodeURIComponent(id)}${sid ? `#s=${sid}` : ''}`;
   const docUrl = (id, anchor = '') => `doc.html?p=${encodeURIComponent(id)}${anchor ? `#${anchor}` : ''}`;
   // 보이는 주소(PDF에서 그대로 칠 수 있게): 지금 사이트 주소 + 상대경로. 조각(#…)은 넣지 않음(portfolio-structure §5-4)
   const siteBase = () => `${location.host}${location.pathname.replace(/[^/]*$/, '')}`;
@@ -237,7 +243,7 @@ const PF = (() => {
   // ── 문구 표(assets/strings.js): t(키, 값) · tab(data의 탭 값) · label(data의 카드 라벨 값) · 페이지 시작 때 loadStrings()로 theme/strings.tsv를 읽음 ──
   const { t, tab, label, load: loadStrings, report: stringsReport } = PFStr;
 
-  return { esc, inline, isUrl, shortUrl, loadJSON, loadText, encodePath, srcPath, projectUrl, docUrl, siteBase, visibleUrl, metaValue, teamLabel,
+  return { esc, inline, isUrl, shortUrl, loadJSON, loadText, encodePath, srcPath, projectUrl, originalDeck, docName, docUrl, siteBase, visibleUrl, metaValue, teamLabel,
            slugger, normTitle, resolveHeading, keyOk, deckSceneFor, mdHtml, headingsOf, ICON, NEWTAB, link, markNewTab, brandIcon, brandOf, themeTokens, applyTheme, mermaidTheme, mermaidElk, mermaidElkOpt, contrast, hexRgb,
            FILE_HELP, noDataHtml, isFile, notice, guardFileProtocol, noData, t, tab, label, loadStrings, stringsReport };
 })();

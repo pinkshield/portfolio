@@ -183,9 +183,9 @@
     const meta = (p.meta || []).map((m) => `<div${String(m.value || '').length > WIDE ? ' class="wide"' : ''}><dt>${esc(m.label)}</dt><dd>${inline(m.value)}</dd></div>`);
     if (p.team?.role) meta.push(`<div class="wide"><dt>${T('name.role')}</dt><dd>${inline(p.team.role)}</dd></div>`);
     const ext = extLinks(p);
-    const btns = [btn(PF.projectUrl(p.id), T('name.deck'), 'page', 'btn primary'), btn(PF.docUrl(p.id), T('name.doc'), 'page'),
+    const btns = [btn(PF.projectUrl(p.id), T('name.deck'), 'page', 'btn primary'), btn(PF.docUrl(p.id), PF.docName(p.id), 'page'),
       ...ext.map((x) => link({ href: x.url, label: PF.brandIcon(x.icon) + esc(x.label), kind: 'external', cls: `btn ext-${x.kind}`, attrs: x.orig && x.orig !== x.label ? `title="${esc(x.orig)}"` : '' }))];
-    const urls = [[t('name.deck'), PF.visibleUrl(PF.projectUrl(p.id)), PF.projectUrl(p.id), 'page'], [t('name.doc'), PF.visibleUrl(PF.docUrl(p.id)), PF.docUrl(p.id), 'page'],
+    const urls = [[t('name.deck'), PF.visibleUrl(PF.projectUrl(p.id)), PF.projectUrl(p.id), 'page'], [PF.docName(p.id), PF.visibleUrl(PF.docUrl(p.id)), PF.docUrl(p.id), 'page'],
       ...ext.map((x) => [x.label, shortUrl(x.url), x.url, 'external'])];
     const cover = p.cover ? `<figure class="cover"><img src="${esc(PF.srcPath(p.id, p.cover))}" alt="${esc(p.title)} 대표 화면"></figure>` : '';
     const body = `${p.tagline ? `<p class="tagline">${inline(p.tagline)}</p>` : ''}
@@ -213,7 +213,7 @@
         attrs: `aria-label="${esc(PF.normTitle(h.title))} — ${T('page.see-in-deck')} (새 탭)"` })}</div></li>`).join('');
     const body = `<div class="fe${shots.length ? '' : ' noshot'}" style="--shots:${shots.length}">${shots.length ? `<div class="shots">${tiles}</div>` : ''}
       <div class="fe-r"><ol class="flist">${rows}</ol>
-        <div class="btns end no-print">${btn(PF.projectUrl(p.id), T('page.deck-all'), 'page', 'btn primary')}${btn(PF.docUrl(p.id), T('name.doc'), 'page')}</div></div></div>`;
+        <div class="btns end no-print">${btn(PF.projectUrl(p.id), T('page.deck-all'), 'page', 'btn primary')}${btn(PF.docUrl(p.id), PF.docName(p.id), 'page')}</div></div></div>`;
     return sec(`p-${p.id}-core`, `${no} · ${t('page.features')}`, p.title, PF.teamLabel(p.team), body, 'tint core');
   }
 
@@ -236,7 +236,7 @@
   }
 
   function projLinks(p) {
-    return [link({ href: PF.projectUrl(p.id), label: T('name.deck'), kind: 'page' }), link({ href: PF.docUrl(p.id), label: T('name.doc-short'), kind: 'page' }),
+    return [link({ href: PF.projectUrl(p.id), label: T('name.deck'), kind: 'page' }), link({ href: PF.docUrl(p.id), label: PF.docName(p.id, true), kind: 'page' }),
       ...extLinks(p).map((x) => link({ href: x.url, label: PF.brandIcon(x.icon) + esc(x.label) }))].join('');
   }
 

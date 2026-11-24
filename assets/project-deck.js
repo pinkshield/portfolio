@@ -21,6 +21,12 @@
   //   #pf-highlights 등 → 옛 장면 id로 바꾼 뒤 같은 처리 / 그 밖(옛 프로젝트 문서 제목 앵커) → 상세 문서의 같은 조각
   const SCENE = /^(cover|toc|ch-[a-z][a-z0-9-]*|d-[a-z0-9-]+|retro(-\d+)?|end|notice|hl-\d+(-\d+)?|ts-\d+(-\d+)?|shots(-\d+)?|more)$/;
   const LEGACY = { 'pf-highlights': 'hl-1', 'pf-troubleshooting': 'ts-1', 'pf-screenshots': 'shots', 'pf-retro': 'retro' };
+  // [수강생 규칙 .claude/rules/original-deck.md] 본인 발표 PDF가 있는 프로젝트는 만든 슬라이드 대신 그 PDF로 보냅니다.
+  if (id && PF.originalDeck(id)) {
+    // 브라우저가 PDF를 바로 열지 않고 내려받는 경우를 위해 링크도 남깁니다.
+    document.getElementById('deck').innerHTML = `<p style="padding:2rem;font-size:1.1rem">발표 자료 PDF로 이동합니다 — <a href="${PF.originalDeck(id)}">열리지 않으면 여기를 누르세요</a></p>`;
+    location.replace(PF.originalDeck(id)); return;
+  }
   const redirected = (() => {
     if (!id || !location.hash || location.hash === '#') return false;
     const rawEnc = location.hash.slice(1);
@@ -305,7 +311,7 @@
     // 표지 = 프로젝트 소개 템플릿(PF.projectIntro, 결정 G4). 상세 문서 링크는 표지·맺음에만(G1)
     const cards = [
       ...ext.map((l) => ({ k: PF.extEn(l), label: l.label, href: l.url, kind: 'external', visible: shortUrl(l.url) })),
-      { k: PF.t('en.techdoc'), label: PF.t('name.doc'), href: PF.docUrl(p.id), kind: 'page', visible: PF.visibleUrl(PF.docUrl(p.id)) },
+      { k: PF.t('en.techdoc'), label: PF.docName(p.id), href: PF.docUrl(p.id), kind: 'page', visible: PF.visibleUrl(PF.docUrl(p.id)) },
       { k: PF.t('en.portfolio'), label: PF.t('name.portfolio'), href: 'custom/', kind: 'page', visible: PF.visibleUrl('custom/') },
     ];
     const cover = await PF.projectIntro(p, { id: 'cover', titleTag: 'h1', eyebrow: PF.t('deck.cover-eyebrow'), links: cards, foot, sec: PF.t('deck.cover'), stats: info.overflow });

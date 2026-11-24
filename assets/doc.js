@@ -54,7 +54,7 @@
     return done();
   }
   const name = pf.profile?.name || '';
-  document.title = `${p.title} — ${PF.t('name.doc')}${name ? ' · ' + name : ''}`;
+  document.title = `${p.title} — ${PF.docName(id)}${name ? ' · ' + name : ''}`;
 
   // ── 뼈대 ──
   const metaRows = (p.meta || []).map((m) => `<div><dt>${esc(m.label)}</dt><dd>${inline(m.value)}</dd></div>`).join('') +
@@ -70,7 +70,7 @@
   root.innerHTML = `
     <header class="doc-head">
       <div class="doc-head-in">
-        <p class="crumb">${link({ href: 'custom/', label: T('ui.back'), kind: 'page' })}<span aria-hidden="true">›</span><b>${esc(p.title)} — ${T('name.doc')}</b></p>
+        <p class="crumb">${link({ href: 'custom/', label: T('ui.back'), kind: 'page' })}<span aria-hidden="true">›</span><b>${esc(p.title)} — ${PF.docName(id)}</b></p>
         <nav class="head-nav" aria-label="프로젝트 링크">
           ${deckBtn}${ext.join('')}
           <span class="newtab-note">${T('ui.newtab')}</span>
@@ -82,7 +82,7 @@
       <nav class="toc" id="toc" aria-label="문서 목차"><p class="toc-title">${T('name.toc')}</p><div class="toc-links" id="toc-links"></div></nav>
       <main class="doc-main" id="main" tabindex="-1">
         <div class="doc-intro">
-          <p class="eyebrow">${T('name.doc')}</p>
+          <p class="eyebrow">${PF.docName(id)}</p>
           <h1>${esc(p.title)}</h1>
           ${p.tagline ? `<p class="tagline">${inline(p.tagline)}</p>` : ''}
           <dl class="meta-line">${metaRows}</dl>

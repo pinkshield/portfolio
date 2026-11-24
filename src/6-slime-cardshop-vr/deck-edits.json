@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "pin": [
+    {
+      "key": "card-bug",
+      "after": "reveal-code",
+      "chapter": "reveal",
+      "layout": "problem",
+      "tab": "문제 해결",
+      "title": {"text": "4-3. 문제와 해결 — 카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그", "verbatim": true},
+      "lead": {"text": "카드의 Transform 위치와 Rigidbody 위치를 프레임마다 나란히 찍었습니다.", "verbatim": true},
+      "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-3. 문제와 해결 — 카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그"],
+      "points": [
+        {"label": "문제", "text": "팩을 자르면 눈앞 35cm에 카드 5장이 나와야 하는데, 가끔(3번 중 1번) 카드가 카운터 뒤쪽 옛 자리에 나타났습니다.", "verbatim": true},
+        {"label": "원인", "text": "카드 프리팹의 Rigidbody가 보간(Interpolate)으로 설정돼 있었습니다.", "verbatim": true},
+        {"label": "해결", "text": "스크립트로만 움직이는 공개용 카드는 보간을 끄고, 옮길 때 Transform과 Rigidbody를 함께 옮기게 했습니다.", "verbatim": true},
+        {"label": "배운 점", "text": "간헐적인 버그는 추측보다 프레임별 값 로그가 빠릅니다.", "verbatim": true}
+      ],
+      "visuals": [
+        {"kind": "image", "src": "images/bug-card-before.png", "w": 1920, "h": 1032, "caption": {"text": "수정 전 — 넘기기 연출은 진행 중인데 카드가 눈앞이 아니라 카운터 뒤 옛 자리에 있습니다", "verbatim": true}},
+        {"kind": "image", "src": "images/bug-card-after.png", "w": 1920, "h": 1032, "caption": {"text": "수정 후 — 팩을 자른 자리(눈앞)에 카드 묶음이 나옵니다", "verbatim": true}}
+      ]
+    },
+    {
+      "key": "card-art",
+      "after": "workflow",
+      "chapter": "ai",
+      "layout": "visual",
+      "tab": "선택",
+      "title": {"text": "7-2. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다", "verbatim": true},
+      "lead": {"text": "분량을 줄이는 방안을 묻자 Claude는 등급당 1장(35장)으로 줄이는 안을 추천했지만, 작업량을 비용으로만 본 안이었습니다.", "verbatim": true},
+      "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다.", "7-2. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다"],
+      "points": [
+        {"label": "", "text": "카드 50장의 그림은 Gemini로 만들었습니다.", "verbatim": true},
+        {"label": "", "text": "50장을 유지하고, 마음에 들지 않는 카드를 골라 슬라임 컨셉(속성별 디자인, 간식 카드를 슬라임 알로)을 직접 다시 잡았습니다.", "verbatim": true},
+        {"label": "", "text": "다시 뽑을 그림은 진행표에 순서를 정해 두고 골랐습니다: ① 규칙을 어긴 그림 → ② 이름과 그림이 안 맞는 카드 → ③ 나머지.", "verbatim": true}
+      ],
+      "visuals": [
+        {"kind": "table", "n": 1, "fp": "카드 등급|그림 느낌|화면 연출"}
+      ]
+    }
+  ],
+  "hide": []
+}

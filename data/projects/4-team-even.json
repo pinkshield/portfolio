@@ -52,7 +52,7 @@
     ]
   },
   "intent": {
-    "text": "주울 수 없는 곳에 떨어지던 보급과, 4명이 각자 만드는 몬스터·보스·무기에 다른 사람의 코드를 고치지 않고 소리를 붙이는 문제를 푸는 데 집중했습니다.",
+    "text": "주울 수 없는 곳에 떨어지던 보급과, 4명이 각자 만드는 몬스터·보스·무기에 다른 사람 코드의 동작을 고치지 않고 소리를 붙이는 문제를 푸는 데 집중했습니다.",
     "verbatim": false
   },
   "highlights": [
@@ -82,7 +82,7 @@
       "what": "다른 파트는 사운드 표의 키만 넘기고, 새 몬스터는 `MonsterTable`의 사운드 키 열만 채우면 소리가 붙습니다.",
       "how": "몬스터가 생기면(`MonsterSpawnedEvent`) `GameSoundRouter`가 이미터를 붙이고, 이미터는 `OnEnable`에서 `IMonsterSoundSource`를 찾아 공격 예고·사망 같은 지역 이벤트를 구독해 그 몬스터 위치에서 소리를 냅니다.",
       "why": "몬스터·플레이어 프리팹은 다른 팀원 담당이라 프리팹에 사운드 컴포넌트를 미리 붙이지 않았습니다. 플레이어 소리 버그 때도 프리팹에 직접 붙이는 방식 대신 라우터가 실행 중에 붙이는 방식을 골라 담당자의 작업물을 바꾸지 않았습니다.",
-      "section": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기",
+      "section": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기",
       "image": null
     },
     {
@@ -90,7 +90,7 @@
       "what": "각자 만들어 색·글꼴·모양이 제각각이던 UI를, 메인 메뉴의 \"Moonlit Night\" 틀을 기준으로 게임 전체 UI로 통합했습니다.",
       "how": "색·글꼴·크기는 새 파일(`UiTheme`, `UiThemeKit`)에 모으고 기존 파일은 그리는 코드만 바꿨으며, 작은 PR 9개로 나눠 다른 브랜치와 미리 시험 병합하며 하루 안에 develop에 합쳤습니다(PR #112).",
       "why": "메인 메뉴가 게임의 첫인상이라, 모든 화면을 같은 색·글꼴·모양으로 맞추면 화면이 바뀌어도 플레이어의 몰입이 깨지지 않는다고 생각했습니다. 마감 직전 팀원 모두가 UI 파일을 동시에 고치고 있어, 색·글꼴·크기는 누구와도 충돌하지 않는 새 파일에 모았습니다.",
-      "section": "6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게",
+      "section": "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게",
       "image": {
         "src": "images/ui-after.png",
         "w": 1920,
@@ -103,7 +103,7 @@
     {
       "title": "새 맵에서 보급이 하나도 떨어지지 않음",
       "problem": "직접 플레이 테스트를 하다 보급이 전혀 떨어지지 않는 것을 발견했습니다.",
-      "cause": "새 맵(SciFiMap)의 지형 원점이 y = -20이라 실제 전장 지면이 지형 기준 높이 약 18m로 계산되어, \"지형 기준 높이 5m 이하에만 투하\" 조건에 거의 모든 지점이 탈락했습니다.",
+      "cause": "새 맵(SciFiMap)의 지형 원점이 y = -20이라 실제 전장 지면이 지형 기준 높이 약 18m로 계산되어, \"지형 기준 높이 15m 이상이면 투하 금지\" 조건에 거의 모든 지점이 탈락했습니다.",
       "solution": "높이 기준을 플레이어 발 높이 + 5m로 바꾸고, 투하에 실패하면 탈락 사유별 횟수를 경고로 남기게 했습니다.",
       "result": "같은 씬에서 보급이 다시 떨어지는 것을 확인했고, 이후 2차 피드백에서는 \"어디에 떨어지는가\"(지붕·절벽 위) 문제로 넘어갔습니다.",
       "lesson": "",
@@ -116,7 +116,7 @@
       "solution": "플레이어 프리팹(다른 팀원 담당)을 직접 고치지 않고, 라우터가 실행 중에 이미터를 자동으로 붙이는 방식을 골랐습니다.",
       "result": "고친 뒤 직접 플레이해 플레이어 소리가 나는 것을 확인했습니다.",
       "lesson": "AI가 구현했어도 직접 테스트해 확인하기 전에는 구현되었다고 할 수 없기 때문에, AI 구현 뒤 플레이 테스트는 항상 하는 루틴이었습니다.",
-      "section": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)"
+      "section": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"
     },
     {
       "title": "GAME START가 인트로·튜토리얼을 건너뜀",
@@ -125,7 +125,7 @@
       "solution": "그 값을 인트로 씬 이름(기본값 `IntroCrawl`)을 쓰는 새 필드로 바꿔, 씬에 남은 잘못된 값을 무시하게 했습니다.",
       "result": "최종 빌드 전(11-03 밤)에 고쳐, GAME START → 인트로 → 튜토리얼 → 게임 순서로 다시 이어지게 되었습니다.",
       "lesson": "",
-      "section": "8-2. 그 밖의 문제 해결"
+      "section": "11-2. 문제 해결"
     }
   ],
   "screenshots": [
@@ -167,10 +167,10 @@
     }
   ],
   "retro": {
-    "section": "8. 결과와 개선 계획",
+    "section": "11. 결과와 개선 계획",
     "achieved": [
       "보급: 2차 개선 뒤 플레이 테스트에서 못 줍는 보급은 더 이상 나오지 않았습니다 (개선 전: 10개 중 2~3개를 줍지 못함)",
-      "사운드: 사운드 25종을 에셋에서 직접 골라 연결했고, 튜토리얼 음성 41줄·BGM 9곡도 연결했습니다. 나중에 추가된 몬스터는 사운드 코드 수정 없이 테이블만 채워 소리를 붙였습니다",
+      "사운드: 사운드 25종을 에셋에서 직접 골라 연결했고, 튜토리얼 음성 45줄·BGM 9곡도 연결했습니다. 나중에 추가된 몬스터는 사운드 코드 수정 없이 테이블만 채워 소리를 붙였습니다",
       "맵: 맵 면적을 1/4로 줄인 뒤 몬스터를 피해 도망 다니거나 먼 보급을 주우러 가는 부담이 줄어, 전투에 더 몰입할 수 있게 되었습니다",
       "라운드 종료 강화: 강화를 3종 → 8종으로 늘리고 등급 카드를 넣은 개편 뒤, 플레이어가 강해지는 경험을 더 크게 체감할 수 있었습니다"
     ],
@@ -189,15 +189,22 @@
     "chapters": [
       {"key": "intro", "title": "개요", "sectionPath": ["1. 개요"]},
       {"key": "design", "title": "게임 디자인", "sectionPath": ["2. 게임 디자인"]},
-      {"key": "collab", "title": "팀 협업", "sectionPath": ["3. 팀 협업"]},
+      {"key": "arch", "title": "전체 구조 — 한 라운드를 코드에서 다시 그리면", "sectionPath": ["3. 전체 구조 — 한 라운드를 코드에서 다시 그리면"]},
       {
         "key": "supply",
         "title": "보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다",
         "sectionPath": ["4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"]
       },
       {"key": "sound", "title": "사운드 — 네 명이 만든 것에 소리 붙이기", "sectionPath": ["5. 사운드 — 네 명이 만든 것에 소리 붙이기"]},
-      {"key": "other", "title": "그 밖에 맡은 것 — 맵 · 튜토리얼 · 강화 · UI", "sectionPath": ["6. 그 밖에 맡은 것 — 맵 · 튜토리얼 · 강화 · UI"]},
-      {"key": "ai", "title": "AI 협업", "sectionPath": ["7. AI 협업"]}
+      {
+        "key": "upgrade",
+        "title": "라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까",
+        "sectionPath": ["6. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까"]
+      },
+      {"key": "map", "title": "맵 — AI가 만들고, 디테일은 제가 고쳤다", "sectionPath": ["7. 맵 — AI가 만들고, 디테일은 제가 고쳤다"]},
+      {"key": "other", "title": "그 밖에 맡은 것 — 튜토리얼 · UI 통합", "sectionPath": ["8. 그 밖에 맡은 것 — 튜토리얼 · UI 통합"]},
+      {"key": "collab", "title": "팀 협업", "sectionPath": ["9. 팀 협업"]},
+      {"key": "ai", "title": "AI 협업", "sectionPath": ["10. AI 협업"]}
     ],
     "slides": [
       {
@@ -209,8 +216,12 @@
         "lead": {"text": "몰려오는 수많은 적을 여러 총으로 처치하고, 보스의 공격 패턴을 공략하는 재미를 목표로 했습니다.", "verbatim": true},
         "sectionPath": ["1-1. 무엇을 만들었나"],
         "points": [
-          {"label": "", "text": "한 라운드는 군중전(약 3분) → 보스 등장·시점 전환 → 보스전 → 강화 선택 → 다음 라운드로 이어집니다.", "verbatim": true},
-          {"label": "", "text": "제가 맡은 것은 보급·사운드 시스템과 라운드 종료 강화·맵·튜토리얼·메인 메뉴·UI 통합입니다(3-3).", "verbatim": true}
+          {
+            "label": "",
+            "text": "한 라운드는 군중전(약 3분) → 보스 등장·시점 전환 → 보스전 → 강화 선택 → 다음 라운드로 이어집니다(1라운드 기준, 2-1).",
+            "verbatim": true
+          },
+          {"label": "", "text": "제가 맡은 것은 보급·사운드 시스템과 라운드 종료 강화·맵·튜토리얼·메인 메뉴·UI 통합입니다(1-3 · 9-3).", "verbatim": true}
         ],
         "visuals": [
           {
@@ -239,7 +250,7 @@
         "sectionPath": ["1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제"],
         "points": [
           {"label": "보급", "text": "새 맵에서 보급이 떨어지지 않거나, 지형·높은 건물 위·맵 밖에 떨어져 10개 중 2~3개를 줍지 못했습니다", "verbatim": false},
-          {"label": "사운드", "text": "4명이 각자 만드는 몬스터·보스·무기에 다른 사람의 코드를 고치지 않고 소리를 붙여야 했습니다", "verbatim": false},
+          {"label": "사운드", "text": "4명이 각자 만드는 몬스터·보스·무기에 다른 사람 코드의 동작을 고치지 않고 소리를 붙여야 했습니다", "verbatim": false},
           {"label": "맵", "text": "맵이 너무 커서 도망만 다니게 되고, 보급을 주우러 가는 길이 스트레스였습니다", "verbatim": false}
         ],
         "visuals": [
@@ -265,7 +276,7 @@
         "points": [
           {
             "label": "",
-            "text": "군중전에서는 하늘에서 떨어지는 보급으로 몰려오는 적을 버티고(4장), 라운드가 끝나면 강화를 골라 다음 라운드를 더 강한 상태로 시작합니다(6-3).",
+            "text": "군중전에서는 하늘에서 떨어지는 보급으로 몰려오는 적을 버티고(4장), 라운드가 끝나면 강화를 골라 다음 라운드를 더 강한 상태로 시작합니다(6장).",
             "verbatim": true
           }
         ],
@@ -289,44 +300,35 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "시스템|적용"}]
       },
       {
-        "key": "team",
-        "chapter": "collab",
+        "key": "arch-map",
+        "chapter": "arch",
         "layout": "full",
-        "tab": "개요",
-        "title": {"text": "3-1. 팀 구성과 역할", "verbatim": true},
+        "tab": "구조",
+        "title": {"text": "3-1. 구조 그림", "verbatim": true},
         "lead": null,
-        "sectionPath": ["3-1. 팀 구성과 역할"],
+        "sectionPath": ["3-1. 구조 그림"],
         "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "이름|담당"}]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}]
       },
       {
-        "key": "scope",
-        "chapter": "collab",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "3-4. 협업 — 내 담당 범위와 다른 파트 코드", "verbatim": true},
-        "lead": {"text": "4명이 동시에 작업해서, 어디까지 내가 고칠지를 매번 정해야 했습니다.", "verbatim": true},
-        "sectionPath": ["3-4. 협업 — 내 담당 범위와 다른 파트 코드"],
-        "points": [
-          {
-            "label": "",
-            "text": "보급 정보 UI를 직접 만든 것은, AI로 작업하고 있었기 때문에 제가 기획하고 직접 구현해 원하는 방향으로 만드는 편이 더 빠르다고 판단했기 때문입니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": [
-          {"kind": "table", "n": 1, "fp": "상황|내 결정"},
-          {"kind": "table", "n": 2, "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"}
-        ]
+        "key": "arch-classes",
+        "chapter": "arch",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "3-2. 핵심 클래스", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["3-2. 핵심 클래스"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "역할 (이름)|하는 일|하지 않는 일|다룬 장"}]
       },
       {
         "key": "rules",
-        "chapter": "collab",
+        "chapter": "arch",
         "layout": "visual",
         "tab": "구조",
-        "title": {"text": "3-5. 팀 공통 규칙 — 파트끼리 서로 모른다", "verbatim": true},
-        "lead": {"text": "파트는 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 씁니다.", "verbatim": true},
-        "sectionPath": ["3-5. 팀 공통 규칙 — 파트끼리 서로 모른다"],
+        "title": {"text": "3-3. 약속 — 파트끼리 서로 모른다", "verbatim": true},
+        "lead": {"text": "규칙은 파트가 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 쓰는 것입니다.", "verbatim": true},
+        "sectionPath": ["3-3. 약속 — 파트끼리 서로 모른다"],
         "points": [{"label": "", "text": "이 규칙 위에서 각자 AI로 구현하니 작업 시간이 크게 줄었습니다.", "verbatim": true}],
         "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}, {"kind": "table", "n": 1, "fp": "상황|방법"}]
       },
@@ -435,7 +437,7 @@
         ],
         "visuals": [
           {"kind": "table", "n": 2, "fp": "상자|배율"},
-          {"kind": "table", "n": 3, "fp": "상황 (기본 40/40/10/10, 설계 문서의 계산값)|수류탄|회복|로켓|유탄"}
+          {"kind": "table", "n": 3, "fp": "상황 (기본 40/40/15/15, 최종 보급 표 값으로 계산)|수류탄|회복|로켓|유탄"}
         ]
       },
       {
@@ -510,7 +512,7 @@
           {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
           {
             "label": "",
-            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-01) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-4).",
+            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-02) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-4).",
             "verbatim": true
           }
         ],
@@ -534,12 +536,12 @@
         "chapter": "sound",
         "layout": "visual",
         "tab": "흐름",
-        "title": {"text": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기", "verbatim": true},
+        "title": {"text": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기", "verbatim": true},
         "lead": {
           "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
           "verbatim": true
         },
-        "sectionPath": ["5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
+        "sectionPath": ["5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"],
         "points": [
           {
             "label": "이유",
@@ -560,12 +562,12 @@
         "chapter": "sound",
         "layout": "code",
         "tab": "구현",
-        "title": {"text": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)", "verbatim": true},
+        "title": {"text": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)", "verbatim": true},
         "lead": {"text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).", "verbatim": true},
-        "sectionPath": ["5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)"],
+        "sectionPath": ["5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"],
         "points": [{"label": "이유", "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.", "verbatim": true}],
         "visuals": [
-          {"kind": "code", "n": 1, "fp": "// GameSoundRouter.AttachPlayerEmitters (발췌)"},
+          {"kind": "code", "n": 1, "fp": "// GameSoundRouter.Combat.AttachPlayerEmitters (32~36행 발췌)"},
           {"kind": "table", "n": 1, "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"}
         ]
       },
@@ -587,13 +589,34 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
       },
       {
-        "key": "map",
-        "chapter": "other",
+        "key": "upgrade",
+        "chapter": "upgrade",
         "layout": "visual",
         "tab": "선택",
-        "title": {"text": "6-1. 맵 — AI가 만들고, 디테일은 제가 고쳤다", "verbatim": true},
-        "lead": {"text": "마감인 발표일(11-04)까지 남은 기간이 일주일 정도뿐이었습니다", "verbatim": true},
-        "sectionPath": ["6-1. 맵 — AI가 만들고, 디테일은 제가 고쳤다"],
+        "title": {"text": "6-2. 상점 방식 — 전체 나열 vs 무작위 3장", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["6-2. 상점 방식 — 전체 나열 vs 무작위 3장"],
+        "points": [{"label": "", "text": "[B]를 골랐습니다. 상점을 열 때마다 선택지가 달라져 고르는 재미가 생기기 때문입니다.", "verbatim": true}],
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
+          {
+            "kind": "image",
+            "src": "images/upgrade-shop.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {"text": "구현된 강화 상점 — 무작위 카드 3장(일반·에픽·하급), 산 카드는 SOLD, 리롤 5, 남은 재화", "verbatim": true},
+            "sectionPath": ["6-3. 재화와 가격 — 전투 보상이 바로 '강해짐'으로 이어지게"]
+          }
+        ]
+      },
+      {
+        "key": "map",
+        "chapter": "map",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "7-2. 남은 일주일 — Claude와 함께 다시 만들기", "verbatim": true},
+        "lead": {"text": "그래서 Sci-Fi Base 에셋으로 맵을 새로 만들면서, 맵 제작을 Claude와 함께 진행했습니다.", "verbatim": true},
+        "sectionPath": ["7-2. 남은 일주일 — Claude와 함께 다시 만들기"],
         "points": [
           {"label": "", "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.", "verbatim": true},
           {
@@ -615,33 +638,13 @@
         "edited": true
       },
       {
-        "key": "upgrade",
-        "chapter": "other",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "6-3. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까", "verbatim": true},
-        "lead": {"text": "처음 만든 강화(10-23)는 재장전·탄창·수류탄 파우치 3종이었고, 각 3레벨까지, 라운드마다 한 번만 살 수 있었습니다.", "verbatim": true},
-        "sectionPath": ["6-3. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까"],
-        "points": [{"label": "", "text": "3장 중 에픽이 1장 이상 나올 확률이 약 58%라, 상점을 열 때마다 절반 이상은 에픽을 보게 됩니다.", "verbatim": true}],
-        "visuals": [
-          {"kind": "table", "n": 2, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
-          {
-            "kind": "image",
-            "src": "images/upgrade-shop.png",
-            "w": 1920,
-            "h": 1080,
-            "caption": {"text": "구현된 강화 상점 — 무작위 카드 3장(일반·에픽·하급), 산 카드는 SOLD, 리롤 5, 남은 재화", "verbatim": true}
-          }
-        ]
-      },
-      {
         "key": "ui",
         "chapter": "other",
         "layout": "screens",
         "tab": "결과",
-        "title": {"text": "6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
+        "title": {"text": "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
         "lead": {"text": "메인 메뉴를 기준으로 삼은 이유는, 메인 메뉴가 게임의 첫인상이기 때문입니다.", "verbatim": true},
-        "sectionPath": ["6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
+        "sectionPath": ["8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
         "points": [],
         "visuals": [
           {
@@ -668,13 +671,44 @@
         ]
       },
       {
+        "key": "team",
+        "chapter": "collab",
+        "layout": "full",
+        "tab": "개요",
+        "title": {"text": "9-1. 팀 구성과 역할", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["9-1. 팀 구성과 역할"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "이름|담당"}]
+      },
+      {
+        "key": "scope",
+        "chapter": "collab",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "9-4. 협업 — 내 담당 범위와 다른 파트 코드", "verbatim": true},
+        "lead": {"text": "4명이 동시에 작업해서, 어디까지 내가 고칠지를 매번 정해야 했습니다.", "verbatim": true},
+        "sectionPath": ["9-4. 협업 — 내 담당 범위와 다른 파트 코드"],
+        "points": [
+          {
+            "label": "",
+            "text": "보급 정보 UI를 직접 만든 것은, AI로 작업하고 있었기 때문에 제가 기획하고 직접 구현해 원하는 방향으로 만드는 편이 더 빠르다고 판단했기 때문입니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "상황|내 결정"},
+          {"kind": "table", "n": 2, "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"}
+        ]
+      },
+      {
         "key": "ai-role",
         "chapter": "ai",
         "layout": "visual",
         "tab": "",
-        "title": {"text": "7-1. 제 파트를 만든 방식 — AI(Claude Code)와 역할 나누기", "verbatim": true},
+        "title": {"text": "10-1. 제 파트를 만든 방식 — AI(Claude Code)와 역할 나누기", "verbatim": true},
         "lead": null,
-        "sectionPath": ["7-1. 제 파트를 만든 방식 — AI(Claude Code)와 역할 나누기"],
+        "sectionPath": ["10-1. 제 파트를 만든 방식 — AI(Claude Code)와 역할 나누기"],
         "points": [
           {"label": "", "text": "작업마다 순서를 고정했습니다: 설계 → 빠진 부분 정리 → 내 확인 → 구현.", "verbatim": true},
           {
@@ -696,8 +730,12 @@
         "lead": {"text": "몰려오는 수많은 적을 여러 총으로 처치하고, 보스의 공격 패턴을 공략하는 재미를 목표로 했습니다.", "verbatim": true},
         "sectionPath": ["1-1. 무엇을 만들었나"],
         "points": [
-          {"label": "", "text": "한 라운드는 군중전(약 3분) → 보스 등장·시점 전환 → 보스전 → 강화 선택 → 다음 라운드로 이어집니다.", "verbatim": true},
-          {"label": "", "text": "제가 맡은 것은 보급·사운드 시스템과 라운드 종료 강화·맵·튜토리얼·메인 메뉴·UI 통합입니다(3-3).", "verbatim": true}
+          {
+            "label": "",
+            "text": "한 라운드는 군중전(약 3분) → 보스 등장·시점 전환 → 보스전 → 강화 선택 → 다음 라운드로 이어집니다(1라운드 기준, 2-1).",
+            "verbatim": true
+          },
+          {"label": "", "text": "제가 맡은 것은 보급·사운드 시스템과 라운드 종료 강화·맵·튜토리얼·메인 메뉴·UI 통합입니다(1-3 · 9-3).", "verbatim": true}
         ],
         "visuals": [
           {
@@ -726,7 +764,7 @@
         "sectionPath": ["1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제"],
         "points": [
           {"label": "보급", "text": "새 맵에서 보급이 떨어지지 않거나, 지형·높은 건물 위·맵 밖에 떨어져 10개 중 2~3개를 줍지 못했습니다", "verbatim": false},
-          {"label": "사운드", "text": "4명이 각자 만드는 몬스터·보스·무기에 다른 사람의 코드를 고치지 않고 소리를 붙여야 했습니다", "verbatim": false},
+          {"label": "사운드", "text": "4명이 각자 만드는 몬스터·보스·무기에 다른 사람 코드의 동작을 고치지 않고 소리를 붙여야 했습니다", "verbatim": false},
           {"label": "맵", "text": "맵이 너무 커서 도망만 다니게 되고, 보급을 주우러 가는 길이 스트레스였습니다", "verbatim": false}
         ],
         "visuals": [
@@ -751,7 +789,7 @@
         "points": [
           {
             "label": "",
-            "text": "군중전에서는 하늘에서 떨어지는 보급으로 몰려오는 적을 버티고(4장), 라운드가 끝나면 강화를 골라 다음 라운드를 더 강한 상태로 시작합니다(6-3).",
+            "text": "군중전에서는 하늘에서 떨어지는 보급으로 몰려오는 적을 버티고(4장), 라운드가 끝나면 강화를 골라 다음 라운드를 더 강한 상태로 시작합니다(6장).",
             "verbatim": true
           }
         ],
@@ -775,44 +813,35 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "시스템|적용"}]
       },
       {
-        "key": "team",
-        "chapter": "collab",
+        "key": "arch-map",
+        "chapter": "arch",
         "layout": "full",
-        "tab": "개요",
-        "title": {"text": "3-1. 팀 구성과 역할", "verbatim": true},
+        "tab": "구조",
+        "title": {"text": "3-1. 구조 그림", "verbatim": true},
         "lead": null,
-        "sectionPath": ["3-1. 팀 구성과 역할"],
+        "sectionPath": ["3-1. 구조 그림"],
         "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "이름|담당"}]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}]
       },
       {
-        "key": "scope",
-        "chapter": "collab",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "3-4. 협업 — 내 담당 범위와 다른 파트 코드", "verbatim": true},
-        "lead": {"text": "4명이 동시에 작업해서, 어디까지 내가 고칠지를 매번 정해야 했습니다.", "verbatim": true},
-        "sectionPath": ["3-4. 협업 — 내 담당 범위와 다른 파트 코드"],
-        "points": [
-          {
-            "label": "",
-            "text": "보급 정보 UI를 직접 만든 것은, AI로 작업하고 있었기 때문에 제가 기획하고 직접 구현해 원하는 방향으로 만드는 편이 더 빠르다고 판단했기 때문입니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": [
-          {"kind": "table", "n": 1, "fp": "상황|내 결정"},
-          {"kind": "table", "n": 2, "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"}
-        ]
+        "key": "arch-classes",
+        "chapter": "arch",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "3-2. 핵심 클래스", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["3-2. 핵심 클래스"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "역할 (이름)|하는 일|하지 않는 일|다룬 장"}]
       },
       {
         "key": "rules",
-        "chapter": "collab",
+        "chapter": "arch",
         "layout": "visual",
         "tab": "구조",
-        "title": {"text": "3-5. 팀 공통 규칙 — 파트끼리 서로 모른다", "verbatim": true},
-        "lead": {"text": "파트는 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 씁니다.", "verbatim": true},
-        "sectionPath": ["3-5. 팀 공통 규칙 — 파트끼리 서로 모른다"],
+        "title": {"text": "3-3. 약속 — 파트끼리 서로 모른다", "verbatim": true},
+        "lead": {"text": "규칙은 파트가 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 쓰는 것입니다.", "verbatim": true},
+        "sectionPath": ["3-3. 약속 — 파트끼리 서로 모른다"],
         "points": [{"label": "", "text": "이 규칙 위에서 각자 AI로 구현하니 작업 시간이 크게 줄었습니다.", "verbatim": true}],
         "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}, {"kind": "table", "n": 1, "fp": "상황|방법"}]
       },
@@ -919,7 +948,7 @@
         ],
         "visuals": [
           {"kind": "table", "n": 2, "fp": "상자|배율"},
-          {"kind": "table", "n": 3, "fp": "상황 (기본 40/40/10/10, 설계 문서의 계산값)|수류탄|회복|로켓|유탄"}
+          {"kind": "table", "n": 3, "fp": "상황 (기본 40/40/15/15, 최종 보급 표 값으로 계산)|수류탄|회복|로켓|유탄"}
         ]
       },
       {
@@ -994,7 +1023,7 @@
           {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
           {
             "label": "",
-            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-01) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-4).",
+            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-02) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-4).",
             "verbatim": true
           }
         ],
@@ -1016,12 +1045,12 @@
         "chapter": "sound",
         "layout": "visual",
         "tab": "흐름",
-        "title": {"text": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기", "verbatim": true},
+        "title": {"text": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기", "verbatim": true},
         "lead": {
           "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
           "verbatim": true
         },
-        "sectionPath": ["5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드를 고치지 않고 소리 붙이기"],
+        "sectionPath": ["5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"],
         "points": [
           {
             "label": "이유",
@@ -1042,12 +1071,12 @@
         "chapter": "sound",
         "layout": "code",
         "tab": "구현",
-        "title": {"text": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)", "verbatim": true},
+        "title": {"text": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)", "verbatim": true},
         "lead": {"text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).", "verbatim": true},
-        "sectionPath": ["5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-01)"],
+        "sectionPath": ["5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"],
         "points": [{"label": "이유", "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.", "verbatim": true}],
         "visuals": [
-          {"kind": "code", "n": 1, "fp": "// GameSoundRouter.AttachPlayerEmitters (발췌)"},
+          {"kind": "code", "n": 1, "fp": "// GameSoundRouter.Combat.AttachPlayerEmitters (32~36행 발췌)"},
           {"kind": "table", "n": 1, "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"}
         ]
       },
@@ -1069,13 +1098,34 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
       },
       {
-        "key": "map",
-        "chapter": "other",
+        "key": "upgrade",
+        "chapter": "upgrade",
         "layout": "visual",
         "tab": "선택",
-        "title": {"text": "6-1. 맵 — AI가 만들고, 디테일은 제가 고쳤다", "verbatim": true},
-        "lead": {"text": "마감인 발표일(11-04)까지 남은 기간이 일주일 정도뿐이었습니다", "verbatim": true},
-        "sectionPath": ["6-1. 맵 — AI가 만들고, 디테일은 제가 고쳤다"],
+        "title": {"text": "6-2. 상점 방식 — 전체 나열 vs 무작위 3장", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["6-2. 상점 방식 — 전체 나열 vs 무작위 3장"],
+        "points": [{"label": "", "text": "[B]를 골랐습니다. 상점을 열 때마다 선택지가 달라져 고르는 재미가 생기기 때문입니다.", "verbatim": true}],
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
+          {
+            "kind": "image",
+            "src": "images/upgrade-shop.png",
+            "w": 1920,
+            "h": 1080,
+            "caption": {"text": "구현된 강화 상점 — 무작위 카드 3장(일반·에픽·하급), 산 카드는 SOLD, 리롤 5, 남은 재화", "verbatim": true},
+            "sectionPath": ["6-3. 재화와 가격 — 전투 보상이 바로 '강해짐'으로 이어지게"]
+          }
+        ]
+      },
+      {
+        "key": "map",
+        "chapter": "map",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "7-2. 남은 일주일 — Claude와 함께 다시 만들기", "verbatim": true},
+        "lead": {"text": "그래서 Sci-Fi Base 에셋으로 맵을 새로 만들면서, 맵 제작을 Claude와 함께 진행했습니다.", "verbatim": true},
+        "sectionPath": ["7-2. 남은 일주일 — Claude와 함께 다시 만들기"],
         "points": [
           {"label": "", "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.", "verbatim": true},
           {
@@ -1096,33 +1146,13 @@
         ]
       },
       {
-        "key": "upgrade",
-        "chapter": "other",
-        "layout": "visual",
-        "tab": "선택",
-        "title": {"text": "6-3. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까", "verbatim": true},
-        "lead": {"text": "처음 만든 강화(10-23)는 재장전·탄창·수류탄 파우치 3종이었고, 각 3레벨까지, 라운드마다 한 번만 살 수 있었습니다.", "verbatim": true},
-        "sectionPath": ["6-3. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까"],
-        "points": [{"label": "", "text": "3장 중 에픽이 1장 이상 나올 확률이 약 58%라, 상점을 열 때마다 절반 이상은 에픽을 보게 됩니다.", "verbatim": true}],
-        "visuals": [
-          {"kind": "table", "n": 2, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
-          {
-            "kind": "image",
-            "src": "images/upgrade-shop.png",
-            "w": 1920,
-            "h": 1080,
-            "caption": {"text": "구현된 강화 상점 — 무작위 카드 3장(일반·에픽·하급), 산 카드는 SOLD, 리롤 5, 남은 재화", "verbatim": true}
-          }
-        ]
-      },
-      {
         "key": "ui",
         "chapter": "other",
         "layout": "screens",
         "tab": "결과",
-        "title": {"text": "6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
+        "title": {"text": "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
         "lead": {"text": "메인 메뉴를 기준으로 삼은 이유는, 메인 메뉴가 게임의 첫인상이기 때문입니다.", "verbatim": true},
-        "sectionPath": ["6-4. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
+        "sectionPath": ["8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
         "points": [],
         "visuals": [
           {
@@ -1149,13 +1179,44 @@
         ]
       },
       {
+        "key": "team",
+        "chapter": "collab",
+        "layout": "full",
+        "tab": "개요",
+        "title": {"text": "9-1. 팀 구성과 역할", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["9-1. 팀 구성과 역할"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "이름|담당"}]
+      },
+      {
+        "key": "scope",
+        "chapter": "collab",
+        "layout": "visual",
+        "tab": "선택",
+        "title": {"text": "9-4. 협업 — 내 담당 범위와 다른 파트 코드", "verbatim": true},
+        "lead": {"text": "4명이 동시에 작업해서, 어디까지 내가 고칠지를 매번 정해야 했습니다.", "verbatim": true},
+        "sectionPath": ["9-4. 협업 — 내 담당 범위와 다른 파트 코드"],
+        "points": [
+          {
+            "label": "",
+            "text": "보급 정보 UI를 직접 만든 것은, AI로 작업하고 있었기 때문에 제가 기획하고 직접 구현해 원하는 방향으로 만드는 편이 더 빠르다고 판단했기 때문입니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "상황|내 결정"},
+          {"kind": "table", "n": 2, "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"}
+        ]
+      },
+      {
         "key": "ai-role",
         "chapter": "ai",
         "layout": "visual",
         "tab": "",
-        "title": {"text": "7-1. 제 파트를 만든 방식 — AI(Claude Code)와 역할 나누기", "verbatim": true},
+        "title": {"text": "10-1. 제 파트를 만든 방식 — AI(Claude Code)와 역할 나누기", "verbatim": true},
         "lead": null,
-        "sectionPath": ["7-1. 제 파트를 만든 방식 — AI(Claude Code)와 역할 나누기"],
+        "sectionPath": ["10-1. 제 파트를 만든 방식 — AI(Claude Code)와 역할 나누기"],
         "points": [
           {"label": "", "text": "작업마다 순서를 고정했습니다: 설계 → 빠진 부분 정리 → 내 확인 → 구현.", "verbatim": true},
           {
@@ -1167,7 +1228,7 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "누가|무엇을"}, {"kind": "table", "n": 3, "fp": "맡기지 않은 것|예"}]
       }
     ],
-    "applied": "a90c42ed3eb75254"
+    "applied": "e8d154e86fd5c216"
   },
   "generatedAt": "2026-11-24"
 }

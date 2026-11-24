@@ -27,7 +27,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: 사이트 만들기 (첫 화면 = custom)
         run: |
@@ -39,11 +39,11 @@ jobs:
           sed 's#\.\./#./#g' custom/index.html > _site/index.html
           if grep -q '\.\./' _site/index.html; then echo "../ 경로가 남았습니다"; exit 1; fi
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

@@ -99,10 +99,10 @@
     {
       "title": "카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그",
       "problem": "팩을 자르면 눈앞 35cm에 카드 5장이 나와야 하는데, 가끔(3번 중 1번) 카드가 카운터 뒤쪽 옛 자리에 나타났습니다. 에러 로그는 없었습니다.",
-      "cause": "카드 프리팹의 Rigidbody가 보간(Interpolate)으로 설정돼 있었고, 공개 연출 코드는 Transform만 옮겼습니다. 렌더 프레임이 먼저 오면 보간이 옛 물리 위치로 덮어썼습니다. Transform과 Rigidbody 위치를 프레임마다 나란히 찍어 찾았습니다.",
-      "solution": "스크립트로만 움직이는 공개용 카드는 보간을 끄고, 옮길 때 Transform과 Rigidbody를 함께 옮기게 했습니다(`CardRevealView.Teleport`).",
-      "result": "팩을 자른 자리(눈앞)에 카드 묶음이 나옵니다.",
-      "lesson": "Rigidbody가 있는 물체를 스크립트로 순간이동시킬 때는 Transform만 옮기면 안 됩니다. 간헐적인 버그는 추측보다 프레임별 값 로그가 빠릅니다.",
+      "cause": "카드 프리팹의 Rigidbody가 보간(Interpolate)으로 설정돼 있었고, 공개 연출 코드는 Transform만 옮겼습니다. 렌더 프레임이 먼저 오면 보간이 옛 물리 위치로 덮어썼습니다. AI가 Transform과 Rigidbody 위치를 프레임마다 나란히 찍는 진단 로그를 넣었고, 제가 그 빌드로 재현해 찾았습니다.",
+      "solution": "AI가 스크립트로만 움직이는 공개용 카드의 보간을 끄고, 옮길 때 Transform과 Rigidbody를 함께 옮기게 고쳤습니다(`CardRevealView.Teleport`).",
+      "result": "3번 중 1번꼴로 카운터 뒤 옛 자리에 나타나던 카드 묶음이 팩을 자른 자리(눈앞)에 나옵니다. 11-17 시연 테스트에서 여러 번 연속 개봉해도 카드 묶음이 눈앞에 나왔습니다.",
+      "lesson": "Rigidbody가 있는 물체를 스크립트로 순간이동시킬 때는 Transform만 옮기지 않고 Rigidbody도 함께 옮겨야 합니다.",
       "section": "4-3. 문제와 해결 — 카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그"
     },
     {
@@ -331,7 +331,10 @@
         "layout": "problem",
         "tab": "문제 해결",
         "title": {"text": "4-3. 문제와 해결 — 카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그", "verbatim": true},
-        "lead": {"text": "카드의 Transform 위치와 Rigidbody 위치를 프레임마다 나란히 찍었습니다.", "verbatim": true},
+        "lead": {
+          "text": "AI가 카드의 Transform 위치와 Rigidbody 위치를 프레임마다 나란히 찍는 진단 로그를 넣었고, 제가 그 빌드로 재현해 로그를 받았습니다.",
+          "verbatim": true
+        },
         "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-3. 문제와 해결 — 카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그"],
         "points": [
           {
@@ -342,10 +345,10 @@
           {"label": "원인", "text": "카드 프리팹의 Rigidbody가 보간(Interpolate)으로 설정돼 있었습니다.", "verbatim": true},
           {
             "label": "해결",
-            "text": "스크립트로만 움직이는 공개용 카드는 보간을 끄고, 옮길 때 Transform과 Rigidbody를 함께 옮기게 했습니다.",
+            "text": "AI가 스크립트로만 움직이는 공개용 카드의 보간을 끄고, 옮길 때 Transform과 Rigidbody를 함께 옮기게 고쳤습니다.",
             "verbatim": true
           },
-          {"label": "배운 점", "text": "간헐적인 버그는 추측보다 프레임별 값 로그가 빠릅니다.", "verbatim": true}
+          {"label": "확인", "text": "11-17 시연 테스트에서 여러 번 연속 개봉해도 카드 묶음이 눈앞에 나왔습니다.", "verbatim": true}
         ],
         "visuals": [
           {
@@ -980,6 +983,6 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "단계|확인한 방법"}]
       }
     ],
-    "applied": "d77f0fafefe4c9a3"
+    "applied": "c64ed135029ac914"
   }
 }

@@ -630,10 +630,21 @@
       {
         "key": "state-class",
         "chapter": "arch",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다", "verbatim": true},
+        "lead": {"text": "적 AI는 보스 4명이 함께 쓰는 적 본체(`EnemyStateManager`)와 지금 하는 행동(`IEnemyState`)으로 나뉩니다.", "verbatim": false},
+        "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
+        "points": [],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}]
+      },
+      {
+        "key": "state-roles",
+        "chapter": "arch",
         "layout": "visual",
         "tab": "구조",
         "title": {"text": "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다", "verbatim": true},
-        "lead": {"text": "비유하자면 본체는 몸이고, 행동은 그 몸이 잠깐 입는 옷입니다.", "verbatim": true},
+        "lead": null,
         "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-1. 인터페이스를 활용한 적 AI — 몸은 하나, 옷만 갈아입는다"],
         "points": [
           {
@@ -644,7 +655,7 @@
           {"label": "", "text": "옷을 갈아입어도(`ChangeState`) 몸의 위치와 컴포넌트 참조는 그대로 유지됩니다.", "verbatim": true},
           {"label": "이유", "text": "보스 4명은 외형만 다르고 공격·이동은 모두 같습니다.", "verbatim": true}
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}]
+        "visuals": [{"kind": "table", "n": 2, "fp": "역할|맡은 스크립트|하는 일|비유"}]
       },
       {
         "key": "state-flow",
@@ -655,7 +666,6 @@
         "lead": {"text": "전환 조건은 시야 박스와 공격 범위 박스로 판정합니다.", "verbatim": true},
         "sectionPath": ["3. 적 AI — 몸은 하나, 옷만 갈아입는다", "3-2. 상태 전환"],
         "points": [
-          {"label": "", "text": "예를 들어 Chase 상태는 플레이어가 공격 범위 박스 안에 들어오면 직접 Attack 상태로 전환합니다.", "verbatim": true},
           {
             "label": "",
             "text": "2-4의 와치만(감시자가 지키는 구역으로 이동)과 랫만(쥐가 죽은 곳으로 이동) 패턴은 `AlertMovePatternState` 하나로 만들었습니다.",
@@ -699,7 +709,17 @@
           {"label": "이유", "text": "당시에는 A* 길찾기가 제 수준에서 구현하기 어렵다고 생각해, 제가 만들 수 있는 방식으로 먼저 설계했습니다.", "verbatim": false},
           {"label": "문제", "text": "그런데 나중에 디버그 로그로 확인해 보니, 실제로는 같은 쪽을 두 번 보고 한쪽 끝은 보지 않았습니다.", "verbatim": true}
         ],
-        "visuals": [{"kind": "table", "n": 1, "fp": "살피는 순서|1|2|3|4|5"}]
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "살피는 순서|1|2|3|4|5"},
+          {
+            "kind": "image",
+            "src": "images/ai-review-debug-log.png",
+            "w": 1600,
+            "h": 720,
+            "caption": {"text": "디버그 로그로 확인한 #1 회피 각도와 #2 대기 시간 — Unity Editor.log 발췌", "verbatim": true},
+            "sectionPath": ["6-1. AI 코드 리뷰로 다시 본 내 코드"]
+          }
+        ]
       },
       {
         "key": "boss-choice",
@@ -835,57 +855,69 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "1-2의 문제|결과|남은 것"}]
       },
       {
-        "key": "lessons",
+        "key": "ts-knockdown",
         "chapter": "result",
-        "layout": "visual",
-        "tab": "결과",
-        "title": {"text": "7-1. 배운 점", "verbatim": true},
+        "layout": "problem",
+        "tab": "문제 해결",
+        "title": {"text": "A. 적을 쓰러뜨렸는데 플레이어도 쓰러지는 문제", "verbatim": true},
         "lead": null,
-        "sectionPath": ["7. 결과 및 배운 점", "7-1. 배운 점"],
+        "sectionPath": ["7. 결과 및 배운 점", "7-2. 트러블슈팅"],
         "points": [
-          {"label": "게임 연출의 중요성", "text": "그래서 뒤통수를 때리는 순간과 뺨을 맞는 순간을 컷씬으로 보여 주어 플레이에 생동감을 더했습니다.", "verbatim": true},
+          {"label": "문제", "text": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 되었습니다", "verbatim": true},
+          {"label": "원인", "text": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냈습니다", "verbatim": true},
           {
-            "label": "사운드의 중요성",
-            "text": "SFX를 넣자 플레이어와 적의 타격이 훨씬 재미있어졌고, SFX와 BGM의 중요성을 다시 한번 깨달았습니다.",
-            "verbatim": true
-          },
-          {
-            "label": "같은 소리를 여러 소리처럼",
-            "text": "감시자의 \"Hey\" 소리가 매번 똑같아 밋밋해서, 음높이만 무작위로 바꾸는 방법을 배워 적용했습니다.",
+            "label": "해결",
+            "text": "공격 타격 박스와 `OnBackHit` 앞에 `IsKnockDown` 확인을 추가하고(7/6), `ChangeState` 입구에도 같은 가드를 넣었습니다(7/22)",
             "verbatim": false
           }
         ],
         "visuals": [
           {
             "kind": "image",
-            "src": "images/cutscene-slap-face.png",
-            "w": 1578,
-            "h": 882,
-            "caption": {"text": "뺨 맞는 컷씬 — 플레이어가 적에게 들켰을 때", "verbatim": true}
+            "src": "images/backstab.gif",
+            "w": 960,
+            "h": 538,
+            "caption": {"text": "뒤통수 — 뒤로 몰래 다가가 뒤통수를 치면 컷씬(SLAP!)과 함께 적이 쓰러집니다", "verbatim": true},
+            "sectionPath": ["4-3. 같은 프레임 동시 피격 방지"]
           }
         ]
-      },
-      {
-        "key": "ts-knockdown",
-        "chapter": "result",
-        "layout": "problem",
-        "tab": "문제 해결",
-        "title": {"text": "7-2. 트러블슈팅", "verbatim": true},
-        "lead": null,
-        "sectionPath": ["7. 결과 및 배운 점", "7-2. 트러블슈팅"],
-        "points": [],
-        "visuals": [{"kind": "table", "n": 1, "fp": "단계|내용"}]
       },
       {
         "key": "ts-bgm",
         "chapter": "result",
         "layout": "problem",
         "tab": "문제 해결",
-        "title": {"text": "7-2. 트러블슈팅", "verbatim": true},
+        "title": {"text": "B. 추격 음악이 처음 한 번만 나오는 문제", "verbatim": true},
         "lead": null,
         "sectionPath": ["7. 결과 및 배운 점", "7-2. 트러블슈팅"],
-        "points": [],
-        "visuals": [{"kind": "table", "n": 2, "fp": "단계|내용"}]
+        "points": [
+          {"label": "문제", "text": "처음 추격 상태가 되었을 때는 추격 BGM이 나오지만, 재시도한 뒤에는 나오지 않았습니다", "verbatim": true},
+          {
+            "label": "원인",
+            "text": "추격 중에 플레이어가 죽고 씬을 다시 불러오면, 적의 `Exit`가 불리지 않아 `engagedEnemyCount`가 0으로 돌아가지 않습니다.",
+            "verbatim": true
+          },
+          {
+            "label": "시도",
+            "text": "씬이 시작될 때 `GameSceneInitializer`가 `SoundManager.ResetCombatMusicState()`로 카운트를 0으로 되돌리게 했습니다",
+            "verbatim": true
+          },
+          {
+            "label": "결과",
+            "text": "아직 해결되지 않았습니다. 카운트를 되돌린 뒤에도 남은 문제라 다른 원인이 더 있을 수 있고, 다시 만들 때 확인할 예정입니다(7-4).",
+            "verbatim": true
+          }
+        ],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/enemy-chase.gif",
+            "w": 960,
+            "h": 538,
+            "caption": {"text": "들켰을 때 — 시야(빨간 원)에 들키면 적이 쫓아오고, 공격에 한 번 맞으면 뺨 컷씬과 함께 끝납니다", "verbatim": true},
+            "sectionPath": ["3-2. 상태 전환"]
+          }
+        ]
       },
       {
         "key": "plan",
@@ -902,7 +934,7 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "이번에 확인한 것|이번 게임|다시 만들 때"}]
       }
     ],
-    "applied": "bc2b09e65c66d984"
+    "applied": "c46e9430efd87aac"
   },
   "generatedAt": "2026-11-24"
 }

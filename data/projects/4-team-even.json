@@ -82,7 +82,7 @@
       "what": "다른 파트는 사운드 표의 키만 넘기고, 새 몬스터는 `MonsterTable`의 사운드 키 열만 채우면 소리가 붙습니다.",
       "how": "몬스터가 생기면(`MonsterSpawnedEvent`) `GameSoundRouter`가 이미터를 붙이고, 이미터는 `OnEnable`에서 `IMonsterSoundSource`를 찾아 공격 예고·사망 같은 지역 이벤트를 구독해 그 몬스터 위치에서 소리를 냅니다.",
       "why": "몬스터·플레이어 프리팹은 다른 팀원 담당이라 프리팹에 사운드 컴포넌트를 미리 붙이지 않았습니다. 플레이어 소리 버그 때도 프리팹에 직접 붙이는 방식 대신 라우터가 실행 중에 붙이는 방식을 골라 담당자의 작업물을 바꾸지 않았습니다.",
-      "section": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기",
+      "section": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기",
       "image": null
     },
     {
@@ -116,7 +116,7 @@
       "solution": "플레이어 프리팹(다른 팀원 담당)을 직접 고치지 않고, 라우터가 실행 중에 이미터를 자동으로 붙이는 방식을 골랐습니다.",
       "result": "고친 뒤 직접 플레이해 플레이어 소리가 나는 것을 확인했습니다.",
       "lesson": "AI가 구현했어도 직접 테스트해 확인하기 전에는 구현되었다고 할 수 없기 때문에, AI 구현 뒤 플레이 테스트는 항상 하는 루틴이었습니다.",
-      "section": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"
+      "section": "5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"
     },
     {
       "title": "GAME START가 인트로·튜토리얼을 건너뜀",
@@ -195,7 +195,7 @@
         "title": "보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다",
         "sectionPath": ["4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"]
       },
-      {"key": "sound", "title": "사운드 — 네 명이 만든 것에 소리 붙이기", "sectionPath": ["5. 사운드 — 네 명이 만든 것에 소리 붙이기"]},
+      {"key": "sound", "title": "사운드 — 군중전에서 몇 마리의 소리를 낼까", "sectionPath": ["5. 사운드 — 군중전에서 몇 마리의 소리를 낼까"]},
       {
         "key": "upgrade",
         "title": "라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까",
@@ -501,18 +501,57 @@
         "visuals": []
       },
       {
+        "key": "crowd-limit",
+        "chapter": "sound",
+        "layout": "full",
+        "tab": "선택",
+        "title": {"text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한", "verbatim": true},
+        "lead": {"text": "[B]를 골랐습니다. 모든 몬스터의 소리를 내면 플레이어가 겹친 소리에 불편함을 겪기 때문입니다.", "verbatim": true},
+        "sectionPath": ["5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 자기 소리를 전부 내기|[B] 요청을 거르고 가까운 몇 마리만 들려주기 ✓"}]
+      },
+      {
+        "key": "crowd-numbers",
+        "chapter": "sound",
+        "layout": "full",
+        "tab": "수치",
+        "title": {"text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한", "verbatim": true},
+        "lead": {"text": "고른 제한은 사운드 표(SoundTable.tsv)의 열과 소리 서비스의 설정으로 정했습니다.", "verbatim": true},
+        "sectionPath": ["5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 2, "fp": "제한|값|효과"}]
+      },
+      {
+        "key": "hurt-sound",
+        "chapter": "sound",
+        "layout": "full",
+        "tab": "선택",
+        "title": {"text": "5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
+        "lead": {"text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).", "verbatim": true},
+        "sectionPath": ["5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"],
+        "points": [
+          {
+            "label": "",
+            "text": "같은 효과음의 음높이만 바꿔 여러 소리처럼 들리게 하는 방법을 써서, 새 사운드를 찾지 않고 재생 값만 바꿔 여러 가지 소리를 낼 수 있었습니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
+      },
+      {
         "key": "sound-arch",
         "chapter": "sound",
         "layout": "visual",
         "tab": "구조",
-        "title": {"text": "5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
+        "title": {"text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
         "lead": null,
-        "sectionPath": ["5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
+        "sectionPath": ["5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
         "points": [
           {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
           {
             "label": "",
-            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-02) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-4).",
+            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-02) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-6).",
             "verbatim": true
           }
         ],
@@ -524,9 +563,9 @@
         "chapter": "sound",
         "layout": "full",
         "tab": "구조",
-        "title": {"text": "5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
+        "title": {"text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
         "lead": null,
-        "sectionPath": ["5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
+        "sectionPath": ["5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
         "points": [],
         "visuals": [{"kind": "table", "n": 1, "fp": "경로|언제|예"}],
         "edited": true
@@ -536,12 +575,12 @@
         "chapter": "sound",
         "layout": "visual",
         "tab": "흐름",
-        "title": {"text": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기", "verbatim": true},
+        "title": {"text": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기", "verbatim": true},
         "lead": {
           "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
           "verbatim": true
         },
-        "sectionPath": ["5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"],
+        "sectionPath": ["5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"],
         "points": [
           {
             "label": "이유",
@@ -562,31 +601,14 @@
         "chapter": "sound",
         "layout": "code",
         "tab": "구현",
-        "title": {"text": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)", "verbatim": true},
+        "title": {"text": "5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)", "verbatim": true},
         "lead": {"text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).", "verbatim": true},
-        "sectionPath": ["5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"],
+        "sectionPath": ["5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"],
         "points": [{"label": "이유", "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.", "verbatim": true}],
         "visuals": [
           {"kind": "code", "n": 1, "fp": "// GameSoundRouter.Combat.AttachPlayerEmitters (32~36행 발췌)"},
           {"kind": "table", "n": 1, "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"}
         ]
-      },
-      {
-        "key": "hurt-sound",
-        "chapter": "sound",
-        "layout": "full",
-        "tab": "선택",
-        "title": {"text": "5-5. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
-        "lead": {"text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).", "verbatim": true},
-        "sectionPath": ["5-5. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"],
-        "points": [
-          {
-            "label": "",
-            "text": "같은 효과음의 음높이만 바꿔 여러 소리처럼 들리게 하는 방법을 써서, 새 사운드를 찾지 않고 재생 값만 바꿔 여러 가지 소리를 낼 수 있었습니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
       },
       {
         "key": "upgrade",
@@ -1012,18 +1034,57 @@
         "visuals": []
       },
       {
+        "key": "crowd-limit",
+        "chapter": "sound",
+        "layout": "full",
+        "tab": "선택",
+        "title": {"text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한", "verbatim": true},
+        "lead": {"text": "[B]를 골랐습니다. 모든 몬스터의 소리를 내면 플레이어가 겹친 소리에 불편함을 겪기 때문입니다.", "verbatim": true},
+        "sectionPath": ["5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 자기 소리를 전부 내기|[B] 요청을 거르고 가까운 몇 마리만 들려주기 ✓"}]
+      },
+      {
+        "key": "crowd-numbers",
+        "chapter": "sound",
+        "layout": "full",
+        "tab": "수치",
+        "title": {"text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한", "verbatim": true},
+        "lead": {"text": "고른 제한은 사운드 표(SoundTable.tsv)의 열과 소리 서비스의 설정으로 정했습니다.", "verbatim": true},
+        "sectionPath": ["5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 2, "fp": "제한|값|효과"}]
+      },
+      {
+        "key": "hurt-sound",
+        "chapter": "sound",
+        "layout": "full",
+        "tab": "선택",
+        "title": {"text": "5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
+        "lead": {"text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).", "verbatim": true},
+        "sectionPath": ["5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"],
+        "points": [
+          {
+            "label": "",
+            "text": "같은 효과음의 음높이만 바꿔 여러 소리처럼 들리게 하는 방법을 써서, 새 사운드를 찾지 않고 재생 값만 바꿔 여러 가지 소리를 낼 수 있었습니다.",
+            "verbatim": true
+          }
+        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
+      },
+      {
         "key": "sound-arch",
         "chapter": "sound",
         "layout": "visual",
         "tab": "구조",
-        "title": {"text": "5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
+        "title": {"text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
         "lead": null,
-        "sectionPath": ["5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
+        "sectionPath": ["5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
         "points": [
           {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
           {
             "label": "",
-            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-02) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-4).",
+            "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-02) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-6).",
             "verbatim": true
           }
         ],
@@ -1034,9 +1095,9 @@
         "chapter": "sound",
         "layout": "full",
         "tab": "구조",
-        "title": {"text": "5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
+        "title": {"text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
         "lead": null,
-        "sectionPath": ["5-1. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
+        "sectionPath": ["5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
         "points": [],
         "visuals": [{"kind": "table", "n": 1, "fp": "경로|언제|예"}]
       },
@@ -1045,12 +1106,12 @@
         "chapter": "sound",
         "layout": "visual",
         "tab": "흐름",
-        "title": {"text": "5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기", "verbatim": true},
+        "title": {"text": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기", "verbatim": true},
         "lead": {
           "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
           "verbatim": true
         },
-        "sectionPath": ["5-3. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"],
+        "sectionPath": ["5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"],
         "points": [
           {
             "label": "이유",
@@ -1071,31 +1132,14 @@
         "chapter": "sound",
         "layout": "code",
         "tab": "구현",
-        "title": {"text": "5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)", "verbatim": true},
+        "title": {"text": "5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)", "verbatim": true},
         "lead": {"text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).", "verbatim": true},
-        "sectionPath": ["5-4. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"],
+        "sectionPath": ["5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"],
         "points": [{"label": "이유", "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.", "verbatim": true}],
         "visuals": [
           {"kind": "code", "n": 1, "fp": "// GameSoundRouter.Combat.AttachPlayerEmitters (32~36행 발췌)"},
           {"kind": "table", "n": 1, "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"}
         ]
-      },
-      {
-        "key": "hurt-sound",
-        "chapter": "sound",
-        "layout": "full",
-        "tab": "선택",
-        "title": {"text": "5-5. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
-        "lead": {"text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).", "verbatim": true},
-        "sectionPath": ["5-5. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"],
-        "points": [
-          {
-            "label": "",
-            "text": "같은 효과음의 음높이만 바꿔 여러 소리처럼 들리게 하는 방법을 써서, 새 사운드를 찾지 않고 재생 값만 바꿔 여러 가지 소리를 낼 수 있었습니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
       },
       {
         "key": "upgrade",
@@ -1228,7 +1272,7 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "누가|무엇을"}, {"kind": "table", "n": 3, "fp": "맡기지 않은 것|예"}]
       }
     ],
-    "applied": "e8d154e86fd5c216"
+    "applied": "c0d6663364ea5b0d"
   },
   "generatedAt": "2026-11-24"
 }

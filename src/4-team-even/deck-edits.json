@@ -34,9 +34,9 @@
       "visuals": [
         {
           "kind": "image",
-          "src": "images/supply-drop.png",
-          "w": 1920,
-          "h": 1080,
+          "src": "images/supply-drop.gif",
+          "w": 800,
+          "h": 450,
           "caption": {
             "text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함",
             "verbatim": true
@@ -52,7 +52,7 @@
           "1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제"
         ],
         "sig": [
-          "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)|image|images/supply-drop.png|1"
+          "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)|image|images/supply-drop.gif|1"
         ]
       }
     },
@@ -248,6 +248,114 @@
       ],
       "after": "drop-point",
       "group": "split-drop-point-table"
+    },
+    {
+      "key": "tutorial",
+      "chapter": "other",
+      "layout": "visual",
+      "tab": "결과",
+      "title": {
+        "text": "8-1. 튜토리얼 — 기획 세 번, 7과목과 행동 제한",
+        "verbatim": true
+      },
+      "lead": {
+        "text": "튜토리얼도 AI와 함께 구현했습니다.",
+        "verbatim": true
+      },
+      "sectionPath": [
+        "8-1. 튜토리얼 — 기획 세 번, 7과목과 행동 제한"
+      ],
+      "points": [
+        {
+          "label": "7과목",
+          "text": "이동·질주·구르기 → 사격·처치 보상 → 무기 교체 → 수류탄 → 보급 → 강화 체험 → 전초기지 게이트",
+          "verbatim": true
+        },
+        {
+          "label": "오퍼레이터 음성 45줄",
+          "text": "대사를 직접 TTS로 만들고, 녹음 한 파일을 대사별로 나눠 사운드 테이블에 연결 (처음 41줄, 11-03에 4줄 추가)",
+          "verbatim": true
+        },
+        {
+          "label": "행동 제한",
+          "text": "단계마다 지시한 행동만 할 수 있게 하고, 끝나거나 건너뛰면 풀어 줍니다",
+          "verbatim": true
+        }
+      ],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/tutorial-gate.gif",
+          "w": 800,
+          "h": 450,
+          "caption": {
+            "text": "튜토리얼 「기동」 과목(1배속) — 피해 차단막에 닿자 오퍼레이터가 \"차단막 바로 앞에서 Ctrl 키로 굴러라\"라고 안내하고, 구르기로 통과하면 「기동 과목 통과」 뒤 다음 과목 안내가 이어집니다. 과목마다 지시한 행동을 해야 다음으로 넘어가게 했습니다(행동 제한).",
+            "verbatim": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "ui",
+      "chapter": "other",
+      "layout": "screens",
+      "tab": "결과",
+      "title": {
+        "text": "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게",
+        "verbatim": true
+      },
+      "lead": {
+        "text": "메인 메뉴를 기준으로 삼은 이유는, 메인 메뉴가 게임의 첫인상이기 때문입니다.",
+        "verbatim": true
+      },
+      "sectionPath": [
+        "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"
+      ],
+      "points": [],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/main-menu.png",
+          "w": 1920,
+          "h": 1080,
+          "caption": {
+            "text": "메인 메뉴 — 보스와 몬스터 디오라마 배경 위에 글자 중심 메뉴, 선택 항목의 붉은 표식",
+            "verbatim": true
+          }
+        },
+        {
+          "kind": "image",
+          "src": "images/ui-before.png",
+          "w": 1452,
+          "h": 829,
+          "caption": {
+            "text": "UI 통합 전 「출발 전 무기 선택」 화면 (왼쪽은 개발용 디버그 창)",
+            "verbatim": true
+          }
+        },
+        {
+          "kind": "image",
+          "src": "images/ui-after.png",
+          "w": 1920,
+          "h": 1080,
+          "caption": {
+            "text": "UI 통합 후 같은 화면 — 메인 메뉴의 선·띠 스타일과 붉은 포인트로 통일",
+            "verbatim": true
+          }
+        }
+      ],
+      "after": "tutorial",
+      "from": {
+        "key": "ui",
+        "sectionPath": [
+          "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"
+        ],
+        "sig": [
+          "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게|image|images/main-menu.png|1",
+          "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게|image|images/ui-after.png|1",
+          "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게|image|images/ui-before.png|1"
+        ]
+      }
     }
   ],
   "hide": []

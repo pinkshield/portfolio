@@ -765,8 +765,6 @@ function App() {
       if (vids) stats.push({ value: vids, label: '시연 영상' });
     }
     if (analyses.length) stats.push({ value: analyses.length, label: '게임 분석 문서' });
-    slides.push({ key: 'cover', group: 'intro', label: T('page.intro'), el: () => <CoverSlide profile={pf.profile} coverImg={coverImg} stats={stats} /> });
-    if (state.ai) slides.push({ key: 'ai', group: 'ai', label: 'AI와 일하는 방식', el: (goProject) => <AiWaySlide ai={state.ai} projects={state.projects} goProject={goProject} /> });
     // 연표: 교육(자기소개서 머리줄) + 프로젝트 기간(새 것부터)
     const history = [];
     const L = state.letter;
@@ -778,17 +776,20 @@ function App() {
       .forEach((x, i) => history.push({ kindStart: i === 0 ? '프로젝트' : '', when: x.per.text, title: x.p.title, sub: teamLabel(x.p), project: x.p.id }));
     analyses.map((p) => ({ p, per: periodOf(p) })).filter((x) => x.per).sort((a, b) => b.per.start.localeCompare(a.per.start))
       .forEach((x, i) => history.push({ kindStart: i === 0 ? '게임 분석' : '', when: x.per.text, title: x.p.title, sub: '개인 분석', project: x.p.id }));
-    slides.push({ key: 'history', group: 'stack', label: `이력 · ${T('page.stack')}`, el: (goProject) => <HistorySkillsSlide history={history} skills={pf.skills || []} titleOf={titleOf} goProject={goProject} /> });
+    // 장 순서(11-26 건우 님): 소개 → 자기소개서 → 프로젝트 → AI와 일하는 방식 → 게임 분석 → 이력 · 기술
+    slides.push({ key: 'cover', group: 'intro', label: T('page.intro'), el: () => <CoverSlide profile={pf.profile} coverImg={coverImg} stats={stats} /> });
     if (L) slides.push({ key: 'letter', group: 'letter', label: T('name.letter'), el: () => <LetterSlide letter={L} quote={pf.profile.headline} name={pf.profile.name} /> });
     slides.push({ key: 'projects', group: 'projects', label: T('page.nav-projects'), el: (goProject) => <ProjectsGridSlide projects={projects} goProject={goProject} /> });
     projects.forEach((p, i) => {
       slides.push({ key: `p-${p.id}`, group: 'projects', project: p.id, label: p.title, el: () => <ProjectSlide p={p} no={i + 1} total={projects.length} /> });
       if ((p.highlights || []).length) slides.push({ key: `p-${p.id}-core`, group: 'projects', of: p.id, label: `${p.title} · ${T('page.features')}`, el: () => <FeaturesSlide p={p} no={i + 1} /> });
     });
+    if (state.ai) slides.push({ key: 'ai', group: 'ai', label: 'AI와 일하는 방식', el: (goProject) => <AiWaySlide ai={state.ai} projects={state.projects} goProject={goProject} /> });
     analyses.forEach((p, i) => {
       slides.push({ key: `p-${p.id}`, group: 'analysis', project: p.id, label: p.title, el: () => <ProjectSlide p={p} no={i + 1} total={analyses.length} /> });
       if ((p.highlights || []).length) slides.push({ key: `p-${p.id}-core`, group: 'analysis', of: p.id, label: `${p.title} · 핵심 분석`, el: () => <FeaturesSlide p={p} no={i + 1} /> });
     });
+    slides.push({ key: 'history', group: 'stack', label: `이력 · ${T('page.stack')}`, el: (goProject) => <HistorySkillsSlide history={history} skills={pf.skills || []} titleOf={titleOf} goProject={goProject} /> });
     slides.push({ key: 'contact', group: 'contact', label: T('page.nav-contact'), el: () => <ContactSlide profile={pf.profile} /> });
   }
   const n = slides.length;
@@ -796,11 +797,11 @@ function App() {
   // 위 칸 버튼의 주제 — 누르면 그 주제의 첫 장으로
   const TOPICS = [
     { group: 'intro', label: T('page.nav-intro') },
-    { group: 'ai', label: 'AI와 일하는 방식', short: 'AI 방식' },
-    { group: 'stack', label: '이력 · 기술' },
     { group: 'letter', label: T('page.nav-letter') },
     { group: 'projects', label: T('page.nav-projects') },
+    { group: 'ai', label: 'AI와 일하는 방식', short: 'AI 방식' },
     { group: 'analysis', label: '게임 분석' },
+    { group: 'stack', label: '이력 · 기술' },
   ].filter((t) => slides.some((s) => s.group === t.group));
   const cur = slides[idx] || {};
   const curProject = cur.project || cur.of || null;

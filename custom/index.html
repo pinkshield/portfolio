@@ -109,11 +109,13 @@
   .btn-ghost { background: transparent; border: 1px solid transparent; color: var(--muted); }
   .btn-ghost:hover { color: var(--ink); border-color: var(--line); }
   /* 연락처 장 */
-  /* 연락처 장 위 그림: 표지(뒤통수 타이틀)와 짝 — 시작 화면으로 열고 클리어 화면으로 닫음 */
-  .end-shot { margin: 0; width: fit-content; max-width: 100%; border: 1px solid var(--line2); border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 18px 40px rgba(0,0,0,.45); }
-  .end-shot img { display: block; width: auto; height: auto; max-width: 100%; max-height: 31vh; image-rendering: pixelated; }
-  .end-shot figcaption { padding: 7px 12px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); }
-  .contact .h-big { font-size: clamp(30px, 3.6vw, 52px); }
+  /* 연락처 장: 표지 틀(.hero)을 그대로 씀 — 클리어 화면은 가운데(Game Clear · 캐릭터 · Menu/Exit)가 보이게 */
+  .end-img { object-position: 70% 50%; }
+  @media (max-width: 1099px) { .end-img { object-position: 50% 45%; } }
+  .contact .credits { padding: 16px 20px; }
+  .contact .cr-list li { padding: 6px 0; }
+  .contact .cr-mail a { font-size: 19px; }
+  .contact .back-top { margin-top: 14px; }
   .back-top { margin-top: 22px; background: none; border: 0; padding: 0; color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .04em; cursor: pointer; }
   .back-top:hover { color: var(--accent); }
   .credits { border: 1px solid var(--line); border-radius: 14px; padding: 24px 26px; background: rgba(255,255,255,.02); }
@@ -745,60 +747,51 @@ function CopyMail({ email, big }) {
 function ContactSlide({ profile, projects, goProject, endImg }) {
   const pad = (v) => String(v).padStart(2, '0');
   const mail = profile.email ? `mailto:${profile.email}?subject=${encodeURIComponent(`[포트폴리오] ${profile.name} 님께`)}` : '';
+  // 표지와 같은 틀(.hero): 왼쪽 그림 · 오른쪽 어두운 판. 표지 = 뒤통수 시작 화면, 끝 장 = 클리어 화면(11-26 건우 님)
   return (
-    <section className="slide contact" aria-label={T('page.nav-contact')}>
-      <Wrap>
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          <div className="lg:col-span-6">
-            {endImg && (
-              <figure className="end-shot">
-                <img src={endImg} alt="뒤통수를 조심해 게임 클리어 화면" />
-                <figcaption>「뒤통수를 조심해」 게임 클리어 화면</figcaption>
-              </figure>
+    <section className="slide hero contact" aria-label={T('page.nav-contact')}>
+      {endImg && <div className="hero-art"><img className="hero-img end-img" src={endImg} alt="뒤통수를 조심해 게임 클리어 화면" /></div>}
+      <div className="hero-shade" />
+      <div className="hero-panel">
+        <div className="hero-copy">
+          <div className="eyebrow">CREDITS · {T('page.nav-contact')}</div>
+          {/* ✏️ 11-26 UI 문구(사실 아님): 끝 장 인사 */}
+          <h2 className="h-big text-4xl xl:text-5xl mt-4 leading-tight">끝까지 봐 주셔서<br />감사합니다.</h2>
+          {profile.headline && <p className="mt-4 text-base xl:text-lg font-bold leading-snug" style={{ color: 'var(--ink)' }}>{profile.headline}</p>}
+          <div className="mt-6 flex flex-wrap gap-3">
+            {mail && <a className="btn btn-fill" href={mail}>✉ 메일 보내기</a>}
+            {profile.email && <CopyMail email={profile.email} big />}
+            {profile.github && <a className="btn btn-line" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
+            {(profile.links || []).filter((x) => x && x.url).map((x) => <a key={x.url} className="btn btn-line" href={x.url} target="_blank" rel="noopener">{x.label} ↗</a>)}
+          </div>
+          <div className="credits mt-7">
+            {profile.email && (
+              <>
+                <div className="cr-h">{T('page.nav-contact')}</div>
+                <div className="cr-mail"><a href={mail}>{profile.email}</a><CopyMail email={profile.email} /></div>
+              </>
             )}
-            <div className={`eyebrow ${endImg ? 'mt-7' : ''}`}>CREDITS · {T('page.nav-contact')}</div>
-            {/* ✏️ 11-26 UI 문구(사실 아님): 끝 장 인사 */}
-            <h2 className="h-big text-4xl md:text-5xl xl:text-6xl mt-4 leading-tight">끝까지 봐 주셔서<br />감사합니다.</h2>
-            {profile.headline && <p className="mt-6 text-lg md:text-xl font-bold" style={{ color: 'var(--ink)' }}>{profile.headline}</p>}
-            <div className="mt-8 flex flex-wrap gap-3">
-              {mail && <a className="btn btn-fill" href={mail}>✉ 메일 보내기</a>}
-              {profile.email && <CopyMail email={profile.email} big />}
-              {profile.github && <a className="btn btn-line" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
-              {(profile.links || []).filter((x) => x && x.url).map((x) => <a key={x.url} className="btn btn-line" href={x.url} target="_blank" rel="noopener">{x.label} ↗</a>)}
-            </div>
-            <button type="button" className="back-top" onClick={() => goProject('#cover')}>↑ 처음으로</button>
+            <div className={`cr-h ${profile.email ? 'mt-5' : ''}`}>게임 · 바로 가기</div>
+            <ol className="cr-list">
+              {projects.map((p, i) => {
+                const L = p.links || {};
+                return (
+                  <li key={p.id}>
+                    <button type="button" className="cr-title" onClick={() => goProject(p.id)}><span className="no">{isAnalysis(p) ? '분석' : pad(i + 1)}</span>{p.title.replace(/\s*\(.*\)$/, '').replace(/\s+—.*$/, '')}<em>{teamLabel(p)}</em></button>
+                    <span className="cr-links">
+                      {L.video && <a href={L.video} target="_blank" rel="noopener">▶ 영상</a>}
+                      <a href={deckHref(p)} {...(ORIGINAL_DECK[p.id] ? { target: '_blank', rel: 'noopener' } : {})}>{T('name.deck')}</a>
+                      <a href={`../doc.html?p=${encodeURIComponent(p.id)}`}>{docLabel(p, true)}</a>
+                      {L.github && <a href={L.github} target="_blank" rel="noopener">GitHub</a>}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
-          <div className="lg:col-span-6">
-            <div className="credits">
-              <div className="cr-h">만든 사람</div>
-              <div className="cr-name">{profile.name}{profile.nameEn && <span>{profile.nameEn}</span>}</div>
-              <div className="cr-h mt-6">게임 · 바로 가기</div>
-              <ol className="cr-list">
-                {projects.map((p, i) => {
-                  const L = p.links || {};
-                  return (
-                    <li key={p.id}>
-                      <button type="button" className="cr-title" onClick={() => goProject(p.id)}><span className="no">{isAnalysis(p) ? '분석' : pad(i + 1)}</span>{p.title.replace(/\s*\(.*\)$/, '').replace(/\s+—.*$/, '')}<em>{teamLabel(p)}</em></button>
-                      <span className="cr-links">
-                        {L.video && <a href={L.video} target="_blank" rel="noopener">▶ 영상</a>}
-                        <a href={deckHref(p)} {...(ORIGINAL_DECK[p.id] ? { target: '_blank', rel: 'noopener' } : {})}>{T('name.deck')}</a>
-                        <a href={`../doc.html?p=${encodeURIComponent(p.id)}`}>{docLabel(p, true)}</a>
-                        {L.github && <a href={L.github} target="_blank" rel="noopener">GitHub</a>}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ol>
-              {profile.email && (
-                <>
-                  <div className="cr-h mt-6">{T('page.nav-contact')}</div>
-                  <div className="cr-mail"><a href={mail}>{profile.email}</a><CopyMail email={profile.email} /></div>
-                </>
-              )}
-            </div>
-          </div>
+          <button type="button" className="back-top" onClick={() => goProject('#cover')}>↑ 처음으로</button>
         </div>
-      </Wrap>
+      </div>
     </section>
   );
 }

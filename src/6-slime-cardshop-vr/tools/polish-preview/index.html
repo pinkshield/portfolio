@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>폴리싱 미리 보기</title>
+<style>
+  :root{
+    --bg:#211b2e; --panel:#3a2c58; --panel2:#2c2244; --ink:#fff7eb; --sub:#cbc2ea;
+    --gold:#ffd166; --softgold:#e8c36a; --line:#5a4a80;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.55}
+  main{max-width:1080px;margin:0 auto;padding:28px 16px 80px}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:20px;margin:44px 0 6px;padding-top:18px;border-top:1px solid var(--line)}
+  p.note{color:var(--sub);margin:4px 0 16px;font-size:14px}
+  .tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--panel);color:var(--gold);margin-left:6px;vertical-align:middle}
+  .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  .box{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:14px}
+  .box h3{margin:0 0 4px;font-size:16px}
+  .box .why{font-size:13px;color:var(--sub);margin:0 0 10px}
+  .rec{outline:2px solid var(--softgold)}
+  button.ctl{font:inherit;font-size:14px;color:var(--ink);background:#4b3a74;border:1px solid #6d5aa0;border-radius:10px;padding:7px 14px;cursor:pointer}
+  button.ctl:hover{background:#ea5c99;border-color:#ea5c99}
+  button.ctl.on{background:#ea5c99;border-color:#ffd166}
+
+  /* ---------- 카운터(버튼 받침 바닥) ---------- */
+  .counter{height:220px;border-radius:10px;position:relative;overflow:hidden;
+    background:linear-gradient(#6b4a30,#4f3622);display:flex;justify-content:space-around;align-items:center;padding:0 8px}
+  .counter::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 46px,rgba(0,0,0,.08) 46px 48px)}
+  .wall{background:linear-gradient(#d9cbb8,#bfae97)}
+  .wall::before{display:none}
+  .btn{position:relative;width:100px;height:160px;cursor:pointer;user-select:none;touch-action:none}
+  .btn .lbl{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:13px;font-weight:700}
+
+  /* 지금: 큐브 + 단색 + 떠 있는 글자 + 흰 빛판 */
+  .old .plate{position:absolute;left:10px;top:76px;width:80px;height:46px;background:rgba(255,255,255,.6);border-radius:3px}
+  .old .cap{position:absolute;left:18px;top:72px;width:64px;height:34px;background:var(--c);transition:top .05s}
+  .old .cap::after{content:"";position:absolute;left:0;right:0;top:34px;height:14px;background:var(--c);filter:brightness(.8)}
+  .old .lbl{top:30px;color:#fff}
+  .old.down .cap{top:78px}
+
+  /* A안: 슬라임 젤리 버튼 (1판) — 진보라 받침 + 금 테 · 슬라임 돔 캡 · 광택 */
+  .jelly .base{position:absolute;left:8px;top:84px;width:84px;height:44px;border-radius:50%;
+    background:radial-gradient(ellipse at 50% 35%,#4a3870,#271d3d 70%);box-shadow:0 6px 0 #1a1329,0 9px 10px rgba(0,0,0,.45)}
+  .jelly .ring{position:absolute;left:12px;top:86px;width:76px;height:36px;border-radius:50%;border:2px solid var(--softgold);opacity:.85;transition:box-shadow .15s,border-color .15s}
+  .jelly .cap{position:absolute;left:20px;top:58px;width:60px;height:52px;transform-origin:50% 100%;
+    border-radius:50% 50% 46% 46%/62% 62% 38% 38%;
+    background:radial-gradient(ellipse at 50% 90%,color-mix(in srgb,var(--c) 70%,#000) 0 30%,transparent 60%),
+               linear-gradient(var(--c),color-mix(in srgb,var(--c) 70%,#2a1a40));
+    box-shadow:inset 0 -6px 8px rgba(40,20,60,.35)}
+  .jelly .cap::before{content:"";position:absolute;left:12px;top:7px;width:24px;height:12px;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(1.5px)}
+  .jelly .cap::after{content:"";position:absolute;left:38px;top:12px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.6)}
+  .jelly:hover .cap{filter:brightness(1.12)}
+  .jelly:hover .ring{border-color:var(--c);box-shadow:0 0 12px var(--c)}
+  .jelly .name{position:absolute;left:50%;top:132px;transform:translateX(-50%) perspective(200px) rotateX(15deg);
+    background:var(--panel);border:1px solid var(--softgold);border-radius:6px;padding:1px 8px;font-size:12px;white-space:nowrap;color:var(--ink)}
+  .jelly.locked .cap{filter:saturate(.25) brightness(.8)}
+  .jelly.locked .cap::before,.jelly.locked .cap::after{opacity:0}
+
+  /* B안: 아케이드 */
+  .arcade .base{position:absolute;left:10px;top:86px;width:80px;height:40px;border-radius:50%;
+    background:linear-gradient(#e9edf2,#8b929c 60%,#5b616a);box-shadow:0 6px 0 #3b3f46,0 9px 10px rgba(0,0,0,.45)}
+  .arcade .cap{position:absolute;left:22px;top:70px;width:56px;height:44px;transform-origin:50% 100%}
+  .arcade .cap i{position:absolute;left:0;right:0;bottom:0;height:22px;border-radius:0 0 50% 50%/0 0 100% 100%;background:color-mix(in srgb,var(--c) 65%,#000)}
+  .arcade .cap b{position:absolute;left:0;right:0;top:4px;height:28px;border-radius:50%;background:radial-gradient(ellipse at 40% 35%,#fff8 0 15%,var(--c) 40%,color-mix(in srgb,var(--c) 75%,#000))}
+  .arcade .lbl{top:132px;color:#fff;font-size:12px;background:#111a;padding:0 6px;border-radius:4px}
+
+  /* 집 벽 스위치 (그대로) */
+  .switch{position:relative;width:70px;height:100px;border-radius:8px;background:#f1ece4;box-shadow:0 3px 6px rgba(0,0,0,.3);cursor:pointer}
+  .switch i{position:absolute;left:22px;top:22px;width:26px;height:56px;border-radius:5px;background:linear-gradient(#ffffff,#d9d2c6);box-shadow:0 2px 0 #b5ab9c;transition:transform .08s}
+  .switch.off i{transform:perspective(80px) rotateX(18deg)}
+  .switch-lbl{font-size:12px;color:#3a2c58;margin-top:6px;text-align:center;font-weight:700}
+
+  /* ---------- 개봉 무대 ---------- */
+  .stage{position:relative;height:500px;border-radius:14px;overflow:hidden;
+    background:radial-gradient(ellipse at 50% 70%,#3a2c58,#1b1526 75%)}
+  .stage .fx{position:absolute;left:50%;top:50%;width:0;height:0}
+  .card{position:absolute;left:50%;top:50%;width:170px;height:238px;margin:-119px 0 0 -85px;border-radius:10px;
+    background:linear-gradient(160deg,#3b2b59,#2a1f42);border:4px solid var(--softgold);z-index:5;
+    box-shadow:0 10px 24px rgba(0,0,0,.5);overflow:hidden}
+  .card .art{position:absolute;left:12px;right:12px;top:30px;height:120px;border-radius:6px;
+    background:radial-gradient(circle at 50% 120%,#7a4ab0,#2d2150)}
+  .card .art::after{content:"";position:absolute;left:50%;top:44px;width:86px;height:64px;margin-left:-43px;border-radius:50% 50% 44% 44%/64% 64% 36% 36%;
+    background:linear-gradient(color-mix(in srgb,var(--art) 70%,#fff),var(--art));box-shadow:inset 0 -8px 10px rgba(0,0,0,.25)}
+  .card .nm{position:absolute;left:0;right:0;top:6px;text-align:center;font-size:13px;font-weight:700}
+  .card .mk{position:absolute;left:0;right:0;bottom:44px;text-align:center;font-size:12px}
+  .card .tx{position:absolute;left:14px;right:14px;bottom:10px;height:26px;border-radius:4px;background:#ffffff14}
+  .card .holo{position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.18) 45%,rgba(180,140,255,.14) 50%,transparent 65%);background-size:250% 100%;animation:holo 3s linear infinite;opacity:0}
+  @keyframes holo{from{background-position:120% 0}to{background-position:-120% 0}}
+  .ctrls{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .legend{font-size:13px;color:var(--sub)}
+  table{border-collapse:collapse;width:100%;font-size:13px;margin-top:10px}
+  td,th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  th{background:var(--panel);font-weight:700}
+  td.c{text-align:center}
+
+  /* ---------- P3 작은 장면 ---------- */
+  .mini{position:relative;height:200px;border-radius:10px;overflow:hidden;background:#2c2244}
+  .sofa{position:absolute;left:50%;bottom:30px;width:110px;height:60px;margin-left:-55px;border-radius:14px 14px 6px 6px;background:linear-gradient(#e86f9c,#b84a76);transform-origin:50% 100%}
+  .sofa::before{content:"";position:absolute;left:-10px;right:-10px;bottom:0;height:30px;border-radius:10px;background:#c95a85}
+  .tagpop{position:absolute;left:50%;top:26px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--softgold);border-radius:8px;padding:2px 10px;font-size:13px;opacity:0}
+  .floor{position:absolute;left:0;right:0;bottom:0;height:30px;background:#4f3a2a}
+  .wallet{position:absolute;left:50%;top:60px;transform:translateX(-50%);width:170px;height:80px;border-radius:12px;background:var(--panel);border:2px solid var(--softgold);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700}
+  .plus{position:absolute;left:50%;top:64px;transform:translateX(-50%);color:#5fe3a6;font-weight:700;font-size:20px;opacity:0;pointer-events:none}
+  .window{position:absolute;right:16px;top:14px;width:110px;height:120px;background:linear-gradient(#ffe7b0,#ffcf8a);border:6px solid #6b4a30;opacity:.85}
+  .beam{position:absolute;right:40px;top:30px;width:220px;height:240px;background:linear-gradient(200deg,rgba(255,230,170,.22),transparent 70%);transform:skewX(-25deg);transform-origin:top right}
+  .dust{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff1c9}
+  .shelf{position:relative;height:190px;border-radius:10px;background:linear-gradient(#3b2d25,#2a201b);display:flex;justify-content:space-around;align-items:flex-end;padding:0 6px 26px;overflow:hidden}
+  .shelf::after{content:"";position:absolute;left:0;right:0;bottom:0;height:26px;background:linear-gradient(#8a623f,#5e4129)}
+  .shelf svg{width:19%;max-width:110px;position:relative;z-index:1}
+  .turn{height:240px;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(ellipse at 50% 80%,#3a2c58,#1b1526 75%);border-radius:10px;padding-bottom:10px}
+  .turn svg{width:220px}
+  ol.how{margin:0;padding-left:20px;font-size:14px}
+  ol.how li{margin:4px 0}
+</style>
+</head>
+<body>
+<main>
+  <h1>폴리싱 미리 보기 <span class="tag">11-22 · 3판</span></h1>
+  <p class="note">방향을 고르기 위한 그림입니다 (실제 Unity 모습과 크기 · 빛은 다릅니다). 설계는 <b>폴리싱_설계.md</b>, ⭐ 테두리 = 추천안.</p>
+
+  <!-- ================= P1 버튼 ================= -->
+  <h2>P1. 상점 버튼 셰이딩</h2>
+  <p class="note">버튼을 <b>눌러 보세요</b> (마우스를 올리면 가리킴, 누르면 납작했다 통 튐). 대상은 가게 버튼 3개(상자 열기 · 퇴근 · 결제)입니다.</p>
+  <div class="row">
+    <div class="box">
+      <h3>지금</h3>
+      <p class="why">단색 큐브 · 흰 빛판 · 공중에 뜬 글자 · 1cm 내려감뿐</p>
+      <div class="counter" id="oldRow"></div>
+    </div>
+    <div class="box rec">
+      <h3>⭐ A. 슬라임 젤리 버튼</h3>
+      <p class="why">진보라 받침 + 금 테 · 슬라임 돔 캡 · 광택 · 눌리면 납작했다 통 튐 · 앞 명판 (1판 모양으로 확정)</p>
+      <div class="counter" id="jellyRow"></div>
+      <div class="ctrls"><button class="ctl" id="lockBtn">상자 열기 잠김(영업 중) 보기</button></div>
+    </div>
+    <div class="box">
+      <h3>B. 아케이드 버튼</h3>
+      <p class="why">크롬 링 · 원통 캡 · 볼록 광택 — 오락실 느낌, 슬라임 컨셉과는 멀어짐</p>
+      <div class="counter" id="arcadeRow"></div>
+    </div>
+    <div class="box">
+      <h3>집 · 불 끄고 자기 = 지금 그대로</h3>
+      <p class="why">잠자러 가는 벽 스위치라 슬라임과 관계없음 → 바꾸지 않음</p>
+      <div class="counter wall"><div><div class="switch" id="sw"><i></i></div><div class="switch-lbl">불 끄고 자기</div></div></div>
+    </div>
+  </div>
+
+  <!-- ================= P2 개봉 ================= -->
+  <h2>P2. 등급별 개봉 연출</h2>
+  <p class="note">카드가 맨 앞에 보이는 순간의 연출입니다 (뒤집기 전 예고 없음 · 화면 흔들림 없음 · 흰 번쩍임 없음). <b>레어 = 지난판의 수퍼레어</b>를 가볍게 옮기고, 위 등급은 한 단계씩 더 화려하게.</p>
+  <div class="ctrls">
+    <span class="legend" style="align-self:center">보기:</span>
+    <button class="ctl on" data-mode="new">⭐ 새 설계 (계단식)</button>
+    <button class="ctl" data-mode="old">지금 (마름모 폭죽)</button>
+    <span style="width:16px"></span>
+    <button class="ctl" data-r="1">레어</button>
+    <button class="ctl" data-r="2">수퍼레어</button>
+    <button class="ctl" data-r="3">유니크</button>
+    <button class="ctl" data-r="4">레전더리</button>
+    <button class="ctl" id="seq">넷 차례로</button>
+  </div>
+  <div class="stage" id="stage">
+    <div class="fx" id="dim" style="z-index:0"></div>
+    <div class="fx" id="back" style="z-index:1"></div>
+    <div class="card" id="card"><div class="holo"></div><div class="nm" id="cname">물방울 슬라임</div><div class="art"></div><div class="mk" id="cmark">●●</div><div class="tx"></div></div>
+    <div class="fx" id="front" style="z-index:8"></div>
+    <div class="fx" id="top" style="z-index:9;left:0;top:0"></div>
+  </div>
+  <table>
+    <tr><th>요소</th><th>레어 (하늘)</th><th>수퍼레어 (연보라)</th><th>유니크 (금)</th><th>레전더리 (무지개)</th></tr>
+    <tr><td>① 말랑 펀치</td><td class="c">1번</td><td class="c">1번 (크게)</td><td class="c">2번</td><td class="c">2번 + 둥실 떠오름</td></tr>
+    <tr><td>② 뒤 후광</td><td class="c">작게</td><td class="c">중간</td><td class="c">크게 + 숨쉬기</td><td class="c">아주 크게 · 무지개</td></tr>
+    <tr><td>③ 슬라임 방울 폭죽</td><td class="c">8개</td><td class="c">12 + 8개 (2겹)</td><td class="c">16 + 10개</td><td class="c">20 + 14 + 10개 (3겹)</td></tr>
+    <tr><td>④ 테 둘레 별 반짝임</td><td></td><td class="c">8개</td><td class="c">10개</td><td class="c">14개 + 카드 위 반짝 남음</td></tr>
+    <tr><td>⑤ 회전 빛줄기</td><td></td><td class="c">10줄</td><td class="c">12줄</td><td class="c">16줄 · 2겹 반대 방향</td></tr>
+    <tr><td>⑥ 테 빛</td><td></td><td class="c">한 번 훑기</td><td class="c">두 번 맥박</td><td class="c">무지개 맥박</td></tr>
+    <tr><td>⑦ 충격파 링 (앞으로)</td><td></td><td class="c">1겹</td><td class="c">2겹</td><td class="c">3겹</td></tr>
+    <tr><td>⑧ 주변 어둡게 (카드에 눈이 가게)</td><td></td><td></td><td class="c">살짝</td><td class="c">조금 더</td></tr>
+    <tr><td>⑨ 색종이 비</td><td></td><td></td><td class="c">금 20개</td><td class="c">무지개 40개</td></tr>
+    <tr><td>⑩ 카드 부르르 · 진동</td><td></td><td></td><td class="c">짧게</td><td class="c">길게</td></tr>
+    <tr><td>총 길이</td><td class="c">0.6초</td><td class="c">1.1초</td><td class="c">1.5초</td><td class="c">2.2초</td></tr>
+  </table>
+
+  <!-- ================= P3 ================= -->
+  <h2>P3. 그 밖의 보완 후보 (⭐ 3개)</h2>
+  <div class="row">
+    <div class="box rec">
+      <h3>3-1. 집 업그레이드 설치 순간</h3>
+      <p class="why">가구가 말랑하게 튀어 커지며 바닥에 돔 반짝임 + "설치 완료" 꼬리표</p>
+      <div class="mini" id="m1"><div class="floor"></div><div class="sofa" id="sofa"></div><div class="tagpop" id="tag1">설치 완료 · 소파</div><div class="fx" id="m1fx" style="position:absolute;left:50%;top:170px"></div></div>
+      <div class="ctrls"><button class="ctl" id="b1">다시 보기</button></div>
+    </div>
+    <div class="box rec">
+      <h3>3-2. 돈이 들어올 때</h3>
+      <p class="why">손목 지갑 숫자가 굴러 올라가고 초록 "+금액"이 떠오름</p>
+      <div class="mini"><div class="wallet" id="wal">₩ 12,400</div><div class="plus" id="plus">+1,200</div></div>
+      <div class="ctrls"><button class="ctl" id="b2">결제 해 보기</button></div>
+    </div>
+    <div class="box rec">
+      <h3>3-4. 가게 공기</h3>
+      <p class="why">창가 햇빛 속 먼지 20개가 천천히 떠다님 (영업 낮에만, 아주 옅게)</p>
+      <div class="mini" id="m3"><div class="beam"></div><div class="window"></div><div class="floor"></div></div>
+    </div>
+  </div>
+
+  <!-- ================= P4 피규어 ================= -->
+  <h2>P4. 가게 슬라임 피규어 <span class="tag">Gemini 그림 기준</span></h2>
+  <p class="note">선반 장식 <b>SlimeFigure 5색</b>(분홍 · 하늘 · 연두 · 주황 · 연보라)을 사용자 그림의 느낌으로 바꿉니다. 그림을 통째로 판에 붙이면 VR에서 옆으로 볼 때 종이처럼 납작해지므로, <b>입체 돔 몸 + 얼굴 텍스처</b>로 나눕니다. 아래 슬라이더로 돌려 보세요.</p>
+  <div class="row">
+    <div class="box">
+      <h3>지금</h3>
+      <p class="why">공 모양 몸 + 검은 점 눈 2개 + 흰 점 광택 (Lit 단색)</p>
+      <div class="shelf" id="figOld"></div>
+    </div>
+    <div class="box rec">
+      <h3>⭐ 새 피규어 (5색)</h3>
+      <p class="why">아래가 넓은 돔 · 속이 비치는 젤리 빛(가운데 따뜻하게) · 반짝이는 큰 눈 · ω 입 · 볼 터치</p>
+      <div class="shelf" id="figNew"></div>
+    </div>
+  </div>
+  <div class="row" style="margin-top:16px">
+    <div class="box">
+      <h3>돌려 보기 — 얼굴은 입체 표면에 붙어 함께 돎</h3>
+      <div class="turn"><div id="figTurn"></div></div>
+      <div class="ctrls" style="align-items:center"><span class="legend">각도</span><input type="range" id="ang" min="-60" max="60" value="0" style="flex:1"><span class="legend" id="angV">0°</span></div>
+    </div>
+    <div class="box">
+      <h3>만드는 방법</h3>
+      <ol class="how">
+        <li><b>몸</b>: 아래가 넓은 돔 메시(코드로 생성, 지금 구 대신). 재질은 <b>젤리 셰이더</b> — 가장자리는 진하게, 가운데는 따뜻하게 비치는 듯, 위쪽 광택 (블룸 없이 색만으로).</li>
+        <li><b>얼굴</b>: 그림에서 눈 · 입 · 볼 · 눈썹만 오려 배경 투명 PNG 한 장 → 돔 앞면에 붙임. <b>5색이 같은 얼굴</b>을 같이 씀.</li>
+        <li><b>색</b>: 몸 색만 5가지 (지금 색 값 그대로).</li>
+        <li><b>받침</b>: 지금 어두운 원통 받침 유지 (선반 다른 소품과 맞춤).</li>
+        <li>프리팹 5개는 메뉴 하나로 다시 입힘 (장식 팩 MALLANG처럼). 씬은 안 건드림.</li>
+      </ol>
+    </div>
+  </div>
+</main>
+
+<script>
+const SHOP=[["상자 열기","#ffbf4d"],["퇴근","#73ccff"],["결제","#66e673"]];
+function makeRow(id,kind){
+  const row=document.getElementById(id);
+  SHOP.forEach(([t,c],i)=>{
+    const b=document.createElement("div");b.className="btn "+kind;b.style.setProperty("--c",c);
+    if(kind==="old") b.innerHTML=`<div class="lbl">${t}</div><div class="plate"></div><div class="cap"></div>`;
+    if(kind==="jelly") b.innerHTML=`<div class="base"></div><div class="ring"></div><div class="cap"></div><div class="name">${t}</div>`;
+    if(kind==="arcade") b.innerHTML=`<div class="base"></div><div class="cap"><i></i><b></b></div><div class="lbl">${t}</div>`;
+    if(kind==="jelly"&&i===0) b.id="boxJelly";
+    const cap=b.querySelector(".cap");
+    b.addEventListener("pointerdown",()=>{
+      if(b.classList.contains("locked")){cap.animate([{transform:"translateX(0)"},{transform:"translateX(-4px)"},{transform:"translateX(4px)"},{transform:"translateX(0)"}],{duration:220});return;}
+      if(kind==="old") b.classList.add("down");
+      if(kind==="jelly") cap.animate([{transform:"scale(1,1)"},{transform:"scale(1.12,.6)"}],{duration:90,fill:"forwards"});
+      if(kind==="arcade") cap.animate([{transform:"translateY(0)"},{transform:"translateY(10px)"}],{duration:70,fill:"forwards"});
+    });
+    const up=()=>{
+      if(kind==="old") b.classList.remove("down");
+      if(kind==="jelly"&&!b.classList.contains("locked")) cap.animate([{transform:"scale(1.12,.6)"},{transform:"scale(.94,1.12)"},{transform:"scale(1.03,.96)"},{transform:"scale(1,1)"}],{duration:280,easing:"ease-out",fill:"forwards"});
+      if(kind==="arcade") cap.animate([{transform:"translateY(10px)"},{transform:"translateY(0)"}],{duration:120,fill:"forwards"});
+    };
+    b.addEventListener("pointerup",up);b.addEventListener("pointerleave",()=>{if(kind==="old")b.classList.remove("down")});
+    row.appendChild(b);
+  });
+}
+makeRow("oldRow","old");makeRow("jellyRow","jelly");makeRow("arcadeRow","arcade");
+document.getElementById("lockBtn").onclick=e=>{document.getElementById("boxJelly").classList.toggle("locked");e.target.classList.toggle("on")};
+document.getElementById("sw").onclick=e=>e.currentTarget.classList.toggle("off");
+
+// ---------------- 개봉 연출 ----------------
+const dim=document.getElementById("dim"),back=document.getElementById("back"),front=document.getElementById("front"),top_=document.getElementById("top"),card=document.getElementById("card");
+const COL={1:"#bfe3ff",2:"#e6bcff",3:"#ffd766"};
+const RAIN=["#ff8fa3","#ffc16b","#fff08a","#8ff0a4","#8fd3ff","#c49bff"];
+const CARDS={1:["물방울 슬라임","#7cc4ff"],2:["바위 슬라임","#b48cff"],3:["번개 슬라임","#ffcf4d"],4:["태양 슬라임","#ff8a5c"]};
+// 등급별 연출 예산 (레어 = 지난판 수퍼레어)
+const CFG={
+  1:{dur:600, halo:1.4,blobs:[8],      rad:120,stars:0, rays:0, rayA:0,  glow:0,rings:0,punch:1,dimA:0,  confetti:0, shake:0},
+  2:{dur:1100,halo:1.9,blobs:[12,8],   rad:170,stars:8, rays:10,rayA:.22,glow:1,rings:1,punch:1,dimA:0,  confetti:0, shake:0},
+  3:{dur:1500,halo:2.3,blobs:[16,10],  rad:220,stars:10,rays:12,rayA:.26,glow:2,rings:2,punch:2,dimA:.22,confetti:20,shake:450},
+  4:{dur:2200,halo:2.9,blobs:[20,14,10],rad:280,stars:14,rays:16,rayA:.3,glow:3,rings:3,punch:2,dimA:.38,confetti:40,shake:900},
+};
+let mode="new",timers=[];
+document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("on",x===b))});
+document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{timers.forEach(clearTimeout);timers=[];play(+b.dataset.r)});
+document.getElementById("seq").onclick=()=>{timers.forEach(clearTimeout);timers=[];let t=0;[1,2,3,4].forEach(r=>{timers.push(setTimeout(()=>play(r),t));t+=CFG[r].dur+700})};
+
+function el(parent,css){const d=document.createElement("div");d.style.cssText="position:absolute;"+css;parent.appendChild(d);return d}
+function gone(d,anim){anim.onfinish=()=>d.remove();return anim}
+function clear(){[dim,back,front,top_].forEach(x=>x.innerHTML="");card.getAnimations().forEach(a=>a.cancel());card.style.boxShadow=""}
+
+function play(r){
+  clear();
+  const [nm,art]=CARDS[r];document.getElementById("cname").textContent=nm;card.style.setProperty("--art",art);
+  const mk=document.getElementById("cmark");mk.textContent="●".repeat(r+1);
+  if(r===4){mk.style.background=`linear-gradient(90deg,${RAIN.join(",")})`;mk.style.webkitBackgroundClip="text";mk.style.backgroundClip="text";mk.style.color="transparent"}
+  else{mk.style.background="none";mk.style.color=COL[r]}
+  card.querySelector(".holo").style.opacity=[0,.35,.6,.8,1][r];
+  card.style.borderColor=r===4?"#ffd166":COL[r];
+  card.animate([{transform:"translateY(30px)",opacity:0},{transform:"translateY(0)",opacity:1}],{duration:160});
+  setTimeout(()=> mode==="old"?oldFx(r):newFx(r),160);
+}
+
+// 지금 코드: 레어 없음, 수퍼레어=유니크 금빛 마름모 14개, 레전더리만 크게 + 흔들림
+function oldFx(r){
+  if(r===1) return;
+  const L=r===4, radius=L?260:95, secs=L?1300:700, color=L?"#ffc761":"#ffd14d";
+  for(let i=0;i<14;i++){
+    let g=i*0.618034; g-=Math.floor(g);
+    const a=(i/14+g*0.08)*Math.PI*2, d=radius*(0.55+0.45*g);
+    const s=el(back,`left:-6px;top:-6px;width:12px;height:12px;background:${color}`);
+    gone(s,s.animate([{transform:"translate(0,0) rotate(45deg) scale(1.2)",opacity:1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) rotate(45deg) scale(.2)`,opacity:0}],{duration:secs,easing:"cubic-bezier(.2,.7,.3,1)"}));
+  }
+  if(L) shake(900,3);
+}
+
+function newFx(r){
+  const C=CFG[r], c=COL[r], L=r===4, colorAt=i=>L?RAIN[i%RAIN.length]:c;
+  // ⑧ 주변 어둡게
+  if(C.dimA){const d=el(dim,`left:-800px;top:-600px;width:1600px;height:1200px;background:radial-gradient(circle,transparent 0 120px,#0b0812 380px)`);
+    gone(d,d.animate([{opacity:0},{opacity:C.dimA*2.2,offset:.15},{opacity:C.dimA*2.2,offset:.75},{opacity:0}],{duration:C.dur+400}))}
+  // ① 말랑 펀치 (+ 레전더리 둥실)
+  const big=r>=2?1.11:1.08;
+  const punch=[{transform:"scale(1)"},{transform:`scale(${big},${big-.03})`},{transform:"scale(.97,1.02)"},{transform:"scale(1)"}];
+  card.animate(punch,{duration:280,easing:"ease-out"});
+  if(C.punch>1) setTimeout(()=>card.animate(punch,{duration:280,easing:"ease-out"}),320);
+  if(L) card.animate([{transform:"translateY(0)"},{transform:"translateY(-14px)",offset:.3},{transform:"translateY(-10px)",offset:.7},{transform:"translateY(0)"}],{duration:C.dur,easing:"ease-in-out",composite:"add"});
+  // ② 뒤 후광
+  const hs=C.halo*170;
+  const haloBg=L?`conic-gradient(${RAIN.join(",")},${RAIN[0]})`:`radial-gradient(circle,${c}cc 0 18%,${c}44 45%,transparent 68%)`;
+  const h=el(back,`left:${-hs/2}px;top:${-hs/2}px;width:${hs}px;height:${hs}px;border-radius:50%;background:${haloBg};${L?"-webkit-mask:radial-gradient(circle,#000 22%,transparent 68%);mask:radial-gradient(circle,#000 22%,transparent 68%);":""}`);
+  const hk=r>=3?[{transform:"scale(.4) rotate(0)",opacity:0},{transform:"scale(1)",opacity:.65,offset:.2},{transform:"scale(.9)",opacity:.5,offset:.45},{transform:"scale(1.03)",opacity:.6,offset:.7},{transform:"scale(1.08) rotate(40deg)",opacity:0}]
+               :[{transform:"scale(.4)",opacity:0},{transform:"scale(1)",opacity:.6,offset:.3},{transform:"scale(1.1)",opacity:0}];
+  gone(h,h.animate(hk,{duration:C.dur,easing:"ease-out"}));
+  // ⑤ 회전 빛줄기 (레전더리는 2겹 반대 방향)
+  const rayLayer=(n,size,alpha,dir,offset)=>{
+    const stops=[];for(let i=0;i<n;i++){const s=i*360/n+offset;stops.push(`transparent ${s}deg`,`${L?RAIN[i%6]:c} ${s+3}deg`,`transparent ${s+9}deg`)}
+    const ray=el(back,`left:${-size/2}px;top:${-size/2}px;width:${size}px;height:${size}px;border-radius:50%;background:conic-gradient(from 0deg,${stops.join(",")});-webkit-mask:radial-gradient(circle,#000 12%,transparent 66%);mask:radial-gradient(circle,#000 12%,transparent 66%)`);
+    gone(ray,ray.animate([{transform:"rotate(0) scale(.5)",opacity:0},{opacity:alpha,offset:.2},{opacity:alpha,offset:.75},{transform:`rotate(${dir*60}deg) scale(1)`,opacity:0}],{duration:C.dur+200,easing:"linear"}));
+  };
+  if(C.rays){rayLayer(C.rays,C.rad*2.6,C.rayA,1,0); if(L) rayLayer(10,C.rad*1.9,C.rayA*.8,-1,9);}
+  // ③ 슬라임 방울 폭죽 (겹마다 조금 늦게 · 일부는 앞으로 = 크게)
+  C.blobs.forEach((count,layer)=>{
+    const radius=C.rad*(1-layer*0.25), delay=layer*170;
+    for(let i=0;i<count;i++){
+      const a=(i/count)*Math.PI*2+layer*0.35, d=radius*(0.75+0.25*((i*0.618)%1));
+      const fwd=i%3===0, sz=(fwd?16:11)*(r>=3?1.15:1);
+      const col=colorAt(i+layer);
+      const p=el(fwd?front:back,`left:${-sz/2}px;top:${-sz/2}px;width:${sz}px;height:${sz*0.8}px;border-radius:50% 50% 44% 44%/64% 64% 36% 36%;background:linear-gradient(color-mix(in srgb,${col} 60%,#fff),${col});box-shadow:inset -2px -2px 0 #0002;opacity:0`);
+      gone(p,p.animate([{transform:"translate(0,0) scale(.5)",opacity:0},{opacity:.95,offset:.1},{transform:`translate(${Math.cos(a)*d}px,${Math.sin(a)*d+24}px) scale(${fwd?1.6:.6})`,opacity:0}],{duration:C.dur*.85,delay,easing:"cubic-bezier(.15,.7,.3,1)"}));
+    }
+  });
+  // ④ 테 둘레 별 반짝임
+  for(let i=0;i<C.stars;i++){
+    const t=i/C.stars*Math.PI*2, x=Math.cos(t)*(102+(i%2)*14), y=Math.sin(t)*(138+(i%2)*14), sz=r>=3?22:17;
+    const s=el(front,`left:${x-sz/2}px;top:${y-sz/2}px;width:${sz}px;height:${sz}px;background:${L?RAIN[i%6]:"#fff3d1"};clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);opacity:0`);
+    gone(s,s.animate([{transform:"scale(0) rotate(0)",opacity:0},{transform:"scale(1) rotate(45deg)",opacity:.95},{transform:"scale(0) rotate(90deg)",opacity:0}],{duration:440,delay:100+i*(C.dur*.65/C.stars)}));
+  }
+  // 레전더리: 카드 위에 남는 작은 반짝임
+  if(L) for(let i=0;i<12;i++){
+    const x=(Math.random()-.5)*150, y=(Math.random()-.5)*210, sz=8+Math.random()*6;
+    const s=el(front,`left:${x}px;top:${y}px;width:${sz}px;height:${sz}px;background:#fff8e0;clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);opacity:0`);
+    gone(s,s.animate([{transform:"scale(0)",opacity:0},{transform:"scale(1)",opacity:.85},{transform:"scale(0)",opacity:0}],{duration:500,delay:500+i*130}));
+  }
+  // ⑥ 테 빛
+  if(C.glow){
+    const shadow=g=>`0 10px 24px rgba(0,0,0,.5),0 0 26px 7px ${g}aa`, none="0 10px 24px rgba(0,0,0,.5),0 0 0 0 transparent";
+    if(L){const k=[{boxShadow:none}];RAIN.forEach(g=>k.push({boxShadow:shadow(g)}));k.push({boxShadow:none});card.animate(k,{duration:C.dur})}
+    else card.animate([{boxShadow:none},{boxShadow:shadow(c)},{boxShadow:none}],{duration:C.dur/C.glow,iterations:C.glow});
+  }
+  // ⑦ 충격파 링
+  for(let k=0;k<C.rings;k++){
+    const col=L?RAIN[(k*2)%6]:c;
+    const ring=el(front,`left:-90px;top:-90px;width:180px;height:180px;border-radius:50%;border:${5-k}px solid ${col};opacity:0`);
+    gone(ring,ring.animate([{transform:"scale(.5)",opacity:.85},{transform:`scale(${2.4+k*.4})`,opacity:0}],{duration:800,delay:80+k*200,easing:"ease-out"}));
+  }
+  // ⑨ 색종이 비
+  for(let i=0;i<C.confetti;i++){
+    const W=document.getElementById("stage").clientWidth, x=Math.random()*W, col=L?RAIN[i%6]:(i%3?c:"#fff1c9");
+    const w=6+Math.random()*5, dome=i%2===0;
+    const p=el(top_,`left:${x}px;top:-20px;width:${w}px;height:${dome?w*0.8:w*1.6}px;background:${col};${dome?"border-radius:50% 50% 44% 44%/64% 64% 36% 36%;":"border-radius:2px;"}opacity:.9`);
+    const drift=(Math.random()-.5)*120, rot=(Math.random()-.5)*720;
+    gone(p,p.animate([{transform:"translate(0,0) rotate(0)",opacity:.95},{opacity:.9,offset:.8},{transform:`translate(${drift}px,540px) rotate(${rot}deg)`,opacity:0}],{duration:1400+Math.random()*900,delay:200+Math.random()*500,easing:"cubic-bezier(.3,.1,.6,1)"}));
+  }
+  // ⑩ 부르르
+  if(C.shake) setTimeout(()=>shake(C.shake,L?3:2),250);
+}
+function shake(ms,amp){
+  const k=[];for(let i=0;i<=12;i++){const a=i===12?0:(i%2?amp:-amp)*(1-i/12);k.push({transform:`translate(${a}px,${-a/2}px)`})}
+  card.animate(k,{duration:ms,composite:"add"});
+}
+
+// ---------------- P3 ----------------
+function install(){
+  const s=document.getElementById("sofa"),t=document.getElementById("tag1"),fx=document.getElementById("m1fx");
+  s.animate([{transform:"scale(.6)",opacity:0},{transform:"scale(1.1,.9)",opacity:1,offset:.45},{transform:"scale(.95,1.06)",offset:.7},{transform:"scale(1)"}],{duration:520,easing:"ease-out",fill:"forwards"});
+  t.animate([{opacity:0,transform:"translate(-50%,8px)"},{opacity:1,transform:"translate(-50%,0)",offset:.15},{opacity:1,offset:.8},{opacity:0}],{duration:1800,delay:250});
+  for(let i=0;i<8;i++){const a=Math.PI+(i/7)*Math.PI;const p=el(fx,`left:-5px;top:-4px;width:10px;height:8px;border-radius:50% 50% 44% 44%/64% 64% 36% 36%;background:#ffd166`);
+    gone(p,p.animate([{transform:"translate(0,0)",opacity:1},{transform:`translate(${Math.cos(a)*90}px,${Math.sin(a)*30}px) scale(.3)`,opacity:0}],{duration:600,delay:200,easing:"ease-out"}))}
+}
+document.getElementById("b1").onclick=install; setTimeout(install,600);
+
+let money=12400;
+document.getElementById("b2").onclick=()=>{
+  const w=document.getElementById("wal"),p=document.getElementById("plus"),from=money,to=money+1200;money=to;const t0=performance.now();
+  p.animate([{opacity:0,transform:"translate(-50%,0)"},{opacity:1,transform:"translate(-50%,-30px)",offset:.3},{opacity:0,transform:"translate(-50%,-60px)"}],{duration:1100,easing:"ease-out"});
+  (function step(now){const k=Math.min(1,(now-t0)/400);w.textContent="₩ "+Math.round(from+(to-from)*(1-(1-k)*(1-k))).toLocaleString();if(k<1)requestAnimationFrame(step)})(t0);
+  w.animate([{transform:"translateX(-50%) scale(1)"},{transform:"translateX(-50%) scale(1.06)"},{transform:"translateX(-50%) scale(1)"}],{duration:300});
+};
+
+const m3=document.getElementById("m3");
+for(let i=0;i<20;i++){
+  const d=el(m3,`left:${30+Math.random()*60}%;top:${10+Math.random()*70}%;opacity:0`);d.className="dust";
+  const dx=(Math.random()-.5)*40, dy=-20-Math.random()*30;
+  d.animate([{transform:"translate(0,0)",opacity:0},{opacity:.35,offset:.3},{opacity:.25,offset:.7},{transform:`translate(${dx}px,${dy}px)`,opacity:0}],{duration:5000+Math.random()*4000,delay:Math.random()*4000,iterations:Infinity});
+}
+
+// ---------------- P4 피규어 ----------------
+const FIG=[["분홍","#ff9ec0"],["하늘","#8cc8ff"],["연두","#a8e57a"],["주황","#ffb46b"],["연보라","#c4a8ff"]];
+function mix(a,b,t){const p=x=>[1,3,5].map(i=>parseInt(x.substr(i,2),16));const A=p(a),B=p(b);return "#"+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,"0")).join("")}
+let gid=0;
+function slimeSvg(c,ang=0){
+  const id="g"+(gid++), rad=ang*Math.PI/180, sx=Math.cos(rad), dx=Math.sin(rad)*70;
+  const warm=mix(c,"#ff6a4a",.35), edge=mix(c,"#5a2a4a",.35), light=mix(c,"#ffffff",.45);
+  return `<svg viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="${id}b" cx="${50+Math.sin(rad)*20}%" cy="62%" r="62%"><stop offset="0" stop-color="${warm}"/><stop offset=".45" stop-color="${c}"/><stop offset=".85" stop-color="${mix(c,"#ffffff",.15)}"/><stop offset="1" stop-color="${edge}"/></radialGradient>
+    <radialGradient id="${id}e" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#8a2a35"/><stop offset="1" stop-color="#3a0d16"/></radialGradient>
+    <filter id="${id}s"><feGaussianBlur stdDeviation="3"/></filter>
+    <clipPath id="${id}c"><path d="M12,160 C6,92 46,52 100,52 C154,52 194,92 188,160 Q100,174 12,160 Z"/></clipPath>
+  </defs>
+  <ellipse cx="100" cy="172" rx="90" ry="12" fill="#1c1626"/>
+  <ellipse cx="100" cy="166" rx="90" ry="12" fill="#2e2a36"/>
+  <ellipse cx="100" cy="164" rx="84" ry="9" fill="${c}" opacity=".25" filter="url(#${id}s)"/>
+  <path d="M12,160 C6,92 46,52 100,52 C154,52 194,92 188,160 Q100,174 12,160 Z" fill="url(#${id}b)"/>
+  <g clip-path="url(#${id}c)">
+    <ellipse cx="${100-dx*.4}" cy="72" rx="52" ry="16" fill="${light}" opacity=".55" filter="url(#${id}s)"/>
+    <g transform="translate(${100+dx},0) scale(${Math.max(.15,sx)},1) translate(-100,0)" opacity="${Math.max(0,Math.min(1,sx*1.6))}">
+      <ellipse cx="100" cy="122" rx="40" ry="24" fill="${warm}" opacity=".55" filter="url(#${id}s)"/>
+      <path d="M60,96 q8,-5 15,-1" stroke="${edge}" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
+      <path d="M125,95 q8,-4 15,1" stroke="${edge}" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
+      <ellipse cx="62" cy="130" rx="13" ry="7" fill="#ff7f9a" opacity=".45" filter="url(#${id}s)"/>
+      <ellipse cx="138" cy="130" rx="13" ry="7" fill="#ff7f9a" opacity=".45" filter="url(#${id}s)"/>
+      <circle cx="72" cy="114" r="13" fill="url(#${id}e)"/><circle cx="128" cy="114" r="13" fill="url(#${id}e)"/>
+      <circle cx="67" cy="108" r="5" fill="#fff"/><circle cx="123" cy="108" r="5" fill="#fff"/>
+      <circle cx="77" cy="120" r="2" fill="#fff" opacity=".9"/><circle cx="133" cy="120" r="2" fill="#fff" opacity=".9"/>
+      <path d="M86,128 q7,8 14,0 q7,8 14,0" stroke="#6b2430" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <ellipse cx="${60-dx*.3}" cy="76" rx="14" ry="6" fill="#fff" opacity=".7" transform="rotate(-18 ${60-dx*.3} 76)"/>
+    <path d="M30,140 Q100,160 170,140" stroke="${light}" stroke-width="3" fill="none" opacity=".35"/>
+  </g>
+</svg>`;
+}
+function oldSvg(c){
+  return `<svg viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="100" cy="172" rx="90" ry="12" fill="#1c1626"/><ellipse cx="100" cy="166" rx="90" ry="12" fill="#33333d"/>
+  <ellipse cx="100" cy="112" rx="74" ry="58" fill="${c}"/>
+  <circle cx="72" cy="104" r="8" fill="#140f1a"/><circle cx="128" cy="104" r="8" fill="#140f1a"/>
+  <circle cx="64" cy="76" r="7" fill="#fff"/></svg>`;
+}
+document.getElementById("figOld").innerHTML=FIG.map(([,c])=>oldSvg(c)).join("");
+document.getElementById("figNew").innerHTML=FIG.map(([,c])=>slimeSvg(c)).join("");
+const turnBox=document.getElementById("figTurn"),ang=document.getElementById("ang");
+const drawTurn=()=>{turnBox.innerHTML=slimeSvg(FIG[0][1],+ang.value);document.getElementById("angV").textContent=ang.value+"°"};
+ang.oninput=drawTurn;drawTurn();
+</script>
+</body>
+</html>

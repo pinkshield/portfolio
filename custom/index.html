@@ -425,7 +425,7 @@ function teamLabel(p) {
 }
 // 직접 만든 원본 발표 자료가 있으면 「슬라이드」는 그 파일을 엶 (강사님 피드백 11-21: "슬라이드는 니꺼 원본 써")
 const ORIGINAL_DECK = {
-  '5-wow-hardcore-analysis': 'Present File/WoW_클래식_하드코어_전투시스템_분석_개선.pptx.pdf',
+  '5-wow-hardcore-analysis': 'Present File/WoW_클래식_하드코어_전투시스템_분석_문서순서.pptx.pdf', // 11-25 문서 순서판(37장)
 };
 const deckHref = (p) => ORIGINAL_DECK[p.id]
   ? `../src/${encodeURIComponent(p.id)}/${ORIGINAL_DECK[p.id].split('/').map(encodeURIComponent).join('/')}`

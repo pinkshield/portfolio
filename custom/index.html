@@ -110,12 +110,45 @@
   .btn-ghost:hover { color: var(--ink); border-color: var(--line); }
   /* 연락처 장 */
   /* 연락처 장: 표지 틀(.hero)을 그대로 씀 — 클리어 화면은 가운데(Game Clear · 캐릭터 · Menu/Exit)가 보이게 */
-  .end-img { object-position: 70% 50%; }
+  /* 가로 화면: 그림은 높이에 맞춰 커지므로 화면 비율마다 「- Game Clear -」(그림 가로 480~1095 / 1579, 높이 884)의 가운데를
+     화면 23% 지점(글 판 페이드 44% 앞)에 둠. 왼쪽 끝 = 23vw − 787.5 × (100vh / 884). 초광각에서는 그림 오른쪽 끝이 그림 칸(66vw) 안으로 들어오지 않게 clamp */
+  .end-img { object-position: clamp(66vw - 178.6vh, 23vw - 89.08vh, 0px) 50%; }
   @media (max-width: 1099px) { .end-img { object-position: 50% 45%; } }
+  /* 세로 화면(세로 모니터 · 폰): 클리어 화면을 위에 통째로(가로 폭 가득), 아래에 연락처 — 경계는 페이드(11-26 건우 님) */
+  @media (orientation: portrait) {
+    .hero.contact { overflow-y: auto; overscroll-behavior: contain; }
+    .hero.contact { display: flex; flex-direction: column; }
+    /* 높이는 그림 비율과 화면 절반 중 큰 쪽 — 세로가 긴 모니터에서도 아래가 비지 않게(넘치는 양옆만 잘림, 가운데 클리어 장면은 그대로) */
+    .contact .hero-art { position: relative; flex: none; width: 100%; height: max(calc(100vw * 884 / 1579), 50vh); }
+    .contact .end-img { object-position: 50% 50%; }
+    .contact .hero-shade { inset: 0 0 auto 0; height: max(calc(100vw * 884 / 1579), 50vh); background:
+        linear-gradient(to top, rgb(17 17 17) 0%, rgb(17 17 17 / 0) 32%),
+        linear-gradient(to bottom, rgb(17 17 17 / .75) 0%, rgb(17 17 17 / 0) 18%); }
+    .contact .hero-panel { position: relative; inset: auto; flex: 1 0 auto; width: auto; overflow: visible; display: flex; flex-direction: column; justify-content: flex-start; padding: 0 6vw 124px; margin-top: -72px; }
+    .contact .hero-copy { position: relative; width: 100%; max-width: 820px; margin: 0 auto; font-size: clamp(16px, 1.6vw, 20px); }
+    .contact .h-big { font-size: clamp(36px, 5vw, 64px); }
+  }
+  /* 폰: 그림이 너무 납작해지므로 표지처럼 높이를 주고 가운데(클리어 글자 · 캐릭터)만 */
+  @media (orientation: portrait) and (max-width: 759px) {
+    .contact .hero-art { aspect-ratio: auto; height: 50vh; max-height: none; }
+    .contact .end-img { object-position: 50% 40%; }
+    .contact .hero-shade { height: 50vh; }
+    .contact .hero-panel { padding: 0 16px 124px; margin-top: -64px; }
+  }
   .contact .credits { padding: 16px 20px; }
   .contact .cr-list li { padding: 6px 0; }
   .contact .cr-mail a { font-size: 19px; }
+  .contact .cr-links { font-size: 13.5px; gap: 4px 14px; }
+  .contact .cr-links a.v { color: var(--accent); }
+  .contact .cr-links a.v:hover { filter: brightness(1.15); }
   .contact .back-top { margin-top: 14px; }
+  /* 「처음으로」를 그림 속 게임 메뉴(Menu / Exit)처럼 — 깜빡이는 ▶ 커서, 올리면 한 칸 들어감 */
+  .back-top.game-menu { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; letter-spacing: .02em; color: var(--ink); transition: transform .12s steps(2); }
+  .game-menu i { font-style: normal; font-size: 13px; color: var(--accent); animation: menu-blink 1s steps(1) infinite; }
+  .back-top.game-menu:hover, .back-top.game-menu:focus-visible { color: var(--ink); transform: translateX(6px); }
+  .game-menu:hover i { animation: none; }
+  @keyframes menu-blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .game-menu i { animation: none; } .game-menu { transition: none; } }
   .back-top { margin-top: 22px; background: none; border: 0; padding: 0; color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .04em; cursor: pointer; }
   .back-top:hover { color: var(--accent); }
   .credits { border: 1px solid var(--line); border-radius: 14px; padding: 24px 26px; background: rgba(255,255,255,.02); }
@@ -760,7 +793,6 @@ function ContactSlide({ profile, projects, goProject, endImg }) {
           {profile.headline && <p className="mt-4 text-base xl:text-lg font-bold leading-snug" style={{ color: 'var(--ink)' }}>{profile.headline}</p>}
           <div className="mt-6 flex flex-wrap gap-3">
             {mail && <a className="btn btn-fill" href={mail}>✉ 메일 보내기</a>}
-            {profile.email && <CopyMail email={profile.email} big />}
             {profile.github && <a className="btn btn-line" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
             {(profile.links || []).filter((x) => x && x.url).map((x) => <a key={x.url} className="btn btn-line" href={x.url} target="_blank" rel="noopener">{x.label} ↗</a>)}
           </div>
@@ -779,7 +811,7 @@ function ContactSlide({ profile, projects, goProject, endImg }) {
                   <li key={p.id}>
                     <button type="button" className="cr-title" onClick={() => goProject(p.id)}><span className="no">{isAnalysis(p) ? '분석' : pad(i + 1)}</span>{p.title.replace(/\s*\(.*\)$/, '').replace(/\s+—.*$/, '')}<em>{teamLabel(p)}</em></button>
                     <span className="cr-links">
-                      {L.video && <a href={L.video} target="_blank" rel="noopener">▶ 영상</a>}
+                      {L.video && <a className="v" href={L.video} target="_blank" rel="noopener">▶ 영상</a>}
                       <a href={deckHref(p)} {...(ORIGINAL_DECK[p.id] ? { target: '_blank', rel: 'noopener' } : {})}>{T('name.deck')}</a>
                       <a href={`../doc.html?p=${encodeURIComponent(p.id)}`}>{docLabel(p, true)}</a>
                       {L.github && <a href={L.github} target="_blank" rel="noopener">GitHub</a>}
@@ -789,7 +821,7 @@ function ContactSlide({ profile, projects, goProject, endImg }) {
               })}
             </ol>
           </div>
-          <button type="button" className="back-top" onClick={() => goProject('#cover')}>↑ 처음으로</button>
+          <button type="button" className="back-top game-menu" onClick={() => goProject('#cover')}><i aria-hidden="true">▶</i>처음으로</button>
         </div>
       </div>
     </section>

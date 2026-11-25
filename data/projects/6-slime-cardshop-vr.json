@@ -200,11 +200,7 @@
       {"key": "reveal", "title": "카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게"]},
       {"key": "economy", "title": "경제 재설계 — 팩을 다 팔면 조금 손해 보게", "sectionPath": ["5. 경제 재설계 — 팩을 다 팔면 조금 손해 보게"]},
       {"key": "shop", "title": "손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게"]},
-      {
-        "key": "ai",
-        "title": "AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다.",
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다"]
-      }
+      {"key": "ai", "title": "AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다"]}
     ],
     "slides": [
       {
@@ -301,12 +297,13 @@
         "visuals": [
           {
             "kind": "image",
-            "src": "images/reveal-legendary.png",
-            "w": 1280,
-            "h": 720,
-            "caption": {"text": "레전더리 공개 — 무지개 후광 · 빛줄기 · 충격파 링 · 색종이가 한꺼번에 나옵니다", "verbatim": true}
+            "src": "images/reveal-legendary.gif",
+            "w": 960,
+            "h": 540,
+            "caption": {"text": "레전더리 공개 장면 — 유니크 다음 장으로 넘기자 레전더리 「원초의 슬라임」이 나옵니다", "verbatim": true}
           }
-        ]
+        ],
+        "edited": true
       },
       {
         "key": "reveal-tiers",
@@ -383,7 +380,7 @@
         "tab": "선택",
         "title": {"text": "시연 뒤 뒤집은 처음 규칙 (11-17)", "verbatim": true},
         "lead": {"text": "설계 단계에서는 \"유니크 이상은 건너뛰기 불가, AI가 제안했던 갓팩(전부 유니크 이상)은 전용 동시 공개\" 규칙을 정했습니다.", "verbatim": true},
-        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다"],
+        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다", "① 시연 뒤 뒤집은 처음 규칙 (11-17)"],
         "points": [
           {"label": "이유", "text": "갓팩은 한 장 한 장 까면서 희귀 카드를 직접 확인하는 재미가 더 컸습니다.", "verbatim": true},
           {
@@ -398,11 +395,11 @@
       {
         "key": "reveal-box",
         "chapter": "reveal",
-        "layout": "full",
+        "layout": "visual",
         "tab": "선택",
         "title": {"text": "상자 10팩 장면에만 미리 보여 주기 (11-19)", "verbatim": true},
         "lead": {"text": "상자 개봉은 시연 영상에서 가장 길게 쓰는 장면인데, 팩 10개가 똑같이 뜯겨 밋밋했습니다.", "verbatim": true},
-        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다"],
+        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다", "② 상자 10팩 장면에만 미리 보여 주기 (11-19)"],
         "points": [
           {"label": "이유", "text": "10팩 상자는 빠른 결과를 원하는 사람이 고르는 선택지입니다.", "verbatim": true},
           {
@@ -411,7 +408,17 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "table", "n": 2, "fp": "|[A] 그대로 (결과 숨김)|[B] 좋은 팩만 빛남 ✓|[C] 넘길 때만 연출"}]
+        "visuals": [
+          {"kind": "table", "n": 1, "fp": "|[A] 그대로 (결과 숨김)|[B] 좋은 팩만 빛남 ✓|[C] 넘길 때만 연출"},
+          {
+            "kind": "image",
+            "src": "images/box-open.gif",
+            "w": 800,
+            "h": 450,
+            "caption": {"text": "상자 10팩 개봉 — 팩 10개가 한 줄로 서서 한꺼번에 뜯깁니다", "verbatim": true}
+          }
+        ],
+        "edited": true
       },
       {
         "key": "money-problem",
@@ -483,7 +490,7 @@
       {
         "key": "shop",
         "chapter": "shop",
-        "layout": "visual",
+        "layout": "screens",
         "tab": "개요",
         "title": {"text": "6-1. 계산 · 청소 · 도둑", "verbatim": true},
         "lead": {"text": "손님은 진열대를 둘러보고 물건을 골라 계산대 줄에 섭니다.", "verbatim": true},
@@ -499,30 +506,41 @@
         "visuals": [
           {
             "kind": "image",
-            "src": "images/checkout-bag.png",
-            "w": 1280,
-            "h": 720,
-            "caption": {"text": "계산 — 스캐너로 바코드를 찍은 물건을 봉투 위로 가져가 놓으면 담깁니다(첫 계산은 사장님 안내와 함께 시간이 멈춥니다)", "verbatim": true}
+            "src": "images/checkout.gif",
+            "w": 800,
+            "h": 450,
+            "caption": {"text": "계산 — 바코드를 먼저 찍고 봉투 위로 옮겨 담습니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/catch-thief.gif",
+            "w": 800,
+            "h": 450,
+            "caption": {"text": "도둑 잡기 — 대걸레를 들고 쫓아가 한 대 쳐서 잡습니다", "verbatim": true}
           }
-        ]
+        ],
+        "edited": true
       },
       {
         "key": "waves",
         "chapter": "shop",
-        "layout": "code",
+        "layout": "visual",
         "tab": "구현",
         "title": {"text": "6-2. 몰려왔다 한산해지는 손님 웨이브", "verbatim": true},
         "lead": {"text": "손님이 고르게 오면 계산대를 떠날 틈이 없었습니다. (그때 영업 90초 기준으로 평균 13초마다 오는데 한 명 계산에 15~ 30초 소요).", "verbatim": true},
         "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "6-2. 몰려왔다 한산해지는 손님 웨이브"],
-        "points": [
-          {"label": "구현", "text": "그래서 2~3명씩 몰려오고, 그 손님들을 계산할 시간 + 한산한 시간이 지난 뒤 다음 웨이브가 오게 했습니다.", "verbatim": true},
+        "points": [{"label": "구현", "text": "그래서 2~3명씩 몰려오고, 그 손님들을 계산할 시간 + 한산한 시간이 지난 뒤 다음 웨이브가 오게 했습니다.", "verbatim": true}],
+        "visuals": [
           {
-            "label": "",
-            "text": "순수 C# 함수라, 난수를 넣어 주는 인터페이스(`IRandomSource`)를 고정 시드로 바꿔 끼워 EditMode 테스트로 확인합니다.",
-            "verbatim": true
-          }
+            "kind": "image",
+            "src": "images/customer-wave.gif",
+            "w": 800,
+            "h": 450,
+            "caption": {"text": "손님 웨이브 — 영업이 시작되자 손님들이 잇달아 들어옵니다", "verbatim": true}
+          },
+          {"kind": "code", "n": 1, "fp": "// CustomerRules.cs — CustomerSchedule.Waves (101~116행 발췌)"}
         ],
-        "visuals": [{"kind": "code", "n": 1, "fp": "// CustomerRules.cs — CustomerSchedule.Waves (101~116행 발췌)"}]
+        "edited": true
       },
       {
         "key": "event-choice",
@@ -531,7 +549,7 @@
         "tab": "선택",
         "title": {"text": "상황들을 겹치지 않게 조율 할 것인가? (AI 추천을 일부 거절)", "verbatim": true},
         "lead": {"text": "[A]만 골랐습니다.", "verbatim": true},
-        "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "6-3. 고민과 선택 — 알바를 얼마나 바쁘게 할까"],
+        "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "6-3. 고민과 선택 — 알바를 얼마나 바쁘게 할까", "① 상황들을 겹치지 않게 조율 할 것인가? (AI 추천을 일부 거절)"],
         "points": [
           {
             "label": "이유",
@@ -547,13 +565,24 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 손님 웨이브 ✓|[B] 일어나는 상황값을 설정 (뺌)"}]
       },
       {
+        "key": "ai-map",
+        "chapter": "ai",
+        "layout": "full",
+        "tab": "",
+        "title": {"text": "7-1. 장마다 AI가 한 것과 제가 한 것", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-1. 장마다 AI가 한 것과 제가 한 것"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "장|AI가 한 것|제가 한 것"}]
+      },
+      {
         "key": "workflow",
         "chapter": "ai",
         "layout": "visual",
         "tab": "흐름",
-        "title": {"text": "7-1. 일하는 방식", "verbatim": true},
+        "title": {"text": "7-2. 일하는 방식", "verbatim": true},
         "lead": {"text": "이 그림에서 볼 것은 AI가 안을 내고 구현할 때마다, 그 사이에 제가 고르고 확인하는 단계가 하나씩 끼어 있다는 점입니다.", "verbatim": true},
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-1. 일하는 방식"],
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-2. 일하는 방식"],
         "points": [
           {"label": "", "text": "개발 과정은 게임 저장소의 작업 노트 폴더(`DevLog/`)에 남겼습니다.", "verbatim": true},
           {"label": "", "text": "그래서 AI가 낸 안은 모두 제가 고른 뒤에 구현으로 넘어갔습니다.", "verbatim": true},
@@ -562,13 +591,46 @@
         "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
+        "key": "ai-tools",
+        "chapter": "ai",
+        "layout": "screens",
+        "tab": "결과",
+        "title": {"text": "7-3. AI와 만든 작업 도구", "verbatim": true},
+        "lead": {"text": "반복되는 일과 고르는 일은 Claude Code에게 작은 HTML 도구를 만들게 해서 줄였습니다.", "verbatim": true},
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-3. AI와 만든 작업 도구"],
+        "points": [],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/tool-card-prompts.png",
+            "w": 1400,
+            "h": 1000,
+            "caption": {"text": "슬라임 카드 뽑기 목록 — 묶음마다 세션 설정 · 기준 그림 · 카드 주문을 차례로 복사합니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/tool-ui-redesign.png",
+            "w": 1560,
+            "h": 1000,
+            "caption": {"text": "UI 개편 샘플 — 같은 두 화면을 세 가지 재질로 그려 비교합니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/tool-polish-preview.png",
+            "w": 1400,
+            "h": 1000,
+            "caption": {"text": "폴리싱 미리 보기 — 상점 버튼 안 3개를 나란히 보여 주고 추천안에 별을 답니다", "verbatim": true}
+          }
+        ]
+      },
+      {
         "key": "card-art",
         "chapter": "ai",
         "layout": "visual",
         "tab": "선택",
-        "title": {"text": "7-2. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다", "verbatim": true},
+        "title": {"text": "7-4. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다", "verbatim": true},
         "lead": {"text": "분량을 줄이는 방안을 묻자 Claude는 등급당 1장(35장)으로 줄이는 안을 추천했지만, 작업량을 비용으로만 본 안이었습니다.", "verbatim": true},
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-2. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다"],
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-4. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다"],
         "points": [
           {"label": "", "text": "카드 50장의 그림은 Gemini로 만들었습니다.", "verbatim": true},
           {
@@ -590,13 +652,13 @@
         "chapter": "ai",
         "layout": "overview",
         "tab": "",
-        "title": {"text": "7-3. 잘된 것", "verbatim": true},
+        "title": {"text": "7-5. 잘된 것", "verbatim": true},
         "lead": null,
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-3. 잘된 것"],
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-5. 잘된 것"],
         "points": [
           {
             "label": "거대 클래스를 규칙으로 막은 일",
-            "text": "\"AI는 요청 하나를 가장 작게 풀려고 열린 파일에 붙인다\"는 분석을 읽고, 7-1의 300줄 규칙을 만들었습니다(지금 398줄 + 부품 5개).",
+            "text": "\"AI는 요청 하나를 가장 작게 풀려고 열린 파일에 붙인다\"는 분석을 읽고, 7-2의 300줄 규칙을 만들었습니다(지금 398줄 + 부품 5개).",
             "verbatim": true
           },
           {"label": "사람은 쉬지만 AI는 일한다", "text": "아침까지 커밋 19개가 쌓였고, 테스트는 309개에서 323개로 늘었습니다.", "verbatim": true}
@@ -608,9 +670,9 @@
         "chapter": "ai",
         "layout": "problem",
         "tab": "문제 해결",
-        "title": {"text": "7-4. 안된 것 — AI가 낸 사고와 막은 방법", "verbatim": true},
+        "title": {"text": "7-6. 안된 것 — AI가 낸 사고와 막은 방법", "verbatim": true},
         "lead": null,
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-4. 안된 것 — AI가 낸 사고와 막은 방법"],
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-6. 안된 것 — AI가 낸 사고와 막은 방법"],
         "points": [],
         "visuals": [{"kind": "table", "n": 1, "fp": "사고|발견|막은 방법"}]
       },
@@ -619,9 +681,9 @@
         "chapter": "ai",
         "layout": "full",
         "tab": "",
-        "title": {"text": "7-5. AI 결과를 확인한 방법", "verbatim": true},
+        "title": {"text": "7-7. AI 결과를 확인한 방법", "verbatim": true},
         "lead": null,
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-5. AI 결과를 확인한 방법"],
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-7. AI 결과를 확인한 방법"],
         "points": [],
         "visuals": [{"kind": "table", "n": 1, "fp": "단계|확인한 방법"}]
       }
@@ -760,7 +822,7 @@
         "tab": "선택",
         "title": {"text": "시연 뒤 뒤집은 처음 규칙 (11-17)", "verbatim": true},
         "lead": {"text": "설계 단계에서는 \"유니크 이상은 건너뛰기 불가, AI가 제안했던 갓팩(전부 유니크 이상)은 전용 동시 공개\" 규칙을 정했습니다.", "verbatim": true},
-        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다"],
+        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다", "① 시연 뒤 뒤집은 처음 규칙 (11-17)"],
         "points": [
           {"label": "이유", "text": "갓팩은 한 장 한 장 까면서 희귀 카드를 직접 확인하는 재미가 더 컸습니다.", "verbatim": true},
           {
@@ -779,7 +841,7 @@
         "tab": "선택",
         "title": {"text": "상자 10팩 장면에만 미리 보여 주기 (11-19)", "verbatim": true},
         "lead": {"text": "상자 개봉은 시연 영상에서 가장 길게 쓰는 장면인데, 팩 10개가 똑같이 뜯겨 밋밋했습니다.", "verbatim": true},
-        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다"],
+        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다", "② 상자 10팩 장면에만 미리 보여 주기 (11-19)"],
         "points": [
           {"label": "이유", "text": "10팩 상자는 빠른 결과를 원하는 사람이 고르는 선택지입니다.", "verbatim": true},
           {
@@ -788,7 +850,7 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "table", "n": 2, "fp": "|[A] 그대로 (결과 숨김)|[B] 좋은 팩만 빛남 ✓|[C] 넘길 때만 연출"}]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 그대로 (결과 숨김)|[B] 좋은 팩만 빛남 ✓|[C] 넘길 때만 연출"}]
       },
       {
         "key": "money-problem",
@@ -908,7 +970,7 @@
         "tab": "선택",
         "title": {"text": "상황들을 겹치지 않게 조율 할 것인가? (AI 추천을 일부 거절)", "verbatim": true},
         "lead": {"text": "[A]만 골랐습니다.", "verbatim": true},
-        "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "6-3. 고민과 선택 — 알바를 얼마나 바쁘게 할까"],
+        "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "6-3. 고민과 선택 — 알바를 얼마나 바쁘게 할까", "① 상황들을 겹치지 않게 조율 할 것인가? (AI 추천을 일부 거절)"],
         "points": [
           {
             "label": "이유",
@@ -924,13 +986,24 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 손님 웨이브 ✓|[B] 일어나는 상황값을 설정 (뺌)"}]
       },
       {
+        "key": "ai-map",
+        "chapter": "ai",
+        "layout": "full",
+        "tab": "",
+        "title": {"text": "7-1. 장마다 AI가 한 것과 제가 한 것", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-1. 장마다 AI가 한 것과 제가 한 것"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "장|AI가 한 것|제가 한 것"}]
+      },
+      {
         "key": "workflow",
         "chapter": "ai",
         "layout": "visual",
         "tab": "흐름",
-        "title": {"text": "7-1. 일하는 방식", "verbatim": true},
+        "title": {"text": "7-2. 일하는 방식", "verbatim": true},
         "lead": {"text": "이 그림에서 볼 것은 AI가 안을 내고 구현할 때마다, 그 사이에 제가 고르고 확인하는 단계가 하나씩 끼어 있다는 점입니다.", "verbatim": true},
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-1. 일하는 방식"],
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-2. 일하는 방식"],
         "points": [
           {"label": "", "text": "개발 과정은 게임 저장소의 작업 노트 폴더(`DevLog/`)에 남겼습니다.", "verbatim": true},
           {"label": "", "text": "그래서 AI가 낸 안은 모두 제가 고른 뒤에 구현으로 넘어갔습니다.", "verbatim": true},
@@ -939,17 +1012,50 @@
         "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
+        "key": "ai-tools",
+        "chapter": "ai",
+        "layout": "screens",
+        "tab": "결과",
+        "title": {"text": "7-3. AI와 만든 작업 도구", "verbatim": true},
+        "lead": {"text": "반복되는 일과 고르는 일은 Claude Code에게 작은 HTML 도구를 만들게 해서 줄였습니다.", "verbatim": true},
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-3. AI와 만든 작업 도구"],
+        "points": [],
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/tool-card-prompts.png",
+            "w": 1400,
+            "h": 1000,
+            "caption": {"text": "슬라임 카드 뽑기 목록 — 묶음마다 세션 설정 · 기준 그림 · 카드 주문을 차례로 복사합니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/tool-ui-redesign.png",
+            "w": 1560,
+            "h": 1000,
+            "caption": {"text": "UI 개편 샘플 — 같은 두 화면을 세 가지 재질로 그려 비교합니다", "verbatim": true}
+          },
+          {
+            "kind": "image",
+            "src": "images/tool-polish-preview.png",
+            "w": 1400,
+            "h": 1000,
+            "caption": {"text": "폴리싱 미리 보기 — 상점 버튼 안 3개를 나란히 보여 주고 추천안에 별을 답니다", "verbatim": true}
+          }
+        ]
+      },
+      {
         "key": "wins",
         "chapter": "ai",
         "layout": "overview",
         "tab": "",
-        "title": {"text": "7-3. 잘된 것", "verbatim": true},
+        "title": {"text": "7-5. 잘된 것", "verbatim": true},
         "lead": null,
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-3. 잘된 것"],
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-5. 잘된 것"],
         "points": [
           {
             "label": "거대 클래스를 규칙으로 막은 일",
-            "text": "\"AI는 요청 하나를 가장 작게 풀려고 열린 파일에 붙인다\"는 분석을 읽고, 7-1의 300줄 규칙을 만들었습니다(지금 398줄 + 부품 5개).",
+            "text": "\"AI는 요청 하나를 가장 작게 풀려고 열린 파일에 붙인다\"는 분석을 읽고, 7-2의 300줄 규칙을 만들었습니다(지금 398줄 + 부품 5개).",
             "verbatim": true
           },
           {"label": "사람은 쉬지만 AI는 일한다", "text": "아침까지 커밋 19개가 쌓였고, 테스트는 309개에서 323개로 늘었습니다.", "verbatim": true}
@@ -961,9 +1067,9 @@
         "chapter": "ai",
         "layout": "problem",
         "tab": "문제 해결",
-        "title": {"text": "7-4. 안된 것 — AI가 낸 사고와 막은 방법", "verbatim": true},
+        "title": {"text": "7-6. 안된 것 — AI가 낸 사고와 막은 방법", "verbatim": true},
         "lead": null,
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-4. 안된 것 — AI가 낸 사고와 막은 방법"],
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-6. 안된 것 — AI가 낸 사고와 막은 방법"],
         "points": [],
         "visuals": [{"kind": "table", "n": 1, "fp": "사고|발견|막은 방법"}]
       },
@@ -972,13 +1078,13 @@
         "chapter": "ai",
         "layout": "full",
         "tab": "",
-        "title": {"text": "7-5. AI 결과를 확인한 방법", "verbatim": true},
+        "title": {"text": "7-7. AI 결과를 확인한 방법", "verbatim": true},
         "lead": null,
-        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-5. AI 결과를 확인한 방법"],
+        "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-7. AI 결과를 확인한 방법"],
         "points": [],
         "visuals": [{"kind": "table", "n": 1, "fp": "단계|확인한 방법"}]
       }
     ],
-    "applied": "eef604bc391aad8e"
+    "applied": "05835e6c24b4546d"
   }
 }

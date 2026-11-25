@@ -104,6 +104,32 @@
   .top-links { justify-self: end; display: flex; gap: 8px; }
   .top-links a { font-size: 13px; font-weight: 600; color: var(--muted); padding: 7px 12px; border: 1px solid var(--line); border-radius: var(--pill); }
   .top-links a:hover { color: var(--ink); border-color: var(--line2); }
+  .to-contact { font-size: 13px; font-weight: 700; color: var(--ink); padding: 7px 12px; border: 1px solid var(--accent); border-radius: var(--pill); background: transparent; cursor: pointer; white-space: nowrap; }
+  .to-contact:hover, .to-contact.on { background: var(--accent); color: #fff; }
+  .btn-ghost { background: transparent; border: 1px solid transparent; color: var(--muted); }
+  .btn-ghost:hover { color: var(--ink); border-color: var(--line); }
+  /* 연락처 장 */
+  .back-top { margin-top: 22px; background: none; border: 0; padding: 0; color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .04em; cursor: pointer; }
+  .back-top:hover { color: var(--accent); }
+  .credits { border: 1px solid var(--line); border-radius: 14px; padding: 24px 26px; background: rgba(255,255,255,.02); }
+  .cr-h { font-family: var(--en); font-size: 11px; font-weight: 800; letter-spacing: .16em; color: var(--accent); text-transform: uppercase; }
+  .cr-name { margin-top: 6px; font-size: 22px; font-weight: 800; color: var(--ink); }
+  .cr-name span { margin-left: 10px; font-family: var(--en); font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: .04em; }
+  .cr-list { list-style: none; margin: 8px 0 0; padding: 0; }
+  .cr-list li { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 14px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .cr-list li:last-child { border-bottom: 0; }
+  .cr-title { background: none; border: 0; padding: 0; cursor: pointer; text-align: left; color: var(--ink); font-weight: 700; font-size: 15px; }
+  .cr-title:hover { color: var(--accent); }
+  .cr-title .no { display: inline-block; min-width: 30px; font-family: var(--en); font-size: 12px; color: var(--accent); }
+  .cr-title em { font-style: normal; margin-left: 8px; font-size: 12px; font-weight: 500; color: var(--muted); }
+  .cr-links { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12.5px; }
+  .cr-links a { color: var(--muted); font-weight: 600; }
+  .cr-links a:hover { color: var(--accent); }
+  .cr-mail { margin-top: 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+  .cr-mail a { font-family: var(--en); font-size: 22px; font-weight: 800; color: var(--ink); word-break: break-all; }
+  .cr-mail a:hover { color: var(--accent); }
+  .copy-mini { font-size: 12px; font-weight: 700; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: var(--pill); padding: 4px 10px; cursor: pointer; }
+  .copy-mini:hover { color: var(--ink); border-color: var(--line2); }
   /* 프로젝트 장에서만 보이는 프로젝트 탭 */
   .tabs { display: flex; justify-content: center; gap: 6px; margin-top: 8px; flex-wrap: wrap; transition: opacity .25s, transform .25s; }
   .tabs.hide { opacity: 0; transform: translateY(-6px); pointer-events: none; }
@@ -111,11 +137,12 @@
   .tab:hover { background: rgb(255 255 255 / .06); }
   .tab.on { background: var(--accent); color: #fff; }
   .tab .no { font-family: var(--en); margin-right: 6px; opacity: .7; }
-  @media (max-width: 1099px) { .top-links { display: none; } .top-row { grid-template-columns: auto 1fr; } .seg { justify-self: end; } .seg button { padding: 8px 11px; font-size: 13px; } }
+  @media (max-width: 1099px) { .top-links .gh { display: none; } .to-contact { padding: 7px 10px !important; } .top-row { grid-template-columns: auto 1fr auto; } .seg { justify-self: end; } .seg button { padding: 8px 11px; font-size: 13px; } }
   @media (max-width: 759px) { .top { padding: 10px 12px 8px; } .logo, .tabs { display: none; } .top-row { grid-template-columns: 1fr; } .seg { justify-self: center; }
     .seg button { padding: 8px 9px; font-size: 13px; } }
-  .lbl-short { display: none; }
+  .lbl-short, .lbl-m, .seg .m-only { display: none; }
   @media (max-width: 1099px) { .lbl-full { display: none; } .lbl-short { display: inline; } }
+  @media (max-width: 759px) { .lbl-short { display: none; } .lbl-m { display: inline; } .seg .m-only { display: inline-block; } .top-links { display: none; } }
   @media (max-width: 759px) { .seg button { padding: 8px 6px; font-size: 12px; } }
 
   /* 이력 · 기술 */
@@ -183,7 +210,13 @@
   /* 표지 숫자 띠 — data에서 센 값만 */
   .stats { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 10px 26px; margin-top: 18px; }
   @media (max-width: 1279px) { .stats { grid-template-columns: repeat(2, auto); } }   /* 좁으면 2칸 × 2줄로 고정(한 칸만 떨어지지 않게) */
-  .lead-s { color: var(--ink); font-weight: 700; }   /* 표지 자기소개: 단락 첫 문장(요점)을 굵게 — 글은 profile.md 그대로 */
+  .leads { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .leads li { position: relative; padding-left: 16px; font-size: 15.5px; line-height: 1.55; }
+  .leads li::before { content: ''; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .leads b { color: var(--ink); font-weight: 700; }
+  .lead-go { margin-left: 10px; font-size: 13px; font-weight: 700; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; white-space: nowrap; }
+  .lead-go:hover { text-decoration: underline; }
+
   .stat b { display: block; font-family: var(--en); font-weight: 800; font-size: 22px; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }
   .stat span { display: block; margin-top: 3px; font-size: 12px; color: var(--muted); }
   /* 기능 카드 · AI 표의 장면 바로가기 */
@@ -246,8 +279,11 @@ const img = (id, src) => `../src/${id}/${src}`;
 function Wrap({ children }) { return <div className="slide-inner"><div className="wrap">{children}</div></div>; }
 
 // 표지 + 자기소개 한 장: 왼쪽은 타이틀 그림, 오른쪽 어두운 판에 이름·한 줄 소개·자기소개·연락처
-function CoverSlide({ profile, coverImg, stats }) {
+function CoverSlide({ profile, coverImg, stats, reel, goProject }) {
   const paras = String(profile.intro || '').split('\n').filter(Boolean);
+  // 자기소개 단락마다 굵은 첫 문장만(profile.md 원문 그대로) — 긴 이야기는 프로젝트 · AI · 자기소개서 장에서 읽음(11-26 A안)
+  const leads = paras.map((p) => { const m = p.match(/^(.+?다\.)(\s|$)/); return m ? m[1] : p; });
+  const LEAD_GO = [null, { to: '#projects', label: '프로젝트에서 보기' }, { to: '#ai', label: 'AI와 일하는 방식' }];
   return (
     <section className="slide hero" aria-label={T('page.intro')}>
       {coverImg && <div className="hero-art"><img className="hero-img" src={coverImg} alt="" /></div>}
@@ -263,17 +299,20 @@ function CoverSlide({ profile, coverImg, stats }) {
               {stats.map((s) => <div key={s.label} className="stat"><b>{s.value}</b><span>{s.label}</span></div>)}
             </div>
           )}
-          {paras.length > 0 && (
+          {leads.length > 0 && (
             <div className="mt-7 pt-6" style={{ borderTop: '1px solid var(--line)' }}>
               <div className="eyebrow mb-3">{T('en.about')}</div>
-              <div className="space-y-3">
-                {paras.map((p, i) => { const m = p.match(/^(.+?다\.)\s+(.+)$/); return <p key={i} className="text-[15px] leading-relaxed">{m ? <><b className="lead-s">{m[1]}</b> {m[2]}</> : p}</p>; })}
-              </div>
+              <ul className="leads">
+                {leads.map((t, i) => (
+                  <li key={i}><b>{t}</b>{LEAD_GO[i] && <button type="button" className="lead-go" onClick={() => goProject(LEAD_GO[i].to)}>{LEAD_GO[i].label} →</button>}</li>
+                ))}
+              </ul>
             </div>
           )}
           <div className="mt-7 flex flex-wrap gap-3">
-            {profile.email && <a className="btn btn-fill" href={`mailto:${profile.email}`}>✉ {profile.email}</a>}
-            {profile.github && <a className="btn btn-line" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
+            <button type="button" className="btn btn-fill" onClick={() => goProject('#projects')}>프로젝트 보기 →</button>
+            {reel && <a className="btn btn-line" href={reel.links.video} target="_blank" rel="noopener">▶ 대표작 시연 영상 ↗</a>}
+            <button type="button" className="btn btn-ghost" onClick={() => goProject('#contact')}>✉ {T('page.nav-contact')} →</button>
           </div>
         </div>
       </div>
@@ -687,19 +726,65 @@ function AiWaySlide({ ai, projects, goProject }) {
   );
 }
 
-function ContactSlide({ profile }) {
+function CopyMail({ email, big }) {
+  const [done, setDone] = useState(false);
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(email); }
+    catch (e) { const t = document.createElement('textarea'); t.value = email; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (_) {} t.remove(); }
+    setDone(true); setTimeout(() => setDone(false), 1800);
+  };
+  return <button type="button" className={big ? 'btn btn-line' : 'copy-mini'} onClick={copy} aria-live="polite">{done ? '✓ 복사했습니다' : (big ? '⧉ 주소 복사' : '⧉ 복사')}</button>;
+}
+
+// 연락처(11-26 레퍼런스 현지화): 끝까지 본 사람이 할 행동(메일 · 주소 복사 · 처음으로)과, 모든 게임의 링크를 한 곳에
+function ContactSlide({ profile, projects, goProject }) {
+  const pad = (v) => String(v).padStart(2, '0');
+  const mail = profile.email ? `mailto:${profile.email}?subject=${encodeURIComponent(`[포트폴리오] ${profile.name} 님께`)}` : '';
   return (
-    <section className="slide" aria-label={T('page.nav-contact')}>
+    <section className="slide contact" aria-label={T('page.nav-contact')}>
       <Wrap>
-        <div className="max-w-3xl">
-          <div className="eyebrow">{T('en.contact')}</div>
-          <h2 className="h-big text-4xl md:text-6xl mt-4">{profile.name}</h2>
-          {profile.nameEn && <div className="mt-2 text-lg font-bold accent" style={{ fontFamily: 'var(--en)' }}>{profile.nameEn}</div>}
-          {profile.headline && <p className="mt-6 text-lg md:text-xl" style={{ color: 'var(--ink)' }}>{profile.headline}</p>}
-          <div className="mt-8 flex flex-wrap gap-3">
-            {profile.email && <a className="btn btn-fill" href={`mailto:${profile.email}`}>✉ {profile.email}</a>}
-            {profile.github && <a className="btn btn-line" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
-            {(profile.links || []).filter((x) => x && x.url).map((x) => <a key={x.url} className="btn btn-line" href={x.url} target="_blank" rel="noopener">{x.label} ↗</a>)}
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="lg:col-span-6">
+            <div className="eyebrow">CREDITS · {T('page.nav-contact')}</div>
+            {/* ✏️ 11-26 UI 문구(사실 아님): 끝 장 인사 */}
+            <h2 className="h-big text-4xl md:text-5xl xl:text-6xl mt-4 leading-tight">끝까지 봐 주셔서<br />감사합니다.</h2>
+            {profile.headline && <p className="mt-6 text-lg md:text-xl font-bold" style={{ color: 'var(--ink)' }}>{profile.headline}</p>}
+            <div className="mt-8 flex flex-wrap gap-3">
+              {mail && <a className="btn btn-fill" href={mail}>✉ 메일 보내기</a>}
+              {profile.email && <CopyMail email={profile.email} big />}
+              {profile.github && <a className="btn btn-line" href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
+              {(profile.links || []).filter((x) => x && x.url).map((x) => <a key={x.url} className="btn btn-line" href={x.url} target="_blank" rel="noopener">{x.label} ↗</a>)}
+            </div>
+            <button type="button" className="back-top" onClick={() => goProject('#cover')}>↑ 처음으로</button>
+          </div>
+          <div className="lg:col-span-6">
+            <div className="credits">
+              <div className="cr-h">만든 사람</div>
+              <div className="cr-name">{profile.name}{profile.nameEn && <span>{profile.nameEn}</span>}</div>
+              <div className="cr-h mt-6">게임 · 바로 가기</div>
+              <ol className="cr-list">
+                {projects.map((p, i) => {
+                  const L = p.links || {};
+                  return (
+                    <li key={p.id}>
+                      <button type="button" className="cr-title" onClick={() => goProject(p.id)}><span className="no">{isAnalysis(p) ? '분석' : pad(i + 1)}</span>{p.title.replace(/\s*\(.*\)$/, '').replace(/\s+—.*$/, '')}<em>{teamLabel(p)}</em></button>
+                      <span className="cr-links">
+                        {L.video && <a href={L.video} target="_blank" rel="noopener">▶ 영상</a>}
+                        <a href={deckHref(p)} {...(ORIGINAL_DECK[p.id] ? { target: '_blank', rel: 'noopener' } : {})}>{T('name.deck')}</a>
+                        <a href={`../doc.html?p=${encodeURIComponent(p.id)}`}>{docLabel(p, true)}</a>
+                        {L.github && <a href={L.github} target="_blank" rel="noopener">GitHub</a>}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ol>
+              {profile.email && (
+                <>
+                  <div className="cr-h mt-6">{T('page.nav-contact')}</div>
+                  <div className="cr-mail"><a href={mail}>{profile.email}</a><CopyMail email={profile.email} /></div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </Wrap>
@@ -776,9 +861,9 @@ function App() {
       .forEach((x, i) => history.push({ kindStart: i === 0 ? '프로젝트' : '', when: x.per.text, title: x.p.title, sub: teamLabel(x.p), project: x.p.id }));
     analyses.map((p) => ({ p, per: periodOf(p) })).filter((x) => x.per).sort((a, b) => b.per.start.localeCompare(a.per.start))
       .forEach((x, i) => history.push({ kindStart: i === 0 ? '게임 분석' : '', when: x.per.text, title: x.p.title, sub: '개인 분석', project: x.p.id }));
-    // 장 순서(11-26 건우 님): 소개 → 자기소개서 → 프로젝트 → AI와 일하는 방식 → 게임 분석 → 이력 · 기술
-    slides.push({ key: 'cover', group: 'intro', label: T('page.intro'), el: () => <CoverSlide profile={pf.profile} coverImg={coverImg} stats={stats} /> });
-    if (L) slides.push({ key: 'letter', group: 'letter', label: T('name.letter'), el: () => <LetterSlide letter={L} quote={pf.profile.headline} name={pf.profile.name} /> });
+    // 장 순서(11-26 건우 님 A안 · 증거 먼저): 소개 → 프로젝트 → AI와 일하는 방식 → 게임 분석 → 이력 · 기술 → 자기소개서
+    const reel = projects.find((p) => (p.links || {}).video);   // 표지 「대표작 시연 영상」 = 영상이 있는 첫 프로젝트
+    slides.push({ key: 'cover', group: 'intro', label: T('page.intro'), el: (goProject) => <CoverSlide profile={pf.profile} coverImg={coverImg} stats={stats} reel={reel} goProject={goProject} /> });
     slides.push({ key: 'projects', group: 'projects', label: T('page.nav-projects'), el: (goProject) => <ProjectsGridSlide projects={projects} goProject={goProject} /> });
     projects.forEach((p, i) => {
       slides.push({ key: `p-${p.id}`, group: 'projects', project: p.id, label: p.title, el: () => <ProjectSlide p={p} no={i + 1} total={projects.length} /> });
@@ -790,18 +875,20 @@ function App() {
       if ((p.highlights || []).length) slides.push({ key: `p-${p.id}-core`, group: 'analysis', of: p.id, label: `${p.title} · 핵심 분석`, el: () => <FeaturesSlide p={p} no={i + 1} /> });
     });
     slides.push({ key: 'history', group: 'stack', label: `이력 · ${T('page.stack')}`, el: (goProject) => <HistorySkillsSlide history={history} skills={pf.skills || []} titleOf={titleOf} goProject={goProject} /> });
-    slides.push({ key: 'contact', group: 'contact', label: T('page.nav-contact'), el: () => <ContactSlide profile={pf.profile} /> });
+    if (L) slides.push({ key: 'letter', group: 'letter', label: T('name.letter'), el: () => <LetterSlide letter={L} quote={pf.profile.headline} name={pf.profile.name} /> });
+    slides.push({ key: 'contact', group: 'contact', label: T('page.nav-contact'), el: (goProject) => <ContactSlide profile={pf.profile} projects={[...projects, ...analyses]} goProject={goProject} /> });
   }
   const n = slides.length;
 
   // 위 칸 버튼의 주제 — 누르면 그 주제의 첫 장으로
   const TOPICS = [
     { group: 'intro', label: T('page.nav-intro') },
-    { group: 'letter', label: T('page.nav-letter') },
     { group: 'projects', label: T('page.nav-projects') },
     { group: 'ai', label: 'AI와 일하는 방식', short: 'AI 방식' },
-    { group: 'analysis', label: '게임 분석' },
-    { group: 'stack', label: '이력 · 기술' },
+    { group: 'analysis', label: '게임 분석', mshort: '분석' },
+    { group: 'stack', label: '이력 · 기술', mshort: '이력' },
+    { group: 'letter', label: T('page.nav-letter') },
+    { group: 'contact', label: T('page.nav-contact'), mobile: true },   // 폰 폭에서만: 위 띠 오른쪽 연락처 버튼 대신 메뉴 끝 칸
   ].filter((t) => slides.some((s) => s.group === t.group));
   const cur = slides[idx] || {};
   const curProject = cur.project || cur.of || null;
@@ -823,7 +910,7 @@ function App() {
   }, [idx, n]);
 
   const go = useCallback((i) => setIdx((cur) => Math.max(0, Math.min(n - 1, typeof i === 'function' ? i(cur) : i))), [n]);
-  const goProject = useCallback((id) => { const i = slides.findIndex((s) => s.project === id); if (i >= 0) go(i); }, [n]);
+  const goProject = useCallback((id) => { const i = String(id).startsWith('#') ? slides.findIndex((s) => s.key === id.slice(1)) : slides.findIndex((s) => s.project === id); if (i >= 0) go(i); }, [n]);
 
   // 주소(#key)와 맞추기 — 새로고침·공유해도 같은 장
   useEffect(() => {
@@ -881,12 +968,12 @@ function App() {
           <nav className="seg" ref={segRef} aria-label="주제 바로 가기">
             <span className="seg-thumb" style={{ width: thumb.w, transform: `translateX(${thumb.x}px)`, opacity: thumb.on ? 1 : 0 }} />
             {TOPICS.map((t) => (
-              <button key={t.group} className={cur.group === t.group ? 'on' : ''} onClick={() => go(firstOf(t.group))} aria-current={cur.group === t.group ? 'true' : undefined}>{t.short ? <><span className="lbl-full">{t.label}</span><span className="lbl-short">{t.short}</span></> : t.label}</button>
+              <button key={t.group} className={`${cur.group === t.group ? 'on' : ''} ${t.mobile ? 'm-only' : ''}`} onClick={() => go(firstOf(t.group))} aria-current={cur.group === t.group ? 'true' : undefined}><span className="lbl-full">{t.label}</span><span className="lbl-short">{t.short || t.label}</span><span className="lbl-m">{t.mshort || t.short || t.label}</span></button>
             ))}
           </nav>
           <div className="top-links">
-            {state.pf.profile.github && <a href={state.pf.profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
-            {state.pf.profile.email && <a href={`mailto:${state.pf.profile.email}`}>Email</a>}
+            {state.pf.profile.github && <a className="gh" href={state.pf.profile.github} target="_blank" rel="noopener">GitHub ↗</a>}
+            <button type="button" className={`to-contact ${cur.group === 'contact' ? 'on' : ''}`} onClick={() => go(firstOf('contact'))}>✉ {T('page.nav-contact')}</button>
           </div>
         </div>
         <div className={`tabs ${cur.group === 'projects' ? '' : 'hide'}`} aria-label={T('page.nav-projects')}>

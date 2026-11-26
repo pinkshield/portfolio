@@ -92,22 +92,22 @@
   ],
   "troubleshooting": [
     {
-      "title": "점프 쿠션으로 튀어 오른 공이 커튼에 낌",
+      "title": "점프 쿠션으로 튀어 오른 공이 커튼에 끼는 문제",
       "problem": "점프 쿠션으로 튀어 오른 공이 커튼에 끼었습니다.",
       "cause": "커튼봉 모양에 공이 걸렸습니다.",
       "solution": "끼이는 커튼봉 메쉬 콜라이더 겉을 박스 콜라이더를 더해 끼이지 않게 했습니다.",
       "result": "",
       "lesson": "",
-      "section": "9-1. 결과"
+      "section": "9-2. 문제 해결"
     },
     {
-      "title": "창문을 뚫고 집 밖으로 나갈 수 있음",
-      "problem": "창문을 뚫고 집 밖으로 나갈 수 있었습니다 (클리어는 안 됨).",
+      "title": "창문을 뚫고 집 밖으로 나가는 문제",
+      "problem": "창문을 뚫고 집 밖으로 나갈 수 있었습니다 (클리어는 되지 않았습니다).",
       "cause": "창문에는 유리가 없어 공을 막을 콜라이더가 없었습니다. 집 주변 경계는 리셋 지점이라 클리어로 이어지지는 않았습니다.",
       "solution": "커튼 오브젝트를 더해, 그 콜라이더로 자연스럽게 탈출 경로를 막았습니다.",
       "result": "",
       "lesson": "",
-      "section": "9-1. 결과"
+      "section": "9-2. 문제 해결"
     }
   ],
   "screenshots": [
@@ -150,8 +150,8 @@
   ],
   "retro": {
     "achieved": [
-      "탈출한 순간의 안도감은 전해졌습니다. 처음 도전한 플레이어는 14분 동안 고생하다가 우연히 클리어해, \"살짝 허무하면서도 해냈다\"는 안도감을 느꼈다고 했습니다.",
-      "길을 아는 내가 어려운 길로 가도 3분 12초가 걸렸고, 처음 도전한 사람은 14분이 걸려 과제 조건(총 플레이 시간 3분 이상)을 넘었습니다.",
+      "탈출한 순간의 안도감은 전해졌습니다. 처음 도전한 플레이어는 14분 11초 동안 97번 떨어진 끝에, 우연히 튕겨 나간 방향으로 클리어했습니다. 그 플레이어는 \"살짝 허무하면서도 해냈다\"는 안도감을 느꼈다고 했습니다.",
+      "길을 아는 제가 어려운 길로 가도 3분 12초가 걸렸고, 처음 도전한 사람은 14분이 걸려 과제 조건(총 플레이 시간 3분 이상)을 넘었습니다.",
       "친구 플레이 테스트 피드백으로 커튼봉에 공이 끼는 문제와 창문으로 빠져나가는 문제를 고쳤습니다."
     ],
     "regrets": [
@@ -162,7 +162,7 @@
       "바람 부는 소리와 시각 효과로 가야 할 방향을 알려 주고, 거실에 들어왔을 때 목표 지점 두 곳을 카메라로 잠시 보여 줍니다.",
       "처음 보는 장애물이 나왔을 때 짧은 설명 UI를 보여 줍니다."
     ],
-    "section": "4. 결과 및 배운 점"
+    "section": "9. 결과와 개선 계획"
   },
   "deck": {
     "chapters": [
@@ -384,16 +384,13 @@
       {
         "key": "cushion-choice",
         "chapter": "traps",
-        "layout": "overview",
+        "layout": "full",
         "tab": "선택",
         "title": {"text": "4-2. 복불복 쿠션을 남길까", "verbatim": true},
         "lead": {"text": "과제 작업지시서에는 \"운만으로 결정되는 구간은 난이도가 아니라 벌\"이라는 기준이 있습니다.", "verbatim": true},
         "sectionPath": ["4. 함정 — 튕기고, 밀치고, 가속한다", "4-2. 복불복 쿠션을 남길까"],
-        "points": [
-          {"label": "이유", "text": "떨어져도 바로 그 전 위치에서 다시 칠 수 있어 벌이 작다고 판단했습니다.", "verbatim": true},
-          {"label": "이유", "text": "계속 도전하면서 여러 방향으로 튀다 보면 새로운 경로를 찾는 경험을 줄 수 있다고 생각했습니다.", "verbatim": true}
-        ],
-        "visuals": []
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 쿠션을 뺀다|[B] 쿠션을 남긴다 ✓"}]
       },
       {
         "key": "courses",
@@ -492,6 +489,17 @@
             "fp": "|[A] 대체 에셋 (Mobile Modern Interiors)|[B] 원래 에셋 (Low Poly Cartoon House Interiors) ✓"
           }
         ]
+      },
+      {
+        "key": "ai-map",
+        "chapter": "ai-collab",
+        "layout": "full",
+        "tab": "",
+        "title": {"text": "8-1. 장마다 AI가 한 것과 제가 한 것", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["8. AI 협업 — 함정 스크립트는 AI에게, 수치는 플레이로", "8-1. 장마다 AI가 한 것과 제가 한 것"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "장|AI가 한 것|제가 한 것"}]
       },
       {
         "key": "ai-traps",
@@ -717,16 +725,13 @@
       {
         "key": "cushion-choice",
         "chapter": "traps",
-        "layout": "overview",
+        "layout": "full",
         "tab": "선택",
         "title": {"text": "4-2. 복불복 쿠션을 남길까", "verbatim": true},
         "lead": {"text": "과제 작업지시서에는 \"운만으로 결정되는 구간은 난이도가 아니라 벌\"이라는 기준이 있습니다.", "verbatim": true},
         "sectionPath": ["4. 함정 — 튕기고, 밀치고, 가속한다", "4-2. 복불복 쿠션을 남길까"],
-        "points": [
-          {"label": "이유", "text": "떨어져도 바로 그 전 위치에서 다시 칠 수 있어 벌이 작다고 판단했습니다.", "verbatim": true},
-          {"label": "이유", "text": "계속 도전하면서 여러 방향으로 튀다 보면 새로운 경로를 찾는 경험을 줄 수 있다고 생각했습니다.", "verbatim": true}
-        ],
-        "visuals": []
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 쿠션을 뺀다|[B] 쿠션을 남긴다 ✓"}]
       },
       {
         "key": "courses",
@@ -778,6 +783,20 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 한 갈래 길|[B] 두 갈래 길 ✓"}]
       },
       {
+        "key": "route-why",
+        "chapter": "routes",
+        "layout": "overview",
+        "tab": "선택",
+        "title": {"text": "6-1. 길을 한 갈래로 할까, 두 갈래로 할까", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["6. 동선 — 두 갈래 길에서 고른다", "6-1. 길을 한 갈래로 할까, 두 갈래로 할까"],
+        "points": [
+          {"label": "감수한 단점", "text": "정보를 주지 않으면 어디로 가야 할지 방향을 잡기 어렵다는 점입니다.", "verbatim": true},
+          {"label": "예상과 실제", "text": "처음 하는 사람은 이어져 있는 쉬운 길로 갈 것이라고 예상했고, 대부분 첫 플레이는 예상대로 흘러갔습니다.", "verbatim": true}
+        ],
+        "visuals": []
+      },
+      {
         "key": "shortcut-wall",
         "chapter": "routes",
         "layout": "visual",
@@ -826,6 +845,17 @@
         ]
       },
       {
+        "key": "ai-map",
+        "chapter": "ai-collab",
+        "layout": "full",
+        "tab": "",
+        "title": {"text": "8-1. 장마다 AI가 한 것과 제가 한 것", "verbatim": true},
+        "lead": null,
+        "sectionPath": ["8. AI 협업 — 함정 스크립트는 AI에게, 수치는 플레이로", "8-1. 장마다 AI가 한 것과 제가 한 것"],
+        "points": [],
+        "visuals": [{"kind": "table", "n": 1, "fp": "장|AI가 한 것|제가 한 것"}]
+      },
+      {
         "key": "ai-traps",
         "chapter": "ai-collab",
         "layout": "full",
@@ -844,6 +874,6 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "함정|받은 코드|플레이하며 직접 고친 것"}]
       }
     ],
-    "applied": "92cff1794ea7b758"
+    "applied": "8b11004c52d6e6b6"
   }
 }

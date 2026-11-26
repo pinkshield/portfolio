@@ -10,13 +10,13 @@
 /* ── 장 표지 그림 (공통) ──
    제목은 왼쪽 위 한 줄, 그 아래 [게임 화면 | 장면 목록]을 같은 높이로 — 그림이 목록보다 아래로 내려가지 않게.
    그림을 넣을 장 표지는 아래 SEL 목록에 더하고, 그림 줄을 하나 씁니다. (PPTX로 저장에는 들어가지 않음 — CSS 배경) */
-:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-mid {
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm)) .ch-mid {
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: auto auto;
   grid-template-areas: "t t" "img list"; align-content: center; align-items: stretch; row-gap: 20px;
 }
-:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-mid > div:first-child { grid-area: t; }
-:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-list { grid-area: list; display: flex; flex-direction: column; justify-content: center; }
-:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm, #ch-result)) .ch-mid::after {
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm)) .ch-mid > div:first-child { grid-area: t; }
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm)) .ch-list { grid-area: list; display: flex; flex-direction: column; justify-content: center; }
+:is(#deck:has(a[href*="p=4-team-even"]) :is(#ch-intro, #ch-design), #deck:has(a[href*="p=1-watch-your-back"]) :is(#ch-intro, #ch-arch, #ch-core, #ch-bgm)) .ch-mid::after {
   content: ""; grid-area: img; min-height: 220px;
   border-radius: var(--radius, 6px); border: 1px solid var(--line);
   background: var(--card) left center / cover no-repeat;
@@ -67,12 +67,11 @@
 
 /* ── 뒤통수를 조심해 (1-watch-your-back) ── */
 
-/* 장 표지 5장 그림 */
+/* 장 표지 4장 그림 — 11-26 v4: 결과 장이 회고 장면으로 바뀌어 #ch-result 규칙을 뺌. #ch-bgm은 6장 「그 밖에 만든 것」(전투 BGM · 연출), 3장 전체 구조 · 2장 · 7장은 그림 없는 기본 표지 */
 #deck:has(a[href*="p=1-watch-your-back"]) #ch-intro .ch-mid::after { background-image: url("../src/1-watch-your-back/images/GameMenu.png"); }
 #deck:has(a[href*="p=1-watch-your-back"]) #ch-arch .ch-mid::after { background-image: url("../src/1-watch-your-back/images/빨간색(시야박스)-노란색(허트박스)-초록색(히트박스).png"); background-position: center; }
 #deck:has(a[href*="p=1-watch-your-back"]) #ch-core .ch-mid::after { background-image: url("../src/1-watch-your-back/images/플레이사진.png"); background-position: center; }
 #deck:has(a[href*="p=1-watch-your-back"]) #ch-bgm .ch-mid::after { background-image: url("../src/1-watch-your-back/images/cutscene-slap-back.png"); background-position: center; }
-#deck:has(a[href*="p=1-watch-your-back"]) #ch-result .ch-mid::after { background-image: url("../src/1-watch-your-back/images/GameClear.png"); background-position: center; }
 
 /* 장 표지에 그림을 넣으면 목록 자리가 줄어서, 장면마다 붙는 도입 문장은 빼고 제목만 보입니다 */
 #deck:has(a[href*="p=1-watch-your-back"]) .t-CH .ch-list .ld { display: none; }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25",
+  "generatedAt": "2026-11-26",
   "profile": {
     "name": "윤 건우",
     "nameEn": "Geonwoo Yoon",
@@ -72,7 +72,7 @@
       "name": "Unity",
       "evidence": [
         {
-          "text": "적 상태 행동을 코루틴으로 만들고, BoxCast로 몸 크기만큼 지나갈 길을 찾는 2D 잠입 액션을 혼자 만들었습니다",
+          "text": "적 상태 행동을 코루틴으로 만들고, BoxCast로 몸 크기만큼 지나갈 길을 찾는 2D 잠입 액션을 만들었습니다",
           "project": "1-watch-your-back"
         },
         {

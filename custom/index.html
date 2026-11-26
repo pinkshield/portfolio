@@ -31,7 +31,7 @@
     --pill: var(--t-pill, 4px);
     --en: var(--t-display, 'Montserrat'), 'Montserrat', 'Pretendard', sans-serif;
   }
-  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--body); overflow: hidden; overflow: clip; }
+  html, body { height: 100%; height: 100dvh; margin: 0; background: var(--bg); color: var(--body); overflow: hidden; overflow: clip; }
   main { overflow: clip; }   /* 포커스·스크롤 이동이 가로 레일을 밀지 못하게(장 이동은 transform만) */
   body { font-family: 'Pretendard', system-ui, sans-serif; -webkit-font-smoothing: antialiased; word-break: keep-all; }
   #root { height: 100%; }
@@ -39,9 +39,12 @@
   /* 슬라이드 레일 — 가로로 한 줄, transform으로 이동 (마우스 휠로 넘어가지 않음) */
   .rail { display: flex; height: 100%; transition: transform .55s cubic-bezier(.7,0,.2,1); will-change: transform; }
   .slide { flex: 0 0 100vw; width: 100vw; height: 100%; position: relative; overflow: hidden; }
-  .slide-inner { height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 108px 7vw 100px; box-sizing: border-box; }
+  /* 위·아래 여백은 위 메뉴(--top-h)·아래 쪽수 띠(--bar-h)의 실제 높이로 — 전에는 108·100px로 고정이라 프로젝트 탭이 뜨면(메뉴 119px) 글이 메뉴 밑에 깔렸음(11-27) */
+  .slide-inner { height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: calc(var(--top-h, 108px) + 10px) 7vw calc(var(--bar-h, 64px) + 14px); box-sizing: border-box; }
+  /* 장 맞춤: 글이 장 높이를 넘으면 그 장의 내용만 줄임(브라우저 85~90% 보기와 같은 효과, 0.78까지). 값은 App의 fitSlides가 넣음 */
+  .slide-inner > .wrap { zoom: var(--fit, 1); }
   .slide-inner > .wrap { max-width: 1240px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; justify-content: center; }
-  @media (max-width: 759px) { .slide-inner { padding: 70px 16px 124px; } }
+  @media (max-width: 759px) { .slide-inner { padding: calc(var(--top-h, 60px) + 10px) 16px calc(var(--bar-h, 64px) + 60px); } }
 
   .eyebrow { font-family: var(--en); font-weight: 800; letter-spacing: .18em; font-size: 12px; color: var(--accent); text-transform: uppercase; }
   .h-big { color: var(--ink); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
@@ -172,7 +175,7 @@
   .copy-mini:hover { color: var(--ink); border-color: var(--line2); }
   /* 프로젝트 장에서만 보이는 프로젝트 탭 */
   .tabs { display: flex; justify-content: center; gap: 6px; margin-top: 8px; flex-wrap: wrap; transition: opacity .25s, transform .25s; }
-  .tabs.hide { opacity: 0; transform: translateY(-6px); pointer-events: none; }
+  .tabs.hide { opacity: 0; transform: translateY(-6px); pointer-events: none; position: absolute; left: 32px; right: 32px; }   /* 숨길 때는 자리도 비움 — 프로젝트 밖 장에서 메뉴 띠가 31px 덜 내려옴(11-27) */
   .tab { font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 3px; color: var(--ink); transition: background .2s; white-space: nowrap; }
   .tab:hover { background: rgb(255 255 255 / .06); }
   .tab.on { background: var(--accent); color: #fff; }
@@ -233,7 +236,15 @@
   .page mark { background: linear-gradient(transparent 58%, rgb(236 28 35 / .38) 58%); color: var(--ink); font-weight: 700; padding: 0 1px; }
   .fade-in { animation: fadeIn .35s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  .letter-grid { height: calc(100vh - 188px); min-height: 520px; }
+  .letter-grid { height: calc(100dvh - var(--top-h, 108px) - var(--bar-h, 64px) - 24px); min-height: 460px; }
+  @media (min-width: 1024px) {
+    .letter-grid > aside { min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line2) transparent; }   /* 문항 목록이 길면 왼쪽 칸 안에서만 스크롤 */
+  }
+  @media (min-width: 1024px) and (max-height: 860px) {   /* 낮은 화면: 인용은 빼고 문항은 한 줄로 */
+    .letter-grid .quote { display: none; }
+    .letter-grid .ch small { display: none; }
+    .letter-grid .ch { padding: 7px 12px; }
+  }
   .page-scroll { flex: 1; min-height: 0; }
   /* 넓은 화면: 줄 높이를 칸 높이에 묶어 글이 길면 글 상자 안에서만 스크롤(전에는 줄이 글만큼 늘어 장 전체가 스크롤됨, 11-27) */
   @media (min-width: 1024px) { .letter-grid { grid-template-rows: minmax(0, 1fr); } }
@@ -1053,6 +1064,47 @@ function App() {
     return () => window.removeEventListener('hashchange', fromHash);
   }, [n]);
   useEffect(() => { if (n && slides[idx]) history.replaceState(null, '', '#' + slides[idx].key); }, [idx, n]);
+
+  // 화면 맞춤(11-27): ① 위 메뉴 · 아래 띠의 실제 높이를 --top-h · --bar-h로 ② 장마다 내용이 남은 높이를 넘으면 --fit(0.78~1)으로 줄임.
+  //   100% 보기에서도 85~90% 보기처럼 한 화면에 들어오게. 0.78보다 더 줄여야 하는 장(좁은 화면 등)은 줄이지 않고 그 장 안에서 스크롤
+  useEffect(() => {
+    if (!n) return;
+    const root = document.documentElement;
+    const MIN = 0.78;
+    let t = 0;
+    const fitSlides = () => {
+      t = 0;
+      const top = document.querySelector('header.top'), bar = document.querySelector('nav.bar');
+      const row = top && top.querySelector('.top-row'), tabs = top && top.querySelector('.tabs');
+      // 메뉴 높이 = 칸 버튼 줄까지(+ 아래 여백 12). 프로젝트 장만 탭 줄 높이를 더함
+      const topH = row ? Math.ceil(row.getBoundingClientRect().bottom - top.getBoundingClientRect().top + 12) : 108;
+      const tabsH = tabs && getComputedStyle(tabs).display !== 'none' ? Math.ceil(tabs.getBoundingClientRect().height + 8) : 0;
+      root.style.setProperty('--top-h', topH + 'px');
+      if (bar) root.style.setProperty('--bar-h', Math.ceil(bar.getBoundingClientRect().height) + 'px');
+      const narrow = innerWidth < 760;
+      document.querySelectorAll('.rail > .slide').forEach((sl, i) => {
+        const si = sl.querySelector('.slide-inner'); if (!si) return;
+        si.style.paddingTop = slides[i] && slides[i].group === 'projects' && tabsH ? `${topH + tabsH + 10}px` : '';
+        const w = si.querySelector(':scope > .wrap'); if (!w) return;
+        const cur = w.style.getPropertyValue('--fit');
+        w.style.removeProperty('--fit');   // 줄이기 전 높이를 재려고 잠시 1로(같은 순간 안이라 화면에는 안 보임)
+        const cs = getComputedStyle(si);
+        const room = si.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+        const need = w.getBoundingClientRect().height;
+        let k = need > room + 1 ? Math.floor((room / need) * 100) / 100 : 1;
+        if (narrow || k < MIN) k = 1;
+        if (k < 1) w.style.setProperty('--fit', String(k));
+        else if (cur) w.style.removeProperty('--fit');
+      });
+    };
+    const later = () => { if (!t) t = setTimeout(fitSlides, 60); };
+    const ro = new ResizeObserver(later);
+    document.querySelectorAll('header.top, nav.bar, .slide-inner, .slide-inner > .wrap').forEach((el) => ro.observe(el));
+    window.addEventListener('resize', later);
+    document.fonts && document.fonts.ready.then(later);
+    fitSlides();
+    return () => { ro.disconnect(); window.removeEventListener('resize', later); clearTimeout(t); };
+  }, [n]);
 
   // 키보드: ← → (+ PageUp/PageDown · Home/End · Space)
   useEffect(() => {

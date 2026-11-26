@@ -600,11 +600,14 @@
           {
             "kind": "code",
             "n": 1,
-            "lines": [
-              1,
-              18
-            ],
-            "fp": "// FishCaughtSate.cs · FishCaughtState.Tick (32~48행) — 잡혀 있는"
+            "fp": "// FishStateManager.cs · OnReleased (129~149행) — 놓았을 때 남은 저항"
+          },
+          {
+            "kind": "image",
+            "src": "images/fish-struggle.gif",
+            "w": 960,
+            "h": 522,
+            "caption": "꼬마돌들이 상어를 붙잡아 계단 바위에 부딪치게 하면, 버둥거리던 상어의 머리 위에 노란 별(탈진)이 뜹니다."
           }
         ]
       },
@@ -692,7 +695,7 @@
       {
         "key": "patrol",
         "chapter": "fishai",
-        "layout": "code",
+        "layout": "visual",
         "tab": "구현",
         "title": {
           "text": "4-6. 벽에 박지 않고 대각선으로 헤엄친다 — 풀링에 맞춘 순찰과 장애물 회피",
@@ -721,15 +724,6 @@
           }
         ],
         "visuals": [
-          {
-            "kind": "code",
-            "n": 1,
-            "fp": "// FishObstacleSensor.cs · Update → CheckForObstacles (27~58",
-            "lines": [
-              19,
-              32
-            ]
-          },
           {
             "kind": "image",
             "src": "images/fish-boxcast.gif",

@@ -77,6 +77,10 @@
 /* 장 표지에 그림을 넣으면 목록 자리가 줄어서, 장면마다 붙는 도입 문장은 빼고 제목만 보입니다 */
 #deck:has(a[href*="p=1-watch-your-back"]) .t-CH .ch-list .ld { display: none; }
 
+/* 17쪽 4-2 — 11-27: 상태 그림을 가로로 눕혀(1081×722) 그림 칸을 넓힘. 카드 2장은 오른쪽 좁은 칸(약 357px)에 그대로
+   예전: 자동 배치(그림 646px · 카드 462px, 글자 6.9px) */
+#deck:has(a[href*="p=1-watch-your-back"]) #d-state-flow .dk { grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr) !important; }
+
 /* ── WoW 하드코어 분석 (5-wow-hardcore-analysis) ── */
 
 /* 10쪽 「핵심 분석」 장 표지 — 장면이 12개라 목록이 넘침. 탭 이름(구조·흐름…)을 제목 옆 한 줄로

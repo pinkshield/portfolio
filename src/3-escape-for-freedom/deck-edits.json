@@ -53,6 +53,87 @@
         ]
       },
       "group": "merge-route-choice"
+    },
+    {
+      "key": "core-loop",
+      "chapter": "layout",
+      "layout": "full",
+      "tab": "흐름",
+      "title": {
+        "text": "2-1. 코스 한 바퀴의 흐름 — 치고, 떨어지면 다시 치고, 문을 연다",
+        "verbatim": true
+      },
+      "lead": {
+        "text": "이 반복이 1-2에서 바란 경험을 만듭니다.",
+        "verbatim": true
+      },
+      "sectionPath": [
+        "2. 게임 디자인",
+        "2-1. 코스 한 바퀴의 흐름 — 치고, 떨어지면 다시 치고, 문을 연다"
+      ],
+      "points": [
+        {
+          "label": "",
+          "text": "바닥에 떨어져도 처음으로 돌아가지 않고 치기 전 위치에서 바로 다시 칠 수 있어 도전 욕구가 이어지고, 목표 지점에 도착할 때마다 문이 열려 한 구간씩 집 밖에 가까워지는 것이 보입니다.",
+          "verbatim": true
+        },
+        {
+          "label": "",
+          "text": "끝까지 가면 탈출한 자유를 느끼게 됩니다.",
+          "verbatim": true
+        }
+      ],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/core-loop.png",
+          "w": 2000,
+          "h": 900,
+          "caption": {
+            "text": "코스 한 바퀴의 흐름입니다. 힘을 조절해 치고 함정을 넘어 목표 지점에 들어가면 다음 문이 열립니다. 바닥에 떨어지면 마지막으로 친 자리로 돌아오고, 목표 지점 두 곳을 모두 열면 현관 밖으로 탈출해 결과 화면이 나옵니다.",
+            "verbatim": true
+          }
+        }
+      ],
+      "from": {
+        "key": "core-loop",
+        "sectionPath": [
+          "2. 게임 디자인",
+          "2-1. 코스 한 바퀴의 흐름 — 치고, 떨어지면 다시 치고, 문을 연다"
+        ],
+        "sig": [
+          "2-1. 코스 한 바퀴의 흐름 — 치고, 떨어지면 다시 치고, 문을 연다|image|images/core-loop.png|1"
+        ]
+      }
+    },
+    {
+      "key": "concept",
+      "after": "core-loop",
+      "chapter": "layout",
+      "layout": "overview",
+      "tab": "개요",
+      "title": {
+        "text": "2-3. 주제와 콘셉트",
+        "verbatim": true
+      },
+      "lead": null,
+      "sectionPath": [
+        "2. 게임 디자인",
+        "2-3. 주제와 콘셉트"
+      ],
+      "points": [
+        {
+          "label": "주제를 바꾼 이유",
+          "text": "그때 미니 골프처럼 홀을 하나씩 깨는 스테이지 방식이 아니라, 집에서 빠져나가는 탈출 방식으로 방향을 바꿔야겠다고 생각했습니다.",
+          "verbatim": true
+        },
+        {
+          "label": "\"떨어진 명예\"라는 콘셉트",
+          "text": "홀인원이라는 큰 영광을 가진 공이 바닥에 떨어지면, 수치심을 느껴 치기 전 위치로 되돌아간다는 콘셉트입니다.",
+          "verbatim": true
+        }
+      ],
+      "visuals": []
     }
   ],
   "hide": [

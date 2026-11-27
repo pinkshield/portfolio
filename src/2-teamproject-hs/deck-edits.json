@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "pin": [
+    {
+      "key": "loop",
+      "chapter": "design",
+      "layout": "full",
+      "tab": "흐름",
+      "title": {"text": "2-1. 한 판의 흐름 — 잡고, 모으고, 다리를 짓는다", "verbatim": true},
+      "lead": null,
+      "sectionPath": ["2. 게임 디자인", "2-1. 한 판의 흐름 — 잡고, 모으고, 다리를 짓는다"],
+      "points": [
+        {"label": "경험 목표", "text": "힘을 맞추면 금방 지쳐 잡히고, 손이 어긋나면 달아나는 물고기로 협동과 불협화음을 함께 겪는 낚시", "verbatim": true},
+        {"label": "", "text": "물고기 낚기는 4장(물고기 AI)과 5장(동기화)에서, 스테이지와 튜토리얼은 6장에서 다룹니다.", "verbatim": true},
+        {"label": "", "text": "이 루프에서 협동과 불협화음이 가장 크게 드러나는 곳이 물고기 낚기입니다(4장).", "verbatim": true}
+      ],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/core-loop.png",
+          "w": 2000,
+          "h": 900,
+          "caption": {
+            "text": "한 판의 흐름입니다. 섬에서 출발해 물고기를 낚고 나무를 모아 다리에 넣고, 다리를 지어 다음 바다로 가기를 되풀이합니다. 마지막 다리까지 짓고 모두 육지에 닿으면 이기고, 모두 스태미나가 0이 되면 게임 오버입니다.",
+            "verbatim": true
+          }
+        }
+      ],
+      "from": {
+        "key": "loop",
+        "sectionPath": ["2. 게임 디자인", "2-1. 한 판의 흐름 — 잡고, 모으고, 다리를 짓는다"],
+        "sig": ["2-1. 한 판의 흐름 — 잡고, 모으고, 다리를 짓는다|image|images/core-loop.png|1"]
+      }
+    }
+  ],
+  "hide": []
+}

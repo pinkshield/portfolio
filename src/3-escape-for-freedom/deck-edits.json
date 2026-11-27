@@ -134,6 +134,131 @@
         }
       ],
       "visuals": []
+    },
+    {
+      "key": "play",
+      "chapter": "routes",
+      "layout": "screens",
+      "tab": "결과",
+      "title": {
+        "text": "6. 동선 — 두 갈래 길에서 고른다",
+        "verbatim": true
+      },
+      "lead": null,
+      "sectionPath": [
+        "6. 동선 — 두 갈래 길에서 고른다"
+      ],
+      "points": [],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/route-split.gif",
+          "w": 960,
+          "h": 540,
+          "caption": {
+            "text": "창고방 위에서 본 갈림길입니다. 에어컨 쪽이 어려운 길, 선물 상자 쪽이 쉬운 길입니다.",
+            "verbatim": true
+          }
+        },
+        {
+          "kind": "image",
+          "src": "images/play-ramp.png",
+          "w": 1920,
+          "h": 1080,
+          "caption": {
+            "text": "플레이 장면 — 책장 위의 경사로와 깃발",
+            "verbatim": true
+          }
+        }
+      ],
+      "from": {
+        "key": "play",
+        "sectionPath": [
+          "6. 동선 — 두 갈래 길에서 고른다"
+        ],
+        "sig": [
+          "6. 동선 — 두 갈래 길에서 고른다|image|images/play-ramp.png|1"
+        ]
+      }
+    },
+    {
+      "key": "start-view",
+      "chapter": "layout",
+      "layout": "screens",
+      "tab": "개요",
+      "title": {
+        "text": "시작 장면 — 진열장 옆의 홀인원 골프공",
+        "verbatim": true
+      },
+      "lead": {
+        "text": "골프공 옆의 \"0%\"는 치는 힘 게이지입니다.",
+        "verbatim": true
+      },
+      "sectionPath": [
+        "2. 게임 디자인",
+        "2-2. 조작"
+      ],
+      "points": [],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/start-trophy-case.png",
+          "w": 1920,
+          "h": 1080,
+          "caption": {
+            "text": "시작 장면 — 진열장 옆의 홀인원 골프공",
+            "verbatim": true
+          }
+        },
+        {
+          "kind": "image",
+          "src": "images/first-shot.gif",
+          "w": 960,
+          "h": 540,
+          "caption": {
+            "text": "스페이스를 길게 누르면 힘 게이지가 차오르고, 떼면 공이 진열장 밖으로 나갑니다.",
+            "verbatim": true
+          }
+        }
+      ],
+      "from": {
+        "key": "start-view",
+        "sectionPath": [
+          "2. 게임 디자인",
+          "2-2. 조작"
+        ],
+        "sig": [
+          "2-2. 조작|image|images/start-trophy-case.png|1"
+        ]
+      }
+    },
+    {
+      "key": "fall-reset",
+      "after": "courses",
+      "chapter": "zones",
+      "layout": "full",
+      "tab": "흐름",
+      "title": {
+        "text": "떨어지면 친 자리로 돌아옴",
+        "verbatim": true
+      },
+      "lead": null,
+      "sectionPath": [
+        "5. 구간 — 배우고, 익히고, 시험받는다"
+      ],
+      "points": [],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/fall-reset.gif",
+          "w": 960,
+          "h": 540,
+          "caption": {
+            "text": "힘을 모아 친 공이 바닥에 떨어지면, 처음이 아니라 마지막으로 친 자리로 돌아옵니다.",
+            "verbatim": true
+          }
+        }
+      ]
     }
   ],
   "hide": [

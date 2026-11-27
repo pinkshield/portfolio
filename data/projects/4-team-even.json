@@ -316,11 +316,24 @@
         "chapter": "arch",
         "layout": "full",
         "tab": "구조",
-        "title": {"text": "3-1. 구조 그림", "verbatim": true},
+        "title": {"text": "3-1. 구조 그림 — ① 한 라운드 — 군중전", "verbatim": false},
         "lead": null,
         "sectionPath": ["3-1. 구조 그림"],
         "points": [],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "sequenceDiagram"}],
+        "edited": true
+      },
+      {
+        "key": "arch-boss",
+        "chapter": "arch",
+        "layout": "full",
+        "tab": "구조",
+        "title": {"text": "3-1. 구조 그림 — ② 보스전 · 보상", "verbatim": false},
+        "lead": null,
+        "sectionPath": ["3-1. 구조 그림"],
+        "points": [],
+        "visuals": [{"kind": "mermaid", "n": 2, "fp": "sequenceDiagram"}],
+        "edited": true
       },
       {
         "key": "arch-classes",
@@ -1469,7 +1482,7 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "AI가 만든 것|틀린 곳|찾은 방법|바꾼 규칙|절"}]
       }
     ],
-    "applied": "2d9cbc7c205d6576"
+    "applied": "14c81a54c9ea664a"
   },
   "generatedAt": "2026-11-25"
 }

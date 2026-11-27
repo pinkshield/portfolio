@@ -248,6 +248,32 @@
         "sectionPath": ["2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다"],
         "sig": ["2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다|image|images/core-loop.png|1"]
       }
+    },
+    {
+      "key": "arch-map",
+      "chapter": "arch",
+      "layout": "full",
+      "tab": "구조",
+      "title": {"text": "3-1. 구조 그림 — ① 한 라운드 — 군중전", "verbatim": false},
+      "lead": null,
+      "sectionPath": ["3-1. 구조 그림"],
+      "points": [],
+      "visuals": [{"kind": "mermaid", "n": 1, "fp": "sequenceDiagram"}],
+      "from": {"key": "arch-map", "sectionPath": ["3-1. 구조 그림"], "sig": ["3-1. 구조 그림|mermaid|1|flowchart TB"]},
+      "group": "split-arch-boss"
+    },
+    {
+      "key": "arch-boss",
+      "chapter": "arch",
+      "layout": "full",
+      "tab": "구조",
+      "title": {"text": "3-1. 구조 그림 — ② 보스전 · 보상", "verbatim": false},
+      "lead": null,
+      "sectionPath": ["3-1. 구조 그림"],
+      "points": [],
+      "visuals": [{"kind": "mermaid", "n": 2, "fp": "sequenceDiagram"}],
+      "after": "arch-map",
+      "group": "split-arch-boss"
     }
   ],
   "hide": []

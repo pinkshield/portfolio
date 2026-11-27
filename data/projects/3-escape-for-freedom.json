@@ -579,6 +579,23 @@
           {"label": "안 된 것", "text": "함정을 자세하게 설명하지 않고 요청해서, 받은 코드에 문제가 생겨 고치는 데 시간이 들었습니다.", "verbatim": true}
         ],
         "visuals": [{"kind": "table", "n": 1, "fp": "함정|받은 코드|플레이하며 직접 고친 것"}]
+      },
+      {
+        "key": "ai-prompts",
+        "chapter": "ai-collab",
+        "layout": "overview",
+        "tab": "",
+        "title": {"text": "8-3. 실제로 준 지시 세 가지", "verbatim": true},
+        "lead": {"text": "함정 코드를 받을 때 실제로 보낸 지시문입니다(원문 그대로).", "verbatim": true},
+        "sectionPath": ["8. AI 협업 — 함정 스크립트는 AI에게, 수치는 플레이로", "8-3. 실제로 준 지시 세 가지"],
+        "points": [
+          {"label": "", "text": "\"3D physics materials 에서 bounciness 를 더 크게 하려면 어떻게 해야해?\"", "verbatim": true},
+          {"label": "", "text": "\"트램펄린 같은 오브젝트를 만들고 싶은데, bouncy 로는 부족해서 스크립트로 공에게 점프효과를 더하는게 좋아보여\"", "verbatim": true},
+          {"label": "", "text": "\"가속 패드를 만들어보자\"", "verbatim": true},
+          {"label": "", "text": "당시에는 프롬프트 작성법을 따로 배우지 않은 상태라, 원하는 기능을 짧은 한 문장으로 요청했습니다.", "verbatim": true}
+        ],
+        "visuals": [],
+        "edited": true
       }
     ],
     "base": [
@@ -946,6 +963,6 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "함정|받은 코드|플레이하며 직접 고친 것"}]
       }
     ],
-    "applied": "86830b7ce6533168"
+    "applied": "969625ff40fb2178"
   }
 }

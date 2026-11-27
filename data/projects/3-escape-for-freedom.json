@@ -353,7 +353,8 @@
           {"label": "", "text": "진열장에서 어느 길로 갈지 정해지고, 창고방을 지나 윗길과 아랫길로 나뉩니다.", "verbatim": true},
           {"label": "", "text": "거실의 목표 지점 두 곳에 모두 도착하면 현관에서 집 밖으로 탈출할 수 있습니다.", "verbatim": true}
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}],
+        "edited": true
       },
       {
         "key": "routes",
@@ -963,6 +964,6 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "함정|받은 코드|플레이하며 직접 고친 것"}]
       }
     ],
-    "applied": "969625ff40fb2178"
+    "applied": "6297a06ce6475343"
   }
 }

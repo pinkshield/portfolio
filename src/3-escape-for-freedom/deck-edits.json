@@ -301,6 +301,25 @@
         }
       ],
       "visuals": []
+    },
+    {
+      "key": "flow",
+      "chapter": "map",
+      "layout": "visual",
+      "tab": "흐름",
+      "title": {"text": "3-1. 레벨 지도 — 네 구간과 두 갈래 길", "verbatim": true},
+      "lead": {"text": "맵은 진열장 → 창고방 → 거실 → 현관 네 구간으로 이어집니다.", "verbatim": true},
+      "sectionPath": ["3. 전체 구조 — 레벨 지도", "3-1. 레벨 지도 — 네 구간과 두 갈래 길"],
+      "points": [
+        {"label": "", "text": "진열장에서 어느 길로 갈지 정해지고, 창고방을 지나 윗길과 아랫길로 나뉩니다.", "verbatim": true},
+        {"label": "", "text": "거실의 목표 지점 두 곳에 모두 도착하면 현관에서 집 밖으로 탈출할 수 있습니다.", "verbatim": true}
+      ],
+      "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}],
+      "from": {
+        "key": "flow",
+        "sectionPath": ["3. 전체 구조 — 레벨 지도", "3-1. 레벨 지도 — 네 구간과 두 갈래 길"],
+        "sig": ["3-1. 레벨 지도 — 네 구간과 두 갈래 길|mermaid|1|flowchart LR"]
+      }
     }
   ],
   "hide": [

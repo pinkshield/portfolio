@@ -122,11 +122,11 @@
           "verbatim": true
         }
       ],
-      "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}],
+      "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}],
       "from": {
         "key": "drop-point",
         "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
-        "sig": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)|mermaid|1|flowchart LR"]
+        "sig": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)|mermaid|1|flowchart TB"]
       },
       "group": "split-drop-point-table"
     },

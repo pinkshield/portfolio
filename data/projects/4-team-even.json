@@ -419,7 +419,7 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}],
         "edited": true
       },
       {
@@ -1482,7 +1482,7 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "AI가 만든 것|틀린 곳|찾은 방법|바꾼 규칙|절"}]
       }
     ],
-    "applied": "14c81a54c9ea664a"
+    "applied": "220fe073df18dd8b"
   },
   "generatedAt": "2026-11-25"
 }

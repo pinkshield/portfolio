@@ -56,13 +56,14 @@
 #deck:has(a[href*="p=4-team-even"]) #d-sound-arch .dk > .vis { grid-column: 1; grid-row: 1; }
 #deck:has(a[href*="p=4-team-even"]) #d-sound-arch .dk > .cards { grid-column: 2; grid-row: 1; grid-template-columns: minmax(0, 1fr) !important; align-self: end; }
 
-/* 13쪽 3-2 — 다이어그램 위쪽 가로 전체, 카드 1·2 가운데 아래 가로로 (표는 다음 장면) */
+/* 13쪽 3-2 — 11-27: 4-3 그림을 두 줄로 접어 세로로 높아짐 → 다이어그램 왼쪽(약 2/3), 카드 1·2 오른쪽 세로로 (표는 다음 장면)
+   예전(그림 위 가로 전체 · 카드 아래 가로 두 장): .dk 1열 · 2행(1fr auto), .vis 1열 1행, .cards 1열 2행 repeat(2, minmax(0, 560px)) 가운데 */
 #deck:has(a[href*="p=4-team-even"]) #d-drop-point .dk {
-  grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: minmax(0, 1fr) auto !important; gap: 20px;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr) !important; grid-template-rows: minmax(0, 1fr) !important; gap: 20px;
 }
-#deck:has(a[href*="p=4-team-even"]) #d-drop-point .dk > .vis { grid-column: 1; grid-row: 1; }
+#deck:has(a[href*="p=4-team-even"]) #d-drop-point .dk > .vis { grid-column: 1 !important; grid-row: 1 !important; }
 #deck:has(a[href*="p=4-team-even"]) #d-drop-point .dk > .cards {
-  grid-column: 1; grid-row: 2; grid-template-columns: repeat(2, minmax(0, 560px)) !important; justify-content: center;
+  grid-column: 2 !important; grid-row: 1 !important; grid-template-columns: minmax(0, 1fr) !important; align-content: center;
 }
 
 /* ── 뒤통수를 조심해 (1-watch-your-back) ── */

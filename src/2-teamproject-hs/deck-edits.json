@@ -33,5 +33,10 @@
       }
     }
   ],
-  "hide": []
+  "hide": [],
+  "editModePortfolio": [
+    {"field": "highlight.title", "section": "4-4. 잡히면 버둥거리다 지친다 — 저항도로 행동이 바뀐다", "value": "잡힌 물고기가 버둥거리다 지치는 저항 시스템", "from": "잡히면 버둥거리다 지친다"},
+    {"field": "highlight.title", "section": "4-3. 손은 신호 세 개만 보낸다 — 손이 물고기를 잡는 방법", "value": "물고기를 직접 잡고 놓는 조작", "from": "손이 물고기를 잡는 방법"},
+    {"field": "highlight.title", "section": "6-2. 튜토리얼 — 안내를 맵에 직접 놓다", "value": "맵 위에 직접 놓은 안내로 만든 튜토리얼", "from": "AI가 만든 연출 대신, 고칠 수 있는 연출과 맵 위 안내로 만든 튜토리얼"}
+  ]
 }

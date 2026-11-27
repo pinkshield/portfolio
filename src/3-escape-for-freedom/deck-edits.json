@@ -335,5 +335,8 @@
       },
       "group": "merge-route-choice"
     }
+  ],
+  "editModePortfolio": [
+    {"field": "highlight.title", "section": "5-1. 배우고, 익히고, 시험받는 네 구간", "value": "소개 → 응용 → 심화로 이어지는 코스 구성", "from": "배우고, 익히고, 시험받는 네 구간"}
   ]
 }

@@ -216,5 +216,11 @@
       }
     }
   ],
-  "hide": []
+  "hide": [],
+  "editModePortfolio": [
+    {"field": "highlight.title", "section": "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI", "value": "보스 4명이 공통 기능을 함께 쓰는 적 AI", "from": "몸 하나에 옷만 갈아입는 적 AI"},
+    {"field": "highlight.what", "section": "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI", "value": "보스 4명이 이동·회전·승패 판정 같은 공통 기능(`EnemyStateManager`)을 함께 쓰고, 대기·순찰·추격 같은 행동은 7가지 상태로 나눠 맡습니다.", "from": "보스 4명이 몸(`EnemyStateManager`) 하나를 같이 쓰고, 지금 무엇을 할지는 상태(옷)가 정합니다."},
+    {"field": "highlight.title", "section": "4-3. 쓰러진 적은 옷을 갈아입지 않는다", "value": "쓰러진 적이 다시 움직이지 않게 막기", "from": "쓰러진 적은 옷을 갈아입지 않는다"},
+    {"field": "highlight.what", "section": "4-3. 쓰러진 적은 옷을 갈아입지 않는다", "value": "적의 행동을 바꾸는 경로를 함수 하나(`ChangeState`)로 통일해, 이미 쓰러진 적이 다른 행동으로 바뀌지 않게 막았습니다.", "from": "밖에서는 상태를 바꾸는 함수 하나만 부르면 이전 행동을 멈추고 새 행동을 시작합니다."}
+  ]
 }

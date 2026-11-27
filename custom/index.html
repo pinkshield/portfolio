@@ -633,9 +633,15 @@ function sectionImages(d, section) {
 const isGif = (s) => /\.gif$/i.test(s);
 const capText = (c) => (c && typeof c === 'object' ? c.text || '' : c || '');   // caption이 { text, verbatim }일 때도
 const shortCap = (alt) => String(capText(alt)).split(/\s+—\s+/)[0];
+// 기능 카드 그림 덮어쓰기(11-27 건우 님 요청 — 뒤통수 FEATURE 01은 인스펙터 대신 뺨 맞는 컷씬 GIF). .claude/rules/custom-page.md 3절
+const FEATURE_MEDIA = {
+  '1-watch-your-back': { 0: [{ src: 'images/cutscene-slap-face.gif', alt: '뺨 맞는 컷씬 — 플레이어가 적에게 맞으면 이 장면 뒤에 게임 오버 화면이 나옵니다', w: 720, h: 405 }] },
+};
 function buildMedia(p, md) {
   const d = docImages(md);
-  const features = (p.highlights || []).map((h) => {
+  const features = (p.highlights || []).map((h, i) => {
+    const over = FEATURE_MEDIA[p.id] && FEATURE_MEDIA[p.id][i];
+    if (over) return over;
     const inSec = sectionImages(d, h.section);
     const gifs = inSec.filter((x) => isGif(x.src));
     if (gifs.length) return gifs;                                   // 그 절에 GIF가 있으면 GIF(여러 개면 모두)

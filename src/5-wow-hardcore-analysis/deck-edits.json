@@ -34,5 +34,8 @@
       ]
     }
   ],
-  "hide": []
+  "hide": [],
+  "editModePortfolio": [
+    {"field": "highlight.title", "section": "3-1. 분석 틀 — 시스템에서 결과까지", "value": "시스템 → 플레이어 행동 → 결과 순서로 따라간 분석", "from": "기능이 아니라 인과를 따라간 분석 틀"}
+  ]
 }

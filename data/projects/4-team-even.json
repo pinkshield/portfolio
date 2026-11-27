@@ -187,76 +187,24 @@
   },
   "deck": {
     "chapters": [
-      {
-        "key": "intro",
-        "title": "개요",
-        "sectionPath": [
-          "1. 개요"
-        ]
-      },
-      {
-        "key": "design",
-        "title": "게임 디자인",
-        "sectionPath": [
-          "2. 게임 디자인"
-        ]
-      },
-      {
-        "key": "arch",
-        "title": "전체 구조 — 한 라운드를 코드에서 다시 그리면",
-        "sectionPath": [
-          "3. 전체 구조 — 한 라운드를 코드에서 다시 그리면"
-        ]
-      },
+      {"key": "intro", "title": "개요", "sectionPath": ["1. 개요"]},
+      {"key": "design", "title": "게임 디자인", "sectionPath": ["2. 게임 디자인"]},
+      {"key": "arch", "title": "전체 구조 — 한 라운드를 코드에서 다시 그리면", "sectionPath": ["3. 전체 구조 — 한 라운드를 코드에서 다시 그리면"]},
       {
         "key": "supply",
         "title": "보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다",
-        "sectionPath": [
-          "4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"
-        ]
+        "sectionPath": ["4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"]
       },
-      {
-        "key": "sound",
-        "title": "사운드 — 군중전에서 몇 마리의 소리를 낼까",
-        "sectionPath": [
-          "5. 사운드 — 군중전에서 몇 마리의 소리를 낼까"
-        ]
-      },
+      {"key": "sound", "title": "사운드 — 군중전에서 몇 마리의 소리를 낼까", "sectionPath": ["5. 사운드 — 군중전에서 몇 마리의 소리를 낼까"]},
       {
         "key": "upgrade",
         "title": "라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까",
-        "sectionPath": [
-          "6. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까"
-        ]
+        "sectionPath": ["6. 라운드 종료 강화 — 작게 느껴진 보상을 어떻게 키울까"]
       },
-      {
-        "key": "map",
-        "title": "맵 — AI가 만들고, 디테일은 제가 고쳤다",
-        "sectionPath": [
-          "7. 맵 — AI가 만들고, 디테일은 제가 고쳤다"
-        ]
-      },
-      {
-        "key": "other",
-        "title": "그 밖에 맡은 것 — 튜토리얼 · UI 통합",
-        "sectionPath": [
-          "8. 그 밖에 맡은 것 — 튜토리얼 · UI 통합"
-        ]
-      },
-      {
-        "key": "collab",
-        "title": "팀 협업",
-        "sectionPath": [
-          "9. 팀 협업"
-        ]
-      },
-      {
-        "key": "ai",
-        "title": "AI 협업",
-        "sectionPath": [
-          "10. AI 협업"
-        ]
-      }
+      {"key": "map", "title": "맵 — AI가 만들고, 디테일은 제가 고쳤다", "sectionPath": ["7. 맵 — AI가 만들고, 디테일은 제가 고쳤다"]},
+      {"key": "other", "title": "그 밖에 맡은 것 — 튜토리얼 · UI 통합", "sectionPath": ["8. 그 밖에 맡은 것 — 튜토리얼 · UI 통합"]},
+      {"key": "collab", "title": "팀 협업", "sectionPath": ["9. 팀 협업"]},
+      {"key": "ai", "title": "AI 협업", "sectionPath": ["10. AI 협업"]}
     ],
     "slides": [
       {
@@ -264,28 +212,16 @@
         "chapter": "intro",
         "layout": "overview",
         "tab": "개요",
-        "title": {
-          "text": "1-1. 무엇을 만들었나",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "몰려오는 수많은 적을 여러 총으로 처치하고, 보스의 공격 패턴을 공략하는 재미를 목표로 했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "1-1. 무엇을 만들었나"
-        ],
+        "title": {"text": "1-1. 무엇을 만들었나", "verbatim": true},
+        "lead": {"text": "몰려오는 수많은 적을 여러 총으로 처치하고, 보스의 공격 패턴을 공략하는 재미를 목표로 했습니다.", "verbatim": true},
+        "sectionPath": ["1-1. 무엇을 만들었나"],
         "points": [
           {
             "label": "",
             "text": "한 라운드는 군중전(약 3분) → 보스 등장·시점 전환 → 보스전 → 강화 선택 → 다음 라운드로 이어집니다(1라운드 기준, 2-1).",
             "verbatim": true
           },
-          {
-            "label": "",
-            "text": "제가 맡은 것은 보급·사운드 시스템과 라운드 종료 강화·맵·튜토리얼·메인 메뉴·UI 통합입니다(1-3 · 9-3).",
-            "verbatim": true
-          }
+          {"label": "", "text": "제가 맡은 것은 보급·사운드 시스템과 라운드 종료 강화·맵·튜토리얼·메인 메뉴·UI 통합입니다(1-3 · 9-3).", "verbatim": true}
         ],
         "visuals": [
           {
@@ -293,20 +229,14 @@
             "src": "images/gameplay-crowd.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "1인칭 군중전(라운드 2 · 섬멸전) — 하늘을 덮고 몰려오는 몬스터 무리와 통합된 전투 HUD",
-              "verbatim": true
-            }
+            "caption": {"text": "1인칭 군중전(라운드 2 · 섬멸전) — 하늘을 덮고 몰려오는 몬스터 무리와 통합된 전투 HUD", "verbatim": true}
           },
           {
             "kind": "image",
             "src": "images/boss-third-person.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "3인칭 보스전 — 시점이 바뀌고, 바닥의 붉은 원으로 보스의 공격 범위를 알림",
-              "verbatim": true
-            }
+            "caption": {"text": "3인칭 보스전 — 시점이 바뀌고, 바닥의 붉은 원으로 보스의 공격 범위를 알림", "verbatim": true}
           }
         ]
       },
@@ -315,30 +245,13 @@
         "chapter": "intro",
         "layout": "visual",
         "tab": "개요",
-        "title": {
-          "text": "1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제",
-          "verbatim": true
-        },
+        "title": {"text": "1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제"
-        ],
+        "sectionPath": ["1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제"],
         "points": [
-          {
-            "label": "보급",
-            "text": "새 맵에서 보급이 떨어지지 않거나, 지형·높은 건물 위·맵 밖에 떨어져 10개 중 2~3개를 줍지 못했습니다",
-            "verbatim": false
-          },
-          {
-            "label": "사운드",
-            "text": "4명이 각자 만드는 몬스터·보스·무기에 다른 사람 코드의 동작을 고치지 않고 소리를 붙여야 했습니다",
-            "verbatim": false
-          },
-          {
-            "label": "맵",
-            "text": "맵이 너무 커서 도망만 다니게 되고, 보급을 주우러 가는 길이 스트레스였습니다",
-            "verbatim": false
-          }
+          {"label": "보급", "text": "새 맵에서 보급이 떨어지지 않거나, 지형·높은 건물 위·맵 밖에 떨어져 10개 중 2~3개를 줍지 못했습니다", "verbatim": false},
+          {"label": "사운드", "text": "4명이 각자 만드는 몬스터·보스·무기에 다른 사람 코드의 동작을 고치지 않고 소리를 붙여야 했습니다", "verbatim": false},
+          {"label": "맵", "text": "맵이 너무 커서 도망만 다니게 되고, 보급을 주우러 가는 길이 스트레스였습니다", "verbatim": false}
         ],
         "visuals": [
           {
@@ -346,13 +259,8 @@
             "src": "images/supply-drop.gif",
             "w": 800,
             "h": 450,
-            "caption": {
-              "text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함",
-              "verbatim": true
-            },
-            "sectionPath": [
-              "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
-            ]
+            "caption": {"text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함", "verbatim": true},
+            "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
           }
         ],
         "edited": true
@@ -360,16 +268,11 @@
       {
         "key": "game-flow",
         "chapter": "design",
-        "layout": "visual",
+        "layout": "full",
         "tab": "흐름",
-        "title": {
-          "text": "2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다",
-          "verbatim": true
-        },
+        "title": {"text": "2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다"
-        ],
+        "sectionPath": ["2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다"],
         "points": [
           {
             "label": "",
@@ -379,28 +282,26 @@
         ],
         "visuals": [
           {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
+            "kind": "image",
+            "src": "images/core-loop.png",
+            "w": 2000,
+            "h": 900,
+            "caption": {
+              "text": "한 라운드의 흐름입니다(1라운드 기준). 1인칭 군중전 → 보스 등장과 3인칭 전환 → 보스전 → 라운드 종료 강화를 거쳐 다음 라운드로 갑니다. 최종 보스를 쓰러뜨리면 게임 클리어이고, 플레이어가 끝내 쓰러지면 그 라운드의 시작 상태에서 다시 합니다.",
+              "verbatim": true
+            }
           }
-        ]
+        ],
+        "edited": true
       },
       {
         "key": "high-ground",
         "chapter": "design",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "이 원칙을 세 곳에 똑같이 적용했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로"
-        ],
+        "title": {"text": "2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로", "verbatim": true},
+        "lead": {"text": "이 원칙을 세 곳에 똑같이 적용했습니다.", "verbatim": true},
+        "sectionPath": ["2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로"],
         "points": [
           {
             "label": "",
@@ -408,74 +309,38 @@
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "시스템|적용"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "시스템|적용"}]
       },
       {
         "key": "arch-map",
         "chapter": "arch",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "3-1. 구조 그림",
-          "verbatim": true
-        },
+        "title": {"text": "3-1. 구조 그림", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "3-1. 구조 그림"
-        ],
+        "sectionPath": ["3-1. 구조 그림"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart TB"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}]
       },
       {
         "key": "arch-classes",
         "chapter": "arch",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "3-2. 핵심 클래스",
-          "verbatim": true
-        },
+        "title": {"text": "3-2. 핵심 클래스", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "3-2. 핵심 클래스"
-        ],
+        "sectionPath": ["3-2. 핵심 클래스"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "역할 (이름)|하는 일|하지 않는 일|다룬 장"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "역할 (이름)|하는 일|하지 않는 일|다룬 장"}]
       },
       {
         "key": "rules",
         "chapter": "arch",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "3-3. 약속 — 파트끼리 서로 모른다",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "규칙은 파트가 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 쓰는 것입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "3-3. 약속 — 파트끼리 서로 모른다"
-        ],
+        "title": {"text": "3-3. 약속 — 파트끼리 서로 모른다", "verbatim": true},
+        "lead": {"text": "규칙은 파트가 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 쓰는 것입니다.", "verbatim": true},
+        "sectionPath": ["3-3. 약속 — 파트끼리 서로 모른다"],
         "points": [
           {
             "label": "",
@@ -483,71 +348,30 @@
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart TB"
-          },
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "상황|방법"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}, {"kind": "table", "n": 1, "fp": "상황|방법"}]
       },
       {
         "key": "supply-flow",
         "chapter": "supply",
         "layout": "visual",
         "tab": "흐름",
-        "sectionPath": [
-          "4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"
-        ],
-        "title": {
-          "text": "4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "군중전에서 보급 상자는 플레이어의 생사를 가르는 시스템입니다.",
-          "verbatim": true
-        },
+        "sectionPath": ["4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"],
+        "title": {"text": "4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다", "verbatim": true},
+        "lead": {"text": "군중전에서 보급 상자는 플레이어의 생사를 가르는 시스템입니다.", "verbatim": true},
         "points": [
-          {
-            "label": "",
-            "text": "이 그림에서 볼 것은 어디에 떨어질지(4-3)와 무엇이 떨어질지(4-4)를 보급이 혼자 정한다는 점입니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "라운드 담당은 \"떨어뜨려라\"만 부르고, HUD·사운드는 \"주웠다\"는 이벤트만 듣습니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "이 그림에서 볼 것은 어디에 떨어질지(4-3)와 무엇이 떨어질지(4-4)를 보급이 혼자 정한다는 점입니다.", "verbatim": true},
+          {"label": "", "text": "라운드 담당은 \"떨어뜨려라\"만 부르고, HUD·사운드는 \"주웠다\"는 이벤트만 듣습니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
         "key": "supply-arch",
         "chapter": "supply",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "4-1. 보급 모듈 구조 — 맡은 클래스",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "보급 시스템에서 중요한 것은 언제 떨어지는가, 얼마나 떨어지는가, 무엇이 떨어지는가입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4-1. 보급 모듈 구조 — 맡은 클래스"
-        ],
+        "title": {"text": "4-1. 보급 모듈 구조 — 맡은 클래스", "verbatim": true},
+        "lead": {"text": "보급 시스템에서 중요한 것은 언제 떨어지는가, 얼마나 떨어지는가, 무엇이 떨어지는가입니다.", "verbatim": true},
+        "sectionPath": ["4-1. 보급 모듈 구조 — 맡은 클래스"],
         "points": [
           {
             "label": "",
@@ -560,35 +384,16 @@
             "verbatim": false
           }
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "classDiagram"
-          },
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "역할 (클래스)|하는 일"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}, {"kind": "table", "n": 1, "fp": "역할 (클래스)|하는 일"}]
       },
       {
         "key": "drop-point",
         "chapter": "supply",
         "layout": "visual",
         "tab": "흐름",
-        "title": {
-          "text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "하나라도 걸리면 그 후보는 버리고 다시 뽑습니다(최대 30번).",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
-        ],
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "lead": {"text": "하나라도 걸리면 그 후보는 버리고 다시 뽑습니다(최대 30번).", "verbatim": true},
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
         "points": [
           {
             "label": "길 찾기를 맨 마지막에 둔 이유",
@@ -601,13 +406,7 @@
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
-          }
-        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}],
         "edited": true
       },
       {
@@ -615,22 +414,11 @@
         "chapter": "supply",
         "layout": "full",
         "tab": "흐름",
-        "title": {
-          "text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
-          "verbatim": true
-        },
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
-        ],
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "검사|막는 문제|어디서 나왔나"
-          }
-        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "검사|막는 문제|어디서 나왔나"}],
         "edited": true
       },
       {
@@ -638,59 +426,27 @@
         "chapter": "supply",
         "layout": "full",
         "tab": "선택",
-        "sectionPath": [
-          "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
-        ],
-        "title": {
-          "text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "성능은 두 안이 같습니다.",
-          "verbatim": true
-        },
-        "points": [
-          {
-            "label": "이유",
-            "text": "B안은 Ground만 허용하므로 소품 레이어를 빠뜨려도 틀리지 않습니다. 이 실수를 막을 수 있어 B안을 골랐습니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "|[A] 소품이 아닌 곳에 투하|[B] 처음 맞은 것이 Ground일 때만 투하 ✓|[C] Ground만 맞히는 레이캐스트"
-          }
-        ]
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "lead": {"text": "성능은 두 안이 같습니다.", "verbatim": true},
+        "points": [{"label": "이유", "text": "B안은 Ground만 허용하므로 소품 레이어를 빠뜨려도 틀리지 않습니다. 이 실수를 막을 수 있어 B안을 골랐습니다.", "verbatim": true}],
+        "visuals": [{"kind": "table", "n": 2, "fp": "|[A] 소품이 아닌 곳에 투하|[B] 처음 맞은 것이 Ground일 때만 투하 ✓|[C] Ground만 맞히는 레이캐스트"}]
       },
       {
         "key": "drop-weight",
         "chapter": "supply",
         "layout": "visual",
         "tab": "구현",
-        "title": {
-          "text": "4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "최종 가중치 = 테이블 기본 Weight × 상황 배율",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률"
-        ],
+        "title": {"text": "4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률", "verbatim": true},
+        "lead": {"text": "최종 가중치 = 테이블 기본 Weight × 상황 배율", "verbatim": true},
+        "sectionPath": ["4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률"],
         "points": [
           {
             "label": "이유",
             "text": "확률을 바꾸기 전에는 정해진 확률대로 무작위로 떨어뜨렸고, 플레이 테스트 중 정작 필요한 순간에 필요한 보급을 받지 못하는 상황을 겪었습니다.",
             "verbatim": true
           },
-          {
-            "label": "제안",
-            "text": "기본 확률을 올리는 대신, 언제 무엇이 필요한지에 따라 확률이 바뀌게 하자고 제안했습니다.",
-            "verbatim": true
-          },
+          {"label": "제안", "text": "기본 확률을 올리는 대신, 언제 무엇이 필요한지에 따라 확률이 바뀌게 하자고 제안했습니다.", "verbatim": true},
           {
             "label": "",
             "text": "저는 투하 확률 로그([SupplyDropper] 투하 확률: …)로 수류탄이 0개일 때 수류탄 상자가 자주 나오는 것을 확인했습니다.",
@@ -698,16 +454,8 @@
           }
         ],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "상자|배율"
-          },
-          {
-            "kind": "table",
-            "n": 3,
-            "fp": "상황 (기본 40/40/15/15, 최종 보급 표 값으로 계산)|수류탄|회복|로켓|유탄"
-          }
+          {"kind": "table", "n": 2, "fp": "상자|배율"},
+          {"kind": "table", "n": 3, "fp": "상황 (기본 40/40/15/15, 최종 보급 표 값으로 계산)|수류탄|회복|로켓|유탄"}
         ]
       },
       {
@@ -715,17 +463,9 @@
         "chapter": "supply",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "처음에는 플레이어가 보급 상자에 닿기만 하면 바로 획득했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기"
-        ],
+        "title": {"text": "4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기", "verbatim": true},
+        "lead": {"text": "처음에는 플레이어가 보급 상자에 닿기만 하면 바로 획득했습니다.", "verbatim": true},
+        "sectionPath": ["4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기"],
         "points": [
           {
             "label": "F키로 바꾼 이유",
@@ -737,27 +477,16 @@
             "text": "또 빛기둥 색으로만 구분하던 보급을 보급 정보 UI로도 보여 주어, 어떤 보급인지 줍기 전에 확인할 수 있게 했습니다.",
             "verbatim": true
           },
-          {
-            "label": "",
-            "text": "획득 반경 2m, 조준 정보 카드는 30m 안에서만, 상자 투하는 60m 안 — 숫자는 직접 플레이하면서 정했습니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "획득 반경 2m, 조준 정보 카드는 30m 안에서만, 상자 투하는 60m 안 — 숫자는 직접 플레이하면서 정했습니다.", "verbatim": true}
         ],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 조준만 (처음 방식)|[B] 근접만|[C] 둘 다 ✓"
-          },
+          {"kind": "table", "n": 1, "fp": "|[A] 조준만 (처음 방식)|[B] 근접만|[C] 둘 다 ✓"},
           {
             "kind": "image",
             "src": "images/supply-pickup.gif",
             "w": 960,
             "h": 540,
-            "caption": {
-              "text": "보급 상자 줍기 — 빛기둥 아래 상자로 다가가면 정보 카드(회복 팩 보급 상자)가 뜨고, 가까이에서 F로 획득",
-              "verbatim": true
-            }
+            "caption": {"text": "보급 상자 줍기 — 빛기둥 아래 상자로 다가가면 정보 카드(회복 팩 보급 상자)가 뜨고, 가까이에서 F로 획득", "verbatim": true}
           }
         ]
       },
@@ -766,20 +495,11 @@
         "chapter": "supply",
         "layout": "problem",
         "tab": "문제 해결",
-        "title": {
-          "text": "4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)",
-          "verbatim": true
-        },
+        "title": {"text": "4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)"
-        ],
+        "sectionPath": ["4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)"],
         "points": [
-          {
-            "label": "문제",
-            "text": "직접 플레이 테스트를 하다 보급이 떨어지지 않는 것을 발견했습니다.",
-            "verbatim": false
-          },
+          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 떨어지지 않는 것을 발견했습니다.", "verbatim": false},
           {
             "label": "원인",
             "text": "새 맵(SciFiMap)의 지형 원점이 y = -20이라, 실제 전장 지면이 지형 기준 높이 약 18m로 계산되었습니다.",
@@ -803,67 +523,31 @@
         "chapter": "sound",
         "layout": "full",
         "tab": "선택",
-        "title": {
-          "text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "[B]를 골랐습니다. 모든 몬스터의 소리를 내면 플레이어가 겹친 소리에 불편함을 겪기 때문입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"
-        ],
+        "title": {"text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한", "verbatim": true},
+        "lead": {"text": "[B]를 골랐습니다. 모든 몬스터의 소리를 내면 플레이어가 겹친 소리에 불편함을 겪기 때문입니다.", "verbatim": true},
+        "sectionPath": ["5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 몬스터마다 자기 소리를 전부 내기|[B] 요청을 거르고 가까운 몇 마리만 들려주기 ✓"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 자기 소리를 전부 내기|[B] 요청을 거르고 가까운 몇 마리만 들려주기 ✓"}]
       },
       {
         "key": "crowd-numbers",
         "chapter": "sound",
         "layout": "full",
         "tab": "수치",
-        "title": {
-          "text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "고른 제한은 사운드 표(SoundTable.tsv)의 열과 소리 서비스의 설정으로 정했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"
-        ],
+        "title": {"text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한", "verbatim": true},
+        "lead": {"text": "고른 제한은 사운드 표(SoundTable.tsv)의 열과 소리 서비스의 설정으로 정했습니다.", "verbatim": true},
+        "sectionPath": ["5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "제한|값|효과"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 2, "fp": "제한|값|효과"}]
       },
       {
         "key": "hurt-sound",
         "chapter": "sound",
         "layout": "full",
         "tab": "선택",
-        "title": {
-          "text": "5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"
-        ],
+        "title": {"text": "5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
+        "lead": {"text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).", "verbatim": true},
+        "sectionPath": ["5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"],
         "points": [
           {
             "label": "",
@@ -871,46 +555,25 @@
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
       },
       {
         "key": "sound-arch",
         "chapter": "sound",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나",
-          "verbatim": true
-        },
+        "title": {"text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"
-        ],
+        "sectionPath": ["5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
         "points": [
-          {
-            "label": "",
-            "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.",
-            "verbatim": true
-          },
+          {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
           {
             "label": "",
             "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-02) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-6).",
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
-          }
-        ],
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}],
         "edited": true
       },
       {
@@ -918,22 +581,11 @@
         "chapter": "sound",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나",
-          "verbatim": true
-        },
+        "title": {"text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"
-        ],
+        "sectionPath": ["5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "경로|언제|예"
-          }
-        ],
+        "visuals": [{"kind": "table", "n": 1, "fp": "경로|언제|예"}],
         "edited": true
       },
       {
@@ -941,17 +593,12 @@
         "chapter": "sound",
         "layout": "visual",
         "tab": "흐름",
-        "title": {
-          "text": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기",
-          "verbatim": true
-        },
+        "title": {"text": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기", "verbatim": true},
         "lead": {
           "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
           "verbatim": true
         },
-        "sectionPath": [
-          "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"
-        ],
+        "sectionPath": ["5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"],
         "points": [
           {
             "label": "이유",
@@ -963,54 +610,22 @@
             "text": "몬스터는 오브젝트 풀을 쓰기 때문에, 풀에서 다시 꺼낼 때 Awake가 다시 불리지 않습니다.",
             "verbatim": true
           },
-          {
-            "label": "명중이 아니라 예고(Windup) 순간에 공격음",
-            "text": "플레이어에게 공격이 온다는 정보를 미리 주기 위한 장치입니다.",
-            "verbatim": true
-          }
+          {"label": "명중이 아니라 예고(Windup) 순간에 공격음", "text": "플레이어에게 공격이 온다는 정보를 미리 주기 위한 장치입니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 2,
-            "fp": "sequenceDiagram"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 2, "fp": "sequenceDiagram"}]
       },
       {
         "key": "player-emitter",
         "chapter": "sound",
         "layout": "code",
         "tab": "구현",
-        "title": {
-          "text": "5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"
-        ],
-        "points": [
-          {
-            "label": "이유",
-            "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.",
-            "verbatim": true
-          }
-        ],
+        "title": {"text": "5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)", "verbatim": true},
+        "lead": {"text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).", "verbatim": true},
+        "sectionPath": ["5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"],
+        "points": [{"label": "이유", "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.", "verbatim": true}],
         "visuals": [
-          {
-            "kind": "code",
-            "n": 1,
-            "fp": "// GameSoundRouter.Combat.AttachPlayerEmitters (32~36행 발췌)"
-          },
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"
-          }
+          {"kind": "code", "n": 1, "fp": "// GameSoundRouter.Combat.AttachPlayerEmitters (32~36행 발췌)"},
+          {"kind": "table", "n": 1, "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"}
         ]
       },
       {
@@ -1018,36 +633,18 @@
         "chapter": "upgrade",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "6-2. 상점 방식 — 전체 나열 vs 무작위 3장",
-          "verbatim": true
-        },
+        "title": {"text": "6-2. 상점 방식 — 전체 나열 vs 무작위 3장", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "6-2. 상점 방식 — 전체 나열 vs 무작위 3장"
-        ],
-        "points": [
-          {
-            "label": "",
-            "text": "[B]를 골랐습니다. 상점을 열 때마다 선택지가 달라져 고르는 재미가 생기기 때문입니다.",
-            "verbatim": true
-          }
-        ],
+        "sectionPath": ["6-2. 상점 방식 — 전체 나열 vs 무작위 3장"],
+        "points": [{"label": "", "text": "[B]를 골랐습니다. 상점을 열 때마다 선택지가 달라져 고르는 재미가 생기기 때문입니다.", "verbatim": true}],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"
-          },
+          {"kind": "table", "n": 1, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
           {
             "kind": "image",
             "src": "images/upgrade-shop.gif",
             "w": 960,
             "h": 540,
-            "caption": {
-              "text": "강화 상점 — 카드를 사면 SOLD가 되고, 리롤 5로 나머지 카드가 바뀜",
-              "verbatim": true
-            }
+            "caption": {"text": "강화 상점 — 카드를 사면 SOLD가 되고, 리롤 5로 나머지 카드가 바뀜", "verbatim": true}
           }
         ]
       },
@@ -1056,23 +653,11 @@
         "chapter": "map",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "7-2. 남은 일주일 — Claude와 함께 다시 만들기",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "그래서 Sci-Fi Base 에셋으로 맵을 새로 만들면서, 맵 제작을 Claude와 함께 진행했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "7-2. 남은 일주일 — Claude와 함께 다시 만들기"
-        ],
+        "title": {"text": "7-2. 남은 일주일 — Claude와 함께 다시 만들기", "verbatim": true},
+        "lead": {"text": "그래서 Sci-Fi Base 에셋으로 맵을 새로 만들면서, 맵 제작을 Claude와 함께 진행했습니다.", "verbatim": true},
+        "sectionPath": ["7-2. 남은 일주일 — Claude와 함께 다시 만들기"],
         "points": [
-          {
-            "label": "",
-            "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.",
-            "verbatim": true
-          },
+          {"label": "", "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.", "verbatim": true},
           {
             "label": "",
             "text": "그래서 \"높은 곳에서 쏘는 이점은 주지 않는다\" 원칙을 빌더 규칙으로 넣어, 계단·사다리·발판이 달린 프리팹은 배치하지 않았습니다.",
@@ -1080,20 +665,13 @@
           }
         ],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 지금까지처럼 전부 손으로 다시 배치|[B] Claude와 함께 생성 + 확인하며 수정 + 디테일은 수작업 ✓"
-          },
+          {"kind": "table", "n": 1, "fp": "|[A] 지금까지처럼 전부 손으로 다시 배치|[B] Claude와 함께 생성 + 확인하며 수정 + 디테일은 수작업 ✓"},
           {
             "kind": "image",
             "src": "images/map-overview.png",
             "w": 2492,
             "h": 1631,
-            "caption": {
-              "text": "신규 인게임 맵 탑뷰 — 지점 13곳, 순환로, 시작·보스 등장·구조선 착륙 지점",
-              "verbatim": true
-            }
+            "caption": {"text": "신규 인게임 맵 탑뷰 — 지점 13곳, 순환로, 시작·보스 등장·구조선 착륙 지점", "verbatim": true}
           }
         ],
         "edited": true
@@ -1103,33 +681,17 @@
         "chapter": "other",
         "layout": "visual",
         "tab": "결과",
-        "title": {
-          "text": "8-1. 튜토리얼 — 기획 세 번, 7과목과 행동 제한",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "튜토리얼도 AI와 함께 구현했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "8-1. 튜토리얼 — 기획 세 번, 7과목과 행동 제한"
-        ],
+        "title": {"text": "8-1. 튜토리얼 — 기획 세 번, 7과목과 행동 제한", "verbatim": true},
+        "lead": {"text": "튜토리얼도 AI와 함께 구현했습니다.", "verbatim": true},
+        "sectionPath": ["8-1. 튜토리얼 — 기획 세 번, 7과목과 행동 제한"],
         "points": [
-          {
-            "label": "7과목",
-            "text": "이동·질주·구르기 → 사격·처치 보상 → 무기 교체 → 수류탄 → 보급 → 강화 체험 → 전초기지 게이트",
-            "verbatim": true
-          },
+          {"label": "7과목", "text": "이동·질주·구르기 → 사격·처치 보상 → 무기 교체 → 수류탄 → 보급 → 강화 체험 → 전초기지 게이트", "verbatim": true},
           {
             "label": "오퍼레이터 음성 45줄",
             "text": "대사를 직접 TTS로 만들고, 녹음 한 파일을 대사별로 나눠 사운드 테이블에 연결 (처음 41줄, 11-03에 4줄 추가)",
             "verbatim": true
           },
-          {
-            "label": "행동 제한",
-            "text": "단계마다 지시한 행동만 할 수 있게 하고, 끝나거나 건너뛰면 풀어 줍니다",
-            "verbatim": true
-          }
+          {"label": "행동 제한", "text": "단계마다 지시한 행동만 할 수 있게 하고, 끝나거나 건너뛰면 풀어 줍니다", "verbatim": true}
         ],
         "visuals": [
           {
@@ -1150,17 +712,9 @@
         "chapter": "other",
         "layout": "screens",
         "tab": "결과",
-        "title": {
-          "text": "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "메인 메뉴를 기준으로 삼은 이유는, 메인 메뉴가 게임의 첫인상이기 때문입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"
-        ],
+        "title": {"text": "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
+        "lead": {"text": "메인 메뉴를 기준으로 삼은 이유는, 메인 메뉴가 게임의 첫인상이기 때문입니다.", "verbatim": true},
+        "sectionPath": ["8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
         "points": [],
         "visuals": [
           {
@@ -1168,30 +722,21 @@
             "src": "images/main-menu.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "메인 메뉴 — 보스와 몬스터 디오라마 배경 위에 글자 중심 메뉴, 선택 항목의 붉은 표식",
-              "verbatim": true
-            }
+            "caption": {"text": "메인 메뉴 — 보스와 몬스터 디오라마 배경 위에 글자 중심 메뉴, 선택 항목의 붉은 표식", "verbatim": true}
           },
           {
             "kind": "image",
             "src": "images/ui-before.png",
             "w": 1452,
             "h": 829,
-            "caption": {
-              "text": "UI 통합 전 「출발 전 무기 선택」 화면 (왼쪽은 개발용 디버그 창)",
-              "verbatim": true
-            }
+            "caption": {"text": "UI 통합 전 「출발 전 무기 선택」 화면 (왼쪽은 개발용 디버그 창)", "verbatim": true}
           },
           {
             "kind": "image",
             "src": "images/ui-after.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "UI 통합 후 같은 화면 — 메인 메뉴의 선·띠 스타일과 붉은 포인트로 통일",
-              "verbatim": true
-            }
+            "caption": {"text": "UI 통합 후 같은 화면 — 메인 메뉴의 선·띠 스타일과 붉은 포인트로 통일", "verbatim": true}
           }
         ],
         "edited": true
@@ -1201,39 +746,20 @@
         "chapter": "collab",
         "layout": "full",
         "tab": "개요",
-        "title": {
-          "text": "9-1. 팀 구성과 역할",
-          "verbatim": true
-        },
+        "title": {"text": "9-1. 팀 구성과 역할", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "9-1. 팀 구성과 역할"
-        ],
+        "sectionPath": ["9-1. 팀 구성과 역할"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "역할|담당"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "역할|담당"}]
       },
       {
         "key": "scope",
         "chapter": "collab",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "9-4. 협업 — 내 담당 범위와 다른 파트 코드",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "4명이 동시에 작업해서, 어디까지 내가 고칠지를 매번 정해야 했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "9-4. 협업 — 내 담당 범위와 다른 파트 코드"
-        ],
+        "title": {"text": "9-4. 협업 — 내 담당 범위와 다른 파트 코드", "verbatim": true},
+        "lead": {"text": "4명이 동시에 작업해서, 어디까지 내가 고칠지를 매번 정해야 했습니다.", "verbatim": true},
+        "sectionPath": ["9-4. 협업 — 내 담당 범위와 다른 파트 코드"],
         "points": [
           {
             "label": "",
@@ -1242,16 +768,8 @@
           }
         ],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "상황|내 결정"
-          },
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"
-          }
+          {"kind": "table", "n": 1, "fp": "상황|내 결정"},
+          {"kind": "table", "n": 2, "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"}
         ]
       },
       {
@@ -1259,128 +777,60 @@
         "chapter": "ai",
         "layout": "full",
         "tab": "",
-        "title": {
-          "text": "10-1. 장마다 AI가 한 것과 제가 한 것",
-          "verbatim": true
-        },
+        "title": {"text": "10-1. 장마다 AI가 한 것과 제가 한 것", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "10-1. 장마다 AI가 한 것과 제가 한 것"
-        ],
+        "sectionPath": ["10-1. 장마다 AI가 한 것과 제가 한 것"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "장|AI가 한 것|제가 한 것"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "장|AI가 한 것|제가 한 것"}]
       },
       {
         "key": "ai-role",
         "chapter": "ai",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "고정 순서",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "작업마다 같은 순서로 진행했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "10-2. AI에게 일을 시키는 구조",
-          "고정 순서"
-        ],
+        "title": {"text": "고정 순서", "verbatim": true},
+        "lead": {"text": "작업마다 같은 순서로 진행했습니다.", "verbatim": true},
+        "sectionPath": ["10-2. AI에게 일을 시키는 구조", "고정 순서"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "순서|누가|하는 일|남는 것"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "순서|누가|하는 일|남는 것"}]
       },
       {
         "key": "ai-rules",
         "chapter": "ai",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "규칙으로 막은 것",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "AI가 다른 사람의 작업물을 건드리지 않게 건 규칙입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "10-2. AI에게 일을 시키는 구조",
-          "규칙으로 막은 것"
-        ],
+        "title": {"text": "규칙으로 막은 것", "verbatim": true},
+        "lead": {"text": "AI가 다른 사람의 작업물을 건드리지 않게 건 규칙입니다.", "verbatim": true},
+        "sectionPath": ["10-2. AI에게 일을 시키는 구조", "규칙으로 막은 것"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "규칙|막는 것|결과"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "규칙|막는 것|결과"}]
       },
       {
         "key": "ai-tool",
         "chapter": "ai",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "AI에게 만들게 한 도구 — 맵 빌더(7-2)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "손으로 배치하던 맵을, AI에게 만들게 한 에디터 도구로 다시 만들었습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "10-2. AI에게 일을 시키는 구조",
-          "AI에게 만들게 한 도구 — 맵 빌더(7-2)"
-        ],
+        "title": {"text": "AI에게 만들게 한 도구 — 맵 빌더(7-2)", "verbatim": true},
+        "lead": {"text": "손으로 배치하던 맵을, AI에게 만들게 한 에디터 도구로 다시 만들었습니다.", "verbatim": true},
+        "sectionPath": ["10-2. AI에게 일을 시키는 구조", "AI에게 만들게 한 도구 — 맵 빌더(7-2)"],
         "points": [
-          {
-            "label": "",
-            "text": "이 도구로 7-2의 다섯 단계(설계 → 생성 → 확인 · 수정 → 수작업 → 규칙으로)를 돌렸습니다.",
-            "verbatim": true
-          },
+          {"label": "", "text": "이 도구로 7-2의 다섯 단계(설계 → 생성 → 확인 · 수정 → 수작업 → 규칙으로)를 돌렸습니다.", "verbatim": true},
           {
             "label": "큰 작업을 쪼개 맡긴 예 — UI 통합(8-2)",
             "text": "진행 중인 다른 브랜치와 시험 병합해 충돌이 없는 것을 확인한 뒤, 9개 단위를 PR 하나(#112)로 합쳤습니다.",
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "메뉴|하는 일"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "메뉴|하는 일"}]
       },
       {
         "key": "ai-prompt",
         "chapter": "ai",
         "layout": "overview",
         "tab": "",
-        "title": {
-          "text": "10-3. 실제 지시문",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "설계안의 질문 표에 제가 답한 말 두 개입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "10-3. 실제 지시문"
-        ],
+        "title": {"text": "10-3. 실제 지시문", "verbatim": true},
+        "lead": {"text": "설계안의 질문 표에 제가 답한 말 두 개입니다.", "verbatim": true},
+        "sectionPath": ["10-3. 실제 지시문"],
         "points": [
           {
             "label": "① 보급 개편 설계안에 답한 말",
@@ -1400,22 +850,11 @@
         "chapter": "ai",
         "layout": "full",
         "tab": "",
-        "title": {
-          "text": "10-4. AI가 틀린 곳과 막은 방법",
-          "verbatim": true
-        },
+        "title": {"text": "10-4. AI가 틀린 곳과 막은 방법", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "10-4. AI가 틀린 곳과 막은 방법"
-        ],
+        "sectionPath": ["10-4. AI가 틀린 곳과 막은 방법"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "AI가 만든 것|틀린 곳|찾은 방법|바꾼 규칙|절"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "AI가 만든 것|틀린 곳|찾은 방법|바꾼 규칙|절"}]
       }
     ],
     "base": [
@@ -1424,28 +863,16 @@
         "chapter": "intro",
         "layout": "overview",
         "tab": "개요",
-        "title": {
-          "text": "1-1. 무엇을 만들었나",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "몰려오는 수많은 적을 여러 총으로 처치하고, 보스의 공격 패턴을 공략하는 재미를 목표로 했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "1-1. 무엇을 만들었나"
-        ],
+        "title": {"text": "1-1. 무엇을 만들었나", "verbatim": true},
+        "lead": {"text": "몰려오는 수많은 적을 여러 총으로 처치하고, 보스의 공격 패턴을 공략하는 재미를 목표로 했습니다.", "verbatim": true},
+        "sectionPath": ["1-1. 무엇을 만들었나"],
         "points": [
           {
             "label": "",
             "text": "한 라운드는 군중전(약 3분) → 보스 등장·시점 전환 → 보스전 → 강화 선택 → 다음 라운드로 이어집니다(1라운드 기준, 2-1).",
             "verbatim": true
           },
-          {
-            "label": "",
-            "text": "제가 맡은 것은 보급·사운드 시스템과 라운드 종료 강화·맵·튜토리얼·메인 메뉴·UI 통합입니다(1-3 · 9-3).",
-            "verbatim": true
-          }
+          {"label": "", "text": "제가 맡은 것은 보급·사운드 시스템과 라운드 종료 강화·맵·튜토리얼·메인 메뉴·UI 통합입니다(1-3 · 9-3).", "verbatim": true}
         ],
         "visuals": [
           {
@@ -1453,20 +880,14 @@
             "src": "images/gameplay-crowd.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "1인칭 군중전(라운드 2 · 섬멸전) — 하늘을 덮고 몰려오는 몬스터 무리와 통합된 전투 HUD",
-              "verbatim": true
-            }
+            "caption": {"text": "1인칭 군중전(라운드 2 · 섬멸전) — 하늘을 덮고 몰려오는 몬스터 무리와 통합된 전투 HUD", "verbatim": true}
           },
           {
             "kind": "image",
             "src": "images/boss-third-person.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "3인칭 보스전 — 시점이 바뀌고, 바닥의 붉은 원으로 보스의 공격 범위를 알림",
-              "verbatim": true
-            }
+            "caption": {"text": "3인칭 보스전 — 시점이 바뀌고, 바닥의 붉은 원으로 보스의 공격 범위를 알림", "verbatim": true}
           }
         ]
       },
@@ -1475,30 +896,13 @@
         "chapter": "intro",
         "layout": "visual",
         "tab": "개요",
-        "title": {
-          "text": "1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제",
-          "verbatim": true
-        },
+        "title": {"text": "1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제"
-        ],
+        "sectionPath": ["1-2. 왜 만들었나 — 제 파트가 풀어야 했던 문제"],
         "points": [
-          {
-            "label": "보급",
-            "text": "새 맵에서 보급이 떨어지지 않거나, 지형·높은 건물 위·맵 밖에 떨어져 10개 중 2~3개를 줍지 못했습니다",
-            "verbatim": false
-          },
-          {
-            "label": "사운드",
-            "text": "4명이 각자 만드는 몬스터·보스·무기에 다른 사람 코드의 동작을 고치지 않고 소리를 붙여야 했습니다",
-            "verbatim": false
-          },
-          {
-            "label": "맵",
-            "text": "맵이 너무 커서 도망만 다니게 되고, 보급을 주우러 가는 길이 스트레스였습니다",
-            "verbatim": false
-          }
+          {"label": "보급", "text": "새 맵에서 보급이 떨어지지 않거나, 지형·높은 건물 위·맵 밖에 떨어져 10개 중 2~3개를 줍지 못했습니다", "verbatim": false},
+          {"label": "사운드", "text": "4명이 각자 만드는 몬스터·보스·무기에 다른 사람 코드의 동작을 고치지 않고 소리를 붙여야 했습니다", "verbatim": false},
+          {"label": "맵", "text": "맵이 너무 커서 도망만 다니게 되고, 보급을 주우러 가는 길이 스트레스였습니다", "verbatim": false}
         ],
         "visuals": [
           {
@@ -1506,13 +910,8 @@
             "src": "images/supply-drop.gif",
             "w": 800,
             "h": 450,
-            "caption": {
-              "text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함",
-              "verbatim": true
-            },
-            "sectionPath": [
-              "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
-            ]
+            "caption": {"text": "보급 상자 낙하 — 빛기둥으로 떨어지는 위치를 멀리서도 알 수 있게 함", "verbatim": true},
+            "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"]
           }
         ]
       },
@@ -1521,14 +920,9 @@
         "chapter": "design",
         "layout": "visual",
         "tab": "흐름",
-        "title": {
-          "text": "2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다",
-          "verbatim": true
-        },
+        "title": {"text": "2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다"
-        ],
+        "sectionPath": ["2-1. 한 라운드의 흐름 — 쓸어내고, 맞서고, 강해진다"],
         "points": [
           {
             "label": "",
@@ -1538,9 +932,14 @@
         ],
         "visuals": [
           {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
+            "kind": "image",
+            "src": "images/core-loop.png",
+            "w": 2000,
+            "h": 900,
+            "caption": {
+              "text": "한 라운드의 흐름입니다(1라운드 기준). 1인칭 군중전 → 보스 등장과 3인칭 전환 → 보스전 → 라운드 종료 강화를 거쳐 다음 라운드로 갑니다. 최종 보스를 쓰러뜨리면 게임 클리어이고, 플레이어가 끝내 쓰러지면 그 라운드의 시작 상태에서 다시 합니다.",
+              "verbatim": true
+            }
           }
         ]
       },
@@ -1549,17 +948,9 @@
         "chapter": "design",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "이 원칙을 세 곳에 똑같이 적용했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로"
-        ],
+        "title": {"text": "2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로", "verbatim": true},
+        "lead": {"text": "이 원칙을 세 곳에 똑같이 적용했습니다.", "verbatim": true},
+        "sectionPath": ["2-3. \"높은 곳에서 쏘는 이점은 주지 않는다\" — 맵·NavMesh·보급을 한 원칙으로"],
         "points": [
           {
             "label": "",
@@ -1567,74 +958,38 @@
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "시스템|적용"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "시스템|적용"}]
       },
       {
         "key": "arch-map",
         "chapter": "arch",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "3-1. 구조 그림",
-          "verbatim": true
-        },
+        "title": {"text": "3-1. 구조 그림", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "3-1. 구조 그림"
-        ],
+        "sectionPath": ["3-1. 구조 그림"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart TB"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}]
       },
       {
         "key": "arch-classes",
         "chapter": "arch",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "3-2. 핵심 클래스",
-          "verbatim": true
-        },
+        "title": {"text": "3-2. 핵심 클래스", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "3-2. 핵심 클래스"
-        ],
+        "sectionPath": ["3-2. 핵심 클래스"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "역할 (이름)|하는 일|하지 않는 일|다룬 장"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "역할 (이름)|하는 일|하지 않는 일|다룬 장"}]
       },
       {
         "key": "rules",
         "chapter": "arch",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "3-3. 약속 — 파트끼리 서로 모른다",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "규칙은 파트가 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 쓰는 것입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "3-3. 약속 — 파트끼리 서로 모른다"
-        ],
+        "title": {"text": "3-3. 약속 — 파트끼리 서로 모른다", "verbatim": true},
+        "lead": {"text": "규칙은 파트가 HybridShooter.Core에만 의존하고, 서로 통신할 때는 세 가지 중 하나를 쓰는 것입니다.", "verbatim": true},
+        "sectionPath": ["3-3. 약속 — 파트끼리 서로 모른다"],
         "points": [
           {
             "label": "",
@@ -1642,71 +997,30 @@
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart TB"
-          },
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "상황|방법"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}, {"kind": "table", "n": 1, "fp": "상황|방법"}]
       },
       {
         "key": "supply-flow",
         "chapter": "supply",
         "layout": "visual",
         "tab": "흐름",
-        "sectionPath": [
-          "4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"
-        ],
-        "title": {
-          "text": "4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "군중전에서 보급 상자는 플레이어의 생사를 가르는 시스템입니다.",
-          "verbatim": true
-        },
+        "sectionPath": ["4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다"],
+        "title": {"text": "4. 보급 — 주울 수 있는 곳에, 지금 필요한 것이 떨어진다", "verbatim": true},
+        "lead": {"text": "군중전에서 보급 상자는 플레이어의 생사를 가르는 시스템입니다.", "verbatim": true},
         "points": [
-          {
-            "label": "",
-            "text": "이 그림에서 볼 것은 어디에 떨어질지(4-3)와 무엇이 떨어질지(4-4)를 보급이 혼자 정한다는 점입니다.",
-            "verbatim": true
-          },
-          {
-            "label": "",
-            "text": "라운드 담당은 \"떨어뜨려라\"만 부르고, HUD·사운드는 \"주웠다\"는 이벤트만 듣습니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "이 그림에서 볼 것은 어디에 떨어질지(4-3)와 무엇이 떨어질지(4-4)를 보급이 혼자 정한다는 점입니다.", "verbatim": true},
+          {"label": "", "text": "라운드 담당은 \"떨어뜨려라\"만 부르고, HUD·사운드는 \"주웠다\"는 이벤트만 듣습니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
         "key": "supply-arch",
         "chapter": "supply",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "4-1. 보급 모듈 구조 — 맡은 클래스",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "보급 시스템에서 중요한 것은 언제 떨어지는가, 얼마나 떨어지는가, 무엇이 떨어지는가입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4-1. 보급 모듈 구조 — 맡은 클래스"
-        ],
+        "title": {"text": "4-1. 보급 모듈 구조 — 맡은 클래스", "verbatim": true},
+        "lead": {"text": "보급 시스템에서 중요한 것은 언제 떨어지는가, 얼마나 떨어지는가, 무엇이 떨어지는가입니다.", "verbatim": true},
+        "sectionPath": ["4-1. 보급 모듈 구조 — 맡은 클래스"],
         "points": [
           {
             "label": "",
@@ -1719,35 +1033,16 @@
             "verbatim": false
           }
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "classDiagram"
-          },
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "역할 (클래스)|하는 일"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}, {"kind": "table", "n": 1, "fp": "역할 (클래스)|하는 일"}]
       },
       {
         "key": "drop-point",
         "chapter": "supply",
         "layout": "visual",
         "tab": "흐름",
-        "title": {
-          "text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "하나라도 걸리면 그 후보는 버리고 다시 뽑습니다(최대 30번).",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
-        ],
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "lead": {"text": "하나라도 걸리면 그 후보는 버리고 다시 뽑습니다(최대 30번).", "verbatim": true},
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
         "points": [
           {
             "label": "길 찾기를 맨 마지막에 둔 이유",
@@ -1760,94 +1055,45 @@
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
         "key": "drop-point-table",
         "chapter": "supply",
         "layout": "full",
         "tab": "흐름",
-        "title": {
-          "text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
-          "verbatim": true
-        },
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
-        ],
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "검사|막는 문제|어디서 나왔나"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "검사|막는 문제|어디서 나왔나"}]
       },
       {
         "key": "ground-choice",
         "chapter": "supply",
         "layout": "full",
         "tab": "선택",
-        "sectionPath": [
-          "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"
-        ],
-        "title": {
-          "text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "성능은 두 안이 같습니다.",
-          "verbatim": true
-        },
-        "points": [
-          {
-            "label": "이유",
-            "text": "B안은 Ground만 허용하므로 소품 레이어를 빠뜨려도 틀리지 않습니다. 이 실수를 막을 수 있어 B안을 골랐습니다.",
-            "verbatim": true
-          }
-        ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "|[A] 소품이 아닌 곳에 투하|[B] 처음 맞은 것이 Ground일 때만 투하 ✓|[C] Ground만 맞히는 레이캐스트"
-          }
-        ]
+        "sectionPath": ["4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)"],
+        "title": {"text": "4-3. 주울 수 있는 곳에만 보급이 떨어진다 — 낙하 지점 찾기 (값싼 검사부터, 길 찾기는 마지막)", "verbatim": true},
+        "lead": {"text": "성능은 두 안이 같습니다.", "verbatim": true},
+        "points": [{"label": "이유", "text": "B안은 Ground만 허용하므로 소품 레이어를 빠뜨려도 틀리지 않습니다. 이 실수를 막을 수 있어 B안을 골랐습니다.", "verbatim": true}],
+        "visuals": [{"kind": "table", "n": 2, "fp": "|[A] 소품이 아닌 곳에 투하|[B] 처음 맞은 것이 Ground일 때만 투하 ✓|[C] Ground만 맞히는 레이캐스트"}]
       },
       {
         "key": "drop-weight",
         "chapter": "supply",
         "layout": "visual",
         "tab": "구현",
-        "title": {
-          "text": "4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "최종 가중치 = 테이블 기본 Weight × 상황 배율",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률"
-        ],
+        "title": {"text": "4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률", "verbatim": true},
+        "lead": {"text": "최종 가중치 = 테이블 기본 Weight × 상황 배율", "verbatim": true},
+        "sectionPath": ["4-4. 지금 필요한 보급이 더 잘 나온다 — 상황에 따라 바뀌는 확률"],
         "points": [
           {
             "label": "이유",
             "text": "확률을 바꾸기 전에는 정해진 확률대로 무작위로 떨어뜨렸고, 플레이 테스트 중 정작 필요한 순간에 필요한 보급을 받지 못하는 상황을 겪었습니다.",
             "verbatim": true
           },
-          {
-            "label": "제안",
-            "text": "기본 확률을 올리는 대신, 언제 무엇이 필요한지에 따라 확률이 바뀌게 하자고 제안했습니다.",
-            "verbatim": true
-          },
+          {"label": "제안", "text": "기본 확률을 올리는 대신, 언제 무엇이 필요한지에 따라 확률이 바뀌게 하자고 제안했습니다.", "verbatim": true},
           {
             "label": "",
             "text": "저는 투하 확률 로그([SupplyDropper] 투하 확률: …)로 수류탄이 0개일 때 수류탄 상자가 자주 나오는 것을 확인했습니다.",
@@ -1855,16 +1101,8 @@
           }
         ],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "상자|배율"
-          },
-          {
-            "kind": "table",
-            "n": 3,
-            "fp": "상황 (기본 40/40/15/15, 최종 보급 표 값으로 계산)|수류탄|회복|로켓|유탄"
-          }
+          {"kind": "table", "n": 2, "fp": "상자|배율"},
+          {"kind": "table", "n": 3, "fp": "상황 (기본 40/40/15/15, 최종 보급 표 값으로 계산)|수류탄|회복|로켓|유탄"}
         ]
       },
       {
@@ -1872,17 +1110,9 @@
         "chapter": "supply",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "처음에는 플레이어가 보급 상자에 닿기만 하면 바로 획득했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기"
-        ],
+        "title": {"text": "4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기", "verbatim": true},
+        "lead": {"text": "처음에는 플레이어가 보급 상자에 닿기만 하면 바로 획득했습니다.", "verbatim": true},
+        "sectionPath": ["4-5. 보급 줍기 — 조준해서 줍기 vs 가까이 가서 줍기"],
         "points": [
           {
             "label": "F키로 바꾼 이유",
@@ -1894,27 +1124,16 @@
             "text": "또 빛기둥 색으로만 구분하던 보급을 보급 정보 UI로도 보여 주어, 어떤 보급인지 줍기 전에 확인할 수 있게 했습니다.",
             "verbatim": true
           },
-          {
-            "label": "",
-            "text": "획득 반경 2m, 조준 정보 카드는 30m 안에서만, 상자 투하는 60m 안 — 숫자는 직접 플레이하면서 정했습니다.",
-            "verbatim": true
-          }
+          {"label": "", "text": "획득 반경 2m, 조준 정보 카드는 30m 안에서만, 상자 투하는 60m 안 — 숫자는 직접 플레이하면서 정했습니다.", "verbatim": true}
         ],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 조준만 (처음 방식)|[B] 근접만|[C] 둘 다 ✓"
-          },
+          {"kind": "table", "n": 1, "fp": "|[A] 조준만 (처음 방식)|[B] 근접만|[C] 둘 다 ✓"},
           {
             "kind": "image",
             "src": "images/supply-pickup.gif",
             "w": 960,
             "h": 540,
-            "caption": {
-              "text": "보급 상자 줍기 — 빛기둥 아래 상자로 다가가면 정보 카드(회복 팩 보급 상자)가 뜨고, 가까이에서 F로 획득",
-              "verbatim": true
-            }
+            "caption": {"text": "보급 상자 줍기 — 빛기둥 아래 상자로 다가가면 정보 카드(회복 팩 보급 상자)가 뜨고, 가까이에서 F로 획득", "verbatim": true}
           }
         ]
       },
@@ -1923,20 +1142,11 @@
         "chapter": "supply",
         "layout": "problem",
         "tab": "문제 해결",
-        "title": {
-          "text": "4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)",
-          "verbatim": true
-        },
+        "title": {"text": "4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)"
-        ],
+        "sectionPath": ["4-6. 문제 해결 — 새 맵에서 보급이 하나도 떨어지지 않음 (10-31 발견 → 11-01 수정)"],
         "points": [
-          {
-            "label": "문제",
-            "text": "직접 플레이 테스트를 하다 보급이 떨어지지 않는 것을 발견했습니다.",
-            "verbatim": false
-          },
+          {"label": "문제", "text": "직접 플레이 테스트를 하다 보급이 떨어지지 않는 것을 발견했습니다.", "verbatim": false},
           {
             "label": "원인",
             "text": "새 맵(SciFiMap)의 지형 원점이 y = -20이라, 실제 전장 지면이 지형 기준 높이 약 18m로 계산되었습니다.",
@@ -1960,67 +1170,31 @@
         "chapter": "sound",
         "layout": "full",
         "tab": "선택",
-        "title": {
-          "text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "[B]를 골랐습니다. 모든 몬스터의 소리를 내면 플레이어가 겹친 소리에 불편함을 겪기 때문입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"
-        ],
+        "title": {"text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한", "verbatim": true},
+        "lead": {"text": "[B]를 골랐습니다. 모든 몬스터의 소리를 내면 플레이어가 겹친 소리에 불편함을 겪기 때문입니다.", "verbatim": true},
+        "sectionPath": ["5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 몬스터마다 자기 소리를 전부 내기|[B] 요청을 거르고 가까운 몇 마리만 들려주기 ✓"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 자기 소리를 전부 내기|[B] 요청을 거르고 가까운 몇 마리만 들려주기 ✓"}]
       },
       {
         "key": "crowd-numbers",
         "chapter": "sound",
         "layout": "full",
         "tab": "수치",
-        "title": {
-          "text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "고른 제한은 사운드 표(SoundTable.tsv)의 열과 소리 서비스의 설정으로 정했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"
-        ],
+        "title": {"text": "5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한", "verbatim": true},
+        "lead": {"text": "고른 제한은 사운드 표(SoundTable.tsv)의 열과 소리 서비스의 설정으로 정했습니다.", "verbatim": true},
+        "sectionPath": ["5-1. 군중전에서 몇 마리의 소리를 낼까 — 소리 수 제한"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "제한|값|효과"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 2, "fp": "제한|값|효과"}]
       },
       {
         "key": "hurt-sound",
         "chapter": "sound",
         "layout": "full",
         "tab": "선택",
-        "title": {
-          "text": "5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"
-        ],
+        "title": {"text": "5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리", "verbatim": true},
+        "lead": {"text": "결과: 타격감은 총알 타격음(3D, 맞은 위치)과 히트마커(2D)로 주고, 약점을 맞히면 같은 타격음의 음높이만 올립니다(제 아이디어).", "verbatim": true},
+        "sectionPath": ["5-2. 몬스터 피격 소리 — 만들 수 있지만 만들지 않은 소리"],
         "points": [
           {
             "label": "",
@@ -2028,85 +1202,48 @@
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "|[A] 몬스터마다 Hurt 소리|[B] 총알 타격음 하나 + 히트마커 ✓"}]
       },
       {
         "key": "sound-arch",
         "chapter": "sound",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나",
-          "verbatim": true
-        },
+        "title": {"text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"
-        ],
+        "sectionPath": ["5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
         "points": [
-          {
-            "label": "",
-            "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.",
-            "verbatim": true
-          },
+          {"label": "", "text": "이 세 갈래 구분은 AI가 설계 문서(SoundSystemRefactor_v3.md §4)에서 정리한 것입니다.", "verbatim": true},
           {
             "label": "",
             "text": "제가 직접 고른 것은 플레이어 소리가 나지 않던 버그(11-02) 때, 몬스터처럼 플레이어에도 라우터가 이미터를 자동으로 붙이는 방식입니다(5-6).",
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 1,
-            "fp": "flowchart LR"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
       },
       {
         "key": "sound-arch-table",
         "chapter": "sound",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나",
-          "verbatim": true
-        },
+        "title": {"text": "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"
-        ],
+        "sectionPath": ["5-3. 사운드 모듈 구조 — 소리 하나에 경로 하나"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "경로|언제|예"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "경로|언제|예"}]
       },
       {
         "key": "emitter",
         "chapter": "sound",
         "layout": "visual",
         "tab": "흐름",
-        "title": {
-          "text": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기",
-          "verbatim": true
-        },
+        "title": {"text": "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기", "verbatim": true},
         "lead": {
           "text": "몬스터가 생기면 Router가 이미터를 붙이고, 이미터는 몬스터가 Core 계약(IMonsterSoundSource)으로 알려 주는 지역 이벤트만 듣습니다.",
           "verbatim": true
         },
-        "sectionPath": [
-          "5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"
-        ],
+        "sectionPath": ["5-5. 새 몬스터도 표만 채우면 소리가 난다 — 다른 파트 코드의 동작을 고치지 않고 소리 붙이기"],
         "points": [
           {
             "label": "이유",
@@ -2118,54 +1255,22 @@
             "text": "몬스터는 오브젝트 풀을 쓰기 때문에, 풀에서 다시 꺼낼 때 Awake가 다시 불리지 않습니다.",
             "verbatim": true
           },
-          {
-            "label": "명중이 아니라 예고(Windup) 순간에 공격음",
-            "text": "플레이어에게 공격이 온다는 정보를 미리 주기 위한 장치입니다.",
-            "verbatim": true
-          }
+          {"label": "명중이 아니라 예고(Windup) 순간에 공격음", "text": "플레이어에게 공격이 온다는 정보를 미리 주기 위한 장치입니다.", "verbatim": true}
         ],
-        "visuals": [
-          {
-            "kind": "mermaid",
-            "n": 2,
-            "fp": "sequenceDiagram"
-          }
-        ]
+        "visuals": [{"kind": "mermaid", "n": 2, "fp": "sequenceDiagram"}]
       },
       {
         "key": "player-emitter",
         "chapter": "sound",
         "layout": "code",
         "tab": "구현",
-        "title": {
-          "text": "5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"
-        ],
-        "points": [
-          {
-            "label": "이유",
-            "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.",
-            "verbatim": true
-          }
-        ],
+        "title": {"text": "5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)", "verbatim": true},
+        "lead": {"text": "원인: PlayerSoundEmitter가 플레이어 프리팹에 붙어 있지 않았습니다(SoundFix_Handoff.md §1).", "verbatim": true},
+        "sectionPath": ["5-6. 같은 방식을 플레이어에도 — 플레이어 소리가 나지 않던 문제 (11-02)"],
+        "points": [{"label": "이유", "text": "담당자의 작업물을 바꾸고 싶지 않았기 때문입니다.", "verbatim": true}],
         "visuals": [
-          {
-            "kind": "code",
-            "n": 1,
-            "fp": "// GameSoundRouter.Combat.AttachPlayerEmitters (32~36행 발췌)"
-          },
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"
-          }
+          {"kind": "code", "n": 1, "fp": "// GameSoundRouter.Combat.AttachPlayerEmitters (32~36행 발췌)"},
+          {"kind": "table", "n": 1, "fp": "|[A] 플레이어 프리팹에 이미터를 직접 붙이기|[B] 라우터가 실행 중에 자동으로 붙이기 ✓"}
         ]
       },
       {
@@ -2173,36 +1278,18 @@
         "chapter": "upgrade",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "6-2. 상점 방식 — 전체 나열 vs 무작위 3장",
-          "verbatim": true
-        },
+        "title": {"text": "6-2. 상점 방식 — 전체 나열 vs 무작위 3장", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "6-2. 상점 방식 — 전체 나열 vs 무작위 3장"
-        ],
-        "points": [
-          {
-            "label": "",
-            "text": "[B]를 골랐습니다. 상점을 열 때마다 선택지가 달라져 고르는 재미가 생기기 때문입니다.",
-            "verbatim": true
-          }
-        ],
+        "sectionPath": ["6-2. 상점 방식 — 전체 나열 vs 무작위 3장"],
+        "points": [{"label": "", "text": "[B]를 골랐습니다. 상점을 열 때마다 선택지가 달라져 고르는 재미가 생기기 때문입니다.", "verbatim": true}],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"
-          },
+          {"kind": "table", "n": 1, "fp": "|[A] 전체 나열|[B] 무작위 카드 3장 + 리롤 ✓"},
           {
             "kind": "image",
             "src": "images/upgrade-shop.gif",
             "w": 960,
             "h": 540,
-            "caption": {
-              "text": "강화 상점 — 카드를 사면 SOLD가 되고, 리롤 5로 나머지 카드가 바뀜",
-              "verbatim": true
-            }
+            "caption": {"text": "강화 상점 — 카드를 사면 SOLD가 되고, 리롤 5로 나머지 카드가 바뀜", "verbatim": true}
           }
         ]
       },
@@ -2211,23 +1298,11 @@
         "chapter": "map",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "7-2. 남은 일주일 — Claude와 함께 다시 만들기",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "그래서 Sci-Fi Base 에셋으로 맵을 새로 만들면서, 맵 제작을 Claude와 함께 진행했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "7-2. 남은 일주일 — Claude와 함께 다시 만들기"
-        ],
+        "title": {"text": "7-2. 남은 일주일 — Claude와 함께 다시 만들기", "verbatim": true},
+        "lead": {"text": "그래서 Sci-Fi Base 에셋으로 맵을 새로 만들면서, 맵 제작을 Claude와 함께 진행했습니다.", "verbatim": true},
+        "sectionPath": ["7-2. 남은 일주일 — Claude와 함께 다시 만들기"],
         "points": [
-          {
-            "label": "",
-            "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.",
-            "verbatim": true
-          },
+          {"label": "", "text": "AI에게 맵 생성 설계와 구현을 맡겼을 때 가장 큰 문제는 맵의 디테일이었습니다.", "verbatim": true},
           {
             "label": "",
             "text": "그래서 \"높은 곳에서 쏘는 이점은 주지 않는다\" 원칙을 빌더 규칙으로 넣어, 계단·사다리·발판이 달린 프리팹은 배치하지 않았습니다.",
@@ -2235,20 +1310,13 @@
           }
         ],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "|[A] 지금까지처럼 전부 손으로 다시 배치|[B] Claude와 함께 생성 + 확인하며 수정 + 디테일은 수작업 ✓"
-          },
+          {"kind": "table", "n": 1, "fp": "|[A] 지금까지처럼 전부 손으로 다시 배치|[B] Claude와 함께 생성 + 확인하며 수정 + 디테일은 수작업 ✓"},
           {
             "kind": "image",
             "src": "images/map-overview.png",
             "w": 2492,
             "h": 1631,
-            "caption": {
-              "text": "신규 인게임 맵 탑뷰 — 지점 13곳, 순환로, 시작·보스 등장·구조선 착륙 지점",
-              "verbatim": true
-            }
+            "caption": {"text": "신규 인게임 맵 탑뷰 — 지점 13곳, 순환로, 시작·보스 등장·구조선 착륙 지점", "verbatim": true}
           }
         ]
       },
@@ -2257,17 +1325,9 @@
         "chapter": "other",
         "layout": "screens",
         "tab": "결과",
-        "title": {
-          "text": "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "메인 메뉴를 기준으로 삼은 이유는, 메인 메뉴가 게임의 첫인상이기 때문입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"
-        ],
+        "title": {"text": "8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게", "verbatim": true},
+        "lead": {"text": "메인 메뉴를 기준으로 삼은 이유는, 메인 메뉴가 게임의 첫인상이기 때문입니다.", "verbatim": true},
+        "sectionPath": ["8-2. UI 통합 — 메인 메뉴 스타일을 게임 전체로, 다른 사람 작업과 부딪히지 않게"],
         "points": [],
         "visuals": [
           {
@@ -2275,30 +1335,21 @@
             "src": "images/main-menu.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "메인 메뉴 — 보스와 몬스터 디오라마 배경 위에 글자 중심 메뉴, 선택 항목의 붉은 표식",
-              "verbatim": true
-            }
+            "caption": {"text": "메인 메뉴 — 보스와 몬스터 디오라마 배경 위에 글자 중심 메뉴, 선택 항목의 붉은 표식", "verbatim": true}
           },
           {
             "kind": "image",
             "src": "images/ui-before.png",
             "w": 1452,
             "h": 829,
-            "caption": {
-              "text": "UI 통합 전 「출발 전 무기 선택」 화면 (왼쪽은 개발용 디버그 창)",
-              "verbatim": true
-            }
+            "caption": {"text": "UI 통합 전 「출발 전 무기 선택」 화면 (왼쪽은 개발용 디버그 창)", "verbatim": true}
           },
           {
             "kind": "image",
             "src": "images/ui-after.png",
             "w": 1920,
             "h": 1080,
-            "caption": {
-              "text": "UI 통합 후 같은 화면 — 메인 메뉴의 선·띠 스타일과 붉은 포인트로 통일",
-              "verbatim": true
-            }
+            "caption": {"text": "UI 통합 후 같은 화면 — 메인 메뉴의 선·띠 스타일과 붉은 포인트로 통일", "verbatim": true}
           }
         ]
       },
@@ -2307,39 +1358,20 @@
         "chapter": "collab",
         "layout": "full",
         "tab": "개요",
-        "title": {
-          "text": "9-1. 팀 구성과 역할",
-          "verbatim": true
-        },
+        "title": {"text": "9-1. 팀 구성과 역할", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "9-1. 팀 구성과 역할"
-        ],
+        "sectionPath": ["9-1. 팀 구성과 역할"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "역할|담당"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "역할|담당"}]
       },
       {
         "key": "scope",
         "chapter": "collab",
         "layout": "visual",
         "tab": "선택",
-        "title": {
-          "text": "9-4. 협업 — 내 담당 범위와 다른 파트 코드",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "4명이 동시에 작업해서, 어디까지 내가 고칠지를 매번 정해야 했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "9-4. 협업 — 내 담당 범위와 다른 파트 코드"
-        ],
+        "title": {"text": "9-4. 협업 — 내 담당 범위와 다른 파트 코드", "verbatim": true},
+        "lead": {"text": "4명이 동시에 작업해서, 어디까지 내가 고칠지를 매번 정해야 했습니다.", "verbatim": true},
+        "sectionPath": ["9-4. 협업 — 내 담당 범위와 다른 파트 코드"],
         "points": [
           {
             "label": "",
@@ -2348,16 +1380,8 @@
           }
         ],
         "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "상황|내 결정"
-          },
-          {
-            "kind": "table",
-            "n": 2,
-            "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"
-          }
+          {"kind": "table", "n": 1, "fp": "상황|내 결정"},
+          {"kind": "table", "n": 2, "fp": "|[A] 담당자에게 요청하고 기다림|[B] 작게 직접 고치고 PR에서 담당자 리뷰 ✓|[C] 내 쪽에서 우회"}
         ]
       },
       {
@@ -2365,128 +1389,60 @@
         "chapter": "ai",
         "layout": "full",
         "tab": "",
-        "title": {
-          "text": "10-1. 장마다 AI가 한 것과 제가 한 것",
-          "verbatim": true
-        },
+        "title": {"text": "10-1. 장마다 AI가 한 것과 제가 한 것", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "10-1. 장마다 AI가 한 것과 제가 한 것"
-        ],
+        "sectionPath": ["10-1. 장마다 AI가 한 것과 제가 한 것"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "장|AI가 한 것|제가 한 것"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "장|AI가 한 것|제가 한 것"}]
       },
       {
         "key": "ai-role",
         "chapter": "ai",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "고정 순서",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "작업마다 같은 순서로 진행했습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "10-2. AI에게 일을 시키는 구조",
-          "고정 순서"
-        ],
+        "title": {"text": "고정 순서", "verbatim": true},
+        "lead": {"text": "작업마다 같은 순서로 진행했습니다.", "verbatim": true},
+        "sectionPath": ["10-2. AI에게 일을 시키는 구조", "고정 순서"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "순서|누가|하는 일|남는 것"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "순서|누가|하는 일|남는 것"}]
       },
       {
         "key": "ai-rules",
         "chapter": "ai",
         "layout": "full",
         "tab": "구조",
-        "title": {
-          "text": "규칙으로 막은 것",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "AI가 다른 사람의 작업물을 건드리지 않게 건 규칙입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "10-2. AI에게 일을 시키는 구조",
-          "규칙으로 막은 것"
-        ],
+        "title": {"text": "규칙으로 막은 것", "verbatim": true},
+        "lead": {"text": "AI가 다른 사람의 작업물을 건드리지 않게 건 규칙입니다.", "verbatim": true},
+        "sectionPath": ["10-2. AI에게 일을 시키는 구조", "규칙으로 막은 것"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "규칙|막는 것|결과"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "규칙|막는 것|결과"}]
       },
       {
         "key": "ai-tool",
         "chapter": "ai",
         "layout": "visual",
         "tab": "구조",
-        "title": {
-          "text": "AI에게 만들게 한 도구 — 맵 빌더(7-2)",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "손으로 배치하던 맵을, AI에게 만들게 한 에디터 도구로 다시 만들었습니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "10-2. AI에게 일을 시키는 구조",
-          "AI에게 만들게 한 도구 — 맵 빌더(7-2)"
-        ],
+        "title": {"text": "AI에게 만들게 한 도구 — 맵 빌더(7-2)", "verbatim": true},
+        "lead": {"text": "손으로 배치하던 맵을, AI에게 만들게 한 에디터 도구로 다시 만들었습니다.", "verbatim": true},
+        "sectionPath": ["10-2. AI에게 일을 시키는 구조", "AI에게 만들게 한 도구 — 맵 빌더(7-2)"],
         "points": [
-          {
-            "label": "",
-            "text": "이 도구로 7-2의 다섯 단계(설계 → 생성 → 확인 · 수정 → 수작업 → 규칙으로)를 돌렸습니다.",
-            "verbatim": true
-          },
+          {"label": "", "text": "이 도구로 7-2의 다섯 단계(설계 → 생성 → 확인 · 수정 → 수작업 → 규칙으로)를 돌렸습니다.", "verbatim": true},
           {
             "label": "큰 작업을 쪼개 맡긴 예 — UI 통합(8-2)",
             "text": "진행 중인 다른 브랜치와 시험 병합해 충돌이 없는 것을 확인한 뒤, 9개 단위를 PR 하나(#112)로 합쳤습니다.",
             "verbatim": true
           }
         ],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "메뉴|하는 일"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "메뉴|하는 일"}]
       },
       {
         "key": "ai-prompt",
         "chapter": "ai",
         "layout": "overview",
         "tab": "",
-        "title": {
-          "text": "10-3. 실제 지시문",
-          "verbatim": true
-        },
-        "lead": {
-          "text": "설계안의 질문 표에 제가 답한 말 두 개입니다.",
-          "verbatim": true
-        },
-        "sectionPath": [
-          "10-3. 실제 지시문"
-        ],
+        "title": {"text": "10-3. 실제 지시문", "verbatim": true},
+        "lead": {"text": "설계안의 질문 표에 제가 답한 말 두 개입니다.", "verbatim": true},
+        "sectionPath": ["10-3. 실제 지시문"],
         "points": [
           {
             "label": "① 보급 개편 설계안에 답한 말",
@@ -2506,25 +1462,14 @@
         "chapter": "ai",
         "layout": "full",
         "tab": "",
-        "title": {
-          "text": "10-4. AI가 틀린 곳과 막은 방법",
-          "verbatim": true
-        },
+        "title": {"text": "10-4. AI가 틀린 곳과 막은 방법", "verbatim": true},
         "lead": null,
-        "sectionPath": [
-          "10-4. AI가 틀린 곳과 막은 방법"
-        ],
+        "sectionPath": ["10-4. AI가 틀린 곳과 막은 방법"],
         "points": [],
-        "visuals": [
-          {
-            "kind": "table",
-            "n": 1,
-            "fp": "AI가 만든 것|틀린 곳|찾은 방법|바꾼 규칙|절"
-          }
-        ]
+        "visuals": [{"kind": "table", "n": 1, "fp": "AI가 만든 것|틀린 곳|찾은 방법|바꾼 규칙|절"}]
       }
     ],
-    "applied": "539998c952e5d04d"
+    "applied": "2d9cbc7c205d6576"
   },
   "generatedAt": "2026-11-25"
 }

@@ -1,5 +1,38 @@
 {
   "schemaVersion": 1,
-  "pin": [],
+  "pin": [
+    {
+      "key": "battle-flow",
+      "after": "origin",
+      "chapter": "design",
+      "layout": "full",
+      "tab": "흐름",
+      "title": {
+        "text": "2-2. 전투(던전) 한 번의 흐름",
+        "verbatim": true
+      },
+      "lead": {
+        "text": "5인 파티가 던전에서 전투 한 번을 치르는 흐름입니다.",
+        "verbatim": true
+      },
+      "sectionPath": [
+        "2. 게임 디자인 — 분석한 게임은 어떻게 짜여 있나",
+        "2-2. 전투(던전) 한 번의 흐름"
+      ],
+      "points": [],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/battle-flow.png",
+          "w": 2000,
+          "h": 900,
+          "caption": {
+            "text": "직접 찍은 화면으로 이은 전투 한 번의 흐름입니다. 이기면 다음 전투로 돌아가고, 하드코어에서는 파티 전멸이 곧 캐릭터 삭제입니다.",
+            "verbatim": true
+          }
+        }
+      ]
+    }
+  ],
   "hide": []
 }

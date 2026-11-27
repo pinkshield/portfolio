@@ -245,7 +245,7 @@
       {
         "key": "day-loop",
         "chapter": "design",
-        "layout": "visual",
+        "layout": "full",
         "tab": "흐름",
         "title": {"text": "2-1. 하루의 흐름", "verbatim": true},
         "lead": {"text": "아래 그림에서 볼 것은 영업으로 번 돈이 팩 개봉으로 이어지고, 개봉한 카드가 다음 날 영업의 상품이 되는 순환입니다.", "verbatim": true},
@@ -253,12 +253,21 @@
         "points": [
           {
             "label": "",
-            "text": "알바해서 번 돈으로 팩을 사서 뜯고(4장), 뜯은 카드를 팔지 · 모을지 고르며(5장), 다음 날 손님이 그 카드를 사 갑니다(6장).",
+            "text": "손님을 받아 번 알바비로(6장 · 5장) 퇴근 전에 팩을 사서 뜯고(4장), 집에서 뽑은 카드를 팔지 · 모을지 고릅니다(5장).",
             "verbatim": true
           },
-          {"label": "", "text": "7일째 최종 정산에서 점수와 랭크가 나오고, 그 뒤에는 평가 없는 무한 모드로 이어집니다.", "verbatim": true}
+          {"label": "", "text": "판매 등록한 카드는 다음 날 진열대에 놓여 손님이 사 갑니다.", "verbatim": true}
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/day-flow.png",
+            "w": 2000,
+            "h": 900,
+            "caption": {"text": "하루의 흐름 — 영업 → 정산 → 퇴근 전 팩 개봉 → 퇴근 · 집, 집에서 등록한 카드가 다음 날 진열대에 놓입니다", "verbatim": true}
+          }
+        ],
+        "edited": true
       },
       {
         "key": "reference",
@@ -739,12 +748,20 @@
         "points": [
           {
             "label": "",
-            "text": "알바해서 번 돈으로 팩을 사서 뜯고(4장), 뜯은 카드를 팔지 · 모을지 고르며(5장), 다음 날 손님이 그 카드를 사 갑니다(6장).",
+            "text": "손님을 받아 번 알바비로(6장 · 5장) 퇴근 전에 팩을 사서 뜯고(4장), 집에서 뽑은 카드를 팔지 · 모을지 고릅니다(5장).",
             "verbatim": true
           },
-          {"label": "", "text": "7일째 최종 정산에서 점수와 랭크가 나오고, 그 뒤에는 평가 없는 무한 모드로 이어집니다.", "verbatim": true}
+          {"label": "", "text": "판매 등록한 카드는 다음 날 진열대에 놓여 손님이 사 갑니다.", "verbatim": true}
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart LR"}]
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/day-flow.png",
+            "w": 2000,
+            "h": 900,
+            "caption": {"text": "하루의 흐름 — 영업 → 정산 → 퇴근 전 팩 개봉 → 퇴근 · 집, 집에서 등록한 카드가 다음 날 진열대에 놓입니다", "verbatim": true}
+          }
+        ]
       },
       {
         "key": "reference",
@@ -1085,6 +1102,6 @@
         "visuals": [{"kind": "table", "n": 1, "fp": "단계|확인한 방법"}]
       }
     ],
-    "applied": "05835e6c24b4546d"
+    "applied": "d507a98ef0b421d8"
   }
 }

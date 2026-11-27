@@ -7,39 +7,22 @@
       "chapter": "reveal",
       "layout": "problem",
       "tab": "문제 해결",
-      "title": {
-        "text": "4-3. 문제와 해결 — 카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "AI가 카드의 Transform 위치와 Rigidbody 위치를 프레임마다 나란히 찍는 진단 로그를 넣었고, 제가 그 빌드로 재현해 로그를 받았습니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게",
-        "4-3. 문제와 해결 — 카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그"
-      ],
+      "title": {"text": "4-3. 문제와 해결 — 카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그", "verbatim": true},
+      "lead": {"text": "AI가 카드의 Transform 위치와 Rigidbody 위치를 프레임마다 나란히 찍는 진단 로그를 넣었고, 제가 그 빌드로 재현해 로그를 받았습니다.", "verbatim": true},
+      "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-3. 문제와 해결 — 카드 묶음이 눈앞이 아니라 옛 자리로 튀던 버그"],
       "points": [
         {
           "label": "문제",
           "text": "팩을 자르면 눈앞 35cm에 카드 5장이 나와야 하는데, 가끔(3번 중 1번) 카드가 카운터 뒤쪽 옛 자리에 나타났습니다.",
           "verbatim": true
         },
-        {
-          "label": "원인",
-          "text": "카드 프리팹의 Rigidbody가 보간(Interpolate)으로 설정돼 있었습니다.",
-          "verbatim": true
-        },
+        {"label": "원인", "text": "카드 프리팹의 Rigidbody가 보간(Interpolate)으로 설정돼 있었습니다.", "verbatim": true},
         {
           "label": "해결",
           "text": "AI가 스크립트로만 움직이는 공개용 카드의 보간을 끄고, 옮길 때 Transform과 Rigidbody를 함께 옮기게 고쳤습니다.",
           "verbatim": true
         },
-        {
-          "label": "확인",
-          "text": "11-17 시연 테스트에서 여러 번 연속 개봉해도 카드 묶음이 눈앞에 나왔습니다.",
-          "verbatim": true
-        }
+        {"label": "확인", "text": "11-17 시연 테스트에서 여러 번 연속 개봉해도 카드 묶음이 눈앞에 나왔습니다.", "verbatim": true}
       ],
       "visuals": [
         {
@@ -47,20 +30,14 @@
           "src": "images/bug-card-before.png",
           "w": 1920,
           "h": 1032,
-          "caption": {
-            "text": "수정 전 — 넘기기 연출은 진행 중인데 카드가 눈앞이 아니라 카운터 뒤 옛 자리에 있습니다",
-            "verbatim": true
-          }
+          "caption": {"text": "수정 전 — 넘기기 연출은 진행 중인데 카드가 눈앞이 아니라 카운터 뒤 옛 자리에 있습니다", "verbatim": true}
         },
         {
           "kind": "image",
           "src": "images/bug-card-after.png",
           "w": 1920,
           "h": 1032,
-          "caption": {
-            "text": "수정 후 — 팩을 자른 자리(눈앞)에 카드 묶음이 나옵니다",
-            "verbatim": true
-          }
+          "caption": {"text": "수정 후 — 팩을 자른 자리(눈앞)에 카드 묶음이 나옵니다", "verbatim": true}
         }
       ]
     },
@@ -70,24 +47,11 @@
       "chapter": "ai",
       "layout": "visual",
       "tab": "선택",
-      "title": {
-        "text": "7-4. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "분량을 줄이는 방안을 묻자 Claude는 등급당 1장(35장)으로 줄이는 안을 추천했지만, 작업량을 비용으로만 본 안이었습니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다",
-        "7-4. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다"
-      ],
+      "title": {"text": "7-4. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다", "verbatim": true},
+      "lead": {"text": "분량을 줄이는 방안을 묻자 Claude는 등급당 1장(35장)으로 줄이는 안을 추천했지만, 작업량을 비용으로만 본 안이었습니다.", "verbatim": true},
+      "sectionPath": ["7. AI 협업 — 나는 기준과 선택을 정하고, AI는 구현한다", "7-4. 카드 만들기 — 그림 규칙은 문서로 세우고, 컨셉은 사람이 잡았다"],
       "points": [
-        {
-          "label": "",
-          "text": "카드 50장의 그림은 Gemini로 만들었습니다.",
-          "verbatim": true
-        },
+        {"label": "", "text": "카드 50장의 그림은 Gemini로 만들었습니다.", "verbatim": true},
         {
           "label": "",
           "text": "50장을 유지하고, 마음에 들지 않는 카드를 골라 슬라임 컨셉(속성별 디자인, 간식 카드를 슬라임 알로)을 직접 다시 잡았습니다.",
@@ -99,42 +63,19 @@
           "verbatim": true
         }
       ],
-      "visuals": [
-        {
-          "kind": "table",
-          "n": 1,
-          "fp": "카드 등급|그림 느낌|화면 연출"
-        }
-      ]
+      "visuals": [{"kind": "table", "n": 1, "fp": "카드 등급|그림 느낌|화면 연출"}]
     },
     {
       "key": "reveal",
       "chapter": "reveal",
       "layout": "visual",
       "tab": "개요",
-      "title": {
-        "text": "4-1. 손으로 찢고 한 장씩 넘기는 개봉",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "팩을 찢으면 카드 5장이 앞면으로 쌓이고, 트리거로 한 장씩 넘깁니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게",
-        "4-1. 손으로 찢고 한 장씩 넘기는 개봉"
-      ],
+      "title": {"text": "4-1. 손으로 찢고 한 장씩 넘기는 개봉", "verbatim": true},
+      "lead": {"text": "팩을 찢으면 카드 5장이 앞면으로 쌓이고, 트리거로 한 장씩 넘깁니다.", "verbatim": true},
+      "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-1. 손으로 찢고 한 장씩 넘기는 개봉"],
       "points": [
-        {
-          "label": "",
-          "text": "레어 이상 카드가 나오면 등급마다 연출 요소가 한 층씩 더해집니다.",
-          "verbatim": true
-        },
-        {
-          "label": "",
-          "text": "10팩 상자를 열 때는 팩 10개가 한 줄로 서서 한꺼번에 뜯기고, 수퍼레어 이상이 든 팩만 빛납니다.",
-          "verbatim": true
-        }
+        {"label": "", "text": "레어 이상 카드가 나오면 등급마다 연출 요소가 한 층씩 더해집니다.", "verbatim": true},
+        {"label": "", "text": "10팩 상자를 열 때는 팩 10개가 한 줄로 서서 한꺼번에 뜯기고, 수퍼레어 이상이 든 팩만 빛납니다.", "verbatim": true}
       ],
       "visuals": [
         {
@@ -142,21 +83,13 @@
           "src": "images/reveal-legendary.gif",
           "w": 960,
           "h": 540,
-          "caption": {
-            "text": "레전더리 공개 장면 — 유니크 다음 장으로 넘기자 레전더리 「원초의 슬라임」이 나옵니다",
-            "verbatim": true
-          }
+          "caption": {"text": "레전더리 공개 장면 — 유니크 다음 장으로 넘기자 레전더리 「원초의 슬라임」이 나옵니다", "verbatim": true}
         }
       ],
       "from": {
         "key": "reveal",
-        "sectionPath": [
-          "4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게",
-          "4-1. 손으로 찢고 한 장씩 넘기는 개봉"
-        ],
-        "sig": [
-          "4-1. 손으로 찢고 한 장씩 넘기는 개봉|image|images/reveal-legendary.png|1"
-        ]
+        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-1. 손으로 찢고 한 장씩 넘기는 개봉"],
+        "sig": ["4-1. 손으로 찢고 한 장씩 넘기는 개봉|image|images/reveal-legendary.png|1"]
       }
     },
     {
@@ -164,25 +97,11 @@
       "chapter": "reveal",
       "layout": "visual",
       "tab": "선택",
-      "title": {
-        "text": "상자 10팩 장면에만 미리 보여 주기 (11-19)",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "상자 개봉은 시연 영상에서 가장 길게 쓰는 장면인데, 팩 10개가 똑같이 뜯겨 밋밋했습니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게",
-        "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다",
-        "② 상자 10팩 장면에만 미리 보여 주기 (11-19)"
-      ],
+      "title": {"text": "상자 10팩 장면에만 미리 보여 주기 (11-19)", "verbatim": true},
+      "lead": {"text": "상자 개봉은 시연 영상에서 가장 길게 쓰는 장면인데, 팩 10개가 똑같이 뜯겨 밋밋했습니다.", "verbatim": true},
+      "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다", "② 상자 10팩 장면에만 미리 보여 주기 (11-19)"],
       "points": [
-        {
-          "label": "이유",
-          "text": "10팩 상자는 빠른 결과를 원하는 사람이 고르는 선택지입니다.",
-          "verbatim": true
-        },
+        {"label": "이유", "text": "10팩 상자는 빠른 결과를 원하는 사람이 고르는 선택지입니다.", "verbatim": true},
         {
           "label": "",
           "text": "처음에는 빛난 팩을 넘기는 순서의 맨 뒤로 보내 좋은 건 마지막에 한꺼번에 연출 을 생각했지만, 해 보니 팩 개봉이 조작된 것처럼 느껴져 원래 순서로 되돌렸습니다.",
@@ -190,32 +109,19 @@
         }
       ],
       "visuals": [
-        {
-          "kind": "table",
-          "n": 1,
-          "fp": "|[A] 그대로 (결과 숨김)|[B] 좋은 팩만 빛남 ✓|[C] 넘길 때만 연출"
-        },
+        {"kind": "table", "n": 1, "fp": "|[A] 그대로 (결과 숨김)|[B] 좋은 팩만 빛남 ✓|[C] 넘길 때만 연출"},
         {
           "kind": "image",
           "src": "images/box-open.gif",
           "w": 800,
           "h": 450,
-          "caption": {
-            "text": "상자 10팩 개봉 — 팩 10개가 한 줄로 서서 한꺼번에 뜯깁니다",
-            "verbatim": true
-          }
+          "caption": {"text": "상자 10팩 개봉 — 팩 10개가 한 줄로 서서 한꺼번에 뜯깁니다", "verbatim": true}
         }
       ],
       "from": {
         "key": "reveal-box",
-        "sectionPath": [
-          "4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게",
-          "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다",
-          "② 상자 10팩 장면에만 미리 보여 주기 (11-19)"
-        ],
-        "sig": [
-          "② 상자 10팩 장면에만 미리 보여 주기 (11-19)|table|1||[A] 그대로 (결과 숨김)|[B] 좋은 팩만 빛남 ✓|[C] 넘길 때만 연출"
-        ]
+        "sectionPath": ["4. 카드팩 개봉 연출 — 희귀할수록 한 단계씩 더 화려하게", "4-4. 고민과 선택 — 연출 규칙을 세 번 바꿨다", "② 상자 10팩 장면에만 미리 보여 주기 (11-19)"],
+        "sig": ["② 상자 10팩 장면에만 미리 보여 주기 (11-19)|table|1||[A] 그대로 (결과 숨김)|[B] 좋은 팩만 빛남 ✓|[C] 넘길 때만 연출"]
       }
     },
     {
@@ -223,24 +129,11 @@
       "chapter": "shop",
       "layout": "screens",
       "tab": "개요",
-      "title": {
-        "text": "6-1. 계산 · 청소 · 도둑",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "손님은 진열대를 둘러보고 물건을 골라 계산대 줄에 섭니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게",
-        "6-1. 계산 · 청소 · 도둑"
-      ],
+      "title": {"text": "6-1. 계산 · 청소 · 도둑", "verbatim": true},
+      "lead": {"text": "손님은 진열대를 둘러보고 물건을 골라 계산대 줄에 섭니다.", "verbatim": true},
+      "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "6-1. 계산 · 청소 · 도둑"],
       "points": [
-        {
-          "label": "",
-          "text": "플레이어는 바코드를 찍고, 물건을 종이봉투에 담고, 결제 버튼을 누릅니다.",
-          "verbatim": true
-        },
+        {"label": "", "text": "플레이어는 바코드를 찍고, 물건을 종이봉투에 담고, 결제 버튼을 누릅니다.", "verbatim": true},
         {
           "label": "",
           "text": "영업 중에는 바닥 쓰레기 · 흐트러진 팩 · 얼룩이 생기고, 3일차부터는 복면 쓴 도둑이 무료 팩을 훔쳐 달아납니다 — 대걸레로 한 대 때리면 잡힙니다.",
@@ -253,31 +146,20 @@
           "src": "images/checkout.gif",
           "w": 800,
           "h": 450,
-          "caption": {
-            "text": "계산 — 바코드를 먼저 찍고 봉투 위로 옮겨 담습니다",
-            "verbatim": true
-          }
+          "caption": {"text": "계산 — 바코드를 먼저 찍고 봉투 위로 옮겨 담습니다", "verbatim": true}
         },
         {
           "kind": "image",
           "src": "images/catch-thief.gif",
           "w": 800,
           "h": 450,
-          "caption": {
-            "text": "도둑 잡기 — 대걸레를 들고 쫓아가 한 대 쳐서 잡습니다",
-            "verbatim": true
-          }
+          "caption": {"text": "도둑 잡기 — 대걸레를 들고 쫓아가 한 대 쳐서 잡습니다", "verbatim": true}
         }
       ],
       "from": {
         "key": "shop",
-        "sectionPath": [
-          "6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게",
-          "6-1. 계산 · 청소 · 도둑"
-        ],
-        "sig": [
-          "6-1. 계산 · 청소 · 도둑|image|images/checkout-bag.png|1"
-        ]
+        "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "6-1. 계산 · 청소 · 도둑"],
+        "sig": ["6-1. 계산 · 청소 · 도둑|image|images/checkout-bag.png|1"]
       }
     },
     {
@@ -285,51 +167,55 @@
       "chapter": "shop",
       "layout": "visual",
       "tab": "구현",
-      "title": {
-        "text": "6-2. 몰려왔다 한산해지는 손님 웨이브",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "손님이 고르게 오면 계산대를 떠날 틈이 없었습니다. (그때 영업 90초 기준으로 평균 13초마다 오는데 한 명 계산에 15~ 30초 소요).",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게",
-        "6-2. 몰려왔다 한산해지는 손님 웨이브"
-      ],
-      "points": [
-        {
-          "label": "구현",
-          "text": "그래서 2~3명씩 몰려오고, 그 손님들을 계산할 시간 + 한산한 시간이 지난 뒤 다음 웨이브가 오게 했습니다.",
-          "verbatim": true
-        }
-      ],
+      "title": {"text": "6-2. 몰려왔다 한산해지는 손님 웨이브", "verbatim": true},
+      "lead": {"text": "손님이 고르게 오면 계산대를 떠날 틈이 없었습니다. (그때 영업 90초 기준으로 평균 13초마다 오는데 한 명 계산에 15~ 30초 소요).", "verbatim": true},
+      "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "6-2. 몰려왔다 한산해지는 손님 웨이브"],
+      "points": [{"label": "구현", "text": "그래서 2~3명씩 몰려오고, 그 손님들을 계산할 시간 + 한산한 시간이 지난 뒤 다음 웨이브가 오게 했습니다.", "verbatim": true}],
       "visuals": [
         {
           "kind": "image",
           "src": "images/customer-wave.gif",
           "w": 800,
           "h": 450,
-          "caption": {
-            "text": "손님 웨이브 — 영업이 시작되자 손님들이 잇달아 들어옵니다",
-            "verbatim": true
-          }
+          "caption": {"text": "손님 웨이브 — 영업이 시작되자 손님들이 잇달아 들어옵니다", "verbatim": true}
         },
-        {
-          "kind": "code",
-          "n": 1,
-          "fp": "// CustomerRules.cs — CustomerSchedule.Waves (101~116행 발췌)"
-        }
+        {"kind": "code", "n": 1, "fp": "// CustomerRules.cs — CustomerSchedule.Waves (101~116행 발췌)"}
       ],
       "from": {
         "key": "waves",
-        "sectionPath": [
-          "6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게",
-          "6-2. 몰려왔다 한산해지는 손님 웨이브"
-        ],
-        "sig": [
-          "6-2. 몰려왔다 한산해지는 손님 웨이브|code|1|// CustomerRules.cs — CustomerSchedule.Waves (101~116행 발췌)"
-        ]
+        "sectionPath": ["6. 손님 · 계산 · 도둑 — 바쁘지만 숨 돌릴 틈이 있게", "6-2. 몰려왔다 한산해지는 손님 웨이브"],
+        "sig": ["6-2. 몰려왔다 한산해지는 손님 웨이브|code|1|// CustomerRules.cs — CustomerSchedule.Waves (101~116행 발췌)"]
+      }
+    },
+    {
+      "key": "day-loop",
+      "chapter": "design",
+      "layout": "full",
+      "tab": "흐름",
+      "title": {"text": "2-1. 하루의 흐름", "verbatim": true},
+      "lead": {"text": "아래 그림에서 볼 것은 영업으로 번 돈이 팩 개봉으로 이어지고, 개봉한 카드가 다음 날 영업의 상품이 되는 순환입니다.", "verbatim": true},
+      "sectionPath": ["2. 게임 디자인", "2-1. 하루의 흐름"],
+      "points": [
+        {
+          "label": "",
+          "text": "손님을 받아 번 알바비로(6장 · 5장) 퇴근 전에 팩을 사서 뜯고(4장), 집에서 뽑은 카드를 팔지 · 모을지 고릅니다(5장).",
+          "verbatim": true
+        },
+        {"label": "", "text": "판매 등록한 카드는 다음 날 진열대에 놓여 손님이 사 갑니다.", "verbatim": true}
+      ],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/day-flow.png",
+          "w": 2000,
+          "h": 900,
+          "caption": {"text": "하루의 흐름 — 영업 → 정산 → 퇴근 전 팩 개봉 → 퇴근 · 집, 집에서 등록한 카드가 다음 날 진열대에 놓입니다", "verbatim": true}
+        }
+      ],
+      "from": {
+        "key": "day-loop",
+        "sectionPath": ["2. 게임 디자인", "2-1. 하루의 흐름"],
+        "sig": ["2-1. 하루의 흐름|image|images/day-flow.png|1"]
       }
     }
   ],

@@ -6,46 +6,22 @@
       "chapter": "arch",
       "layout": "visual",
       "tab": "흐름",
-      "title": {
-        "text": "4-2. 다음 행동은 지금 입은 옷이 정한다",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "전환 조건은 시야 박스와 공격 범위 박스로 판정합니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다",
-        "4-2. 다음 행동은 지금 입은 옷이 정한다"
-      ],
+      "title": {"text": "4-2. 다음 행동은 지금 입은 옷이 정한다", "verbatim": true},
+      "lead": {"text": "전환 조건은 시야 박스와 공격 범위 박스로 판정합니다.", "verbatim": true},
+      "sectionPath": ["4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다", "4-2. 다음 행동은 지금 입은 옷이 정한다"],
       "points": [
         {
           "label": "",
           "text": "2-4의 와치만(감시자가 지키는 구역으로 이동)과 랫만(쥐가 죽은 곳으로 이동) 패턴은 `AlertMovePatternState` 하나로 만들었습니다.",
           "verbatim": true
         },
-        {
-          "label": "",
-          "text": "외부 스크립트(감시자·쥐)는 보스의 내부를 몰라도 목표 위치 하나만 넘기고 `ChangeState`를 부르면 됩니다.",
-          "verbatim": true
-        }
+        {"label": "", "text": "외부 스크립트(감시자·쥐)는 보스의 내부를 몰라도 목표 위치 하나만 넘기고 `ChangeState`를 부르면 됩니다.", "verbatim": true}
       ],
-      "visuals": [
-        {
-          "kind": "mermaid",
-          "n": 1,
-          "fp": "stateDiagram-v2"
-        }
-      ],
+      "visuals": [{"kind": "mermaid", "n": 1, "fp": "stateDiagram-v2"}],
       "from": {
         "key": "state-flow",
-        "sectionPath": [
-          "4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다",
-          "4-2. 다음 행동은 지금 입은 옷이 정한다"
-        ],
-        "sig": [
-          "4-2. 다음 행동은 지금 입은 옷이 정한다|mermaid|1|stateDiagram-v2"
-        ]
+        "sectionPath": ["4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다", "4-2. 다음 행동은 지금 입은 옷이 정한다"],
+        "sig": ["4-2. 다음 행동은 지금 입은 옷이 정한다|mermaid|1|stateDiagram-v2"]
       }
     },
     {
@@ -53,10 +29,7 @@
       "chapter": "core",
       "layout": "problem",
       "tab": "문제 해결",
-      "title": {
-        "text": "적을 쓰러뜨렸는데 플레이어도 쓰러지던 버그",
-        "verbatim": false
-      },
+      "title": {"text": "적을 쓰러뜨렸는데 플레이어도 쓰러지던 버그", "verbatim": false},
       "lead": null,
       "sectionPath": [
         "5. 박스와 판정 — 먼저 때린 쪽만 이긴다",
@@ -64,16 +37,8 @@
         "① 뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 되었습니다"
       ],
       "points": [
-        {
-          "label": "문제",
-          "text": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 되었습니다",
-          "verbatim": true
-        },
-        {
-          "label": "원인",
-          "text": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냈습니다.",
-          "verbatim": true
-        },
+        {"label": "문제", "text": "뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 되었습니다", "verbatim": true},
+        {"label": "원인", "text": "넉다운 컷씬이 재생되는 동안 적 오브젝트가 아직 켜져 있어, 적의 공격 타격 박스가 계속 판정을 냈습니다.", "verbatim": true},
         {
           "label": "해결",
           "text": "공격 타격 박스와 `OnBackHit` 앞에 `IsKnockDown` 확인을 추가하고(7/6), `ChangeState` 입구에도 같은 가드를 넣었습니다(7/22)",
@@ -86,13 +51,8 @@
           "src": "images/backstab.gif",
           "w": 960,
           "h": 538,
-          "caption": {
-            "text": "뒤통수 — 뒤로 몰래 다가가 뒤통수를 치면 컷씬(SLAP!)과 함께 적이 쓰러집니다",
-            "verbatim": true
-          },
-          "sectionPath": [
-            "5-3. 같은 프레임 동시 피격 방지"
-          ]
+          "caption": {"text": "뒤통수 — 뒤로 몰래 다가가 뒤통수를 치면 컷씬(SLAP!)과 함께 적이 쓰러집니다", "verbatim": true},
+          "sectionPath": ["5-3. 같은 프레임 동시 피격 방지"]
         }
       ],
       "from": {
@@ -102,9 +62,7 @@
           "5-4. 문제와 해결 — 적을 쓰러뜨렸는데 플레이어도 쓰러지던 버그",
           "① 뒤통수를 쳐서 적이 넉다운 연출을 하는 중인데, 플레이어도 넉다운되어 게임 오버가 되었습니다"
         ],
-        "sig": [
-          "5-3. 같은 프레임 동시 피격 방지|image|images/backstab.gif|1"
-        ]
+        "sig": ["5-3. 같은 프레임 동시 피격 방지|image|images/backstab.gif|1"]
       }
     },
     {
@@ -112,21 +70,11 @@
       "chapter": "bgm",
       "layout": "problem",
       "tab": "문제 해결",
-      "title": {
-        "text": "추격 음악이 처음 한 번만 나옵니다",
-        "verbatim": false
-      },
+      "title": {"text": "추격 음악이 처음 한 번만 나옵니다", "verbatim": false},
       "lead": null,
-      "sectionPath": [
-        "6. 그 밖에 만든 것",
-        "6-1. 전투 BGM — 몇 명이 나를 쫓고 있나 세기"
-      ],
+      "sectionPath": ["6. 그 밖에 만든 것", "6-1. 전투 BGM — 몇 명이 나를 쫓고 있나 세기"],
       "points": [
-        {
-          "label": "문제",
-          "text": "처음 추격 상태가 되었을 때는 추격 BGM이 나오지만, 재시도한 뒤에는 나오지 않았습니다.",
-          "verbatim": true
-        },
+        {"label": "문제", "text": "처음 추격 상태가 되었을 때는 추격 BGM이 나오지만, 재시도한 뒤에는 나오지 않았습니다.", "verbatim": true},
         {
           "label": "찾아 둔 곳 (추정)",
           "text": "추격 중에 플레이어가 죽고 씬을 다시 불러오면, 적의 `Exit`가 불리지 않아 `engagedEnemyCount`가 0으로 돌아가지 않습니다.",
@@ -149,24 +97,14 @@
           "src": "images/enemy-chase.gif",
           "w": 960,
           "h": 538,
-          "caption": {
-            "text": "들켰을 때 — 시야(빨간 원)에 들키면 적이 쫓아오고, 공격에 한 번 맞으면 뺨 컷씬과 함께 끝납니다",
-            "verbatim": true
-          },
-          "sectionPath": [
-            "4-2. 다음 행동은 지금 입은 옷이 정한다"
-          ]
+          "caption": {"text": "들켰을 때 — 시야(빨간 원)에 들키면 적이 쫓아오고, 공격에 한 번 맞으면 뺨 컷씬과 함께 끝납니다", "verbatim": true},
+          "sectionPath": ["4-2. 다음 행동은 지금 입은 옷이 정한다"]
         }
       ],
       "from": {
         "key": "ts-bgm",
-        "sectionPath": [
-          "6. 그 밖에 만든 것",
-          "6-1. 전투 BGM — 몇 명이 나를 쫓고 있나 세기"
-        ],
-        "sig": [
-          "4-2. 다음 행동은 지금 입은 옷이 정한다|image|images/enemy-chase.gif|1"
-        ]
+        "sectionPath": ["6. 그 밖에 만든 것", "6-1. 전투 BGM — 몇 명이 나를 쫓고 있나 세기"],
+        "sig": ["4-2. 다음 행동은 지금 입은 옷이 정한다|image|images/enemy-chase.gif|1"]
       }
     },
     {
@@ -174,64 +112,29 @@
       "chapter": "arch",
       "layout": "full",
       "tab": "구현",
-      "title": {
-        "text": "4-4. 장애물 회피 이동",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "순찰·추격·출동 상태는 모두 같은 이동 함수를 씁니다.",
-        "verbatim": true
-      },
-      "sectionPath": [
-        "4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다",
-        "4-4. 장애물 회피 이동"
-      ],
+      "title": {"text": "4-4. 장애물 회피 이동", "verbatim": true},
+      "lead": {"text": "순찰·추격·출동 상태는 모두 같은 이동 함수를 씁니다.", "verbatim": true},
+      "sectionPath": ["4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다", "4-4. 장애물 회피 이동"],
       "points": [
-        {
-          "label": "구현",
-          "text": "가려는 방향으로 바로 가지 않고, 부채꼴로 몇 갈래를 살펴서 처음으로 비어 있는 방향으로 움직입니다.",
-          "verbatim": true
-        },
-        {
-          "label": "이유",
-          "text": "당시에는 A* 길찾기 대신, 바로 만들 수 있는 방식으로 먼저 설계했습니다.",
-          "verbatim": false
-        },
-        {
-          "label": "문제",
-          "text": "그런데 나중에 디버그 로그로 확인해 보니, 실제로는 같은 쪽을 두 번 보고 한쪽 끝은 보지 않았습니다.",
-          "verbatim": true
-        }
+        {"label": "구현", "text": "가려는 방향으로 바로 가지 않고, 부채꼴로 몇 갈래를 살펴서 처음으로 비어 있는 방향으로 움직입니다.", "verbatim": true},
+        {"label": "이유", "text": "당시에는 A* 길찾기 대신, 바로 만들 수 있는 방식으로 먼저 설계했습니다.", "verbatim": false},
+        {"label": "문제", "text": "그런데 나중에 디버그 로그로 확인해 보니, 실제로는 같은 쪽을 두 번 보고 한쪽 끝은 보지 않았습니다.", "verbatim": true}
       ],
       "visuals": [
-        {
-          "kind": "table",
-          "n": 1,
-          "fp": "살피는 순서|1|2|3|4|5"
-        },
+        {"kind": "table", "n": 1, "fp": "살피는 순서|1|2|3|4|5"},
         {
           "kind": "image",
           "src": "images/ai-review-debug-log.png",
           "w": 1600,
           "h": 720,
-          "caption": {
-            "text": "디버그 로그로 확인한 #1 회피 각도와 #2 대기 시간 — Unity Editor.log 발췌",
-            "verbatim": true
-          },
-          "sectionPath": [
-            "7-3. AI 코드 리뷰 — AI의 지적은 로그와 코드로 확인했다"
-          ]
+          "caption": {"text": "디버그 로그로 확인한 #1 회피 각도와 #2 대기 시간 — Unity Editor.log 발췌", "verbatim": true},
+          "sectionPath": ["7-3. AI 코드 리뷰 — AI의 지적은 로그와 코드로 확인했다"]
         }
       ],
       "from": {
         "key": "avoidance",
-        "sectionPath": [
-          "4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다",
-          "4-4. 장애물 회피 이동"
-        ],
-        "sig": [
-          "4-4. 장애물 회피 이동|table|1|살피는 순서|1|2|3|4|5"
-        ]
+        "sectionPath": ["4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다", "4-4. 장애물 회피 이동"],
+        "sig": ["4-4. 장애물 회피 이동|table|1|살피는 순서|1|2|3|4|5"]
       }
     },
     {
@@ -239,35 +142,15 @@
       "chapter": "arch",
       "layout": "full",
       "tab": "구조",
-      "title": {
-        "text": "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI",
-        "verbatim": true
-      },
-      "lead": {
-        "text": "적 AI는 보스 4명이 함께 쓰는 적 본체(`EnemyStateManager`)와 지금 하는 행동(`IEnemyState`)으로 나뉩니다.",
-        "verbatim": false
-      },
-      "sectionPath": [
-        "4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다",
-        "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI"
-      ],
+      "title": {"text": "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI", "verbatim": true},
+      "lead": {"text": "적 AI는 보스 4명이 함께 쓰는 적 본체(`EnemyStateManager`)와 지금 하는 행동(`IEnemyState`)으로 나뉩니다.", "verbatim": false},
+      "sectionPath": ["4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다", "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI"],
       "points": [],
-      "visuals": [
-        {
-          "kind": "mermaid",
-          "n": 1,
-          "fp": "classDiagram"
-        }
-      ],
+      "visuals": [{"kind": "mermaid", "n": 1, "fp": "classDiagram"}],
       "from": {
         "key": "state-class",
-        "sectionPath": [
-          "4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다",
-          "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI"
-        ],
-        "sig": [
-          "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI|mermaid|1|classDiagram"
-        ]
+        "sectionPath": ["4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다", "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI"],
+        "sig": ["4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI|mermaid|1|classDiagram"]
       },
       "group": "split-state-roles"
     },
@@ -276,26 +159,16 @@
       "chapter": "arch",
       "layout": "visual",
       "tab": "구조",
-      "title": {
-        "text": "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI",
-        "verbatim": true
-      },
+      "title": {"text": "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI", "verbatim": true},
       "lead": null,
-      "sectionPath": [
-        "4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다",
-        "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI"
-      ],
+      "sectionPath": ["4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다", "4-1. 몸은 하나, 옷만 갈아입는다 — 인터페이스를 활용한 적 AI"],
       "points": [
         {
           "label": "구현",
           "text": "몸(콜라이더, 애니메이터, 이동·회전 함수, Player 참조)은 하나뿐이고, 지금 어떤 행동을 하는지는 지금 입고 있는 옷(상태 클래스)이 결정합니다.",
           "verbatim": true
         },
-        {
-          "label": "이유",
-          "text": "보스 4명은 외형만 다르고 공격·이동은 모두 같습니다.",
-          "verbatim": true
-        }
+        {"label": "이유", "text": "보스 4명은 외형만 다르고 공격·이동은 모두 같습니다.", "verbatim": true}
       ],
       "visuals": [
         {
@@ -303,22 +176,44 @@
           "src": "images/boss-styles.gif",
           "w": 720,
           "h": 405,
-          "caption": {
-            "text": "보스마다 다른 방식으로 찾아옴 — 감시자가 플레이어를 보면 와치만이 그 구역으로 오고, 쥐를 밟으면 랫만이 쥐가 죽은 자리로 옵니다",
-            "verbatim": true
-          },
-          "sectionPath": [
-            "4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다"
-          ]
+          "caption": {"text": "보스마다 다른 방식으로 찾아옴 — 감시자가 플레이어를 보면 와치만이 그 구역으로 오고, 쥐를 밟으면 랫만이 쥐가 죽은 자리로 옵니다", "verbatim": true},
+          "sectionPath": ["4. 적 AI — 보스마다 다른 방식으로 나를 찾아온다"]
         },
-        {
-          "kind": "table",
-          "n": 1,
-          "fp": "보스|추가 스크립트|하는 일"
-        }
+        {"kind": "table", "n": 1, "fp": "보스|추가 스크립트|하는 일"}
       ],
       "after": "state-class",
       "group": "split-state-roles"
+    },
+    {
+      "key": "core-loop",
+      "chapter": "design",
+      "layout": "full",
+      "tab": "흐름",
+      "title": {"text": "2-1. 한 스테이지의 흐름 — 숨어서 다가가고, 뒤통수를 친다", "verbatim": true},
+      "lead": {"text": "경험 목표 — 뒤통수를 치는 통쾌한 복수와, 한 대 맞으면 끝나는 긴장감을 함께 주는 것입니다.", "verbatim": true},
+      "sectionPath": ["2. 게임 디자인", "2-1. 한 스테이지의 흐름 — 숨어서 다가가고, 뒤통수를 친다"],
+      "points": [
+        {"label": "", "text": "적의 시야를 피해 뒤로 돌아가 뒤통수를 치면 컷씬과 함께 적이 쓰러지고, 구역 보스를 쓰러뜨리면 다음 구역으로 갑니다.", "verbatim": true},
+        {"label": "", "text": "반대로 한 번이라도 맞으면 바로 게임 오버입니다.", "verbatim": true},
+        {"label": "", "text": "다가가는 동안 적이 어떻게 움직이는지는 4장, 때리고 맞는 순간의 판정은 5장, 들켰을 때 바뀌는 음악은 6장에서 다룹니다.", "verbatim": true}
+      ],
+      "visuals": [
+        {
+          "kind": "image",
+          "src": "images/core-loop.png",
+          "w": 2000,
+          "h": 900,
+          "caption": {
+            "text": "한 스테이지의 흐름입니다. 적의 시야를 피해 등 뒤로 다가가 뒤통수를 치면 적이 쓰러지고, 구역 보스가 사라지면 다음 구역으로 갑니다. 한 대라도 맞으면 게임 오버이고, 이어 하기는 지금 구역부터 · 다시 하기는 처음 구역부터 시작합니다.",
+            "verbatim": true
+          }
+        }
+      ],
+      "from": {
+        "key": "core-loop",
+        "sectionPath": ["2. 게임 디자인", "2-1. 한 스테이지의 흐름 — 숨어서 다가가고, 뒤통수를 친다"],
+        "sig": ["2-1. 한 스테이지의 흐름 — 숨어서 다가가고, 뒤통수를 친다|image|images/core-loop.png|1"]
+      }
     }
   ],
   "hide": []

@@ -220,7 +220,7 @@
       {
         "key": "core-loop",
         "chapter": "design",
-        "layout": "visual",
+        "layout": "full",
         "tab": "흐름",
         "title": {"text": "2-1. 한 스테이지의 흐름 — 숨어서 다가가고, 뒤통수를 친다", "verbatim": true},
         "lead": {"text": "경험 목표 — 뒤통수를 치는 통쾌한 복수와, 한 대 맞으면 끝나는 긴장감을 함께 주는 것입니다.", "verbatim": true},
@@ -234,7 +234,19 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}]
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/core-loop.png",
+            "w": 2000,
+            "h": 900,
+            "caption": {
+              "text": "한 스테이지의 흐름입니다. 적의 시야를 피해 등 뒤로 다가가 뒤통수를 치면 적이 쓰러지고, 구역 보스가 사라지면 다음 구역으로 갑니다. 한 대라도 맞으면 게임 오버이고, 이어 하기는 지금 구역부터 · 다시 하기는 처음 구역부터 시작합니다.",
+              "verbatim": true
+            }
+          }
+        ],
+        "edited": true
       },
       {
         "key": "bosses",
@@ -648,7 +660,18 @@
             "verbatim": true
           }
         ],
-        "visuals": [{"kind": "mermaid", "n": 1, "fp": "flowchart TB"}]
+        "visuals": [
+          {
+            "kind": "image",
+            "src": "images/core-loop.png",
+            "w": 2000,
+            "h": 900,
+            "caption": {
+              "text": "한 스테이지의 흐름입니다. 적의 시야를 피해 등 뒤로 다가가 뒤통수를 치면 적이 쓰러지고, 구역 보스가 사라지면 다음 구역으로 갑니다. 한 대라도 맞으면 게임 오버이고, 이어 하기는 지금 구역부터 · 다시 하기는 처음 구역부터 시작합니다.",
+              "verbatim": true
+            }
+          }
+        ]
       },
       {
         "key": "bosses",
@@ -970,6 +993,6 @@
         ]
       }
     ],
-    "applied": "df63b76e1dc4a2d1"
+    "applied": "421781ec71c9881c"
   }
 }
